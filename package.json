@@ -1,0 +1,16 @@
+{
+  "name": "auroratide-wc",
+  "private": "true",
+  "version": "0.0.1",
+  "description": "Monorepo for Web Components by Auroratide",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Timothy Foster",
+    "url": "https://auroratide.com"
+  },
+  "license": "ISC"
+}
