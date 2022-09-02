@@ -1,0 +1,22 @@
+{
+  "name": "@auroratide-wc/example-component",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "main": "lib/example-component.js",
+  "module": "lib/example-component.js",
+  "scripts": {
+    "start": "wds --node-resolve -p 3000 --watch",
+    "test": "wtr --node-resolve ./**/*.spec.js"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Timothy Foster",
+    "url": "https://auroratide.com"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@open-wc/testing": "^3.1.6",
+    "@web/test-runner": "^0.14.0"
+  }
+}
