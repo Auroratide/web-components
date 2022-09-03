@@ -18,6 +18,7 @@ importers:
       '@auroratide-wc/example-component': workspace:^0.0.1
       '@sveltejs/adapter-auto': next
       '@sveltejs/kit': next
+      prismjs: ^1.29.0
       svelte: ^3.44.0
       svelte-check: ^2.7.1
       typescript: ^4.7.4
@@ -25,9 +26,10 @@ importers:
       vite-plugin-markdown: ^2.1.0
     dependencies:
       '@auroratide-wc/example-component': link:../components/example-component
+      prismjs: 1.29.0
     devDependencies:
       '@sveltejs/adapter-auto': 1.0.0-next.71
-      '@sveltejs/kit': 1.0.0-next.464_fhgkwirxvgjw2igda6zmhiisma
+      '@sveltejs/kit': 1.0.0-next.465_fhgkwirxvgjw2igda6zmhiisma
       svelte: 3.49.0
       svelte-check: 2.9.0_svelte@3.49.0
       typescript: 4.8.2
@@ -274,8 +276,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.464_fhgkwirxvgjw2igda6zmhiisma:
-    resolution: {integrity: sha512-QV0IE8ShRC5ndP0fQN4/3bg8PMkjnhvLo0C4gULJ14LFPw5fgDbwuVM4uXmM+nfzT8hTkf9F27J3uZSoJmHaeg==}
+  /@sveltejs/kit/1.0.0-next.465_fhgkwirxvgjw2igda6zmhiisma:
+    resolution: {integrity: sha512-eOQEV13d0uQVUiZoB4tLX0Hp/7EddjDynfXSOI6QN0CENNCA6FySH+jq5b3tIjWP9GRNa729adldXev49Yf9kA==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -2517,6 +2519,11 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
     dev: true
+
+  /prismjs/1.29.0:
+    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
+    engines: {node: '>=6'}
+    dev: false
 
   /progress/2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
