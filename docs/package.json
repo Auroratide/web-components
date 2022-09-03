@@ -21,6 +21,7 @@
 	"type": "module",
 	"dependencies": {
 		"@auroratide-wc/example-component": "workspace:^0.0.1",
+		"@auroratide-wc/toggle-switch": "workspace:^0.0.1",
 		"prismjs": "^1.29.0"
 	}
 }

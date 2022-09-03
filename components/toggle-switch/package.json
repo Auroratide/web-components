@@ -1,14 +1,14 @@
 {
-  "name": "@auroratide-wc/example-component",
+  "name": "@auroratide-wc/toggle-switch",
   "version": "0.0.1",
   "description": "",
+  "keywords": [],
   "type": "module",
-  "main": "lib/example-component.js",
-  "module": "lib/example-component.js",
+  "main": "lib/toggle-switch.js",
+  "module": "lib/toggle-switch.js",
   "scripts": {
     "test": "wtr --node-resolve --port \"$(( $RANDOM % 9999 + 10000))\" ./**/*.spec.js"
   },
-  "keywords": [],
   "author": {
     "name": "Timothy Foster",
     "url": "https://auroratide.com"
