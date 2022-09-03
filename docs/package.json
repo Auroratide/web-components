@@ -1,5 +1,5 @@
 {
-	"name": "@auroratide-wc/docs",
+	"name": "@auroratide/wc-docs",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -20,8 +20,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@auroratide-wc/example-component": "workspace:^0.0.1",
-		"@auroratide-wc/toggle-switch": "workspace:^0.0.1",
+		"@auroratide/example-component": "workspace:^0.0.1",
+		"@auroratide/toggle-switch": "workspace:^0.0.1",
 		"prismjs": "^1.29.0"
 	}
 }

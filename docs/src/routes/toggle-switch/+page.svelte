@@ -3,7 +3,7 @@
     import { html } from '../../../../components/toggle-switch/README.md'
 
     if (browser)    
-        import('@auroratide-wc/toggle-switch/lib/define.js')
+        import('@auroratide/toggle-switch/lib/define.js')
 </script>
 
 <svelte:head>

@@ -23,8 +23,8 @@ importers:
 
   docs:
     specifiers:
-      '@auroratide-wc/example-component': workspace:^0.0.1
-      '@auroratide-wc/toggle-switch': workspace:^0.0.1
+      '@auroratide/example-component': workspace:^0.0.1
+      '@auroratide/toggle-switch': workspace:^0.0.1
       '@sveltejs/adapter-auto': next
       '@sveltejs/kit': next
       prismjs: ^1.29.0
@@ -34,12 +34,12 @@ importers:
       vite: ^3.1.0-beta.1
       vite-plugin-markdown: ^2.1.0
     dependencies:
-      '@auroratide-wc/example-component': link:../components/example-component
-      '@auroratide-wc/toggle-switch': link:../components/toggle-switch
+      '@auroratide/example-component': link:../components/example-component
+      '@auroratide/toggle-switch': link:../components/toggle-switch
       prismjs: 1.29.0
     devDependencies:
       '@sveltejs/adapter-auto': 1.0.0-next.71
-      '@sveltejs/kit': 1.0.0-next.465_fhgkwirxvgjw2igda6zmhiisma
+      '@sveltejs/kit': 1.0.0-next.466_fhgkwirxvgjw2igda6zmhiisma
       svelte: 3.49.0
       svelte-check: 2.9.0_svelte@3.49.0
       typescript: 4.8.2
@@ -286,8 +286,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.465_fhgkwirxvgjw2igda6zmhiisma:
-    resolution: {integrity: sha512-eOQEV13d0uQVUiZoB4tLX0Hp/7EddjDynfXSOI6QN0CENNCA6FySH+jq5b3tIjWP9GRNa729adldXev49Yf9kA==}
+  /@sveltejs/kit/1.0.0-next.466_fhgkwirxvgjw2igda6zmhiisma:
+    resolution: {integrity: sha512-4ZqKPXE9rZWJx5E+BSA0nS9DOsKPahm1/Y8VxzeVki2OsS70j71/Cec5bXEG8xB9Zugm/q1VspX6cTZn4jGSyA==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true

@@ -3,7 +3,7 @@
     import { html } from '../../../../components/example-component/README.md'
 
     if (browser)    
-        import('@auroratide-wc/example-component/lib/define.js')
+        import('@auroratide/example-component/lib/define.js')
 </script>
 
 <svelte:head>

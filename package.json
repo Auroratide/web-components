@@ -5,7 +5,7 @@
   "description": "Monorepo for Web Components by Auroratide",
   "type": "module",
   "scripts": {
-    "dev": "pnpm --filter docs dev",
+    "dev": "pnpm --filter wc-docs dev",
     "test": "pnpm --filter \"./components/**\" run test"
   },
   "keywords": [],
