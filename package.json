@@ -5,6 +5,7 @@
   "description": "Monorepo for Web Components by Auroratide",
   "type": "module",
   "scripts": {
+    "dev": "pnpm --filter docs dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
