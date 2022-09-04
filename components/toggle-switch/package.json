@@ -7,7 +7,7 @@
   "main": "lib/toggle-switch.js",
   "module": "lib/toggle-switch.js",
   "scripts": {
-    "test": "wtr --node-resolve --port \"$(( $RANDOM % 9999 + 10000))\" ./**/*.spec.js"
+    "test": "wtr --node-resolve --port 10002 ./**/*.spec.js"
   },
   "author": {
     "name": "Timothy Foster",

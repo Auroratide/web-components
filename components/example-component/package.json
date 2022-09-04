@@ -6,7 +6,7 @@
   "main": "lib/example-component.js",
   "module": "lib/example-component.js",
   "scripts": {
-    "test": "wtr --node-resolve --port \"$(( $RANDOM % 9999 + 10000))\" ./**/*.spec.js"
+    "test": "wtr --node-resolve --port 10001 ./**/*.spec.js"
   },
   "keywords": [],
   "author": {
