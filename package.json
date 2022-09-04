@@ -13,5 +13,9 @@
     "name": "Timothy Foster",
     "url": "https://auroratide.com"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "packageManager": "pnpm@7.9.5",
+	"engines": {
+		"pnpm": "^7.0.0"
+	}
 }
