@@ -10,4 +10,6 @@
     <title>The example-component Element</title>
 </svelte:head>
 
-{@html html}
+<article>
+    {@html html}
+</article>

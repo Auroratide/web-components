@@ -1,8 +1,12 @@
 <script>
+    import { browser } from '$app/environment'
     import Header from './Header.svelte'
     import Nav from './Nav.svelte'
     import { highlight } from '$lib/syntax-highlighter'
     import { afterUpdate } from 'svelte'
+
+    if (browser)
+        import('$lib/wc-demo')
 
     let highlightKey = Symbol()
 
@@ -23,6 +27,7 @@
 <style>
     :root {
         --c-bg: hsl(0, 0%, 87%);
+        --c-bg-border: hsl(0, 0%, 75%);
         --c-banner: hsl(215, 100%, 10%);
         --c-banner-text: hsl(0, 0%, 100%);
         --c-content: hsl(0, 0%, 100%);
@@ -50,6 +55,7 @@
         --f-0: clamp(1rem, 1.667vw, 1.25rem);
         --f-p1: clamp(1.25rem, 2vw, 1.5rem);
         --f-p2: clamp(1.5rem, 2.667vw, 2rem);
+        --f-p3: clamp(1.825rem, 3.667vw, 2.75rem);
     }
 
     :global(*, *::before, *::after) {
@@ -98,6 +104,7 @@
 
     .horizontal-on-large main {
         flex: 1;
+        overflow: hidden;
     }
 
     @media screen and (min-width: 1200px) {
@@ -108,11 +115,21 @@
         }
     }
 
+    :global(wc-demo) {
+        display: block;
+        border: 0.0625em solid var(--c-primary);
+        border-radius: 0.25em;
+        padding: 0.75em;
+        box-shadow: 0.125em 0.125em 0.25em hsla(0, 0%, 0%, 0.15) inset;
+        background: var(--c-content);
+        margin-bottom: 1.5rem;
+    }
+
     /* Code
-    ========================================================================== */
+     * ===================================================================== */
     :global(code) {
         font-family: 'Source Code Pro', monospace;
-        font-size: var(--f-0);
+        font-size: var(--f-m1);
         color: var(--c-content-text);
         background: var(--c-code-bg);
         border-radius: 0.25em;
@@ -124,7 +141,7 @@
     }
 
     :global(pre code) {
-        font-size: 90%;
+        font-size: 80%;
         display: block;
         line-height: 1.5em;
         border: 1px solid var(--c-primary);
@@ -191,5 +208,65 @@
 
     :global(code .tag > .punctuation) {
         color: var(--c-code-default);
+    }
+
+    :global(kbd) {
+        font-family: 'Source Code Pro', monospace;
+        font-size: var(--f-m1);
+        color: var(--c-code-default);
+        border: 0.0625em solid var(--c-bg);
+        border-bottom-width: 0.125em;
+        border-radius: 0.25em;
+        padding: 0.0625em 0.25em;
+    }
+
+    /* Articles
+     * ===================================================================== */
+    :global(article) {
+        padding: 0;
+        margin: 0;
+    }
+
+    :global(article p) {
+        line-height: 1.5em;
+        margin-bottom: 1.5rem;
+    }
+
+    :global(ul, ol) {
+        margin-bottom: 1.5rem;
+    }
+
+    :global(article h1),
+    :global(article h2),
+    :global(article h3),
+    :global(article h4),
+    :global(article h5),
+    :global(article h6) {
+        font-weight: 700;
+        line-height: 1;
+        padding-top: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    :global(article h1) { padding: 0; }
+    :global(article h2) { border-bottom: 1px solid var(--c-bg); }
+
+    :global(article h1) { font-size: var(--f-p3); }
+    :global(article h2) { font-size: var(--f-p2); }
+    :global(article h3) { font-size: var(--f-p1); }
+    :global(article h4) { font-size: var(--f-0); }
+    :global(article h5) { font-size: var(--f-0); }
+    :global(article h6) { font-size: var(--f-0); }
+
+    /* Tables
+     * ===================================================================== */
+    :global(table) {
+        border-collapse: collapse;
+        margin-bottom: 1.5rem;
+    }
+
+    :global(table td, table th) {
+        border: 1px solid var(--c-bg-border);
+        padding: 0.25rem 1rem;
     }
 </style>

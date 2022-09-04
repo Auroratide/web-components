@@ -10,4 +10,6 @@
     <title>The toggle-switch Element</title>
 </svelte:head>
 
-{@html html}
+<article>
+    {@html html}
+</article>
