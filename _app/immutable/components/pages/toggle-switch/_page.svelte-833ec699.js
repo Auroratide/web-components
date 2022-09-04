@@ -1,38 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="/web-components/favicon.png" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-		<meta http-equiv="content-security-policy" content=""><title>The toggle-switch Element</title>
-	<link href="/web-components/_app/immutable/assets/_layout-b3eb8d2a.css" rel="stylesheet">
-	<link rel="modulepreload" href="/web-components/_app/immutable/start-410e9742.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/preload-helper-aa6bc0ce.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/index-949a6768.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/singletons-3faa03b0.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/paths-60f6c67f.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-01d21a24.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/modules/pages/_layout.js-7b9cbfbc.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/_layout-8d2a742b.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/toggle-switch/_page.svelte-833ec699.js">
-	</head>
-	<body>
-		<div>
-
-
-<div class="full-screen horizontal-on-large svelte-1ldmmrv"><header class="svelte-hv9bff"><div class="container"><a class="site-title svelte-hv9bff" href="/web-components">Web Components</a>
-        <address class="svelte-hv9bff">By <a href="https://auroratide.com">Auroratide</a></address>
-        <nav><ul class="svelte-dcuq7w"><li><a href="/web-components/example-component">example-component</a></li>
-        <li><a href="/web-components/toggle-switch">toggle-switch</a></li></ul>
-</nav></div>
-</header>
-    <main class="container svelte-1ldmmrv">
-
-<article><!-- HTML_TAG_START --><h1>The toggle-switch Element</h1>
+import{_ as h}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i as d,s as g,a as p,k as m,J as u,h as o,c as w,l as b,m as f,b as c,A as l}from"../../../chunks/index-949a6768.js";const k=`<h1>The toggle-switch Element</h1>
 <p>The <code>toggle-switch</code> element represents a control that is either on or off. This component is built with accessibility in mind and implements the WAI-ARIA <a href="https://www.w3.org/TR/wai-aria-1.1/#switch">switch role</a>.</p>
 <wc-demo hidden>
     <label for="example-01">Active?</label>
@@ -193,29 +159,4 @@ toggle-switch[checked]::part(track) {
 <li>The element can be focused</li>
 <li>The element can be toggled with <kbd>Enter</kbd> or <kbd>Space</kbd></li>
 </ul>
-<!-- HTML_TAG_END --></article></main>
-</div>
-
-
-		<script type="module" data-sveltekit-hydrate="1pvsl0t">
-		import { start } from "/web-components/_app/immutable/start-410e9742.js";
-
-		start({
-			env: {},
-			hydrate: {
-				status: 200,
-				error: null,
-				node_ids: [0, 4],
-				params: {},
-				routeId: "toggle-switch",
-				data: (function(a){return [a,a]}(null)),
-				errors: null
-			},
-			paths: {"base":"/web-components","assets":"/web-components"},
-			target: document.querySelector('[data-sveltekit-hydrate="1pvsl0t"]').parentNode,
-			trailing_slash: "never"
-		});
-	</script>
-	</div>
-	</body>
-</html>
+`;function y(i){let t,n;return{c(){t=p(),n=m("article"),this.h()},l(e){u('[data-svelte="svelte-836m89"]',document.head).forEach(o),t=w(e),n=b(e,"ARTICLE",{});var s=f(n);s.forEach(o),this.h()},h(){document.title="The toggle-switch Element"},m(e,a){c(e,t,a),c(e,n,a),n.innerHTML=k},p:l,i:l,o:l,d(e){e&&o(t),e&&o(n)}}}function v(i){return h(()=>import("../../../chunks/define-fc384860.js"),[],import.meta.url),[]}class _ extends r{constructor(t){super(),d(this,t,v,y,g,{})}}export{_ as default};
