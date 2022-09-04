@@ -1,6 +1,10 @@
+<script>
+    import { base } from '$app/paths'
+</script>
+
 <header>
     <div class="container">
-        <a class="site-title" href="/">Web Components</a>
+        <a class="site-title" href="{base}">Web Components</a>
         <address>By <a href="https://auroratide.com">Auroratide</a></address>
         <slot></slot>
     </div>

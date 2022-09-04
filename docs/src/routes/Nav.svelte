@@ -1,7 +1,11 @@
+<script>
+    import { base } from '$app/paths'
+</script>
+
 <nav>
     <ul>
-        <li><a href="example-component">example-component</a></li>
-        <li><a href="toggle-switch">toggle-switch</a></li>
+        <li><a href="{base}/example-component">example-component</a></li>
+        <li><a href="{base}/toggle-switch">toggle-switch</a></li>
     </ul>
 </nav>
 
