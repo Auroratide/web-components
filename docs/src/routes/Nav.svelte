@@ -15,4 +15,8 @@
         padding: 0;
         margin: 0;
     }
+
+    li {
+        line-height: 1.5;
+    }
 </style>
