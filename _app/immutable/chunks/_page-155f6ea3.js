@@ -1,8 +1,9 @@
-import{_ as h}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i as d,s as g,a as p,k as m,J as u,h as o,c as w,l as b,m as f,b as c,A as l}from"../../../chunks/index-949a6768.js";const k=`<h1>The toggle-switch Element</h1>
+import{_ as d}from"./preload-helper-aa6bc0ce.js";import{S as g,i as p,s as m,a as u,k as w,K as f,h as a,c as b,l as y,m as k,n as v,b as c,A as s,o as x,L as _}from"./index-a70c3841.js";const q=`<h1>The toggle-switch Element</h1>
 <p>The <code>toggle-switch</code> element represents a control that is either on or off. This component is built with accessibility in mind and implements the WAI-ARIA <a href="https://www.w3.org/TR/wai-aria-1.1/#switch">switch role</a>.</p>
 <wc-demo hidden>
     <label for="example-01">Active?</label>
     <toggle-switch id="example-01"></toggle-switch>
+    <p id="example-01-output">Off</p>
 </wc-demo>
 <pre><code class="language-html">&lt;label for=&quot;example-01&quot;&gt;Active?&lt;/label&gt;
 &lt;toggle-switch id=&quot;example-01&quot;&gt;&lt;/toggle-switch&gt;
@@ -159,4 +160,4 @@ toggle-switch[checked]::part(track) {
 <li>The element can be focused</li>
 <li>The element can be toggled with <kbd>Enter</kbd> or <kbd>Space</kbd></li>
 </ul>
-`;function y(i){let t,n;return{c(){t=p(),n=m("article"),this.h()},l(e){u('[data-svelte="svelte-836m89"]',document.head).forEach(o),t=w(e),n=b(e,"ARTICLE",{});var s=f(n);s.forEach(o),this.h()},h(){document.title="The toggle-switch Element"},m(e,a){c(e,t,a),c(e,n,a),n.innerHTML=k},p:l,i:l,o:l,d(e){e&&o(t),e&&o(n)}}}function v(i){return h(()=>import("../../../chunks/define-fc384860.js"),[],import.meta.url),[]}class _ extends r{constructor(t){super(),d(this,t,v,y,g,{})}}export{_ as default};
+`,h="toggle-switch:change",I=o=>new CustomEvent(h,{detail:{checked:o}});const{document:i}=_;function A(o){let t,e;return{c(){t=u(),e=w("article"),this.h()},l(n){f('[data-svelte="svelte-836m89"]',i.head).forEach(a),t=b(n),e=y(n,"ARTICLE",{class:!0});var r=k(e);r.forEach(a),this.h()},h(){i.title="The toggle-switch Element",v(e,"class","svelte-1e8zya6")},m(n,l){c(n,t,l),c(n,e,l),e.innerHTML=q},p:s,i:s,o:s,d(n){n&&a(t),n&&a(e)}}}function T(o){return d(()=>import("./define-e8d393ea.js"),[],import.meta.url),x(()=>{const t=document.querySelector("#example-01"),e=document.querySelector("#example-01-output");t&&e&&(t==null||t.addEventListener(h,n=>{n.detail.checked?(e.textContent="On",e.classList.add("example-active")):(e.textContent="Off",e.classList.remove("example-active"))}))}),[]}class S extends g{constructor(t){super(),p(this,t,T,A,m,{})}}export{S as P,I as c};

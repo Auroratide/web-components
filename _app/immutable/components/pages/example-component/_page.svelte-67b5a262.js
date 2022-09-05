@@ -1,4 +1,4 @@
-import{_ as c}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i,s as u,a as h,k as d,J as _,h as a,c as x,l as f,m as v,b as m,A as l}from"../../../chunks/index-949a6768.js";const g=`<h1>The example-component Element</h1>
+import{_ as c}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i,s as u,a as h,k as d,K as _,h as a,c as x,l as f,m as v,b as m,A as l}from"../../../chunks/index-a70c3841.js";const g=`<h1>The example-component Element</h1>
 <p>This example component just lets you decrease and increase a number.</p>
 <p><example-component></example-component></p>
 <pre><code class="language-html">&lt;example-component&gt;&lt;/example-component&gt;

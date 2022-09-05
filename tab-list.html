@@ -8,7 +8,7 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-		<meta http-equiv="content-security-policy" content=""><title>The example-component Element</title>
+		<meta http-equiv="content-security-policy" content=""><title>The tab-list Element</title>
 	<link href="/web-components/_app/immutable/assets/_layout-d30571b6.css" rel="stylesheet">
 	<link rel="modulepreload" href="/web-components/_app/immutable/start-4f5b2013.js">
 	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/preload-helper-aa6bc0ce.js">
@@ -18,7 +18,7 @@
 	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-0d2faefd.js">
 	<link rel="modulepreload" href="/web-components/_app/immutable/modules/pages/_layout.js-7b9cbfbc.js">
 	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/_layout-8d2a742b.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/example-component/_page.svelte-67b5a262.js">
+	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/tab-list/_page.svelte-c2a9edc2.js">
 	</head>
 	<body>
 		<div>
@@ -34,21 +34,25 @@
 </header>
     <main class="container svelte-kzrdm7">
 
-<article><!-- HTML_TAG_START --><h1>The example-component Element</h1>
-<p>This example component just lets you decrease and increase a number.</p>
-<p><example-component></example-component></p>
-<pre><code class="language-html">&lt;example-component&gt;&lt;/example-component&gt;
-</code></pre>
-<h2>Initial value</h2>
-<p>You can set an initial value.</p>
-<p><example-component value="7"></example-component></p>
-<pre><code class="language-html">&lt;example-component value=&quot;7&quot;&gt;&lt;/example-component&gt;
-</code></pre>
-<!-- HTML_TAG_END --></article></main>
+<article><!-- HTML_TAG_START --><h1>The tab-list Element</h1>
+<tab-list>
+    <tab-item for="example-1-tab-1" selected>First</tab-item>
+    <tab-item for="example-1-tab-2">Second</tab-item>
+    <tab-item for="example-1-tab-3">Third</tab-item>
+</tab-list>
+<tab-panel id="example-1-tab-1">
+    <p>Content in the first panel.</p>
+</tab-panel>
+<tab-panel id="example-1-tab-2">
+    <p>Content in the second panel.</p>
+</tab-panel>
+<tab-panel id="example-1-tab-3">
+    <p>Content in the third panel.</p>
+</tab-panel><!-- HTML_TAG_END --></article></main>
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="gwj2vw">
+		<script type="module" data-sveltekit-hydrate="19bunmw">
 		import { start } from "/web-components/_app/immutable/start-4f5b2013.js";
 
 		start({
@@ -56,14 +60,14 @@
 			hydrate: {
 				status: 200,
 				error: null,
-				node_ids: [0, 3],
+				node_ids: [0, 4],
 				params: {},
-				routeId: "example-component",
+				routeId: "tab-list",
 				data: (function(a){return [a,a]}(null)),
 				errors: null
 			},
 			paths: {"base":"/web-components","assets":"/web-components"},
-			target: document.querySelector('[data-sveltekit-hydrate="gwj2vw"]').parentNode,
+			target: document.querySelector('[data-sveltekit-hydrate="19bunmw"]').parentNode,
 			trailing_slash: "never"
 		});
 	</script>
