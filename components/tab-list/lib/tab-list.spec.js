@@ -5,15 +5,25 @@ import './define.js'
  * @param {Element} node 
  */
 const asTabContainer = (node) => ({
+    node: node,
     tab: (name) => node.querySelector(`tab-item[for="${name}"]`),
     panel: (name) => node.querySelector(`#${name}`),
 })
 
 describe('tab-list', () => {
     it('roles', async () => {
-        const elem = await fixture(`<tab-list></tab-list>`)
+        const container = asTabContainer(await fixture(`<div>
+            <tab-list>
+                <tab-item for="first" selected>First</tab-item>
+            </tab-list>
+            <tab-panel id="first">
+                <p>Content of first.</p>
+            </tab-panel>
+        </div>`))
 
-        expect(elem.getAttribute('role')).to.equal('tablist')
+        expect(container.node.querySelector('tab-list').getAttribute('role')).to.equal('tablist')
+        expect(container.node.querySelector('tab-item').getAttribute('role')).to.equal('tab')
+        expect(container.node.querySelector('tab-panel').getAttribute('role')).to.equal('tabpanel')
     })
 
     it('standard tab selection', async () => {
