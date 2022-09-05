@@ -1,8 +1,13 @@
 {
   "name": "@auroratide/toggle-switch",
-  "version": "0.0.1",
-  "description": "",
-  "keywords": [],
+  "version": "0.2.1",
+  "description": "A toggle switch web component",
+  "keywords": [
+    "toggle",
+    "switch",
+    "element",
+    "web component"
+  ],
   "type": "module",
   "main": "lib/toggle-switch.js",
   "module": "lib/toggle-switch.js",
@@ -12,6 +17,10 @@
   "author": {
     "name": "Timothy Foster",
     "url": "https://auroratide.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Auroratide/web-components/tree/main/components/toggle-switch"
   },
   "license": "ISC",
   "devDependencies": {
