@@ -5,7 +5,16 @@ export class TabPanelElement extends HTMLElement {
         <slot></slot>
     `
 
-    static css = ``
+    static css = `
+        :host {
+            border: 1px solid black;
+            padding: 4px;
+        }
+
+        :host(:not([hidden])) {
+            display: block;
+        }
+    `
 
     static get observedAttributes() {
         return []

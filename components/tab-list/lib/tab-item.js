@@ -5,7 +5,24 @@ export class TabItemElement extends HTMLElement {
         <slot></slot>
     `
 
-    static css = ``
+    static css = `
+        :host {
+            border: 1px solid black;
+            border-bottom: 0;
+            border-radius: 4px 4px 0 0;
+            padding: 1px 4px;
+            cursor: pointer;
+        }
+
+        :host([selected]) {
+            background-color: yellow;
+        }
+
+        :host(:hover),
+        :host(:focus) {
+            background-color: lightgray;
+        }
+    `
 
     static get observedAttributes() {
         return ['for', 'selected']

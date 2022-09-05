@@ -8,7 +8,14 @@ export class TabListElement extends HTMLElement {
         <slot></slot>
     `
 
-    static css = ``
+    static css = `
+        :host {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 0 4px;
+        }
+    `
 
     static get observedAttributes() {
         return []
