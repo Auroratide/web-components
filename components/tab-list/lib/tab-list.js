@@ -65,10 +65,29 @@ export class TabListElement extends HTMLElement {
 
     connectedCallback() {
         this.setAttribute('role', 'tablist')
+        this.addEventListener('keydown', this.#handleNavigation)
 
         window.customElements.whenDefined(TabItemElement.defaultElementName).then(() => {
             this.updateSelected()
         })
+    }
+
+    /**
+     * @param {KeyboardEvent} e
+     */
+    #handleNavigation = (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            const tabs = this.tabs()
+            const focused = tabs.find((tab) => tab.getAttribute('tabindex') === '0')
+            const focusedIndex = tabs.indexOf(focused)
+
+            focused.setAttribute('tabindex', '-1')
+
+            const nextIndex = (((focusedIndex + (e.key === 'ArrowLeft' ? -1 : 1)) % tabs.length) + tabs.length) % tabs.length
+
+            tabs[nextIndex].setAttribute('tabindex', '0')
+            tabs[nextIndex].focus()
+        }
     }
 
     #createRoot = () => {

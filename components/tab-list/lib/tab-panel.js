@@ -19,6 +19,7 @@ export class TabPanelElement extends HTMLElement {
 
     connectedCallback() {
         this.setAttribute('role', 'tabpanel')
+        this.setAttribute('tabindex', '0')
     }
 
     #createRoot = () => {

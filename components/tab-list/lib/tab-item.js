@@ -33,22 +33,29 @@ export class TabItemElement extends HTMLElement {
 
     connectedCallback() {
         this.setAttribute('role', 'tab')
-        this.setAttribute('tabindex', '0')
 
-        this.addEventListener('click', this.#handle)
+        this.addEventListener('click', this.#onClick)
+        this.addEventListener('keyup', this.#onKeyPress)
     }
 
     attributeChangedCallback(name) {
         this.setAttribute('aria-controls', this.for)
         this.setAttribute('aria-selected', this.selected.toString())
+        this.setAttribute('tabindex', this.selected ? '0' : '-1')
         
         if (name === 'selected') {
             this.list.updateSelected(this.selected ? this : undefined)
         }
     }
 
-    #handle = () => {
+    #onClick = () => {
         this.selected = true
+    }
+
+    #onKeyPress = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            this.selected = true
+        }
     }
 
     #createRoot = () => {
