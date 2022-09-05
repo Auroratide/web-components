@@ -5,6 +5,7 @@ The `toggle-switch` element represents a control that is either on or off. This 
 <wc-demo hidden>
     <label for="example-01">Active?</label>
     <toggle-switch id="example-01"></toggle-switch>
+    <p id="example-01-output">Off</p>
 </wc-demo>
 
 ```html

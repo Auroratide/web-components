@@ -125,6 +125,10 @@
         margin-bottom: 1.5rem;
     }
 
+    :global(wc-demo > *:last-child) {
+        margin-bottom: 0;
+    }
+
     /* Code
      * ===================================================================== */
     :global(code) {
