@@ -11,19 +11,44 @@ const asTabContainer = (node) => ({
 })
 
 describe('tab-list', () => {
-    it('roles', async () => {
-        const container = asTabContainer(await fixture(`<div>
-            <tab-list>
-                <tab-item for="first" selected>First</tab-item>
-            </tab-list>
-            <tab-panel id="first">
-                <p>Content of first.</p>
-            </tab-panel>
-        </div>`))
+    describe('aria requirements', () => {
+        it('roles', async () => {
+            const container = asTabContainer(await fixture(`<div>
+                <tab-list>
+                    <tab-item for="first" selected>First</tab-item>
+                </tab-list>
+                <tab-panel id="first"><p>Content of first.</p></tab-panel>
+            </div>`))
+    
+            expect(container.node.querySelector('tab-list').getAttribute('role')).to.equal('tablist')
+            expect(container.node.querySelector('tab-item').getAttribute('role')).to.equal('tab')
+            expect(container.node.querySelector('tab-panel').getAttribute('role')).to.equal('tabpanel')
+        })
 
-        expect(container.node.querySelector('tab-list').getAttribute('role')).to.equal('tablist')
-        expect(container.node.querySelector('tab-item').getAttribute('role')).to.equal('tab')
-        expect(container.node.querySelector('tab-panel').getAttribute('role')).to.equal('tabpanel')
+        it('aria-controls', async () => {
+            const container = asTabContainer(await fixture(`<div>
+                <tab-list>
+                    <tab-item for="first" selected>First</tab-item>
+                </tab-list>
+                <tab-panel id="first"><p>Content of first.</p></tab-panel>
+            </div>`))
+    
+            expect(container.tab('first').getAttribute('aria-controls')).to.equal('first')
+        })
+
+        it('aria-selected', async () => {
+            const container = asTabContainer(await fixture(`<div>
+                <tab-list>
+                    <tab-item for="first" selected>First</tab-item>
+                    <tab-item for="second">First</tab-item>
+                </tab-list>
+                <tab-panel id="first"><p>Content of first.</p></tab-panel>
+                <tab-panel id="second"><p>Content of second.</p></tab-panel>
+            </div>`))
+    
+            expect(container.tab('first').getAttribute('aria-selected')).to.equal('true')
+            expect(container.tab('second').getAttribute('aria-selected')).to.equal('false')
+        })
     })
 
     it('standard tab selection', async () => {
