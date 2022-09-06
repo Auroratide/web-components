@@ -18,13 +18,27 @@ export class TabListElement extends HTMLElement {
     `
 
     static get observedAttributes() {
-        return []
+        return ['orientation']
     }
 
     constructor() {
         super()
 
         this.#createRoot()
+    }
+
+    /**
+     * @returns {'horizontal' | 'vertical'}
+     */
+    get orientation() {
+        return this.getAttribute('orientation') ?? 'horizontal'
+    }
+
+    /**
+     * @param {'horizontal' | 'vertical'}
+     */
+    set orientation(value) {
+        return this.setAttribute('orientation', value)
     }
 
     /**
@@ -79,22 +93,37 @@ export class TabListElement extends HTMLElement {
         })
     }
 
+    attributeChangedCallback(name) {
+        if (this.orientation === 'vertical') {
+            this.setAttribute('aria-orientation', 'vertical')
+        } else {
+            this.removeAttribute('aria-orientation')
+        }
+    }
+
     /**
      * @param {KeyboardEvent} e
      */
     #handleNavigation = (e) => {
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        const keys = this.#keysForOrientation()
+        if (keys.includes(e.key)) {
             const tabs = this.tabs()
             const focused = tabs.find((tab) => tab.getAttribute('tabindex') === '0')
             const focusedIndex = tabs.indexOf(focused)
 
             focused.setAttribute('tabindex', '-1')
 
-            const nextIndex = (((focusedIndex + (e.key === 'ArrowLeft' ? -1 : 1)) % tabs.length) + tabs.length) % tabs.length
+            const nextIndex = (((focusedIndex + (e.key === keys[0] ? -1 : 1)) % tabs.length) + tabs.length) % tabs.length
 
             tabs[nextIndex].setAttribute('tabindex', '0')
             tabs[nextIndex].focus()
         }
+    }
+
+    #keysForOrientation = () => {
+        return this.orientation === 'vertical'
+            ? ['ArrowUp', 'ArrowDown']
+            : ['ArrowLeft', 'ArrowRight']
     }
 
     #createRoot = () => {

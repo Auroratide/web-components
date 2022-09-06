@@ -6,6 +6,7 @@ import './define.js'
  */
 const asTabContainer = (node) => ({
     node: node,
+    list: () => node.querySelector('tab-list'),
     tab: (name) => node.querySelector(`tab-item[for="${name}"]`),
     panel: (name) => node.querySelector(`#${name}`),
 })
@@ -99,6 +100,17 @@ describe('tab-list', () => {
     
             expect(container.tab('first').getAttribute('aria-selected')).to.equal('true')
             expect(container.tab('second').getAttribute('aria-selected')).to.equal('false')
+        })
+
+        it('aria-orientation', async () => {
+            const container = asTabContainer(await fixture(`<div>
+                <tab-list orientation="vertical">
+                    <tab-item for="first" selected>First</tab-item>
+                </tab-list>
+                <tab-panel id="first"><p>Content of first.</p></tab-panel>
+            </div>`))
+
+            expect(container.list().getAttribute('aria-orientation')).to.equal('vertical')
         })
     })
 
@@ -200,6 +212,39 @@ describe('tab-list', () => {
             pressSpace()
             pressTab()
             expect(document.activeElement).to.equal(container.panel('third'))
+        })
+
+        it('vertical orientation', async () => {
+            const container = asTabContainer(await fixture(`<div>
+                <tab-list orientation="vertical">
+                    <tab-item for="first">First</tab-item>
+                    <tab-item for="second" selected>Second</tab-item>
+                    <tab-item for="third">Third</tab-item>
+                </tab-list>
+                <tab-panel id="first"><p>Content of first.</p></tab-panel>
+                <tab-panel id="second"><p>Content of second.</p></tab-panel>
+                <tab-panel id="third"><p>Content of third.</p></tab-panel>
+            </div>`))
+
+            container.tab('second').focus()
+
+            pressArrow('Up')
+            expect(document.activeElement).to.equal(container.tab('first'))
+
+            pressArrow('Up')
+            expect(document.activeElement).to.equal(container.tab('third'))
+
+            pressArrow('Down')
+            expect(document.activeElement).to.equal(container.tab('first'))
+
+            pressArrow('Down')
+            expect(document.activeElement).to.equal(container.tab('second'))
+
+            pressArrow('Left')
+            expect(document.activeElement).to.equal(container.tab('second'))
+
+            pressArrow('Right')
+            expect(document.activeElement).to.equal(container.tab('second'))
         })
     })
 })
