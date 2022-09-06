@@ -1,5 +1,6 @@
 # The tab-list Element
 
+<!--DEMO
 <tab-list aria-label="Learn about fruits">
     <tab-item for="example-1-tab-1" selected>First</tab-item>
     <tab-item for="example-1-tab-2">Second</tab-item>
@@ -14,3 +15,4 @@
 <tab-panel id="example-1-tab-3">
     <p>Content in the third panel.</p>
 </tab-panel>
+/DEMO-->

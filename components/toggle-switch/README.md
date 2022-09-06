@@ -2,11 +2,13 @@
 
 The `toggle-switch` element represents a control that is either on or off. This component is built with accessibility in mind and implements the WAI-ARIA [switch role](https://www.w3.org/TR/wai-aria-1.1/#switch).
 
-<wc-demo hidden>
+<!--DEMO
+<wc-demo>
     <label for="example-01">Active?</label>
     <toggle-switch id="example-01"></toggle-switch>
     <p id="example-01-output">Off</p>
 </wc-demo>
+/DEMO-->
 
 ```html
 <label for="example-01">Active?</label>
@@ -49,10 +51,12 @@ By default, the switch starts in the **off** position. You can have it start in 
 <toggle-switch checked id="example-03"></toggle-switch>
 ```
 
-<wc-demo hidden>
+<!--DEMO
+<wc-demo>
     <label for="example-03">Can upload cat images: </label>
     <toggle-switch checked id="example-03"></toggle-switch>
 </wc-demo>
+/DEMO-->
 
 ### Attributes
 
@@ -72,7 +76,8 @@ Additionally, using the `checked` state, you can apply special styling for when 
 
 Here's an example showing how to use CSS to make this look like a Material UI switch:
 
-<wc-demo hidden>
+<!--DEMO
+<wc-demo>
     <label for="fancy-switch">Fancy Switch</label>
     <toggle-switch id="fancy-switch"></toggle-switch>
     <style>
@@ -98,6 +103,7 @@ Here's an example showing how to use CSS to make this look like a Material UI sw
         }
     </style>
 </wc-demo>
+/DEMO-->
 
 ```css
 toggle-switch {

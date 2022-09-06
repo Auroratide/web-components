@@ -38,6 +38,7 @@ importers:
       '@sveltejs/adapter-static': 1.0.0-next.41
       '@sveltejs/kit': next
       highlight.js: ^11.6.0
+      markdown-it: ^13.0.1
       svelte: ^3.44.0
       svelte-check: ^2.7.1
       typescript: ^4.7.4
@@ -50,8 +51,9 @@ importers:
     devDependencies:
       '@sveltejs/adapter-auto': 1.0.0-next.71
       '@sveltejs/adapter-static': 1.0.0-next.41
-      '@sveltejs/kit': 1.0.0-next.473_fhgkwirxvgjw2igda6zmhiisma
+      '@sveltejs/kit': 1.0.0-next.474_fhgkwirxvgjw2igda6zmhiisma
       highlight.js: 11.6.0
+      markdown-it: 13.0.1
       svelte: 3.49.0
       svelte-check: 2.9.0_svelte@3.49.0
       typescript: 4.8.2
@@ -302,8 +304,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.473_fhgkwirxvgjw2igda6zmhiisma:
-    resolution: {integrity: sha512-/PVk8zwUbwGlPfnmvcN71RyoSVrLO9hXMCHJ6BPqrZgBHubB0NPYS4mETE7RGHdxAk1LU2W9WStAdoE0kt6qng==}
+  /@sveltejs/kit/1.0.0-next.474_fhgkwirxvgjw2igda6zmhiisma:
+    resolution: {integrity: sha512-RhyWczm95S4VIlnjCAc5TPRGl2OoVWZ4cQRBKmzdF7MUScTduNzo6WB2JWkImgwE3nqdvepgnem56GbEUj3e5Q==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -1342,6 +1344,11 @@ packages:
     resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
     dev: true
 
+  /entities/3.0.1:
+    resolution: {integrity: sha512-WiyBqoomrwMdFG1e0kqvASYfnlb0lp8M5o5Fw2OFq1hNZxxcNk8Ik0Xm7LxzBhuidnZB/UtBqVCgUz3kBOP51Q==}
+    engines: {node: '>=0.12'}
+    dev: true
+
   /errorstacks/2.4.0:
     resolution: {integrity: sha512-5ecWhU5gt0a5G05nmQcgCxP5HperSMxLDzvWlT5U+ZSKkuDK0rJ3dbCQny6/vSCIXjwrhwSecXBbw1alr295hQ==}
     dev: true
@@ -2149,6 +2156,12 @@ packages:
       uc.micro: 1.0.6
     dev: true
 
+  /linkify-it/4.0.1:
+    resolution: {integrity: sha512-C7bfi1UZmoj8+PQx22XyeXCuBlokoyWQL5pWSP+EI6nzRylyThouddufc2c1NDIcP9k5agmN9fLpA7VNJfIiqw==}
+    dependencies:
+      uc.micro: 1.0.6
+    dev: true
+
   /lit-element/3.2.2:
     resolution: {integrity: sha512-6ZgxBR9KNroqKb6+htkyBwD90XGRiqKDHVrW/Eh0EZ+l+iC+u+v+w3/BA5NGi4nizAVHGYvQBHUDuSmLjPp7NQ==}
     dependencies:
@@ -2229,6 +2242,17 @@ packages:
       argparse: 2.0.1
       entities: 2.1.0
       linkify-it: 3.0.3
+      mdurl: 1.0.1
+      uc.micro: 1.0.6
+    dev: true
+
+  /markdown-it/13.0.1:
+    resolution: {integrity: sha512-lTlxriVoy2criHP0JKRhO2VDG9c2ypWCsT237eDiLqi09rmbKoUetyGHq2uOIRoRS//kfoJckS0eUzzkDR+k2Q==}
+    hasBin: true
+    dependencies:
+      argparse: 2.0.1
+      entities: 3.0.1
+      linkify-it: 4.0.1
       mdurl: 1.0.1
       uc.micro: 1.0.6
     dev: true
