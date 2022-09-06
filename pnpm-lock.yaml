@@ -37,7 +37,7 @@ importers:
       '@sveltejs/adapter-auto': next
       '@sveltejs/adapter-static': 1.0.0-next.41
       '@sveltejs/kit': next
-      prismjs: ^1.29.0
+      highlight.js: ^11.6.0
       svelte: ^3.44.0
       svelte-check: ^2.7.1
       typescript: ^4.7.4
@@ -47,11 +47,11 @@ importers:
       '@auroratide/example-component': link:../components/example-component
       '@auroratide/tab-list': link:../components/tab-list
       '@auroratide/toggle-switch': link:../components/toggle-switch
-      prismjs: 1.29.0
     devDependencies:
       '@sveltejs/adapter-auto': 1.0.0-next.71
       '@sveltejs/adapter-static': 1.0.0-next.41
-      '@sveltejs/kit': 1.0.0-next.470_fhgkwirxvgjw2igda6zmhiisma
+      '@sveltejs/kit': 1.0.0-next.473_fhgkwirxvgjw2igda6zmhiisma
+      highlight.js: 11.6.0
       svelte: 3.49.0
       svelte-check: 2.9.0_svelte@3.49.0
       typescript: 4.8.2
@@ -302,8 +302,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.470_fhgkwirxvgjw2igda6zmhiisma:
-    resolution: {integrity: sha512-gXe+x4pQSxjI1oNo74WOcMXc6sIFJuUAhwAaZ2jcDw+9vpjKJnH/hZFzER97YQA5Oz+iRdv6Mzw1+pprSJoT9Q==}
+  /@sveltejs/kit/1.0.0-next.473_fhgkwirxvgjw2igda6zmhiisma:
+    resolution: {integrity: sha512-/PVk8zwUbwGlPfnmvcN71RyoSVrLO9hXMCHJ6BPqrZgBHubB0NPYS4mETE7RGHdxAk1LU2W9WStAdoE0kt6qng==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -1826,6 +1826,11 @@ packages:
       function-bind: 1.1.1
     dev: true
 
+  /highlight.js/11.6.0:
+    resolution: {integrity: sha512-ig1eqDzJaB0pqEvlPVIpSSyMaO92bH1N2rJpLMN/nX396wTpDA4Eq0uK+7I/2XG17pFaaKE0kjV/XPeGt7Evjw==}
+    engines: {node: '>=12.0.0'}
+    dev: true
+
   /html-escaper/2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
     dev: true
@@ -2545,11 +2550,6 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
     dev: true
-
-  /prismjs/1.29.0:
-    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
-    engines: {node: '>=6'}
-    dev: false
 
   /progress/2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}

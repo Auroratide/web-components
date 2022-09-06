@@ -13,6 +13,7 @@
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/adapter-static": "1.0.0-next.41",
 		"@sveltejs/kit": "next",
+		"highlight.js": "^11.6.0",
 		"svelte": "^3.44.0",
 		"svelte-check": "^2.7.1",
 		"typescript": "^4.7.4",
@@ -23,7 +24,6 @@
 	"dependencies": {
 		"@auroratide/example-component": "workspace:^0.0.1",
 		"@auroratide/tab-list": "workspace:^0.0.1",
-		"@auroratide/toggle-switch": "workspace:^0.2.1",
-		"prismjs": "^1.29.0"
+		"@auroratide/toggle-switch": "workspace:^0.2.1"
 	}
 }

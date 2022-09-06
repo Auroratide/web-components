@@ -2,24 +2,16 @@
     import { browser } from '$app/environment'
     import Header from './Header.svelte'
     import Nav from './Nav.svelte'
-    import { highlight } from '$lib/syntax-highlighter'
-    import { afterUpdate } from 'svelte'
 
     if (browser)
         import('$lib/wc-demo')
-
-    let highlightKey = Symbol()
-
-    afterUpdate(() => {
-        highlightKey = Symbol()
-    })
 </script>
 
 <div class="full-screen horizontal-on-large">
     <Header>
         <Nav />
     </Header>
-    <main class="container" use:highlight={highlightKey}>
+    <main class="container">
         <slot></slot>
     </main>
 </div>
@@ -173,45 +165,40 @@
         background-image: linear-gradient(transparent 50%, var(--c-danger-overlay) 50%);
     }
 
-    :global(code .comment) {
+    :global(code .hljs-comment) {
         color: var(--c-code-comment);
     }
 
-    :global(code .keyword),
-    :global(code .attr-name),
-    :global(code .rule),
-    :global(code .property) {
+    :global(code .hljs-keyword),
+    :global(code .hljs-attr),
+    :global(code .hljs-attribute) {
         color: var(--c-code-keyword);
     }
 
-    :global(code .number),
-    :global(code .boolean) {
+    :global(code .hljs-number),
+    :global(code .hljs-literal) {
         color: var(--c-code-literal);
     }
 
-    :global(code .string),
-    :global(code .regex),
-    :global(code .attr-value) {
+    :global(code .hljs-string),
+    :global(code .hljs-regexp) {
         color: var(--c-code-string);
     }
 
-    :global(code .class-name),
-    :global(code .selector),
-    :global(code .tag > .tag) {
+    :global(code .hljs-name),
+    :global(code .hljs-title.class_),
+    :global(code .hljs-selector-class) {
         color: var(--c-code-name);
     }
 
-    :global(code .function),
-    :global(code .pseudo-class) {
+    :global(code .hljs-built_in),
+    :global(code .hljs-title.function_),
+    :global(code .hljs-selector-pseudo) {
         font-weight: 700;
     }
 
-    :global(code .doctype) {
+    :global(code .hljs-meta) {
         color: var(--c-code-annotation);
-    }
-
-    :global(code .tag > .punctuation) {
-        color: var(--c-code-default);
     }
 
     :global(kbd) {
