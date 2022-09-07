@@ -12,7 +12,11 @@ export class TabListElement extends HTMLElement {
         :host {
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
+        }
+
+        :host([orientation="vertical"]) {
+            flex-direction: column;
+            width: 50%;
         }
     `
 

@@ -9,7 +9,6 @@ export class TabItemElement extends HTMLElement {
         :host {
             border: 1px solid black;
             border-bottom: 0;
-            border-radius: 4px 4px 0 0;
             padding: 1px 4px;
             cursor: pointer;
         }
