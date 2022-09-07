@@ -19,6 +19,10 @@
     "name": "Timothy Foster",
     "url": "https://auroratide.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Auroratide/web-components/tree/main/components/tab-list"
+  },
   "license": "ISC",
   "devDependencies": {
     "@open-wc/testing": "^3.1.6",
