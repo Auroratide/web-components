@@ -13,7 +13,6 @@ export class TabListElement extends HTMLElement {
             display: flex;
             flex-wrap: wrap;
             gap: 4px;
-            padding: 0 4px;
         }
     `
 
