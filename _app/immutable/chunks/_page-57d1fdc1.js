@@ -1,43 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="/web-components/logo-032.png" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-		<meta http-equiv="content-security-policy" content=""><title>The toggle-switch Element</title>
-	<link href="/web-components/_app/immutable/assets/_layout-8126f751.css" rel="stylesheet">
-	<link href="/web-components/_app/immutable/assets/_page-3d542feb.css" rel="stylesheet">
-	<link rel="modulepreload" href="/web-components/_app/immutable/start-5b28bb4c.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/preload-helper-aa6bc0ce.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/index-9cce3746.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/singletons-1084d4a6.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/paths-acac5138.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-0362b507.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/modules/pages/_layout.js-7b9cbfbc.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/_layout-8d2a742b.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/toggle-switch/_page.svelte-aaa76411.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/_page-57d1fdc1.js">
-	</head>
-	<body>
-		<div>
-
-
-<div class="full-screen horizontal-on-large svelte-tr7o57"><header class="svelte-ja4t0v"><div class="container"><div class="site-nav svelte-ja4t0v"><div class="site-links svelte-ja4t0v"><a class="site-title svelte-ja4t0v" href="/web-components">Web Components</a>
-                <address class="svelte-ja4t0v">By <a href="https://auroratide.com">Auroratide</a></address></div>
-            <a class="site-logo svelte-ja4t0v" href="/web-components" aria-hidden="true"><img src="/web-components/logo-256.png" alt="Web Components" class="svelte-ja4t0v"></a></div>
-        <hr class="svelte-ja4t0v">
-        <nav><ul class="svelte-p7odg2"><li class="svelte-p7odg2"><a href="/web-components/example-component">example-component</a></li>
-        <li class="svelte-p7odg2"><a href="/web-components/tab-list">tab-list</a></li>
-        <li class="svelte-p7odg2"><a href="/web-components/toggle-switch">toggle-switch</a></li></ul>
-</nav></div>
-</header>
-    <main class="container svelte-tr7o57">
-
-<article class="svelte-1e8zya6"><!-- HTML_TAG_START --><h1>The toggle-switch Element</h1>
+import{_ as r}from"./preload-helper-aa6bc0ce.js";import{S as d,i as g,s as m,a as u,k as b,I as j,h as t,c as w,l as f,m as y,n as k,b as p,A as c,o as _,J as x}from"./index-9cce3746.js";const v=`<h1>The toggle-switch Element</h1>
 <p>The <code>toggle-switch</code> element represents a control that is either on or off. This component is built with accessibility in mind and implements the WAI-ARIA <a href="https://www.w3.org/TR/wai-aria-1.1/#switch">switch role</a>.</p>
 <wc-demo>
     <label for="example-01">Active?</label>
@@ -199,30 +160,4 @@ toggle-switch<span class="hljs-selector-attr">[checked]</span><span class="hljs-
 <li>The element can be focused</li>
 <li>The element can be toggled with <kbd>Enter</kbd> or <kbd>Space</kbd></li>
 </ul>
-<!-- HTML_TAG_END -->
-</article></main>
-</div>
-
-
-		<script type="module" data-sveltekit-hydrate="556ho1">
-		import { start } from "/web-components/_app/immutable/start-5b28bb4c.js";
-
-		start({
-			env: {},
-			hydrate: {
-				status: 200,
-				error: null,
-				node_ids: [0, 5],
-				params: {},
-				routeId: "toggle-switch",
-				data: (function(a){return [a,a]}(null)),
-				form: null
-			},
-			paths: {"base":"/web-components","assets":"/web-components"},
-			target: document.querySelector('[data-sveltekit-hydrate="556ho1"]').parentNode,
-			trailing_slash: "never"
-		});
-	</script>
-	</div>
-	</body>
-</html>
+`,h="toggle-switch:change",C=e=>new CustomEvent(h,{detail:{checked:e}});const{document:o}=x;function q(e){let a,s;return{c(){a=u(),s=b("article"),this.h()},l(n){j('[data-svelte="svelte-836m89"]',o.head).forEach(t),a=w(n),s=f(n,"ARTICLE",{class:!0});var i=y(s);i.forEach(t),this.h()},h(){o.title="The toggle-switch Element",k(s,"class","svelte-1e8zya6")},m(n,l){p(n,a,l),p(n,s,l),s.innerHTML=v},p:c,i:c,o:c,d(n){n&&t(a),n&&t(s)}}}function A(e){return r(()=>import("./define-a6f3f1ea.js"),[],import.meta.url),_(()=>{const a=document.querySelector("#example-01"),s=document.querySelector("#example-01-output");a&&s&&(a==null||a.addEventListener(h,n=>{n.detail.checked?(s.textContent="On",s.classList.add("example-active")):(s.textContent="Off",s.classList.remove("example-active"))}))}),[]}class I extends d{constructor(a){super(),g(this,a,A,q,m,{})}}export{I as P,C as c};

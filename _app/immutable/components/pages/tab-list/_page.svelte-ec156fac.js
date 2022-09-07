@@ -1,41 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="/web-components/logo-032.png" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-		<meta http-equiv="content-security-policy" content=""><title>The tab-list Element</title>
-	<link href="/web-components/_app/immutable/assets/_layout-8126f751.css" rel="stylesheet">
-	<link rel="modulepreload" href="/web-components/_app/immutable/start-5b28bb4c.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/preload-helper-aa6bc0ce.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/index-9cce3746.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/singletons-1084d4a6.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/paths-acac5138.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-0362b507.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/modules/pages/_layout.js-7b9cbfbc.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/_layout-8d2a742b.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/tab-list/_page.svelte-ec156fac.js">
-	</head>
-	<body>
-		<div>
-
-
-<div class="full-screen horizontal-on-large svelte-tr7o57"><header class="svelte-ja4t0v"><div class="container"><div class="site-nav svelte-ja4t0v"><div class="site-links svelte-ja4t0v"><a class="site-title svelte-ja4t0v" href="/web-components">Web Components</a>
-                <address class="svelte-ja4t0v">By <a href="https://auroratide.com">Auroratide</a></address></div>
-            <a class="site-logo svelte-ja4t0v" href="/web-components" aria-hidden="true"><img src="/web-components/logo-256.png" alt="Web Components" class="svelte-ja4t0v"></a></div>
-        <hr class="svelte-ja4t0v">
-        <nav><ul class="svelte-p7odg2"><li class="svelte-p7odg2"><a href="/web-components/example-component">example-component</a></li>
-        <li class="svelte-p7odg2"><a href="/web-components/tab-list">tab-list</a></li>
-        <li class="svelte-p7odg2"><a href="/web-components/toggle-switch">toggle-switch</a></li></ul>
-</nav></div>
-</header>
-    <main class="container svelte-tr7o57">
-
-<article><!-- HTML_TAG_START --><h1>The tab-list Elements</h1>
+import{_ as o}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i as b,s as h,a as d,k as u,I as m,h as t,c as g,l as j,m as f,b as i,A as l}from"../../../chunks/index-9cce3746.js";const y=`<h1>The tab-list Elements</h1>
 <p>The <code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code> elements together represent content that is presented one panel at a time. They are build with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://w3c.github.io/aria-practices/#tabpanel">tabs</a>.</p>
 <ul>
 <li>A <code>tab-list</code> represents a set of tabs, where only one tab's contents may be presented at a time.</li>
@@ -90,7 +53,7 @@
 <li><code>tab-item</code> must define the <code>for</code> attribute, whose value is the <code>id</code> of its corresponding <code>tab-panel</code>.</li>
 </ul>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">tab-list</span>&gt;</span>
-    <span class="hljs-comment">&lt;!-- tab-item must be in a tab-list, and defines `for` to be
+    <span class="hljs-comment">&lt;!-- tab-item must be in a tab-list, and defines \`for\` to be
          the corresponding tab-panel id --&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">tab-item</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;tab-panel-id&quot;</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">tab-list</span>&gt;</span>
@@ -206,11 +169,11 @@
                 <p>Ingredients for making apple pie:</p>
                 <ul>
                     <li>8 Granny Smith apples</li>
-                    <li>½ cup butter</li>
+                    <li>\xBD cup butter</li>
                     <li>3 tablespoons flour</li>
-                    <li>½ cup white sugar</li>
-                    <li>½ cup brown sugar</li>
-                    <li>¼ water</li>
+                    <li>\xBD cup white sugar</li>
+                    <li>\xBD cup brown sugar</li>
+                    <li>\xBC water</li>
                     <li>A double-crust pie pastry</li>
                 </ul>
             </tab-panel>
@@ -218,12 +181,12 @@
                 <p>Ingredients for making orange sorbet:</p>
                 <ul>
                     <li>2 cups orange juice pulp</li>
-                    <li>1½ cup almond milk</li>
+                    <li>1\xBD cup almond milk</li>
                     <li>1 tablespoon orange zest</li>
                     <li>1 tablespoon lemon juice</li>
-                    <li>¼ teaspoon salt</li>
+                    <li>\xBC teaspoon salt</li>
                     <li>1 teaspoon vanilla extract</li>
-                    <li>½ teaspoon sweetener</li>
+                    <li>\xBD teaspoon sweetener</li>
                 </ul>
             </tab-panel>
             <tab-panel id="example-4-tab-3">
@@ -339,29 +302,4 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
 <li>Native support for removable tabs.</li>
 <li>Tabs that open popup menus.</li>
 </ul>
-<!-- HTML_TAG_END --></article></main>
-</div>
-
-
-		<script type="module" data-sveltekit-hydrate="knu2cu">
-		import { start } from "/web-components/_app/immutable/start-5b28bb4c.js";
-
-		start({
-			env: {},
-			hydrate: {
-				status: 200,
-				error: null,
-				node_ids: [0, 4],
-				params: {},
-				routeId: "tab-list",
-				data: (function(a){return [a,a]}(null)),
-				form: null
-			},
-			paths: {"base":"/web-components","assets":"/web-components"},
-			target: document.querySelector('[data-sveltekit-hydrate="knu2cu"]').parentNode,
-			trailing_slash: "never"
-		});
-	</script>
-	</div>
-	</body>
-</html>
+`;function w(p){let s,n;return{c(){s=d(),n=u("article"),this.h()},l(a){m('[data-svelte="svelte-vr2uw0"]',document.head).forEach(t),s=g(a),n=j(a,"ARTICLE",{});var c=f(n);c.forEach(t),this.h()},h(){document.title="The tab-list Element"},m(a,e){i(a,s,e),i(a,n,e),n.innerHTML=y},p:l,i:l,o:l,d(a){a&&t(s),a&&t(n)}}}function x(p){return o(()=>import("../../../chunks/define-2b7b9788.js"),[],import.meta.url),[]}class v extends r{constructor(s){super(),b(this,s,x,w,h,{})}}export{v as default};
