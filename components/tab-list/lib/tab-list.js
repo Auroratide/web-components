@@ -1,6 +1,9 @@
-import { TabItemElement } from './tab-item.js'
-import { TabPanelElement } from './tab-panel.js'
+import { TabItemElement } from './tab-item'
 
+/**
+ * Represents a set of tabs, where only one tab's contents may be presented at a time.
+ * @property {'horizontal' | 'vertical'} orientation
+ */
 export class TabListElement extends HTMLElement {
     static defaultElementName = 'tab-list'
 
@@ -30,16 +33,9 @@ export class TabListElement extends HTMLElement {
         this.#createRoot()
     }
 
-    /**
-     * @returns {'horizontal' | 'vertical'}
-     */
     get orientation() {
         return this.getAttribute('orientation') ?? 'horizontal'
     }
-
-    /**
-     * @param {'horizontal' | 'vertical'}
-     */
     set orientation(value) {
         return this.setAttribute('orientation', value)
     }
@@ -66,7 +62,7 @@ export class TabListElement extends HTMLElement {
     }
 
     /**
-     * @param {TabItemElement | undefined} toSelect 
+     * @param {TabItemElement | undefined} toSelect
      */
     updateSelected = (toSelect) => {
         toSelect = toSelect ?? this.selected()
@@ -96,7 +92,7 @@ export class TabListElement extends HTMLElement {
         })
     }
 
-    attributeChangedCallback(name) {
+    attributeChangedCallback() {
         if (this.orientation === 'vertical') {
             this.setAttribute('aria-orientation', 'vertical')
         } else {
@@ -110,6 +106,8 @@ export class TabListElement extends HTMLElement {
     #handleNavigation = (e) => {
         const keys = this.#keysForOrientation()
         if (keys.includes(e.key)) {
+            e.preventDefault()
+
             const tabs = this.tabs()
             const focused = tabs.find((tab) => tab.getAttribute('tabindex') === '0')
             const focusedIndex = tabs.indexOf(focused)

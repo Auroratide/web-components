@@ -45,7 +45,7 @@ const pressArrow = (direction) => {
 }
 
 const pressEnter = () => {
-    document.activeElement.dispatchEvent(new KeyboardEvent('keyup', {
+    document.activeElement.dispatchEvent(new KeyboardEvent('keydown', {
         key: 'Enter',
         code: 'Enter',
         bubbles: true,
@@ -54,7 +54,7 @@ const pressEnter = () => {
 }
 
 const pressSpace = () => {
-    document.activeElement.dispatchEvent(new KeyboardEvent('keyup', {
+    document.activeElement.dispatchEvent(new KeyboardEvent('keydown', {
         key: ' ',
         code: 'Space',
         bubbles: true,

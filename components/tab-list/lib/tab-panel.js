@@ -1,3 +1,6 @@
+/**
+ * Represents a panel of information.
+ */
 export class TabPanelElement extends HTMLElement {
     static defaultElementName = 'tab-panel'
 

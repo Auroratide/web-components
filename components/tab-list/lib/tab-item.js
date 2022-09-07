@@ -1,3 +1,10 @@
+/**
+ * Represents a reference of a single panel of information in a tab list.
+ * @property {string} for
+ * @property {boolean} selected
+ * @property {TabPanelElement} panel
+ * @property {TabListElement} list
+ */
 export class TabItemElement extends HTMLElement {
     static defaultElementName = 'tab-item'
 
@@ -51,7 +58,7 @@ export class TabItemElement extends HTMLElement {
         this.setAttribute('role', 'tab')
 
         this.addEventListener('click', this.#onClick)
-        this.addEventListener('keyup', this.#onKeyPress)
+        this.addEventListener('keydown', this.#onKeyPress)
     }
 
     attributeChangedCallback(name) {
@@ -68,8 +75,12 @@ export class TabItemElement extends HTMLElement {
         this.selected = true
     }
 
+    /**
+     * @param {KeyboardEvent} e
+     */
     #onKeyPress = (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
             this.selected = true
         }
     }
