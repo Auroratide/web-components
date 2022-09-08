@@ -5,9 +5,8 @@ This is just a bunch of highly reusable, fully accessible **[web components](htt
 * It's part of the [HTML Standard](https://html.spec.whatwg.org/#custom-elements), so they work in [every web framework](https://custom-elements-everywhere.com/), or with no framework at all.
 * They are [fast and small](https://webcomponents.dev/blog/all-the-ways-to-make-a-web-component/) compared to components in frameworks, since there's zero library overhead.
 * They facilitate [progressive enhancement](https://kryogenix.org/code/browser/everyonehasjs.html): viewers get a basic view of content before the Javascript makes it functional.
-* Their usage is ergonomic, exactly like native elements, for example:<br />`<sarcastic-text>Cool!</sarcastic-text>`.
 
-Wanna learn more? Join the [Web Component Community](https://community.webcomponents.dev/)!
+...And many more reasons! Wanna learn more? Join the [Web Component Community](https://community.webcomponents.dev/)!
 
 <small>Made by <a href="https://auroratide.com">Auroratide</a>, a developer with a passion for the web, inclusive design, and storytelling ❤️</small>
 
