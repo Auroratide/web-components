@@ -1,5 +1,7 @@
 # The toggle-switch Element
 
+<p hidden><strong><a href="https://auroratide.github.io/web-components/toggle-switch">View this page with live demos!</a></strong></p>
+
 The `toggle-switch` element represents a control that is either on or off. This component is built with accessibility in mind and implements the WAI-ARIA [switch role](https://www.w3.org/TR/wai-aria-1.1/#switch).
 
 <!--DEMO

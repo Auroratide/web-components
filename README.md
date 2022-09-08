@@ -1,5 +1,7 @@
 # Web Components by Auroratide
 
+<p hidden><strong><a href="https://auroratide.github.io/web-components/">View this page with live demos!</a></strong></p>
+
 This is just a bunch of highly reusable, fully accessible **[web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components)** you can use on your websites! Why web components?
 
 * It's part of the [HTML Standard](https://html.spec.whatwg.org/#custom-elements), so they work in [every web framework](https://custom-elements-everywhere.com/), or with no framework at all.
