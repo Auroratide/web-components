@@ -1,40 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="/web-components/logo-032.png" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-		<meta http-equiv="content-security-policy" content=""><title>Web Components by Auroratide</title>
-	<link href="/web-components/_app/immutable/assets/_layout-8ef3f9d6.css" rel="stylesheet">
-	<link rel="modulepreload" href="/web-components/_app/immutable/start-f4509bc7.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/preload-helper-aa6bc0ce.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/index-9cce3746.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/singletons-0354d59c.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/paths-acac5138.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-7060d226.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/modules/pages/_layout.js-7b9cbfbc.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/_layout-8d2a742b.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_page.svelte-642fb838.js">
-	</head>
-	<body>
-		<div>
-
-
-<div class="full-screen horizontal-on-large svelte-odojvr"><header class="svelte-ja4t0v"><div class="container"><div class="site-nav svelte-ja4t0v"><div class="site-links svelte-ja4t0v"><a class="site-title svelte-ja4t0v" href="/web-components">Web Components</a>
-                <address class="svelte-ja4t0v">By <a href="https://auroratide.com">Auroratide</a></address></div>
-            <a class="site-logo svelte-ja4t0v" href="/web-components" aria-hidden="true"><img src="/web-components/logo-256.png" alt="Web Components" class="svelte-ja4t0v"></a></div>
-        <hr class="svelte-ja4t0v">
-        <nav><ul class="svelte-p7odg2"><li class="svelte-p7odg2"><a href="/web-components/tab-list">tab-list</a></li>
-        <li class="svelte-p7odg2"><a href="/web-components/toggle-switch">toggle-switch</a></li></ul>
-</nav></div>
-</header>
-    <main class="container svelte-odojvr">
-
-<article><!-- HTML_TAG_START --><h1>Web Components by Auroratide</h1>
+import{_ as i}from"../../chunks/preload-helper-aa6bc0ce.js";import{S as c,i as h,s as g,a as m,k as b,I as d,h as t,c as u,l as j,m as f,b as o,A as l}from"../../chunks/index-9cce3746.js";const w=`<h1>Web Components by Auroratide</h1>
 <p>This is just a bunch of highly reusable, fully accessible <strong><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a></strong> you can use on your websites! Why web components?</p>
 <ul>
 <li>It's part of the <a href="https://html.spec.whatwg.org/#custom-elements">HTML Standard</a>, so they work in <a href="https://custom-elements-everywhere.com/">every web framework</a>, or with no framework at all.</li>
@@ -43,7 +7,7 @@
 <li>Their usage is ergonomic, exactly like native elements, for example:<br /><code>&lt;sarcastic-text&gt;Cool!&lt;/sarcastic-text&gt;</code>.</li>
 </ul>
 <p>Wanna learn more? Join the <a href="https://community.webcomponents.dev/">Web Component Community</a>!</p>
-<p><small>Made by <a href="https://auroratide.com">Auroratide</a>, a developer with a passion for the web, inclusive design, and storytelling ❤️</small></p>
+<p><small>Made by <a href="https://auroratide.com">Auroratide</a>, a developer with a passion for the web, inclusive design, and storytelling \u2764\uFE0F</small></p>
 <h2>The tab-list Element</h2>
 <p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/tab-list">The tab-list Element</a></p>
 <p>A set of elements (<code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code>) that work together to make a tabbing interface:</p>
@@ -59,11 +23,11 @@
                 <p>Ingredients for making apple pie:</p>
                 <ul>
                     <li>8 Granny Smith apples</li>
-                    <li>½ cup butter</li>
+                    <li>\xBD cup butter</li>
                     <li>3 tablespoons flour</li>
-                    <li>½ cup white sugar</li>
-                    <li>½ cup brown sugar</li>
-                    <li>¼ water</li>
+                    <li>\xBD cup white sugar</li>
+                    <li>\xBD cup brown sugar</li>
+                    <li>\xBC water</li>
                     <li>A double-crust pie pastry</li>
                 </ul>
             </tab-panel>
@@ -71,12 +35,12 @@
                 <p>Ingredients for making orange sorbet:</p>
                 <ul>
                     <li>2 cups orange juice pulp</li>
-                    <li>1½ cup almond milk</li>
+                    <li>1\xBD cup almond milk</li>
                     <li>1 tablespoon orange zest</li>
                     <li>1 tablespoon lemon juice</li>
-                    <li>¼ teaspoon salt</li>
+                    <li>\xBC teaspoon salt</li>
                     <li>1 teaspoon vanilla extract</li>
-                    <li>½ teaspoon sweetener</li>
+                    <li>\xBD teaspoon sweetener</li>
                 </ul>
             </tab-panel>
             <tab-panel id="example-4-tab-3">
@@ -186,29 +150,4 @@
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;toggle-switch&quot;</span>&gt;</span>Fancy Switch<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">toggle-switch</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;toggle-switch&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toggle-switch</span>&gt;</span>
 </code></pre>
-<!-- HTML_TAG_END --></article></main>
-</div>
-
-
-		<script type="module" data-sveltekit-hydrate="lsxvnb">
-		import { start } from "/web-components/_app/immutable/start-f4509bc7.js";
-
-		start({
-			env: {},
-			hydrate: {
-				status: 200,
-				error: null,
-				node_ids: [0, 2],
-				params: {},
-				routeId: "",
-				data: (function(a){return [a,a]}(null)),
-				form: null
-			},
-			paths: {"base":"/web-components","assets":"/web-components"},
-			target: document.querySelector('[data-sveltekit-hydrate="lsxvnb"]').parentNode,
-			trailing_slash: "never"
-		});
-	</script>
-	</div>
-	</body>
-</html>
+`;function y(p){let s,n;return{c(){s=m(),n=b("article"),this.h()},l(a){d('[data-svelte="svelte-ueg07q"]',document.head).forEach(t),s=u(a),n=j(a,"ARTICLE",{});var r=f(n);r.forEach(t),this.h()},h(){document.title="Web Components by Auroratide"},m(a,e){o(a,s,e),o(a,n,e),n.innerHTML=w},p:l,i:l,o:l,d(a){a&&t(s),a&&t(n)}}}function k(p){return i(()=>import("../../chunks/define-2b7b9788.js"),[],import.meta.url),i(()=>import("../../chunks/define-7e898c82.js"),["../../chunks/define-7e898c82.js","../../chunks/events-19830ba9.js"],import.meta.url),[]}class _ extends c{constructor(s){super(),h(this,s,k,y,g,{})}}export{_ as default};

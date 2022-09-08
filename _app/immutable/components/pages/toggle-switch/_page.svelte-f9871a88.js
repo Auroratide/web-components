@@ -1,10 +1,15 @@
-import{_ as r}from"./preload-helper-aa6bc0ce.js";import{S as d,i as g,s as m,a as u,k as b,I as j,h as t,c as w,l as f,m as y,n as k,b as p,A as c,o as _,J as x}from"./index-9cce3746.js";const v=`<h1>The toggle-switch Element</h1>
+import{_ as i}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i as d,s as g,a as m,k as u,I as b,h as e,c as j,l as w,m as f,b as p,A as l,o as y,J as k}from"../../../chunks/index-9cce3746.js";import{C as _}from"../../../chunks/events-19830ba9.js";const x=`<h1>The toggle-switch Element</h1>
 <p>The <code>toggle-switch</code> element represents a control that is either on or off. This component is built with accessibility in mind and implements the WAI-ARIA <a href="https://www.w3.org/TR/wai-aria-1.1/#switch">switch role</a>.</p>
 <wc-demo>
     <label for="example-01">Active?</label>
     <toggle-switch id="example-01"></toggle-switch>
     <p id="example-01-output">Off</p>
 </wc-demo>
+<style>
+    label, toggle-switch {
+        vertical-align: middle;
+    }
+</style>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-01&quot;</span>&gt;</span>Active?<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">toggle-switch</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;example-01&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toggle-switch</span>&gt;</span>
 </code></pre>
@@ -160,4 +165,4 @@ toggle-switch<span class="hljs-selector-attr">[checked]</span><span class="hljs-
 <li>The element can be focused</li>
 <li>The element can be toggled with <kbd>Enter</kbd> or <kbd>Space</kbd></li>
 </ul>
-`,h="toggle-switch:change",C=e=>new CustomEvent(h,{detail:{checked:e}});const{document:o}=x;function q(e){let a,s;return{c(){a=u(),s=b("article"),this.h()},l(n){j('[data-svelte="svelte-836m89"]',o.head).forEach(t),a=w(n),s=f(n,"ARTICLE",{class:!0});var i=y(s);i.forEach(t),this.h()},h(){o.title="The toggle-switch Element",k(s,"class","svelte-1e8zya6")},m(n,l){p(n,a,l),p(n,s,l),s.innerHTML=v},p:c,i:c,o:c,d(n){n&&t(a),n&&t(s)}}}function A(e){return r(()=>import("./define-a6f3f1ea.js"),[],import.meta.url),_(()=>{const a=document.querySelector("#example-01"),s=document.querySelector("#example-01-output");a&&s&&(a==null||a.addEventListener(h,n=>{n.detail.checked?(s.textContent="On",s.classList.add("example-active")):(s.textContent="Off",s.classList.remove("example-active"))}))}),[]}class I extends d{constructor(a){super(),g(this,a,A,q,m,{})}}export{I as P,C as c};
+`;const{document:o}=k;function v(c){let a,s;return{c(){a=m(),s=u("article"),this.h()},l(n){b('[data-svelte="svelte-836m89"]',o.head).forEach(e),a=j(n),s=w(n,"ARTICLE",{});var h=f(s);h.forEach(e),this.h()},h(){o.title="The toggle-switch Element"},m(n,t){p(n,a,t),p(n,s,t),s.innerHTML=x},p:l,i:l,o:l,d(n){n&&e(a),n&&e(s)}}}function q(c){return i(()=>import("../../../chunks/define-7e898c82.js"),["../../../chunks/define-7e898c82.js","../../../chunks/events-19830ba9.js"],import.meta.url),y(()=>{const a=document.querySelector("#example-01"),s=document.querySelector("#example-01-output");a&&s&&(a==null||a.addEventListener(_,n=>{n.detail.checked?(s.textContent="On",s.classList.add("example-active")):(s.textContent="Off",s.classList.remove("example-active"))}))}),[]}class E extends r{constructor(a){super(),d(this,a,q,v,g,{})}}export{E as default};

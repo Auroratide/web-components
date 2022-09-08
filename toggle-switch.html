@@ -9,41 +9,45 @@
 		<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
 		<meta http-equiv="content-security-policy" content=""><title>The toggle-switch Element</title>
-	<link href="/web-components/_app/immutable/assets/_layout-8126f751.css" rel="stylesheet">
-	<link href="/web-components/_app/immutable/assets/_page-3d542feb.css" rel="stylesheet">
-	<link rel="modulepreload" href="/web-components/_app/immutable/start-5b28bb4c.js">
+	<link href="/web-components/_app/immutable/assets/_layout-8ef3f9d6.css" rel="stylesheet">
+	<link href="/web-components/_app/immutable/assets/_page-796cd7f9.css" rel="stylesheet">
+	<link rel="modulepreload" href="/web-components/_app/immutable/start-f4509bc7.js">
 	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/preload-helper-aa6bc0ce.js">
 	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/index-9cce3746.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/singletons-1084d4a6.js">
+	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/singletons-0354d59c.js">
 	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/paths-acac5138.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-0362b507.js">
+	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-7060d226.js">
 	<link rel="modulepreload" href="/web-components/_app/immutable/modules/pages/_layout.js-7b9cbfbc.js">
 	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/_layout-8d2a742b.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/toggle-switch/_page.svelte-aaa76411.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/_page-57d1fdc1.js">
+	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/toggle-switch/_page.svelte-f9871a88.js">
+	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/events-19830ba9.js">
 	</head>
 	<body>
 		<div>
 
 
-<div class="full-screen horizontal-on-large svelte-tr7o57"><header class="svelte-ja4t0v"><div class="container"><div class="site-nav svelte-ja4t0v"><div class="site-links svelte-ja4t0v"><a class="site-title svelte-ja4t0v" href="/web-components">Web Components</a>
+<div class="full-screen horizontal-on-large svelte-odojvr"><header class="svelte-ja4t0v"><div class="container"><div class="site-nav svelte-ja4t0v"><div class="site-links svelte-ja4t0v"><a class="site-title svelte-ja4t0v" href="/web-components">Web Components</a>
                 <address class="svelte-ja4t0v">By <a href="https://auroratide.com">Auroratide</a></address></div>
             <a class="site-logo svelte-ja4t0v" href="/web-components" aria-hidden="true"><img src="/web-components/logo-256.png" alt="Web Components" class="svelte-ja4t0v"></a></div>
         <hr class="svelte-ja4t0v">
-        <nav><ul class="svelte-p7odg2"><li class="svelte-p7odg2"><a href="/web-components/example-component">example-component</a></li>
-        <li class="svelte-p7odg2"><a href="/web-components/tab-list">tab-list</a></li>
+        <nav><ul class="svelte-p7odg2"><li class="svelte-p7odg2"><a href="/web-components/tab-list">tab-list</a></li>
         <li class="svelte-p7odg2"><a href="/web-components/toggle-switch">toggle-switch</a></li></ul>
 </nav></div>
 </header>
-    <main class="container svelte-tr7o57">
+    <main class="container svelte-odojvr">
 
-<article class="svelte-1e8zya6"><!-- HTML_TAG_START --><h1>The toggle-switch Element</h1>
+<article><!-- HTML_TAG_START --><h1>The toggle-switch Element</h1>
 <p>The <code>toggle-switch</code> element represents a control that is either on or off. This component is built with accessibility in mind and implements the WAI-ARIA <a href="https://www.w3.org/TR/wai-aria-1.1/#switch">switch role</a>.</p>
 <wc-demo>
     <label for="example-01">Active?</label>
     <toggle-switch id="example-01"></toggle-switch>
     <p id="example-01-output">Off</p>
 </wc-demo>
+<style>
+    label, toggle-switch {
+        vertical-align: middle;
+    }
+</style>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-01&quot;</span>&gt;</span>Active?<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">toggle-switch</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;example-01&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toggle-switch</span>&gt;</span>
 </code></pre>
@@ -204,8 +208,8 @@ toggle-switch<span class="hljs-selector-attr">[checked]</span><span class="hljs-
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="556ho1">
-		import { start } from "/web-components/_app/immutable/start-5b28bb4c.js";
+		<script type="module" data-sveltekit-hydrate="ghcoh1">
+		import { start } from "/web-components/_app/immutable/start-f4509bc7.js";
 
 		start({
 			env: {},
@@ -219,7 +223,7 @@ toggle-switch<span class="hljs-selector-attr">[checked]</span><span class="hljs-
 				form: null
 			},
 			paths: {"base":"/web-components","assets":"/web-components"},
-			target: document.querySelector('[data-sveltekit-hydrate="556ho1"]').parentNode,
+			target: document.querySelector('[data-sveltekit-hydrate="ghcoh1"]').parentNode,
 			trailing_slash: "never"
 		});
 	</script>
