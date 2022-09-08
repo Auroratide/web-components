@@ -1,4 +1,5 @@
 import{_ as i}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i as d,s as g,a as m,k as u,I as b,h as e,c as j,l as w,m as f,b as p,A as l,o as y,J as k}from"../../../chunks/index-9cce3746.js";import{C as _}from"../../../chunks/events-19830ba9.js";const x=`<h1>The toggle-switch Element</h1>
+<p hidden><strong><a href="https://auroratide.github.io/web-components/toggle-switch">View this page with live demos!</a></strong></p>
 <p>The <code>toggle-switch</code> element represents a control that is either on or off. This component is built with accessibility in mind and implements the WAI-ARIA <a href="https://www.w3.org/TR/wai-aria-1.1/#switch">switch role</a>.</p>
 <wc-demo>
     <label for="example-01">Active?</label>

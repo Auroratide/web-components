@@ -1,12 +1,12 @@
-import{_ as i}from"../../chunks/preload-helper-aa6bc0ce.js";import{S as c,i as h,s as g,a as m,k as b,I as d,h as t,c as u,l as j,m as f,b as o,A as l}from"../../chunks/index-9cce3746.js";const w=`<h1>Web Components by Auroratide</h1>
+import{_ as i}from"../../chunks/preload-helper-aa6bc0ce.js";import{S as c,i as h,s as g,a as m,k as b,I as d,h as t,c as u,l as j,m as w,b as o,A as l}from"../../chunks/index-9cce3746.js";const f=`<h1>Web Components by Auroratide</h1>
+<p hidden><strong><a href="https://auroratide.github.io/web-components/">View this page with live demos!</a></strong></p>
 <p>This is just a bunch of highly reusable, fully accessible <strong><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a></strong> you can use on your websites! Why web components?</p>
 <ul>
 <li>It's part of the <a href="https://html.spec.whatwg.org/#custom-elements">HTML Standard</a>, so they work in <a href="https://custom-elements-everywhere.com/">every web framework</a>, or with no framework at all.</li>
 <li>They are <a href="https://webcomponents.dev/blog/all-the-ways-to-make-a-web-component/">fast and small</a> compared to components in frameworks, since there's zero library overhead.</li>
 <li>They facilitate <a href="https://kryogenix.org/code/browser/everyonehasjs.html">progressive enhancement</a>: viewers get a basic view of content before the Javascript makes it functional.</li>
-<li>Their usage is ergonomic, exactly like native elements, for example:<br /><code>&lt;sarcastic-text&gt;Cool!&lt;/sarcastic-text&gt;</code>.</li>
 </ul>
-<p>Wanna learn more? Join the <a href="https://community.webcomponents.dev/">Web Component Community</a>!</p>
+<p>...And many more reasons! Wanna learn more? Join the <a href="https://community.webcomponents.dev/">Web Component Community</a>!</p>
 <p><small>Made by <a href="https://auroratide.com">Auroratide</a>, a developer with a passion for the web, inclusive design, and storytelling \u2764\uFE0F</small></p>
 <h2>The tab-list Element</h2>
 <p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/tab-list">The tab-list Element</a></p>
@@ -150,4 +150,4 @@ import{_ as i}from"../../chunks/preload-helper-aa6bc0ce.js";import{S as c,i as h
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;toggle-switch&quot;</span>&gt;</span>Fancy Switch<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">toggle-switch</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;toggle-switch&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toggle-switch</span>&gt;</span>
 </code></pre>
-`;function y(p){let s,n;return{c(){s=m(),n=b("article"),this.h()},l(a){d('[data-svelte="svelte-ueg07q"]',document.head).forEach(t),s=u(a),n=j(a,"ARTICLE",{});var r=f(n);r.forEach(t),this.h()},h(){document.title="Web Components by Auroratide"},m(a,e){o(a,s,e),o(a,n,e),n.innerHTML=w},p:l,i:l,o:l,d(a){a&&t(s),a&&t(n)}}}function k(p){return i(()=>import("../../chunks/define-2b7b9788.js"),[],import.meta.url),i(()=>import("../../chunks/define-7e898c82.js"),["../../chunks/define-7e898c82.js","../../chunks/events-19830ba9.js"],import.meta.url),[]}class _ extends c{constructor(s){super(),h(this,s,k,y,g,{})}}export{_ as default};
+`;function y(p){let s,n;return{c(){s=m(),n=b("article"),this.h()},l(a){d('[data-svelte="svelte-ueg07q"]',document.head).forEach(t),s=u(a),n=j(a,"ARTICLE",{});var r=w(n);r.forEach(t),this.h()},h(){document.title="Web Components by Auroratide"},m(a,e){o(a,s,e),o(a,n,e),n.innerHTML=f},p:l,i:l,o:l,d(a){a&&t(s),a&&t(n)}}}function v(p){return i(()=>import("../../chunks/define-2b7b9788.js"),[],import.meta.url),i(()=>import("../../chunks/define-7e898c82.js"),["../../chunks/define-7e898c82.js","../../chunks/events-19830ba9.js"],import.meta.url),[]}class q extends c{constructor(s){super(),h(this,s,v,y,g,{})}}export{q as default};
