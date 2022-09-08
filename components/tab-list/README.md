@@ -254,6 +254,7 @@ Here's an example of a fully customized tab list:
         padding: 12px 24px 24px;
         opacity: 1;
         transition: opacity 0.2s ease-in-out;
+        background: hsl(0, 0%, 100%);
     }
     #fancy tab-panel[hidden] {
         display: block;

@@ -24,6 +24,7 @@
         --c-banner-text: hsl(0, 0%, 100%);
         --c-content: hsl(0, 0%, 100%);
         --c-content-text: hsl(0, 0%, 16%);
+        --c-content-off: hsl(0, 0%, 97%);
         --c-primary: hsl(210, 68%, 45%);
         --c-secondary: hsl(262, 58%, 58%);
         --c-code-bg: hsl(0, 0%, 93%);
@@ -113,7 +114,7 @@
         border-radius: 0.25em;
         padding: 0.75em;
         box-shadow: 0.125em 0.125em 0.25em hsla(0, 0%, 0%, 0.15) inset;
-        background: var(--c-content);
+        background: var(--c-content-off);
         margin-bottom: 1.5rem;
     }
 

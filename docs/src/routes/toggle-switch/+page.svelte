@@ -34,13 +34,6 @@
 </article>
 
 <style>
-    article :global(wc-demo) {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        align-items: center;
-        gap: 0.5em;
-    }
-
     :global(.example-active) {
         font-weight: bold;
         color: var(--c-success);

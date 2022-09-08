@@ -8,6 +8,11 @@ The `toggle-switch` element represents a control that is either on or off. This 
     <toggle-switch id="example-01"></toggle-switch>
     <p id="example-01-output">Off</p>
 </wc-demo>
+<style>
+    label, toggle-switch {
+        vertical-align: middle;
+    }
+</style>
 /DEMO-->
 
 ```html
