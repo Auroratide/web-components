@@ -1,6 +1,6 @@
 # The tab-list Elements
 
-The `tab-list`, `tab-item`, and `tab-panel` elements together represent content that is presented one panel at a time. They are build with accessibility in mind and implement the WAI-ARIA guidelines for [tabs](https://w3c.github.io/aria-practices/#tabpanel).
+The `tab-list`, `tab-item`, and `tab-panel` elements together represent content that is presented one panel at a time. They are built with accessibility in mind and implement the WAI-ARIA guidelines for [tabs](https://w3c.github.io/aria-practices/#tabpanel).
 
 * A `tab-list` represents a set of tabs, where only one tab's contents may be presented at a time.
 * A `tab-item` represents a reference of a single panel of information in a tab list.
