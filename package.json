@@ -1,7 +1,7 @@
 {
   "name": "auroratide-wc",
   "private": "true",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Monorepo for Web Components by Auroratide",
   "type": "module",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "license": "ISC",
   "packageManager": "pnpm@7.9.5",
-	"engines": {
-		"pnpm": "^7.0.0"
-	}
+  "engines": {
+    "pnpm": "^7.0.0"
+  }
 }
