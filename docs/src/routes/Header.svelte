@@ -6,6 +6,7 @@
     <div class="container">
         <div class="site-nav">
             <div class="site-links">
+                <a class="skip-link" href="#main">Skip to content</a>
                 <a class="site-title" href="{base}">Web Components</a>
                 <address>By <a href="https://auroratide.com">Auroratide</a></address>
             </div>
@@ -58,6 +59,30 @@
         border: none;
         border-bottom: 1.5px solid var(--c-banner-text);
         margin: 0 1rem 1rem;
+    }
+
+    .skip-link {
+        text-align: center;
+        position: absolute;
+        top: 1em;
+        left: -9999px;
+    }
+
+    .skip-link:focus {
+        left: clamp(16px, 2.667vw, 32px);
+        z-index: 999;
+    }
+
+    .skip-link:focus::after {
+        content: '';
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: hsla(0, 0%, 0%, 0.75);
+        z-index: -2;
     }
 
     @media screen and (min-width: 1200px) {

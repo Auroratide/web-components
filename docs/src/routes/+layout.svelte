@@ -11,7 +11,7 @@
     <Header>
         <Nav />
     </Header>
-    <main class="container">
+    <main id="main" class="container">
         <slot></slot>
     </main>
 </div>
@@ -65,6 +65,7 @@
     }
 
     :global(.container) {
+        position: relative;
         padding: clamp(16px, 2.667vw, 32px);
     }
 
