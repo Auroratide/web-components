@@ -225,6 +225,11 @@
         margin-bottom: 1.5rem;
     }
 
+    :global(article li),
+    :global(article li) {
+        line-height: 1.5em;
+    }
+
     :global(ul, ol) {
         margin-bottom: 1.5rem;
     }
