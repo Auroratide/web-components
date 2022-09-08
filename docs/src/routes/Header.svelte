@@ -9,7 +9,7 @@
                 <a class="site-title" href="{base}">Web Components</a>
                 <address>By <a href="https://auroratide.com">Auroratide</a></address>
             </div>
-            <a class="site-logo" href="{base}" aria-hidden="true"><img src="{assets}/logo-256.png" alt="Web Components" /></a>
+            <a class="site-logo" href="{base}" aria-hidden="true" tabindex="-1"><img src="{assets}/logo-256.png" alt="Web Components" /></a>
         </div>
         <hr />
         <slot></slot>
