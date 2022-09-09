@@ -1,4 +1,4 @@
-import{_ as o}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i as b,s as h,a as d,k as u,I as m,h as t,c as g,l as j,m as f,b as i,A as l}from"../../../chunks/index-9cce3746.js";const y=`<h1>The tab-list Elements</h1>
+import{_ as o}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i as h,s as b,a as d,k as u,I as m,h as e,c as g,l as j,m as f,b as i,A as l}from"../../../chunks/index-9cce3746.js";const y=`<h1>The tab-list Elements</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/tab-list">View this page with live demos!</a></strong></p>
 <p>The <code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code> elements together represent content that is presented one panel at a time. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://w3c.github.io/aria-practices/#tabpanel">tabs</a>.</p>
 <ul>
@@ -290,6 +290,28 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
     <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
 }
 </code></pre>
+<h2>Events</h2>
+<p>The <code>tab-list</code> element dispatches the following events:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>When Triggered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tab-list:change</code></td>
+<td>Whenever the currently selected tab changes</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>tab-list:change</code> event contains references to the previously selected tab and the newly selected tab:</p>
+<pre><code class="language-js">tabList.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;tab-list:change&#x27;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e.<span class="hljs-property">detail</span>.<span class="hljs-property">from</span>)
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e.<span class="hljs-property">detail</span>.<span class="hljs-property">to</span>)
+})
+</code></pre>
 <h2>Accessibility</h2>
 <p>This custom element is built with accessibility in mind! It follows the WAI-ARIA guidelines for <a href="https://w3c.github.io/aria-practices/#tabpanel">tabs</a> (the <code>tablist</code>, <code>tab</code>, and <code>tabpanel</code> roles).</p>
 <ul>
@@ -304,4 +326,4 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
 <li>Native support for removable tabs.</li>
 <li>Tabs that open popup menus.</li>
 </ul>
-`;function w(p){let s,n;return{c(){s=d(),n=u("article"),this.h()},l(a){m('[data-svelte="svelte-vr2uw0"]',document.head).forEach(t),s=g(a),n=j(a,"ARTICLE",{});var c=f(n);c.forEach(t),this.h()},h(){document.title="The tab-list Element"},m(a,e){i(a,s,e),i(a,n,e),n.innerHTML=y},p:l,i:l,o:l,d(a){a&&t(s),a&&t(n)}}}function x(p){return o(()=>import("../../../chunks/define-db7340a9.js"),[],import.meta.url),[]}class v extends r{constructor(s){super(),b(this,s,x,w,h,{})}}export{v as default};
+`;function w(p){let s,n;return{c(){s=d(),n=u("article"),this.h()},l(a){m('[data-svelte="svelte-vr2uw0"]',document.head).forEach(e),s=g(a),n=j(a,"ARTICLE",{});var c=f(n);c.forEach(e),this.h()},h(){document.title="The tab-list Element"},m(a,t){i(a,s,t),i(a,n,t),n.innerHTML=y},p:l,i:l,o:l,d(a){a&&e(s),a&&e(n)}}}function x(p){return o(()=>import("../../../chunks/define-7fd6948e.js"),[],import.meta.url),[]}class q extends r{constructor(s){super(),h(this,s,x,w,b,{})}}export{q as default};
