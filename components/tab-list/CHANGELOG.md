@@ -1,5 +1,11 @@
 # @auroratide/tab-list
 
+## 0.2.0
+
+### Minor Changes
+
+- 6024257: Emit `tab-list:change` event whenever a new tab is selected.
+
 ## 0.1.1
 
 ### Patch Changes
