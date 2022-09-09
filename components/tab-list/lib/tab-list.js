@@ -1,8 +1,13 @@
-import { TabItemElement } from './tab-item'
+/**
+ * @typedef {import('./tab-item').TabItemElement} TabItemElement
+ * @typedef {import('./tab-panel').TabPanelElement} TabPanelElement
+ */
+
+import { TabItemElement } from './tab-item.js'
 
 /**
  * Represents a set of tabs, where only one tab's contents may be presented at a time.
- * @property {'horizontal' | 'vertical'} orientation
+ * @extends HTMLElement
  */
 export class TabListElement extends HTMLElement {
     static defaultElementName = 'tab-list'
@@ -33,6 +38,10 @@ export class TabListElement extends HTMLElement {
         this.#createRoot()
     }
 
+    /**
+     * Whether the tab is horizontal or vertical. Determines whether Left/Right or Up/Down navigates the tabs.
+     * @member {'horizontal' | 'vertical'}
+     */
     get orientation() {
         return this.getAttribute('orientation') ?? 'horizontal'
     }
@@ -41,20 +50,23 @@ export class TabListElement extends HTMLElement {
     }
 
     /**
-     * @returns {Array<TabItemElement>}
+     * List of tab-items in this list.
+     * @returns {TabItemElement[]}
      */
     tabs = () => {
         return Array.from(this.querySelectorAll(TabItemElement.defaultElementName))
     }
 
     /**
-     * @returns {Array<TabPanelElement>}
+     * List of tab-panels associated with this list.
+     * @returns {TabPanelElement[]}
      */
     panels = () => {
         return this.tabs().map((tab) => tab.panel)
     }
 
     /**
+     * Find the currently selected tab-item element.
      * @returns {TabItemElement | undefined}
      */
     selected = () => {
@@ -62,6 +74,7 @@ export class TabListElement extends HTMLElement {
     }
 
     /**
+     * Updates the visibility state of tab-panels based on the currently selected tab.
      * @param {TabItemElement | undefined} toSelect
      */
     updateSelected = (toSelect) => {
@@ -101,6 +114,7 @@ export class TabListElement extends HTMLElement {
     }
 
     /**
+     * @private
      * @param {KeyboardEvent} e
      */
     #handleNavigation = (e) => {
