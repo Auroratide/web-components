@@ -35,7 +35,7 @@ importers:
   docs:
     specifiers:
       '@auroratide/example-component': workspace:^0.0.1
-      '@auroratide/tab-list': workspace:^0.0.1
+      '@auroratide/tab-list': workspace:^0.1.0
       '@auroratide/toggle-switch': workspace:^0.2.1
       '@sveltejs/adapter-auto': next
       '@sveltejs/adapter-static': 1.0.0-next.41
@@ -52,9 +52,9 @@ importers:
       '@auroratide/tab-list': link:../components/tab-list
       '@auroratide/toggle-switch': link:../components/toggle-switch
     devDependencies:
-      '@sveltejs/adapter-auto': 1.0.0-next.71
+      '@sveltejs/adapter-auto': 1.0.0-next.72
       '@sveltejs/adapter-static': 1.0.0-next.41
-      '@sveltejs/kit': 1.0.0-next.474_fhgkwirxvgjw2igda6zmhiisma
+      '@sveltejs/kit': 1.0.0-next.480_fhgkwirxvgjw2igda6zmhiisma
       highlight.js: 11.6.0
       markdown-it: 13.0.1
       svelte: 3.49.0
@@ -475,12 +475,12 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /@sveltejs/adapter-auto/1.0.0-next.71:
-    resolution: {integrity: sha512-Qsl82HcehWJbZztXgmU/nTPDeeIaB4jrOQpSvy3Pi8octs+rEf/CO87Wk06EP+M/zUzEHDNENMOx0DgWuHpj7Q==}
+  /@sveltejs/adapter-auto/1.0.0-next.72:
+    resolution: {integrity: sha512-SisfQ6adHkkmm6ANVq9V9hemowl9mSVQd+XoNDAhjgf1DtCdJEgpkdJDZ7xq7RB0lsTZTSiAp7c/LlV4lCSTMA==}
     dependencies:
       '@sveltejs/adapter-cloudflare': 1.0.0-next.32
       '@sveltejs/adapter-netlify': 1.0.0-next.76
-      '@sveltejs/adapter-vercel': 1.0.0-next.72
+      '@sveltejs/adapter-vercel': 1.0.0-next.73
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -507,8 +507,8 @@ packages:
     resolution: {integrity: sha512-Bw6MfEuzuqjKZuVCG7ZHXiOIy/LDoRVR278eeAf4kcwl1B8+YEvChqdCvG2N5Ur+rxUIHstPgeX39HezS8d+mw==}
     dev: true
 
-  /@sveltejs/adapter-vercel/1.0.0-next.72:
-    resolution: {integrity: sha512-oNs8FQaYC2NnwDcvX/jc9MDNqXc9HxwGPQNkd+1vBpFVWZl9mShQgCcOMzfTOIH0ka984jYNa0ZawYYHex79xg==}
+  /@sveltejs/adapter-vercel/1.0.0-next.73:
+    resolution: {integrity: sha512-wYm80tDSkwa9YfXHCHqMFMHmGYsQjVWj2oLbQdijQ2k8dnQPq908Pla3IES1cLwtT+fIMbZyh3Xly7mt06FwJg==}
     dependencies:
       '@vercel/nft': 0.22.0
       esbuild: 0.14.54
@@ -517,8 +517,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.474_fhgkwirxvgjw2igda6zmhiisma:
-    resolution: {integrity: sha512-RhyWczm95S4VIlnjCAc5TPRGl2OoVWZ4cQRBKmzdF7MUScTduNzo6WB2JWkImgwE3nqdvepgnem56GbEUj3e5Q==}
+  /@sveltejs/kit/1.0.0-next.480_fhgkwirxvgjw2igda6zmhiisma:
+    resolution: {integrity: sha512-RnltVDZFksAkeIZ0wgMQDr4POz3WZxSDy6D/ycIjrz3VXMDYWxKRqmTEI7Yl7TxPgUabeYHGRm/qI+nSXOb/Yw==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
