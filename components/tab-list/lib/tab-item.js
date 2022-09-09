@@ -1,9 +1,4 @@
 /**
- * @typedef {import('./tab-list').TabListElement} TabListElement
- * @typedef {import('./tab-panel').TabPanelElement} TabPanelElement
- */
-
-/**
  * Represents a reference of a single panel of information in a tab list.
  * @extends HTMLElement
  */
@@ -44,15 +39,14 @@ export class TabItemElement extends HTMLElement {
 
     /**
      * Id of the tab-panel this item references
-     * @member {string}
+     * @returns {string}
      */
     get for() { return this.getAttribute('for') }
     set for(value) { this.setAttribute('for', value) }
 
     /**
      * tab-panel element corresponding to this item
-     * @readonly
-     * @member {TabPanelElement}
+     * @returns {import('./tab-panel').TabPanelElement}
      */
     get panel() {
         return document.querySelector(`#${this.for}`)
@@ -60,8 +54,7 @@ export class TabItemElement extends HTMLElement {
 
     /**
      * tab-list element containing this item
-     * @readonly
-     * @member {TabListElement}
+     * @returns {import('./tab-list').TabListElement}
      */
     get list() {
         return this.closest('tab-list')
@@ -69,7 +62,7 @@ export class TabItemElement extends HTMLElement {
 
     /**
      * Whether this tab is the currently selected tab
-     * @member {boolean}
+     * @returns {boolean}
      */
     get selected() { return this.hasAttribute('selected') }
     set selected(value) { this.toggleAttribute('selected', value) }
@@ -95,10 +88,6 @@ export class TabItemElement extends HTMLElement {
         this.selected = true
     }
 
-    /**
-     * @private
-     * @param {KeyboardEvent} e
-     */
     #onKeyPress = (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault()

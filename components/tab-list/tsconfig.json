@@ -1,0 +1,10 @@
+{
+    "include": ["lib/**/*.js"],
+    "exclude": ["node_modules", "lib/**/*.spec.js"],
+    "compilerOptions": {
+        "allowJs": true,
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "declarationMap": true
+    }
+}

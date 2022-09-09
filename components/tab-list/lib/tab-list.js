@@ -1,8 +1,3 @@
-/**
- * @typedef {import('./tab-item').TabItemElement} TabItemElement
- * @typedef {import('./tab-panel').TabPanelElement} TabPanelElement
- */
-
 import { TabItemElement } from './tab-item.js'
 
 /**
@@ -51,7 +46,7 @@ export class TabListElement extends HTMLElement {
 
     /**
      * List of tab-items in this list.
-     * @returns {TabItemElement[]}
+     * @returns {import('./tab-item').TabItemElement[]}
      */
     tabs = () => {
         return Array.from(this.querySelectorAll(TabItemElement.defaultElementName))
@@ -59,7 +54,7 @@ export class TabListElement extends HTMLElement {
 
     /**
      * List of tab-panels associated with this list.
-     * @returns {TabPanelElement[]}
+     * @returns {import('./tab-panel').TabPanelElement[]}
      */
     panels = () => {
         return this.tabs().map((tab) => tab.panel)
@@ -67,7 +62,7 @@ export class TabListElement extends HTMLElement {
 
     /**
      * Find the currently selected tab-item element.
-     * @returns {TabItemElement | undefined}
+     * @returns {import('./tab-item').TabItemElement | undefined}
      */
     selected = () => {
         return this.tabs().find((tab) => tab.hasAttribute('selected'))
@@ -75,7 +70,7 @@ export class TabListElement extends HTMLElement {
 
     /**
      * Updates the visibility state of tab-panels based on the currently selected tab.
-     * @param {TabItemElement | undefined} toSelect
+     * @param {import('./tab-item').TabItemElement | undefined} toSelect
      */
     updateSelected = (toSelect) => {
         toSelect = toSelect ?? this.selected()
@@ -114,7 +109,6 @@ export class TabListElement extends HTMLElement {
     }
 
     /**
-     * @private
      * @param {KeyboardEvent} e
      */
     #handleNavigation = (e) => {
