@@ -1,4 +1,5 @@
 import { fixture, expect } from '@open-wc/testing'
+import { CHANGED } from './events.js'
 import './define.js'
 
 /**
@@ -245,6 +246,36 @@ describe('tab-list', () => {
 
             pressArrow('Right')
             expect(document.activeElement).to.equal(container.tab('second'))
+        })
+    })
+
+    describe('events', () => {
+        it('tabs are selected', async () => {
+            const container = asTabContainer(await fixture(`<div>
+                <tab-list>
+                    <tab-item for="first" selected>First</tab-item>
+                    <tab-item for="second">Second</tab-item>
+                    <tab-item for="third">Third</tab-item>
+                </tab-list>
+                <tab-panel id="first"><p>Content of first.</p></tab-panel>
+                <tab-panel id="second"><p>Content of second.</p></tab-panel>
+                <tab-panel id="third"><p>Content of third.</p></tab-panel>
+            </div>`))
+
+            let emitted = undefined
+            container.list().addEventListener(CHANGED, e => {
+                emitted = e.detail
+            })
+
+            container.tab('second').click()
+
+            expect(emitted.from).to.equal(container.tab('first'))
+            expect(emitted.to).to.equal(container.tab('second'))
+
+            container.tab('third').click()
+
+            expect(emitted.from).to.equal(container.tab('second'))
+            expect(emitted.to).to.equal(container.tab('third'))
         })
     })
 })

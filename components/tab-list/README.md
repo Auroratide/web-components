@@ -313,6 +313,23 @@ tab-panel[hidden] {
 }
 ```
 
+## Events
+
+The `tab-list` element dispatches the following events:
+
+| Name | When Triggered |
+| ------------- | ------------- |
+| `tab-list:change` | Whenever the currently selected tab changes |
+
+The `tab-list:change` event contains references to the previously selected tab and the newly selected tab:
+
+```js
+tabList.addEventListener('tab-list:change', e => {
+    console.log(e.detail.from)
+    console.log(e.detail.to)
+})
+```
+
 ## Accessibility
 
 This custom element is built with accessibility in mind! It follows the WAI-ARIA guidelines for [tabs](https://w3c.github.io/aria-practices/#tabpanel) (the `tablist`, `tab`, and `tabpanel` roles).

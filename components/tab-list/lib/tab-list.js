@@ -1,3 +1,4 @@
+import { changeEvent } from './events.js'
 import { TabItemElement } from './tab-item.js'
 
 /**
@@ -73,7 +74,8 @@ export class TabListElement extends HTMLElement {
      * @param {import('./tab-item').TabItemElement | undefined} toSelect
      */
     updateSelected = (toSelect) => {
-        toSelect = toSelect ?? this.selected()
+        const previousSelected = this.selected()
+        toSelect = toSelect ?? previousSelected
 
         this.tabs().forEach((tab) => {
             if (tab !== toSelect) {
@@ -88,6 +90,10 @@ export class TabListElement extends HTMLElement {
 
         if (toSelect?.panel !== undefined) {
             toSelect.panel.hidden = false
+        }
+
+        if (toSelect !== previousSelected) {
+            this.dispatchEvent(changeEvent(previousSelected, toSelect))
         }
     }
 
