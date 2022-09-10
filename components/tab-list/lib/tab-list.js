@@ -74,7 +74,7 @@ export class TabListElement extends HTMLElement {
      * @param {import('./tab-item').TabItemElement | undefined} toSelect
      */
     updateSelected = (toSelect) => {
-        const previousSelected = this.selected()
+        const previousSelected = this.tabs().find((tab) => tab.hasAttribute('selected') && tab !== toSelect)
         toSelect = toSelect ?? previousSelected
 
         this.tabs().forEach((tab) => {
