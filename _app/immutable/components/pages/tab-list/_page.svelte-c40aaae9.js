@@ -326,4 +326,4 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
 <li>Native support for removable tabs.</li>
 <li>Tabs that open popup menus.</li>
 </ul>
-`;function w(p){let s,n;return{c(){s=d(),n=u("article"),this.h()},l(a){m('[data-svelte="svelte-vr2uw0"]',document.head).forEach(e),s=g(a),n=j(a,"ARTICLE",{});var c=f(n);c.forEach(e),this.h()},h(){document.title="The tab-list Element"},m(a,t){i(a,s,t),i(a,n,t),n.innerHTML=y},p:l,i:l,o:l,d(a){a&&e(s),a&&e(n)}}}function x(p){return o(()=>import("../../../chunks/define-7fd6948e.js"),[],import.meta.url),[]}class q extends r{constructor(s){super(),h(this,s,x,w,b,{})}}export{q as default};
+`;function w(p){let s,n;return{c(){s=d(),n=u("article"),this.h()},l(a){m('[data-svelte="svelte-vr2uw0"]',document.head).forEach(e),s=g(a),n=j(a,"ARTICLE",{});var c=f(n);c.forEach(e),this.h()},h(){document.title="The tab-list Element"},m(a,t){i(a,s,t),i(a,n,t),n.innerHTML=y},p:l,i:l,o:l,d(a){a&&e(s),a&&e(n)}}}function x(p){return o(()=>import("../../../chunks/define-9d2e7d6c.js"),[],import.meta.url),[]}class q extends r{constructor(s){super(),h(this,s,x,w,b,{})}}export{q as default};
