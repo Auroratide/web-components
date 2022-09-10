@@ -1,5 +1,11 @@
 # @auroratide/tab-list
 
+## 0.2.1
+
+### Patch Changes
+
+- 236cb38: Bugfix: Selecting tabs earlier in the list emits an event.
+
 ## 0.2.0
 
 ### Minor Changes
