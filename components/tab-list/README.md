@@ -337,6 +337,7 @@ This custom element is built with accessibility in mind! It follows the WAI-ARIA
 * When focus enters the tab list, the currently active tab item is focused.
 * <kbd>Left</kbd> and <kbd>Right</kbd> can be used to navigate the tabs.
 * <kbd>Enter</kbd> or <kbd>Space</kbd> select the currently focused tab.
+* <kbd>Home</kbd> goes to the first tab, and <kbd>End</kbd> goes to the last tab.
 
 ## Not (yet) Implemented
 

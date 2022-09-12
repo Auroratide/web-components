@@ -33,31 +33,35 @@ const pressTab = () => {
     }
 }
 
-/**
- * @param {'Left' | 'Right' | 'Up' | 'Down'} direction
- */
-const pressArrow = (direction) => {
-    document.activeElement.dispatchEvent(new KeyboardEvent('keydown', {
-        key: `Arrow${direction}`,
-        code: `Arrow${direction}`,
-        bubbles: true,
-        cancelable: true,
-    }))
-}
+const arrow = (direction) => ({
+    key: `Arrow${direction}`,
+    code: `Arrow${direction}`,
+})
 
-const pressEnter = () => {
-    document.activeElement.dispatchEvent(new KeyboardEvent('keydown', {
-        key: 'Enter',
-        code: 'Enter',
-        bubbles: true,
-        cancelable: true,
-    }))
-}
+const enter = () => ({
+    key: 'Enter',
+    code: 'Enter',
+})
 
-const pressSpace = () => {
+const space = () => ({
+    key: ' ',
+    code: 'Space',
+})
+
+const home = () => ({
+    key: 'Home',
+    code: 'Home',
+})
+
+const end = () => ({
+    key: 'End',
+    code: 'End',
+})
+
+const press = (key) => {
     document.activeElement.dispatchEvent(new KeyboardEvent('keydown', {
-        key: ' ',
-        code: 'Space',
+        key: key.key,
+        code: key.code,
         bubbles: true,
         cancelable: true,
     }))
@@ -176,16 +180,16 @@ describe('tab-list', () => {
             container.tab('second').focus()
             expect(document.activeElement).to.equal(container.tab('second'))
 
-            pressArrow('Left')
+            press(arrow('Left'))
             expect(document.activeElement).to.equal(container.tab('first'))
 
-            pressArrow('Left')
+            press(arrow('Left'))
             expect(document.activeElement).to.equal(container.tab('third'))
 
-            pressArrow('Right')
+            press(arrow('Right'))
             expect(document.activeElement).to.equal(container.tab('first'))
 
-            pressArrow('Right')
+            press(arrow('Right'))
             expect(document.activeElement).to.equal(container.tab('second'))
         })
 
@@ -203,14 +207,14 @@ describe('tab-list', () => {
 
             container.tab('second').focus()
 
-            pressArrow('Left')
-            pressEnter()
+            press(arrow('Left'))
+            press(enter())
             pressTab()
             expect(document.activeElement).to.equal(container.panel('first'))
 
             container.tab('first').focus()
-            pressArrow('Left')
-            pressSpace()
+            press(arrow('Left'))
+            press(space())
             pressTab()
             expect(document.activeElement).to.equal(container.panel('third'))
         })
@@ -229,23 +233,45 @@ describe('tab-list', () => {
 
             container.tab('second').focus()
 
-            pressArrow('Up')
+            press(arrow('Up'))
             expect(document.activeElement).to.equal(container.tab('first'))
 
-            pressArrow('Up')
+            press(arrow('Up'))
             expect(document.activeElement).to.equal(container.tab('third'))
 
-            pressArrow('Down')
+            press(arrow('Down'))
             expect(document.activeElement).to.equal(container.tab('first'))
 
-            pressArrow('Down')
+            press(arrow('Down'))
             expect(document.activeElement).to.equal(container.tab('second'))
 
-            pressArrow('Left')
+            press(arrow('Left'))
             expect(document.activeElement).to.equal(container.tab('second'))
 
-            pressArrow('Right')
+            press(arrow('Right'))
             expect(document.activeElement).to.equal(container.tab('second'))
+        })
+
+        it('Home and End', async () => {
+            const container = asTabContainer(await fixture(`<div>
+                <tab-list>
+                    <tab-item for="first" selected>First</tab-item>
+                    <tab-item for="second">Second</tab-item>
+                    <tab-item for="third">Third</tab-item>
+                </tab-list>
+                <tab-panel id="first"><p>Content of first.</p></tab-panel>
+                <tab-panel id="second"><p>Content of second.</p></tab-panel>
+                <tab-panel id="third"><p>Content of third.</p></tab-panel>
+            </div>`))
+
+            container.tab('first').focus()
+            expect(document.activeElement).to.equal(container.tab('first'))
+
+            press(end())
+            expect(document.activeElement).to.equal(container.tab('third'))
+
+            press(home())
+            expect(document.activeElement).to.equal(container.tab('first'))
         })
     })
 

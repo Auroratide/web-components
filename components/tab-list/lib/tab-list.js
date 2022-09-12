@@ -123,23 +123,45 @@ export class TabListElement extends HTMLElement {
             e.preventDefault()
 
             const tabs = this.tabs()
-            const focused = tabs.find((tab) => tab.getAttribute('tabindex') === '0')
-            const focusedIndex = tabs.indexOf(focused)
+            const { index: previousIndex } = this.#unfocusActiveTab(tabs)
 
-            focused.setAttribute('tabindex', '-1')
+            let nextIndex = 0
+            if (e.key === 'Home') {
+                nextIndex = 0
+            } else if (e.key === 'End') {
+                nextIndex = tabs.length - 1
+            } else {
+                nextIndex = this.#mod(previousIndex + (e.key === keys[0] ? -1 : 1), tabs.length)
+            }
 
-            const nextIndex = (((focusedIndex + (e.key === keys[0] ? -1 : 1)) % tabs.length) + tabs.length) % tabs.length
-
-            tabs[nextIndex].setAttribute('tabindex', '0')
-            tabs[nextIndex].focus()
+            this.#focusNextTab(tabs[nextIndex])
         }
     }
 
     #keysForOrientation = () => {
-        return this.orientation === 'vertical'
+        const arrowKeys = this.orientation === 'vertical'
             ? ['ArrowUp', 'ArrowDown']
             : ['ArrowLeft', 'ArrowRight']
+
+        return [...arrowKeys, 'Home', 'End']
     }
+
+    #unfocusActiveTab = (tabs) => {
+        if (tabs.includes(document.activeElement)) {
+            const tab = document.activeElement
+            const index = tabs.indexOf(tab)
+            tab.setAttribute('tabindex', '-1')
+
+            return { tab, index }
+        }
+    }
+
+    #focusNextTab = (tab) => {
+        tab?.setAttribute('tabindex', '0')
+        tab?.focus()
+    }
+
+    #mod = (x, n) => ((x % n) + n) % n
 
     #createRoot = () => {
         const root = this.shadowRoot ?? this.attachShadow({ mode: 'open' })
