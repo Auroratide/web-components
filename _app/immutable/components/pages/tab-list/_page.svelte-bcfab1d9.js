@@ -1,4 +1,4 @@
-import{_ as o}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i as h,s as b,a as d,k as u,I as m,h as e,c as g,l as j,m as f,b as i,A as l}from"../../../chunks/index-9cce3746.js";const y=`<h1>The tab-list Elements</h1>
+import{_ as o}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i as h,s as b,a as d,k as u,I as m,h as t,c as g,l as j,m as f,b as i,A as l}from"../../../chunks/index-9cce3746.js";const y=`<h1>The tab-list Elements</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/tab-list">View this page with live demos!</a></strong></p>
 <p>The <code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code> elements together represent content that is presented one panel at a time. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://w3c.github.io/aria-practices/#tabpanel">tabs</a>.</p>
 <ul>
@@ -318,6 +318,7 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
 <li>When focus enters the tab list, the currently active tab item is focused.</li>
 <li><kbd>Left</kbd> and <kbd>Right</kbd> can be used to navigate the tabs.</li>
 <li><kbd>Enter</kbd> or <kbd>Space</kbd> select the currently focused tab.</li>
+<li><kbd>Home</kbd> goes to the first tab, and <kbd>End</kbd> goes to the last tab.</li>
 </ul>
 <h2>Not (yet) Implemented</h2>
 <p>The following features are desired of tab lists, but are not yet implemented:</p>
@@ -326,4 +327,4 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
 <li>Native support for removable tabs.</li>
 <li>Tabs that open popup menus.</li>
 </ul>
-`;function w(p){let s,n;return{c(){s=d(),n=u("article"),this.h()},l(a){m('[data-svelte="svelte-vr2uw0"]',document.head).forEach(e),s=g(a),n=j(a,"ARTICLE",{});var c=f(n);c.forEach(e),this.h()},h(){document.title="The tab-list Element"},m(a,t){i(a,s,t),i(a,n,t),n.innerHTML=y},p:l,i:l,o:l,d(a){a&&e(s),a&&e(n)}}}function x(p){return o(()=>import("../../../chunks/define-9d2e7d6c.js"),[],import.meta.url),[]}class q extends r{constructor(s){super(),h(this,s,x,w,b,{})}}export{q as default};
+`;function w(p){let s,n;return{c(){s=d(),n=u("article"),this.h()},l(a){m('[data-svelte="svelte-vr2uw0"]',document.head).forEach(t),s=g(a),n=j(a,"ARTICLE",{});var c=f(n);c.forEach(t),this.h()},h(){document.title="The tab-list Element"},m(a,e){i(a,s,e),i(a,n,e),n.innerHTML=y},p:l,i:l,o:l,d(a){a&&t(s),a&&t(n)}}}function x(p){return o(()=>import("../../../chunks/define-f934d0c8.js"),[],import.meta.url),[]}class q extends r{constructor(s){super(),h(this,s,x,w,b,{})}}export{q as default};
