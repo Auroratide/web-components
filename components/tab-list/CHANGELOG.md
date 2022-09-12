@@ -1,5 +1,11 @@
 # @auroratide/tab-list
 
+## 0.2.2
+
+### Patch Changes
+
+- 4dc3335: Support Home and End keys for navigation.
+
 ## 0.2.1
 
 ### Patch Changes

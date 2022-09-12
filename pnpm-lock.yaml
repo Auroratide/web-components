@@ -37,7 +37,7 @@ importers:
   docs:
     specifiers:
       '@auroratide/example-component': workspace:^0.0.1
-      '@auroratide/tab-list': workspace:^0.2.1
+      '@auroratide/tab-list': workspace:^0.2.2
       '@auroratide/toggle-switch': workspace:^0.2.1
       '@sveltejs/adapter-auto': next
       '@sveltejs/adapter-static': 1.0.0-next.41
