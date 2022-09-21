@@ -1,5 +1,11 @@
 # @auroratide/tab-list
 
+## 0.2.3
+
+### Patch Changes
+
+- 8dab308: Activation mode attribute for selection to follow focus.
+
 ## 0.2.2
 
 ### Patch Changes
