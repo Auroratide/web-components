@@ -46,6 +46,17 @@ export class TabListElement extends HTMLElement {
     }
 
     /**
+     * Determines whether a tab shows upon tab click (manual) or focus (automatic).
+     * @member {'manual' | 'automatic'}
+     */
+    get activation() {
+        return this.getAttribute('activation') ?? 'manual'
+    }
+    set activation(value) {
+        return this.setAttribute('activation', value)
+    }
+
+    /**
      * List of tab-items in this list.
      * @returns {import('./tab-item').TabItemElement[]}
      */

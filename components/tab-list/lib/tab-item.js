@@ -72,6 +72,7 @@ export class TabItemElement extends HTMLElement {
 
         this.addEventListener('click', this.#onClick)
         this.addEventListener('keydown', this.#onKeyPress)
+        this.addEventListener('focus', this.#onFocus)
     }
 
     attributeChangedCallback(name) {
@@ -91,6 +92,12 @@ export class TabItemElement extends HTMLElement {
     #onKeyPress = (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault()
+            this.selected = true
+        }
+    }
+
+    #onFocus = () => {
+        if (this.list.activation === 'automatic') {
             this.selected = true
         }
     }

@@ -87,6 +87,39 @@ The following are good accessibility practices:
 * `tab-list` should be labelled with a name representing the collection of tabs, either with `aria-label` or `aria-labelledby`.
 * `tab-panel` elements can theoretically be anywhere on the page, though it's best if they are the next focusable item after the `tab-list`.
 
+### Automatic Activation
+
+By default, a tab must be clicked in order for its panel to be revealed. With automatic activation, a tab only needs to acquire focus to show its tab. In general, [WAI-ARIA recommends automatic activation](https://w3c.github.io/aria-practices/#kbd_selection_follows_focus) for the best accessibility, unless animations induce lag.
+
+You can enable automatic activation by setting the `activation` attribute to `"automatic"` on the tab list element.
+
+<!--DEMO
+<wc-demo>
+    <tab-list activation="automatic" aria-label="Learn about vegetables">
+        <tab-item for="example-5-tab-1" selected>Tomatoes</tab-item>
+        <tab-item for="example-5-tab-2">Carrots</tab-item>
+        <tab-item for="example-5-tab-3">Squashes</tab-item>
+    </tab-list>
+    <tab-panel id="example-5-tab-1">
+        <p>Tomatoes are red. People like to tell you they are fruit and not vegetables.</p>
+    </tab-panel>
+    <tab-panel id="example-5-tab-2">
+        <p>Carrots are orange, and also a root.</p>
+    </tab-panel>
+    <tab-panel id="example-5-tab-3">
+        <p>Some squashes are yellow, and they come in all shapes and sizes.</p>
+    </tab-panel>
+</wc-demo>
+/DEMO-->
+
+```html
+<tab-list activation="automatic" aria-label="Learn about vegetables">
+    <tab-item for="example-5-tab-1" selected>Tomatoes</tab-item>
+    <tab-item for="example-5-tab-2">Carrots</tab-item>
+    <tab-item for="example-5-tab-3">Squashes</tab-item>
+</tab-list>
+```
+
 ### Vertical Tab List
 
 By default, tabs are listed horizontally, and they can be navigated with the <kbd>left</kbd> and <kbd>right</kbd> arrow keys.
@@ -156,6 +189,7 @@ For `tab-list`:
 | Attribute | Description |
 | ------------- | ------------- |
 | `orientation` | Either `"horizontal"` or `"vertical"`. Represents whether the tab list should be presented horizontally or vertically, and affects whether they are navigated with the <kbd>left</kbd>/<kbd>right</kbd> or <kbd>up</kbd>/<kbd>down</kbd> keys respectively. `"horizontal"` by default. |
+| `activation` | Either `"manual"` or `"automatic"`. Represents whether a click (manual) or focus (automatic) is required to show a tab's panel. `"manual"` by default. |
 
 For `tab-item`:
 

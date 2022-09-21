@@ -275,6 +275,32 @@ describe('tab-list', () => {
         })
     })
 
+    describe('activation', () => {
+        it('automatic activation', async () => {
+            const container = asTabContainer(await fixture(`<div>
+                <tab-list activation="automatic">
+                    <tab-item for="first" selected>First</tab-item>
+                    <tab-item for="second">Second</tab-item>
+                    <tab-item for="third">Third</tab-item>
+                </tab-list>
+                <tab-panel id="first"><p>Content of first.</p></tab-panel>
+                <tab-panel id="second"><p>Content of second.</p></tab-panel>
+                <tab-panel id="third"><p>Content of third.</p></tab-panel>
+            </div>`))
+
+            container.tab('second').focus()
+            expect(document.activeElement).to.equal(container.tab('second'))
+
+            press(arrow('Left'))
+            expect(container.panel('second').hidden).to.be.true
+            expect(container.panel('first').hidden).to.be.false
+
+            press(arrow('Left'))
+            expect(container.panel('first').hidden).to.be.true
+            expect(container.panel('third').hidden).to.be.false
+        })
+    })
+
     describe('events', () => {
         it('tabs are selected', async () => {
             const container = asTabContainer(await fixture(`<div>
