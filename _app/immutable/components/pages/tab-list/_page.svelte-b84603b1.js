@@ -1,4 +1,4 @@
-import{_ as o}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i as h,s as b,a as d,k as u,I as m,h as t,c as g,l as j,m as f,b as i,A as l}from"../../../chunks/index-9cce3746.js";const y=`<h1>The tab-list Elements</h1>
+import{_ as c}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i as b,s as h,a as d,k as u,I as m,h as t,c as g,l as j,m as f,b as i,A as l}from"../../../chunks/index-9cce3746.js";const y=`<h1>The tab-list Elements</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/tab-list">View this page with live demos!</a></strong></p>
 <p>The <code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code> elements together represent content that is presented one panel at a time. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://w3c.github.io/aria-practices/#tabpanel">tabs</a>.</p>
 <ul>
@@ -68,6 +68,31 @@ import{_ as o}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i a
 <li><code>tab-list</code> should be labelled with a name representing the collection of tabs, either with <code>aria-label</code> or <code>aria-labelledby</code>.</li>
 <li><code>tab-panel</code> elements can theoretically be anywhere on the page, though it's best if they are the next focusable item after the <code>tab-list</code>.</li>
 </ul>
+<h3>Automatic Activation</h3>
+<p>By default, a tab must be clicked in order for its panel to be revealed. With automatic activation, a tab only needs to acquire focus to show its tab. In general, <a href="https://w3c.github.io/aria-practices/#kbd_selection_follows_focus">WAI-ARIA recommends automatic activation</a> for the best accessibility, unless animations induce lag.</p>
+<p>You can enable automatic activation by setting the <code>activation</code> attribute to <code>&quot;automatic&quot;</code> on the tab list element.</p>
+<wc-demo>
+    <tab-list activation="automatic" aria-label="Learn about vegetables">
+        <tab-item for="example-5-tab-1" selected>Tomatoes</tab-item>
+        <tab-item for="example-5-tab-2">Carrots</tab-item>
+        <tab-item for="example-5-tab-3">Squashes</tab-item>
+    </tab-list>
+    <tab-panel id="example-5-tab-1">
+        <p>Tomatoes are red. People like to tell you they are fruit and not vegetables.</p>
+    </tab-panel>
+    <tab-panel id="example-5-tab-2">
+        <p>Carrots are orange, and also a root.</p>
+    </tab-panel>
+    <tab-panel id="example-5-tab-3">
+        <p>Some squashes are yellow, and they come in all shapes and sizes.</p>
+    </tab-panel>
+</wc-demo>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">tab-list</span> <span class="hljs-attr">activation</span>=<span class="hljs-string">&quot;automatic&quot;</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Learn about vegetables&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">tab-item</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-5-tab-1&quot;</span> <span class="hljs-attr">selected</span>&gt;</span>Tomatoes<span class="hljs-tag">&lt;/<span class="hljs-name">tab-item</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">tab-item</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-5-tab-2&quot;</span>&gt;</span>Carrots<span class="hljs-tag">&lt;/<span class="hljs-name">tab-item</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">tab-item</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-5-tab-3&quot;</span>&gt;</span>Squashes<span class="hljs-tag">&lt;/<span class="hljs-name">tab-item</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">tab-list</span>&gt;</span>
+</code></pre>
 <h3>Vertical Tab List</h3>
 <p>By default, tabs are listed horizontally, and they can be navigated with the <kbd>left</kbd> and <kbd>right</kbd> arrow keys.</p>
 <p>By setting the <code>orientation</code> attribute to <code>&quot;vertical&quot;</code>, you can make a vertical tab list. This makes it navigable with the <kbd>up</kbd> and <kbd>down</kbd> arrow keys instead.</p>
@@ -127,6 +152,10 @@ import{_ as o}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i a
 <tr>
 <td><code>orientation</code></td>
 <td>Either <code>&quot;horizontal&quot;</code> or <code>&quot;vertical&quot;</code>. Represents whether the tab list should be presented horizontally or vertically, and affects whether they are navigated with the <kbd>left</kbd>/<kbd>right</kbd> or <kbd>up</kbd>/<kbd>down</kbd> keys respectively. <code>&quot;horizontal&quot;</code> by default.</td>
+</tr>
+<tr>
+<td><code>activation</code></td>
+<td>Either <code>&quot;manual&quot;</code> or <code>&quot;automatic&quot;</code>. Represents whether a click (manual) or focus (automatic) is required to show a tab's panel. <code>&quot;manual&quot;</code> by default.</td>
 </tr>
 </tbody>
 </table>
@@ -327,4 +356,4 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
 <li>Native support for removable tabs.</li>
 <li>Tabs that open popup menus.</li>
 </ul>
-`;function w(p){let s,n;return{c(){s=d(),n=u("article"),this.h()},l(a){m('[data-svelte="svelte-vr2uw0"]',document.head).forEach(t),s=g(a),n=j(a,"ARTICLE",{});var c=f(n);c.forEach(t),this.h()},h(){document.title="The tab-list Element"},m(a,e){i(a,s,e),i(a,n,e),n.innerHTML=y},p:l,i:l,o:l,d(a){a&&t(s),a&&t(n)}}}function x(p){return o(()=>import("../../../chunks/define-f934d0c8.js"),[],import.meta.url),[]}class q extends r{constructor(s){super(),h(this,s,x,w,b,{})}}export{q as default};
+`;function w(p){let s,n;return{c(){s=d(),n=u("article"),this.h()},l(a){m('[data-svelte="svelte-vr2uw0"]',document.head).forEach(t),s=g(a),n=j(a,"ARTICLE",{});var o=f(n);o.forEach(t),this.h()},h(){document.title="The tab-list Element"},m(a,e){i(a,s,e),i(a,n,e),n.innerHTML=y},p:l,i:l,o:l,d(a){a&&t(s),a&&t(n)}}}function q(p){return c(()=>import("../../../chunks/define-2107023e.js"),[],import.meta.url),[]}class k extends r{constructor(s){super(),b(this,s,q,w,h,{})}}export{k as default};

@@ -10,15 +10,15 @@
 
 		<meta http-equiv="content-security-policy" content=""><title>The tab-list Element</title>
 	<link href="/web-components/_app/immutable/assets/_layout-37a574ce.css" rel="stylesheet">
-	<link rel="modulepreload" href="/web-components/_app/immutable/start-580aef24.js">
+	<link rel="modulepreload" href="/web-components/_app/immutable/start-635583c2.js">
 	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/preload-helper-aa6bc0ce.js">
 	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/index-9cce3746.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/singletons-e3601824.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/paths-210c1845.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-df66647c.js">
+	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/singletons-83c89fad.js">
+	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/paths-49e6023d.js">
+	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-12d2c771.js">
 	<link rel="modulepreload" href="/web-components/_app/immutable/modules/pages/_layout.js-7b9cbfbc.js">
 	<link rel="modulepreload" href="/web-components/_app/immutable/chunks/_layout-8d2a742b.js">
-	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/tab-list/_page.svelte-bcfab1d9.js">
+	<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/tab-list/_page.svelte-b84603b1.js">
 	</head>
 	<body>
 		<div>
@@ -105,6 +105,31 @@
 <li><code>tab-list</code> should be labelled with a name representing the collection of tabs, either with <code>aria-label</code> or <code>aria-labelledby</code>.</li>
 <li><code>tab-panel</code> elements can theoretically be anywhere on the page, though it's best if they are the next focusable item after the <code>tab-list</code>.</li>
 </ul>
+<h3>Automatic Activation</h3>
+<p>By default, a tab must be clicked in order for its panel to be revealed. With automatic activation, a tab only needs to acquire focus to show its tab. In general, <a href="https://w3c.github.io/aria-practices/#kbd_selection_follows_focus">WAI-ARIA recommends automatic activation</a> for the best accessibility, unless animations induce lag.</p>
+<p>You can enable automatic activation by setting the <code>activation</code> attribute to <code>&quot;automatic&quot;</code> on the tab list element.</p>
+<wc-demo>
+    <tab-list activation="automatic" aria-label="Learn about vegetables">
+        <tab-item for="example-5-tab-1" selected>Tomatoes</tab-item>
+        <tab-item for="example-5-tab-2">Carrots</tab-item>
+        <tab-item for="example-5-tab-3">Squashes</tab-item>
+    </tab-list>
+    <tab-panel id="example-5-tab-1">
+        <p>Tomatoes are red. People like to tell you they are fruit and not vegetables.</p>
+    </tab-panel>
+    <tab-panel id="example-5-tab-2">
+        <p>Carrots are orange, and also a root.</p>
+    </tab-panel>
+    <tab-panel id="example-5-tab-3">
+        <p>Some squashes are yellow, and they come in all shapes and sizes.</p>
+    </tab-panel>
+</wc-demo>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">tab-list</span> <span class="hljs-attr">activation</span>=<span class="hljs-string">&quot;automatic&quot;</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Learn about vegetables&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">tab-item</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-5-tab-1&quot;</span> <span class="hljs-attr">selected</span>&gt;</span>Tomatoes<span class="hljs-tag">&lt;/<span class="hljs-name">tab-item</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">tab-item</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-5-tab-2&quot;</span>&gt;</span>Carrots<span class="hljs-tag">&lt;/<span class="hljs-name">tab-item</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">tab-item</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-5-tab-3&quot;</span>&gt;</span>Squashes<span class="hljs-tag">&lt;/<span class="hljs-name">tab-item</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">tab-list</span>&gt;</span>
+</code></pre>
 <h3>Vertical Tab List</h3>
 <p>By default, tabs are listed horizontally, and they can be navigated with the <kbd>left</kbd> and <kbd>right</kbd> arrow keys.</p>
 <p>By setting the <code>orientation</code> attribute to <code>&quot;vertical&quot;</code>, you can make a vertical tab list. This makes it navigable with the <kbd>up</kbd> and <kbd>down</kbd> arrow keys instead.</p>
@@ -164,6 +189,10 @@
 <tr>
 <td><code>orientation</code></td>
 <td>Either <code>&quot;horizontal&quot;</code> or <code>&quot;vertical&quot;</code>. Represents whether the tab list should be presented horizontally or vertically, and affects whether they are navigated with the <kbd>left</kbd>/<kbd>right</kbd> or <kbd>up</kbd>/<kbd>down</kbd> keys respectively. <code>&quot;horizontal&quot;</code> by default.</td>
+</tr>
+<tr>
+<td><code>activation</code></td>
+<td>Either <code>&quot;manual&quot;</code> or <code>&quot;automatic&quot;</code>. Represents whether a click (manual) or focus (automatic) is required to show a tab's panel. <code>&quot;manual&quot;</code> by default.</td>
 </tr>
 </tbody>
 </table>
@@ -368,8 +397,8 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="ra1f33">
-		import { start } from "/web-components/_app/immutable/start-580aef24.js";
+		<script type="module" data-sveltekit-hydrate="bpn5gs">
+		import { start } from "/web-components/_app/immutable/start-635583c2.js";
 
 		start({
 			env: {},
@@ -383,7 +412,7 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
 				form: null
 			},
 			paths: {"base":"/web-components","assets":"/web-components"},
-			target: document.querySelector('[data-sveltekit-hydrate="ra1f33"]').parentNode,
+			target: document.querySelector('[data-sveltekit-hydrate="bpn5gs"]').parentNode,
 			trailing_slash: "never"
 		});
 	</script>
