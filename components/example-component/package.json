@@ -1,10 +1,10 @@
 {
   "name": "@auroratide/example-component",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "",
   "type": "module",
-  "main": "lib/example-component.js",
-  "module": "lib/example-component.js",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
   "scripts": {
     "clean": "rm -rf lib",
     "build": "tsc",
