@@ -1,5 +1,11 @@
 # @auroratide/tab-list
 
+## 0.2.4
+
+### Patch Changes
+
+- Convert to typescript to ease declaration file management
+
 ## 0.2.3
 
 ### Patch Changes

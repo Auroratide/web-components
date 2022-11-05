@@ -39,12 +39,12 @@ export class ExampleComponentElement extends HTMLElement {
     }
 
     connectedCallback() {
-        this.shadowRoot
-            .querySelector('#decrease')
+        this.shadowRoot!
+            .querySelector('#decrease')!
             .addEventListener('click', this.decrease)
         
-        this.shadowRoot
-            .querySelector('#increase')
+        this.shadowRoot!
+            .querySelector('#increase')!
             .addEventListener('click', this.increase)
         
         this.#updateValue()
@@ -55,17 +55,17 @@ export class ExampleComponentElement extends HTMLElement {
     }
 
     #updateValue = () => {
-        this.shadowRoot.querySelector('#value').textContent = this.value
+        this.shadowRoot!.querySelector('#value')!.textContent = this.value.toString()
     }
 
     #createRoot = () => {
         const root = this.shadowRoot ?? this.attachShadow({ mode: 'open' })
 
         const style = document.createElement('style')
-        style.innerHTML = this.constructor.css
+        style.innerHTML = ExampleComponentElement.css
 
         const template = document.createElement('template')
-        template.innerHTML = this.constructor.html
+        template.innerHTML = ExampleComponentElement.html
 
         root.appendChild(style)
         root.appendChild(template.content)

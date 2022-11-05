@@ -1,6 +1,6 @@
 import { fixture, expect, chai } from '@open-wc/testing'
-import './define.js'
-import { CHANGED } from './events.js'
+import '../lib/define.js'
+import { CHANGED } from '../lib/events.js'
 
 chai.use(function(_chai, utils) {
     const Assertion = _chai.Assertion

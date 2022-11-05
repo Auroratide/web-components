@@ -1,9 +1,12 @@
 import { changeEvent } from './events.js'
 import { TabItemElement } from './tab-item.js'
+import type { TabPanelElement } from './tab-panel.js'
+
+export type Orientation = 'horizontal' | 'vertical'
+export type Activation = 'manual' | 'automatic'
 
 /**
  * Represents a set of tabs, where only one tab's contents may be presented at a time.
- * @extends HTMLElement
  */
 export class TabListElement extends HTMLElement {
     static defaultElementName = 'tab-list'
@@ -36,55 +39,49 @@ export class TabListElement extends HTMLElement {
 
     /**
      * Whether the tab is horizontal or vertical. Determines whether Left/Right or Up/Down navigates the tabs.
-     * @member {'horizontal' | 'vertical'}
      */
-    get orientation() {
-        return this.getAttribute('orientation') ?? 'horizontal'
+    get orientation(): Orientation {
+        return this.getAttribute('orientation') as Orientation ?? 'horizontal'
     }
-    set orientation(value) {
-        return this.setAttribute('orientation', value)
+    set orientation(value: Orientation) {
+        this.setAttribute('orientation', value)
     }
 
     /**
      * Determines whether a tab shows upon tab click (manual) or focus (automatic).
-     * @member {'manual' | 'automatic'}
      */
-    get activation() {
-        return this.getAttribute('activation') ?? 'manual'
+    get activation(): Activation {
+        return this.getAttribute('activation') as Activation ?? 'manual'
     }
-    set activation(value) {
-        return this.setAttribute('activation', value)
+    set activation(value: Activation) {
+        this.setAttribute('activation', value)
     }
 
     /**
      * List of tab-items in this list.
-     * @returns {import('./tab-item').TabItemElement[]}
      */
-    tabs = () => {
+    tabs = (): TabItemElement[] => {
         return Array.from(this.querySelectorAll(TabItemElement.defaultElementName))
     }
 
     /**
      * List of tab-panels associated with this list.
-     * @returns {import('./tab-panel').TabPanelElement[]}
      */
-    panels = () => {
+    panels = (): TabPanelElement[] => {
         return this.tabs().map((tab) => tab.panel)
     }
 
     /**
      * Find the currently selected tab-item element.
-     * @returns {import('./tab-item').TabItemElement | undefined}
      */
-    selected = () => {
+    selected = (): TabItemElement | undefined => {
         return this.tabs().find((tab) => tab.hasAttribute('selected'))
     }
 
     /**
      * Updates the visibility state of tab-panels based on the currently selected tab.
-     * @param {import('./tab-item').TabItemElement | undefined} toSelect
      */
-    updateSelected = (toSelect) => {
+    updateSelected = (toSelect?: TabItemElement) => {
         const previousSelected = this.tabs().find((tab) => tab.hasAttribute('selected') && tab !== toSelect)
         toSelect = toSelect ?? previousSelected
 
@@ -125,9 +122,6 @@ export class TabListElement extends HTMLElement {
         }
     }
 
-    /**
-     * @param {KeyboardEvent} e
-     */
     #handleNavigation = (e) => {
         const keys = this.#keysForOrientation()
         if (keys.includes(e.key)) {
@@ -178,10 +172,10 @@ export class TabListElement extends HTMLElement {
         const root = this.shadowRoot ?? this.attachShadow({ mode: 'open' })
 
         const style = document.createElement('style')
-        style.innerHTML = this.constructor.css
+        style.innerHTML = TabListElement.css
 
         const template = document.createElement('template')
-        template.innerHTML = this.constructor.html
+        template.innerHTML = TabListElement.html
 
         root.appendChild(style)
         root.appendChild(template.content)

@@ -1,6 +1,6 @@
 {
   "name": "@auroratide/tab-list",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Web component for tabs and tab panels",
   "keywords": [
     "tablist",
@@ -13,8 +13,11 @@
   "main": "lib/index.js",
   "module": "lib/index.js",
   "scripts": {
-    "test": "wtr --node-resolve --port 10003 ./**/*.spec.js",
-    "types": "rm lib/*.d.ts* && tsc"
+    "clean": "rm -rf lib",
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "test": "wtr --node-resolve --port 10003 test",
+    "test:clean": "pnpm clean && pnpm build && pnpm test"
   },
   "author": {
     "name": "Timothy Foster",

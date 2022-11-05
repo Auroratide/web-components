@@ -1,6 +1,6 @@
 import { fixture, expect } from '@open-wc/testing'
-import { CHANGED } from './events.js'
-import './define.js'
+import { CHANGED } from '../lib/events.js'
+import '../lib/define.js'
 
 /**
  * @param {Element} node 

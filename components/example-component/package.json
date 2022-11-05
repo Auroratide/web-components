@@ -1,12 +1,16 @@
 {
   "name": "@auroratide/example-component",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "type": "module",
   "main": "lib/example-component.js",
   "module": "lib/example-component.js",
   "scripts": {
-    "test": "wtr --node-resolve --port 10001 ./**/*.spec.js"
+    "clean": "rm -rf lib",
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "test": "wtr --node-resolve --port 10001 test",
+    "test:clean": "pnpm clean && pnpm build && pnpm test"
   },
   "keywords": [],
   "author": {
@@ -16,6 +20,7 @@
   "license": "ISC",
   "devDependencies": {
     "@open-wc/testing": "^3.1.6",
-    "@web/test-runner": "^0.14.0"
+    "@web/test-runner": "^0.14.0",
+    "typescript": "^4.8.4"
   }
 }

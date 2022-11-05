@@ -1,6 +1,6 @@
 {
   "name": "@auroratide/toggle-switch",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A toggle switch web component",
   "keywords": [
     "toggle",
@@ -12,7 +12,11 @@
   "main": "lib/toggle-switch.js",
   "module": "lib/toggle-switch.js",
   "scripts": {
-    "test": "wtr --node-resolve --port 10002 ./**/*.spec.js"
+    "clean": "rm -rf lib",
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "test": "wtr --node-resolve --port 10002 test",
+    "test:clean": "pnpm clean && pnpm build && pnpm test"
   },
   "author": {
     "name": "Timothy Foster",
@@ -25,6 +29,7 @@
   "license": "ISC",
   "devDependencies": {
     "@open-wc/testing": "^3.1.6",
-    "@web/test-runner": "^0.14.0"
+    "@web/test-runner": "^0.14.0",
+    "typescript": "^4.8.4"
   }
 }

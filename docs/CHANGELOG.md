@@ -1,5 +1,14 @@
 # @auroratide/wc-docs
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @auroratide/example-component@0.0.2
+  - @auroratide/tab-list@0.2.4
+  - @auroratide/toggle-switch@0.2.2
+
 ## 0.1.1
 
 ### Patch Changes

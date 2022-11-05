@@ -1,6 +1,5 @@
 /**
  * Represents a panel of information.
- * @extends HTMLElement
  */
 export class TabPanelElement extends HTMLElement {
     static defaultElementName = 'tab-panel'
@@ -39,10 +38,10 @@ export class TabPanelElement extends HTMLElement {
         const root = this.shadowRoot ?? this.attachShadow({ mode: 'open' })
 
         const style = document.createElement('style')
-        style.innerHTML = this.constructor.css
+        style.innerHTML = TabPanelElement.css
 
         const template = document.createElement('template')
-        template.innerHTML = this.constructor.html
+        template.innerHTML = TabPanelElement.html
 
         root.appendChild(style)
         root.appendChild(template.content)

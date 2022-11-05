@@ -1,5 +1,5 @@
 import { fixture, expect } from '@open-wc/testing'
-import './define.js'
+import '../lib/define.js'
 
 describe('example-component', () => {
     it('increases', async () => {

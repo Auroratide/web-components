@@ -124,10 +124,10 @@ export class ToggleSwitchElement extends HTMLElement {
         const root = this.shadowRoot ?? this.attachShadow({ mode: 'open' })
 
         const style = document.createElement('style')
-        style.innerHTML = this.constructor.css
+        style.innerHTML = ToggleSwitchElement.css
 
         const template = document.createElement('template')
-        template.innerHTML = this.constructor.html
+        template.innerHTML = ToggleSwitchElement.html
 
         root.appendChild(style)
         root.appendChild(template.content)

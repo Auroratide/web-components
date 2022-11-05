@@ -1,2 +1,3 @@
-lib/*.spec.js
 CHANGELOG.md
+src
+test

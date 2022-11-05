@@ -1,6 +1,8 @@
+import type { TabListElement } from './tab-list'
+import type { TabPanelElement } from './tab-panel'
+
 /**
  * Represents a reference of a single panel of information in a tab list.
- * @extends HTMLElement
  */
 export class TabItemElement extends HTMLElement {
     static defaultElementName = 'tab-item'
@@ -39,33 +41,29 @@ export class TabItemElement extends HTMLElement {
 
     /**
      * Id of the tab-panel this item references
-     * @returns {string}
      */
-    get for() { return this.getAttribute('for') }
-    set for(value) { this.setAttribute('for', value) }
+    get for(): string { return this.getAttribute('for') }
+    set for(value: string) { this.setAttribute('for', value) }
 
     /**
      * tab-panel element corresponding to this item
-     * @returns {import('./tab-panel').TabPanelElement}
      */
-    get panel() {
+    get panel(): TabPanelElement {
         return document.querySelector(`#${this.for}`)
     }
 
     /**
      * tab-list element containing this item
-     * @returns {import('./tab-list').TabListElement}
      */
-    get list() {
+    get list(): TabListElement {
         return this.closest('tab-list')
     }
 
     /**
      * Whether this tab is the currently selected tab
-     * @returns {boolean}
      */
-    get selected() { return this.hasAttribute('selected') }
-    set selected(value) { this.toggleAttribute('selected', value) }
+    get selected(): boolean { return this.hasAttribute('selected') }
+    set selected(value: boolean) { this.toggleAttribute('selected', value) }
 
     connectedCallback() {
         this.setAttribute('role', 'tab')
@@ -106,10 +104,10 @@ export class TabItemElement extends HTMLElement {
         const root = this.shadowRoot ?? this.attachShadow({ mode: 'open' })
 
         const style = document.createElement('style')
-        style.innerHTML = this.constructor.css
+        style.innerHTML = TabItemElement.css
 
         const template = document.createElement('template')
-        template.innerHTML = this.constructor.html
+        template.innerHTML = TabItemElement.html
 
         root.appendChild(style)
         root.appendChild(template.content)
