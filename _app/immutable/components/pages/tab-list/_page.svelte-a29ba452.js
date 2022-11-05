@@ -1,4 +1,4 @@
-import{_ as c}from"../../../chunks/preload-helper-aa6bc0ce.js";import{S as r,i as b,s as h,a as d,k as u,I as m,h as t,c as g,l as j,m as f,b as i,A as l}from"../../../chunks/index-9cce3746.js";const y=`<h1>The tab-list Elements</h1>
+import{_ as c}from"../../../chunks/preload-helper-b21cceae.js";import{S as r,i as b,s as h,a as d,k as u,J as m,h as t,c as g,l as j,m as f,b as i,B as l}from"../../../chunks/index-4befff42.js";const y=`<h1>The tab-list Elements</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/tab-list">View this page with live demos!</a></strong></p>
 <p>The <code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code> elements together represent content that is presented one panel at a time. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://w3c.github.io/aria-practices/#tabpanel">tabs</a>.</p>
 <ul>
@@ -356,4 +356,4 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
 <li>Native support for removable tabs.</li>
 <li>Tabs that open popup menus.</li>
 </ul>
-`;function w(p){let s,n;return{c(){s=d(),n=u("article"),this.h()},l(a){m('[data-svelte="svelte-vr2uw0"]',document.head).forEach(t),s=g(a),n=j(a,"ARTICLE",{});var o=f(n);o.forEach(t),this.h()},h(){document.title="The tab-list Element"},m(a,e){i(a,s,e),i(a,n,e),n.innerHTML=y},p:l,i:l,o:l,d(a){a&&t(s),a&&t(n)}}}function q(p){return c(()=>import("../../../chunks/define-2107023e.js"),[],import.meta.url),[]}class k extends r{constructor(s){super(),b(this,s,q,w,h,{})}}export{k as default};
+`;function w(p){let s,n;return{c(){s=d(),n=u("article"),this.h()},l(a){m("svelte-vr2uw0",document.head).forEach(t),s=g(a),n=j(a,"ARTICLE",{});var o=f(n);o.forEach(t),this.h()},h(){document.title="The tab-list Element"},m(a,e){i(a,s,e),i(a,n,e),n.innerHTML=y},p:l,i:l,o:l,d(a){a&&t(s),a&&t(n)}}}function q(p){return c(()=>import("../../../chunks/define-6062ac4d.js"),[],import.meta.url),[]}class k extends r{constructor(s){super(),b(this,s,q,w,h,{})}}export{k as default};
