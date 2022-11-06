@@ -1,3 +1,5 @@
+import { ReorderListElement } from './reorder-list.js'
+
 export class ReorderItemElement extends HTMLElement {
     static defaultElementName = 'reorder-item'
 
@@ -17,8 +19,23 @@ export class ReorderItemElement extends HTMLElement {
         this.#createRoot()
     }
 
+    list = (): ReorderListElement =>
+        this.closest(ReorderListElement.defaultElementName)
+
     connectedCallback() {
         this.setAttribute('role', 'option')
+
+        this.#setDefaultFocusability()
+    }
+
+    #setDefaultFocusability = () => {
+        const items = this.list().items()
+        const noOtherItemIsFocusable = null == items.find((it) => it.getAttribute('tabindex') === '0')
+        if (this === items[0] && noOtherItemIsFocusable) {
+            this.setAttribute('tabindex', '0')
+        } else {
+            this.setAttribute('tabindex', '-1')
+        }
     }
 
     #createRoot = () => {

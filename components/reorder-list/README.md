@@ -2,20 +2,15 @@
 
 <p hidden><strong><a href="https://auroratide.github.io/web-components/reorder-list">View this page with live demos!</a></strong></p>
 
-This example component just lets you decrease and increase a number.
+<button>A Button</button>
 
-<reorder-list></reorder-list>
+<reorder-list>
+    <reorder-item>Apple</reorder-item>
+    <reorder-item>Orange</reorder-item>
+    <reorder-item>Lemon</reorder-item>
+    <reorder-item>Lime</reorder-item>
+    <reorder-item>Blueberry</reorder-item>
+    <reorder-item>Plum</reorder-item>
+</reorder-list>
 
-```html
-<reorder-list></reorder-list>
-```
-
-## Initial value
-
-You can set an initial value.
-
-<reorder-list value="7"></reorder-list>
-
-```html
-<reorder-list value="7"></reorder-list>
-```
+<button>A Button</button>

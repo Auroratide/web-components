@@ -1,6 +1,41 @@
 import { fixture, expect } from '@open-wc/testing'
 import '../lib/define.js'
 
+/**
+ * https://stackoverflow.com/questions/7208161/focus-next-element-in-tab-index
+ * Removed the form constraint.
+ */
+ const pressTab = () => {
+    //add all elements we want to include in our selection
+    var focussableElements = 'a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
+    if (document.activeElement) {
+        var focussable = Array.prototype.filter.call(document.querySelectorAll(focussableElements),
+        function (element) {
+            //check for visibility while always include the current activeElement
+            return element.offsetWidth > 0 || element.offsetHeight > 0 || element === document.activeElement
+        });
+        var index = focussable.indexOf(document.activeElement);
+        if(index > -1) {
+           var nextElement = focussable[index + 1] || focussable[0];
+           nextElement.focus();
+        }
+    }
+}
+
+const arrow = (direction) => ({
+    key: `Arrow${direction}`,
+    code: `Arrow${direction}`,
+})
+
+const press = (key) => {
+    document.activeElement.dispatchEvent(new KeyboardEvent('keydown', {
+        key: key.key,
+        code: key.code,
+        bubbles: true,
+        cancelable: true,
+    }))
+}
+
 describe('reorder-list', () => {
     describe('aria-requirements', () => {
         it('roles', async () => {
@@ -15,6 +50,60 @@ describe('reorder-list', () => {
             container.querySelectorAll('reorder-item').forEach((item) => {
                 expect(item.getAttribute('role')).to.equal('option')
             })
+        })
+    })
+
+    describe('keyboard navigation', () => {
+        it('tabbing through', async () => {
+            const container = await fixture(`<div>
+                <button id="focus-start">Focusable</button>
+                <reorder-list>
+                    <reorder-item>Apple</reorder-item>
+                    <reorder-item>Orange</reorder-item>
+                </reorder-list>
+                <button id="focus-end">Focusable</button>
+            </div>`)
+            
+            container.querySelector('#focus-start').focus()
+
+            pressTab()
+            expect(document.activeElement).to.equal(
+                container.querySelectorAll('reorder-item')[0]
+            )
+
+            // The second item does NOT receive focus
+            pressTab()
+            expect(document.activeElement).to.equal(
+                container.querySelector('#focus-end')
+            )
+        })
+
+        it('up/down navigation', async () => {
+            const container = await fixture(`
+                <reorder-list>
+                    <reorder-item>Apple</reorder-item>
+                    <reorder-item>Orange</reorder-item>
+                    <reorder-item>Banana</reorder-item>
+                </reorder-list>
+            `)
+
+            const items = container.querySelectorAll('reorder-item')
+            items[0].focus()
+
+            press(arrow('Down'))
+            expect(document.activeElement).to.equal(items[1])
+
+            press(arrow('Down'))
+            expect(document.activeElement).to.equal(items[2])
+
+            press(arrow('Down'))
+            expect(document.activeElement).to.equal(items[2])
+
+            press(arrow('Up'))
+            expect(document.activeElement).to.equal(items[1])
+
+            press(arrow('Up'))
+            expect(document.activeElement).to.equal(items[0])
         })
     })
 })
