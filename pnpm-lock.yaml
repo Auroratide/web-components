@@ -24,6 +24,16 @@ importers:
       '@web/test-runner': 0.14.0
       typescript: 4.8.4
 
+  components/reorder-list:
+    specifiers:
+      '@open-wc/testing': ^3.1.6
+      '@web/test-runner': ^0.14.0
+      typescript: ^4.8.4
+    devDependencies:
+      '@open-wc/testing': 3.1.6
+      '@web/test-runner': 0.14.0
+      typescript: 4.8.4
+
   components/tab-list:
     specifiers:
       '@open-wc/testing': ^3.1.6
@@ -47,6 +57,7 @@ importers:
   docs:
     specifiers:
       '@auroratide/example-component': workspace:^0.0.1
+      '@auroratide/reorder-list': workspace:^0.0.1
       '@auroratide/tab-list': workspace:^0.2.4
       '@auroratide/toggle-switch': workspace:^0.2.2
       '@sveltejs/adapter-auto': next
@@ -61,6 +72,7 @@ importers:
       vite-plugin-markdown: ^2.1.0
     dependencies:
       '@auroratide/example-component': link:../components/example-component
+      '@auroratide/reorder-list': link:../components/reorder-list
       '@auroratide/tab-list': link:../components/tab-list
       '@auroratide/toggle-switch': link:../components/toggle-switch
     devDependencies:
