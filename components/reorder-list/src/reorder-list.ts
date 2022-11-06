@@ -66,10 +66,10 @@ export class ReorderListElement extends HTMLElement {
 
     #changeFocus = (items: ReorderItemElement[], newItem: ReorderItemElement) => {
         items.forEach((item) => {
-            item.setAttribute('tabindex', '-1')
+            item.setAttribute('aria-selected', 'false')
         })
 
-        newItem.setAttribute('tabindex', '0')
+        newItem.setAttribute('aria-selected', 'true')
         newItem.focus()
     }
 

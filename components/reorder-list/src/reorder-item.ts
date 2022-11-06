@@ -13,6 +13,10 @@ export class ReorderItemElement extends HTMLElement {
         }
     `
 
+    static get observedAttributes() {
+        return ['aria-selected']
+    }
+
     constructor() {
         super()
 
@@ -25,18 +29,24 @@ export class ReorderItemElement extends HTMLElement {
     connectedCallback() {
         this.setAttribute('role', 'option')
 
-        if (!this.hasAttribute('tabindex')) {
+        if (!this.hasAttribute('aria-selected')) {
             this.#setDefaultFocusability()
         }
     }
 
+    attributeChangedCallback() {
+        this.setAttribute('tabindex',
+            this.getAttribute('aria-selected') === 'true' ? '0' : '-1'
+        )
+    }
+
     #setDefaultFocusability = () => {
         const items = this.list().items()
-        const noOtherItemIsFocusable = null == items.find((it) => it.getAttribute('tabindex') === '0')
+        const noOtherItemIsFocusable = null == items.find((it) => it.getAttribute('aria-selected') === 'true')
         if (this === items[0] && noOtherItemIsFocusable) {
-            this.setAttribute('tabindex', '0')
+            this.setAttribute('aria-selected', 'true')
         } else {
-            this.setAttribute('tabindex', '-1')
+            this.setAttribute('aria-selected', 'false')
         }
     }
 

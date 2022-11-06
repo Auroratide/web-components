@@ -59,6 +59,23 @@ describe('reorder-list', () => {
                 expect(item.getAttribute('role')).to.equal('option')
             })
         })
+
+        it('aria-selected and tabindex', async () => {
+            const container = await fixture(`
+                <reorder-list>
+                    <reorder-item>Apple</reorder-item>
+                    <reorder-item>Orange</reorder-item>
+                </reorder-list>
+            `)
+
+            const items = container.querySelectorAll('reorder-item')
+
+            expect(items[0].getAttribute('aria-selected')).to.equal('true')
+            expect(items[0].getAttribute('tabindex')).to.equal('0')
+
+            expect(items[1].getAttribute('aria-selected')).to.equal('false')
+            expect(items[1].getAttribute('tabindex')).to.equal('-1')
+        })
     })
 
     describe('keyboard navigation', () => {
