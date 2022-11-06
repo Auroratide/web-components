@@ -18,7 +18,7 @@
 		<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-8254afe7.js">
 		<link rel="modulepreload" href="/web-components/_app/immutable/modules/pages/_layout.js-7b9cbfbc.js">
 		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/_layout-8d2a742b.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/example-component/_page.svelte-3ba21bd3.js"><title>The example-component Element</title><!-- HEAD_svelte-7x6vw2_START --><!-- HEAD_svelte-7x6vw2_END -->
+		<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/reorder-list/_page.svelte-d5848b1c.js"><title>The reorder-list Element</title><!-- HEAD_svelte-1pq5n9w_START --><!-- HEAD_svelte-1pq5n9w_END -->
 	</head>
 	<body>
 		<div>
@@ -35,22 +35,23 @@
 </header>
     <main id="main" class="container svelte-1km5v2u">
 
-<article><!-- HTML_TAG_START --><h1>The example-component Element</h1>
-<p hidden><strong><a href="https://auroratide.github.io/web-components/example-component">View this page with live demos!</a></strong></p>
-<p>This example component just lets you decrease and increase a number.</p>
-<p><example-component></example-component></p>
-<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">example-component</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">example-component</span>&gt;</span>
-</code></pre>
-<h2>Initial value</h2>
-<p>You can set an initial value.</p>
-<p><example-component value="7"></example-component></p>
-<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">example-component</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;7&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">example-component</span>&gt;</span>
-</code></pre>
+<article><!-- HTML_TAG_START --><h1>The reorder-list Element</h1>
+<p hidden><strong><a href="https://auroratide.github.io/web-components/reorder-list">View this page with live demos!</a></strong></p>
+<p><button>A Button</button></p>
+<reorder-list>
+    <reorder-item>Apple</reorder-item>
+    <reorder-item>Orange</reorder-item>
+    <reorder-item>Lemon</reorder-item>
+    <reorder-item>Lime</reorder-item>
+    <reorder-item>Blueberry</reorder-item>
+    <reorder-item>Plum</reorder-item>
+</reorder-list>
+<p><button>A Button</button></p>
 <!-- HTML_TAG_END --></article></main>
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="1ww46x0">
+		<script type="module" data-sveltekit-hydrate="p265yd">
 			import { start } from "/web-components/_app/immutable/start-70dee957.js";
 
 			start({
@@ -58,14 +59,14 @@
 				hydrate: {
 					status: 200,
 					error: null,
-					node_ids: [0, 3],
+					node_ids: [0, 4],
 					params: {},
-					route: {"id":"/example-component"},
+					route: {"id":"/reorder-list"},
 					data: [null,null],
 					form: null
 				},
 				paths: {"base":"/web-components","assets":"/web-components"},
-				target: document.querySelector('[data-sveltekit-hydrate="1ww46x0"]').parentNode,
+				target: document.querySelector('[data-sveltekit-hydrate="p265yd"]').parentNode,
 				trailing_slash: "never"
 			});
 		</script>
