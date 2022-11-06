@@ -25,7 +25,9 @@ export class ReorderItemElement extends HTMLElement {
     connectedCallback() {
         this.setAttribute('role', 'option')
 
-        this.#setDefaultFocusability()
+        if (!this.hasAttribute('tabindex')) {
+            this.#setDefaultFocusability()
+        }
     }
 
     #setDefaultFocusability = () => {

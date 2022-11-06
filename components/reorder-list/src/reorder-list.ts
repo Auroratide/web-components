@@ -22,6 +22,9 @@ export class ReorderListElement extends HTMLElement {
     items = (): ReorderItemElement[] =>
         Array.from(this.querySelectorAll(ReorderItemElement.defaultElementName))
 
+    current = (): ReorderItemElement =>
+        this.querySelector(`${ReorderItemElement.defaultElementName}[tabindex="0"]`)
+
     connectedCallback() {
         this.setAttribute('role', 'listbox')
 
@@ -36,13 +39,20 @@ export class ReorderListElement extends HTMLElement {
             if (currentFocusable < 0) {
                 currentFocusable = 0
             }
+
             const nextFocusable = Math.max(0,
                 Math.min(items.length - 1,
                     currentFocusable + (e.key === keys[0] ? -1 : 1)
                 )
             )
 
-            if (currentFocusable !== nextFocusable) {
+            if (e.altKey && currentFocusable !== nextFocusable) {
+                e.preventDefault()
+
+                e.key === keys[0]
+                    ? this.#reorderUp(this.current(), items[nextFocusable])
+                    : this.#reorderDown(this.current(), items[nextFocusable])
+            } else if (currentFocusable !== nextFocusable) {
                 e.preventDefault()
 
                 this.#changeFocus(items, items[nextFocusable])
@@ -61,6 +71,16 @@ export class ReorderListElement extends HTMLElement {
 
         newItem.setAttribute('tabindex', '0')
         newItem.focus()
+    }
+
+    #reorderUp = (cur: ReorderItemElement, ref: ReorderItemElement) => {
+        this.insertBefore(cur, ref)
+        cur.focus()
+    }
+
+    #reorderDown = (cur: ReorderItemElement, ref: ReorderItemElement) => {
+        ref.after(cur)
+        cur.focus()
     }
 
     #createRoot = () => {

@@ -27,12 +27,20 @@ const arrow = (direction) => ({
     code: `Arrow${direction}`,
 })
 
-const press = (key) => {
+const alt = () => ({
+    altKey: true,
+})
+
+const press = (key, ...modifiers) => {
     document.activeElement.dispatchEvent(new KeyboardEvent('keydown', {
         key: key.key,
         code: key.code,
         bubbles: true,
         cancelable: true,
+        ...modifiers.reduce((all, cur) => ({
+            ...all,
+            ...cur,
+        }), {})
     }))
 }
 
@@ -104,6 +112,33 @@ describe('reorder-list', () => {
 
             press(arrow('Up'))
             expect(document.activeElement).to.equal(items[0])
+        })
+
+        it('reordering an item', async () => {
+            const container = await fixture(`
+                <reorder-list>
+                    <reorder-item>Apple</reorder-item>
+                    <reorder-item>Orange</reorder-item>
+                    <reorder-item>Banana</reorder-item>
+                </reorder-list>
+            `)
+
+            let items = container.querySelectorAll('reorder-item')
+            items[0].focus()
+
+            press(arrow('Down'), alt())
+            items = container.querySelectorAll('reorder-item')
+            expect(document.activeElement).to.equal(items[1])
+            expect(items[0].textContent).to.equal('Orange')
+            expect(items[1].textContent).to.equal('Apple')
+
+            press(arrow('Down'))
+            press(arrow('Up'), alt())
+            items = container.querySelectorAll('reorder-item')
+            expect(document.activeElement).to.equal(items[1])
+            expect(items[0].textContent).to.equal('Orange')
+            expect(items[1].textContent).to.equal('Banana')
+            expect(items[2].textContent).to.equal('Apple')
         })
     })
 })
