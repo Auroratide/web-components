@@ -35,7 +35,8 @@ export class ReorderListElement extends HTMLElement {
         const keys = this.#keysForOrientation()
         if (keys.includes(e.key)) {
             const items = this.items()
-            let currentFocusable = items.findIndex((it) => it.getAttribute('tabindex') === '0')
+            items.indexOf(this.current())
+            let currentFocusable = items.indexOf(this.current())
             if (currentFocusable < 0) {
                 currentFocusable = 0
             }
@@ -49,9 +50,7 @@ export class ReorderListElement extends HTMLElement {
             if (e.altKey && currentFocusable !== nextFocusable) {
                 e.preventDefault()
 
-                e.key === keys[0]
-                    ? this.#reorderUp(this.current(), items[nextFocusable])
-                    : this.#reorderDown(this.current(), items[nextFocusable])
+                this.#reorder(currentFocusable, nextFocusable, items)
             } else if (currentFocusable !== nextFocusable) {
                 e.preventDefault()
 
@@ -73,14 +72,14 @@ export class ReorderListElement extends HTMLElement {
         newItem.focus()
     }
 
-    #reorderUp = (cur: ReorderItemElement, ref: ReorderItemElement) => {
-        this.insertBefore(cur, ref)
-        cur.focus()
-    }
+    #reorder = (curIndex: number, newIndex: number, list: ReorderItemElement[]) => {
+        if (curIndex < newIndex) {
+            list[newIndex].after(list[curIndex])
+        } else {
+            this.insertBefore(list[curIndex], list[newIndex])
+        }
 
-    #reorderDown = (cur: ReorderItemElement, ref: ReorderItemElement) => {
-        ref.after(cur)
-        cur.focus()
+        list[curIndex].focus()
     }
 
     #createRoot = () => {
