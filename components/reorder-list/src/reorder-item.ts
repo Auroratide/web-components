@@ -28,6 +28,9 @@ export class ReorderItemElement extends HTMLElement {
 
     connectedCallback() {
         this.setAttribute('role', 'option')
+        this.setAttribute('draggable', 'true')
+        this.addEventListener('dragstart', this.#onDragStart)
+        this.addEventListener('dragend', this.#onDragEnd)
 
         if (!this.hasAttribute('aria-selected')) {
             this.#setDefaultFocusability()
@@ -48,6 +51,35 @@ export class ReorderItemElement extends HTMLElement {
         } else {
             this.setAttribute('aria-selected', 'false')
         }
+    }
+
+    #onDragStart = () => {
+        this.dataset.dragging = ''
+
+        this.list().items().forEach((item) => {
+            if (item !== this) {
+                item.addEventListener('dragenter', this.#onDragEnter)
+            }
+        })
+    }
+
+    #onDragEnd = () => {
+        delete this.dataset.dragging
+
+        this.list().items().forEach((item) => {
+            if (item !== this) {
+                item.removeEventListener('dragenter', this.#onDragEnter)
+            }
+        })
+    }
+
+    #onDragEnter = (e: DragEvent) => {
+        const list = this.list()
+        const items = list.items()
+
+        const curIndex = items.indexOf(this)
+        const newIndex = items.indexOf(e.target as ReorderItemElement)
+        list.reorder(curIndex, newIndex, items)
     }
 
     #createRoot = () => {

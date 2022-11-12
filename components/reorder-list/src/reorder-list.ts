@@ -31,6 +31,16 @@ export class ReorderListElement extends HTMLElement {
         this.addEventListener('keydown', this.#handleNav)
     }
 
+    reorder = (curIndex: number, newIndex: number, list: ReorderItemElement[] = this.items()) => {
+        if (curIndex < newIndex) {
+            list[newIndex].after(list[curIndex])
+        } else {
+            this.insertBefore(list[curIndex], list[newIndex])
+        }
+
+        list[curIndex].focus()
+    }
+
     #handleNav = (e: KeyboardEvent) => {
         const keys = this.#keysForOrientation()
         if (keys.includes(e.key)) {
@@ -50,7 +60,7 @@ export class ReorderListElement extends HTMLElement {
             if (e.altKey && currentFocusable !== nextFocusable) {
                 e.preventDefault()
 
-                this.#reorder(currentFocusable, nextFocusable, items)
+                this.reorder(currentFocusable, nextFocusable, items)
             } else if (currentFocusable !== nextFocusable) {
                 e.preventDefault()
 
@@ -70,16 +80,6 @@ export class ReorderListElement extends HTMLElement {
 
         newItem.setAttribute('aria-selected', 'true')
         newItem.focus()
-    }
-
-    #reorder = (curIndex: number, newIndex: number, list: ReorderItemElement[]) => {
-        if (curIndex < newIndex) {
-            list[newIndex].after(list[curIndex])
-        } else {
-            this.insertBefore(list[curIndex], list[newIndex])
-        }
-
-        list[curIndex].focus()
     }
 
     #createRoot = () => {
