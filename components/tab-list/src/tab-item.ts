@@ -79,7 +79,7 @@ export class TabItemElement extends HTMLElement {
         this.setAttribute('tabindex', this.selected ? '0' : '-1')
         
         if (name === 'selected') {
-            this.list.updateSelected(this.selected ? this : undefined)
+            this.list?.updateSelected(this.selected ? this : undefined)
         }
     }
 
@@ -95,7 +95,7 @@ export class TabItemElement extends HTMLElement {
     }
 
     #onFocus = () => {
-        if (this.list.activation === 'automatic') {
+        if (this.list?.activation === 'automatic') {
             this.selected = true
         }
     }
