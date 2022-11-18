@@ -24,7 +24,7 @@
     "type": "module",
     "dependencies": {
         "@auroratide/example-component": "workspace:^0.0.1",
-        "@auroratide/tab-list": "workspace:^0.2.4",
+        "@auroratide/tab-list": "workspace:^0.2.5",
         "@auroratide/toggle-switch": "workspace:^0.2.2",
         "@auroratide/reorder-list": "workspace:^0.0.1"
     }

@@ -1,6 +1,6 @@
 {
   "name": "@auroratide/tab-list",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Web component for tabs and tab panels",
   "keywords": [
     "tablist",

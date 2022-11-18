@@ -1,5 +1,11 @@
 # @auroratide/tab-list
 
+## 0.2.5
+
+### Patch Changes
+
+- f501943: Protect against potentially null tab-list in case rendering order is not strictly parent-to-child
+
 ## 0.2.4
 
 ### Patch Changes
