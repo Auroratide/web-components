@@ -9,13 +9,21 @@ export class ReorderItemElement extends HTMLElement {
 
     static css = `
         :host {
-            display: block;
+            display: list-item;
+            touch-action: none;
+        }
+        
+        :host([data-dragging]) {
+            opacity: 0.5;
+            cursor: ns-resize;
         }
     `
 
     static get observedAttributes() {
         return ['aria-selected']
     }
+
+    static START_DRAG_DELAY_MS = 150
 
     constructor() {
         super()
@@ -28,13 +36,66 @@ export class ReorderItemElement extends HTMLElement {
 
     connectedCallback() {
         this.setAttribute('role', 'option')
-        this.setAttribute('draggable', 'true')
-        this.addEventListener('dragstart', this.#onDragStart)
-        this.addEventListener('dragend', this.#onDragEnd)
+        this.addEventListener('pointerdown', this.#onTouchStart)
 
         if (!this.hasAttribute('aria-selected')) {
             this.#setDefaultFocusability()
         }
+    }
+
+    #onTouchStart = (e: PointerEvent) => {
+        e.preventDefault()
+        const timeout = setTimeout(() => this.#onDragStart(), ReorderItemElement.START_DRAG_DELAY_MS)
+        const cancelDrag = () => {
+            clearTimeout(timeout)
+            document.removeEventListener('pointerup', cancelDrag)
+            document.removeEventListener('pointercancel', cancelDrag)
+            document.removeEventListener('contextmenu', cancelDrag)
+        }
+
+        document.addEventListener('pointerup', cancelDrag)
+        document.addEventListener('pointercancel', cancelDrag)
+        document.addEventListener('contextmenu', cancelDrag)
+    }
+
+    #onDragStart = (e?: PointerEvent) => {
+        e?.preventDefault()
+        this.dataset.dragging = ''
+
+        document.addEventListener('pointermove', this.#onDragMove)
+        document.addEventListener('pointerup', this.#onDragEnd)
+        document.addEventListener('pointercancel', this.#onDragEnd)
+    }
+
+    #onDragMove = (e: PointerEvent) => {
+        e.preventDefault()
+        const list = this.list()
+        const items = list.items()
+        const cur = {
+            index: items.indexOf(this),
+            rect: this.getBoundingClientRect(),
+        }
+        const prev = {
+            index: cur.index - 1,
+            rect: items[cur.index - 1]?.getBoundingClientRect(),
+        }
+        const next = {
+            index: cur.index + 1,
+            rect: items[cur.index + 1]?.getBoundingClientRect(),
+        }
+
+        if (prev.rect && e.clientY < Math.min(prev.rect.top + cur.rect.height, prev.rect.bottom)) {
+            list.reorder(cur.index, prev.index, items)
+        } else if (next.rect && e.clientY > Math.max(next.rect.bottom - cur.rect.height, next.rect.top)) {
+            list.reorder(cur.index, next.index, items)
+        }
+    }
+
+    #onDragEnd = () => {
+        delete this.dataset.dragging
+        document.removeEventListener('pointermove', this.#onDragMove)
+        document.removeEventListener('pointerup', this.#onDragEnd)
+        document.removeEventListener('pointercancel', this.#onDragEnd)
     }
 
     attributeChangedCallback() {
@@ -51,35 +112,6 @@ export class ReorderItemElement extends HTMLElement {
         } else {
             this.setAttribute('aria-selected', 'false')
         }
-    }
-
-    #onDragStart = () => {
-        this.dataset.dragging = ''
-
-        this.list().items().forEach((item) => {
-            if (item !== this) {
-                item.addEventListener('dragenter', this.#onDragEnter)
-            }
-        })
-    }
-
-    #onDragEnd = () => {
-        delete this.dataset.dragging
-
-        this.list().items().forEach((item) => {
-            if (item !== this) {
-                item.removeEventListener('dragenter', this.#onDragEnter)
-            }
-        })
-    }
-
-    #onDragEnter = (e: DragEvent) => {
-        const list = this.list()
-        const items = list.items()
-
-        const curIndex = items.indexOf(this)
-        const newIndex = items.indexOf(e.target as ReorderItemElement)
-        list.reorder(curIndex, newIndex, items)
     }
 
     #createRoot = () => {

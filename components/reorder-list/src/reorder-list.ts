@@ -10,6 +10,8 @@ export class ReorderListElement extends HTMLElement {
     static css = `
         :host {
             display: block;
+            list-style: disc;
+            padding-left: 1em;
         }
     `
 

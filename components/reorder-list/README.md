@@ -1,16 +1,121 @@
-# The reorder-list Element
+# The reorder-list Elements
 
 <p hidden><strong><a href="https://auroratide.github.io/web-components/reorder-list">View this page with live demos!</a></strong></p>
 
-<button>A Button</button>
+The `reorder-list` and `reorder-item` elements represent an ordered list of items that can be reordered.
 
+<!--DEMO
+<wc-demo>
+    <reorder-list>
+        <reorder-item>Apple</reorder-item>
+        <reorder-item>Orange</reorder-item>
+        <reorder-item>Banana</reorder-item>
+        <reorder-item>Lime</reorder-item>
+        <reorder-item>Blueberry</reorder-item>
+        <reorder-item>Plum</reorder-item>
+    </reorder-list>
+</wc-demo>
+/DEMO-->
+
+```html
 <reorder-list>
     <reorder-item>Apple</reorder-item>
     <reorder-item>Orange</reorder-item>
-    <reorder-item>Lemon</reorder-item>
+    <reorder-item>Banana</reorder-item>
     <reorder-item>Lime</reorder-item>
     <reorder-item>Blueberry</reorder-item>
     <reorder-item>Plum</reorder-item>
 </reorder-list>
+```
 
-<button>A Button</button>
+## Installation
+
+You can import through CDN:
+
+```html
+<script type="module" src="https://unpkg.com/@auroratide/reorder-list/lib/define.js"></script>
+```
+
+Or, you may install through [NPM](https://www.npmjs.com/package/@auroratide/reorder-list) and include it as part of your build process:
+
+```
+$ npm i @auroratide/reorder-list
+```
+
+```javascript
+import '@auroratide/reorder-list/lib/define.js'
+```
+
+## Usage
+
+`reorder-list` and `reorder-item` are **markup elements** that you can use in your HTML document. To use them together, it is best to follow these guidelines:
+
+* `reorder-item` elements **must** be _direct_ descendents of a `reorder-list` element. This is similar to how `li` must directly descend `ol`.
+
+## CSS Customization
+
+Since these are native custom elements, they can be styled the same way as regular HTML elements.
+
+Of note:
+
+* `reorder-item[data-dragging]` will style the currently dragged item.
+
+Here's an example of a customized list meant to look like reorderable cards.
+
+<!--DEMO
+<wc-demo id="fancy">
+    <reorder-list>
+        <reorder-item>
+            <strong>Cobb Salad</strong>
+            <ul>
+                <li>chicken</li>
+                <li>egg</li>
+                <li>tomato</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Fried Rice</strong>
+            <ul>
+                <li>rice</li>
+                <li>shrimp</li>
+                <li>egg</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Chimichanga</strong>
+            <ul>
+                <li>chicken</li>
+                <li>beans</li>
+            </ul>
+        </reorder-item>
+    </reorder-list>
+</wc-demo>
+<style>
+    #fancy reorder-list {
+        list-style: none;
+        background: #ddd;
+        border-radius: 0.5em;
+        width: min(400px, 100%);
+        padding: 0.5em;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+    #fancy reorder-item {
+        background: #fff;
+        border-radius: 0.25em;
+        padding: 0.5em;
+        box-shadow: 0 0.1em 0.15em #0002;
+    }
+    #fancy ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+        padding: 0;
+        margin: 0;
+        font-size: 90%;
+        color: #2573C1;
+    }
+</style>
+/DEMO-->
