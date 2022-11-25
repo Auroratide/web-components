@@ -1,4 +1,4 @@
-import{_ as i}from"../../chunks/preload-helper-b21cceae.js";import{S as c,i as h,s as g,a as m,k as b,J as d,h as t,c as u,l as j,m as w,b as o,B as l}from"../../chunks/index-4befff42.js";const f=`<h1>Web Components by Auroratide</h1>
+import{_ as l}from"../../chunks/preload-helper-b21cceae.js";import{S as c,i as h,s as g,a as m,k as d,J as b,h as t,c as u,l as j,m as w,b as i,B as p}from"../../chunks/index-4befff42.js";const f=`<h1>Web Components by Auroratide</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/">View this page with live demos!</a></strong></p>
 <p>This is just a bunch of highly reusable, fully accessible <strong><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a></strong> you can use on your websites! Why web components?</p>
 <ul>
@@ -8,6 +8,97 @@ import{_ as i}from"../../chunks/preload-helper-b21cceae.js";import{S as c,i as h
 </ul>
 <p>...And many more reasons! Wanna learn more? Join the <a href="https://community.webcomponents.dev/">Web Component Community</a>!</p>
 <p><small>Made by <a href="https://auroratide.com">Auroratide</a>, a developer with a passion for the web, inclusive design, and storytelling \u2764\uFE0F</small></p>
+<h2>The reorder-list Element</h2>
+<p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/reorder-list">The reorder-list Element</a></p>
+<p>A set of elements (<code>reorder-list</code> and <code>reorder-item</code>) that work together to make a rearrangeable list:</p>
+<wc-demo id="reorder-list">
+    <reorder-list>
+        <reorder-item>
+            <strong>Cobb Salad</strong>
+            <ul>
+                <li>chicken</li>
+                <li>egg</li>
+                <li>tomato</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Fried Rice</strong>
+            <ul>
+                <li>rice</li>
+                <li>shrimp</li>
+                <li>egg</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Chimichanga</strong>
+            <ul>
+                <li>chicken</li>
+                <li>beans</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Banana Pancake</strong>
+            <ul>
+                <li>breakfast</li>
+                <li>banana</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Philly Cheese Sandwich</strong>
+            <ul>
+                <li>steak</li>
+                <li>cheese</li>
+                <li>bread</li>
+            </ul>
+        </reorder-item>
+    </reorder-list>
+</wc-demo>
+<style>
+    #reorder-list reorder-list {
+        list-style: none;
+        background: #ddd;
+        border-radius: 0.5em;
+        width: min(400px, 100%);
+        padding: 0.5em;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+    #reorder-list reorder-item {
+        background: #fff;
+        border-radius: 0.25em;
+        padding: 0.5em;
+        box-shadow: 0 0.1em 0.15em #0002;
+    }
+    #reorder-list ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+        padding: 0;
+        margin: 0;
+        font-size: 90%;
+        color: #2573C1;
+    }
+</style>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">reorder-list</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Cobb Salad<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Fried Rice<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Chimichanga<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Banana Pancake<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Philly Cheese Sandwich<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-list</span>&gt;</span>
+</code></pre>
 <h2>The tab-list Element</h2>
 <p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/tab-list">The tab-list Element</a></p>
 <p>A set of elements (<code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code>) that work together to make a tabbing interface:</p>
@@ -150,4 +241,4 @@ import{_ as i}from"../../chunks/preload-helper-b21cceae.js";import{S as c,i as h
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;toggle-switch&quot;</span>&gt;</span>Fancy Switch<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">toggle-switch</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;toggle-switch&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toggle-switch</span>&gt;</span>
 </code></pre>
-`;function y(p){let s,n;return{c(){s=m(),n=b("article"),this.h()},l(a){d("svelte-ueg07q",document.head).forEach(t),s=u(a),n=j(a,"ARTICLE",{});var r=w(n);r.forEach(t),this.h()},h(){document.title="Web Components by Auroratide"},m(a,e){o(a,s,e),o(a,n,e),n.innerHTML=f},p:l,i:l,o:l,d(a){a&&t(s),a&&t(n)}}}function k(p){return i(()=>import("../../chunks/define-151efada.js"),[],import.meta.url),i(()=>import("../../chunks/define-c522fdf3.js"),["../../chunks/define-c522fdf3.js","../../chunks/events-19830ba9.js"],import.meta.url),[]}class q extends c{constructor(s){super(),h(this,s,k,y,g,{})}}export{q as default};
+`;function y(r){let a,n;return{c(){a=m(),n=d("article"),this.h()},l(s){b("svelte-ueg07q",document.head).forEach(t),a=u(s),n=j(s,"ARTICLE",{});var o=w(n);o.forEach(t),this.h()},h(){document.title="Web Components by Auroratide"},m(s,e){i(s,a,e),i(s,n,e),n.innerHTML=f},p,i:p,o:p,d(s){s&&t(a),s&&t(n)}}}function k(r){return l(()=>import("../../chunks/define-a3c3ba96.js"),[],import.meta.url),l(()=>import("../../chunks/define-151efada.js"),[],import.meta.url),l(()=>import("../../chunks/define-c522fdf3.js"),["../../chunks/define-c522fdf3.js","../../chunks/events-19830ba9.js"],import.meta.url),[]}class x extends c{constructor(a){super(),h(this,a,k,y,g,{})}}export{x as default};

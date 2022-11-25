@@ -10,15 +10,15 @@
 
 		<meta http-equiv="content-security-policy" content="">
 		<link href="/web-components/_app/immutable/assets/_layout-37a574ce.css" rel="stylesheet">
-		<link rel="modulepreload" href="/web-components/_app/immutable/start-ae6966a9.js">
+		<link rel="modulepreload" href="/web-components/_app/immutable/start-ae246e17.js">
 		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/index-4befff42.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/singletons-e1988094.js">
+		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/singletons-eef77936.js">
 		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/paths-6fea91d4.js">
 		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/preload-helper-b21cceae.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-8254afe7.js">
+		<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-be0de978.js">
 		<link rel="modulepreload" href="/web-components/_app/immutable/modules/pages/_layout.js-7b9cbfbc.js">
 		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/_layout-8d2a742b.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_page.svelte-18706e31.js"><title>Web Components by Auroratide</title><!-- HEAD_svelte-ueg07q_START --><!-- HEAD_svelte-ueg07q_END -->
+		<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_page.svelte-5c9f2531.js"><title>Web Components by Auroratide</title><!-- HEAD_svelte-ueg07q_START --><!-- HEAD_svelte-ueg07q_END -->
 	</head>
 	<body>
 		<div>
@@ -29,7 +29,8 @@
                 <address class="svelte-115rb9m">By <a href="https://auroratide.com">Auroratide</a></address></div>
             <a class="site-logo svelte-115rb9m" href="/web-components" aria-hidden="true" tabindex="-1"><img src="/web-components/logo-256.png" alt="Web Components" class="svelte-115rb9m"></a></div>
         <hr class="svelte-115rb9m">
-        <nav><ul class="svelte-p7odg2"><li class="svelte-p7odg2"><a href="/web-components/tab-list">tab-list</a></li>
+        <nav><ul class="svelte-p7odg2"><li class="svelte-p7odg2"><a href="/web-components/reorder-list">reorder-list</a></li>
+        <li class="svelte-p7odg2"><a href="/web-components/tab-list">tab-list</a></li>
         <li class="svelte-p7odg2"><a href="/web-components/toggle-switch">toggle-switch</a></li></ul>
 </nav></div>
 </header>
@@ -45,6 +46,97 @@
 </ul>
 <p>...And many more reasons! Wanna learn more? Join the <a href="https://community.webcomponents.dev/">Web Component Community</a>!</p>
 <p><small>Made by <a href="https://auroratide.com">Auroratide</a>, a developer with a passion for the web, inclusive design, and storytelling ❤️</small></p>
+<h2>The reorder-list Element</h2>
+<p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/reorder-list">The reorder-list Element</a></p>
+<p>A set of elements (<code>reorder-list</code> and <code>reorder-item</code>) that work together to make a rearrangeable list:</p>
+<wc-demo id="reorder-list">
+    <reorder-list>
+        <reorder-item>
+            <strong>Cobb Salad</strong>
+            <ul>
+                <li>chicken</li>
+                <li>egg</li>
+                <li>tomato</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Fried Rice</strong>
+            <ul>
+                <li>rice</li>
+                <li>shrimp</li>
+                <li>egg</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Chimichanga</strong>
+            <ul>
+                <li>chicken</li>
+                <li>beans</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Banana Pancake</strong>
+            <ul>
+                <li>breakfast</li>
+                <li>banana</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Philly Cheese Sandwich</strong>
+            <ul>
+                <li>steak</li>
+                <li>cheese</li>
+                <li>bread</li>
+            </ul>
+        </reorder-item>
+    </reorder-list>
+</wc-demo>
+<style>
+    #reorder-list reorder-list {
+        list-style: none;
+        background: #ddd;
+        border-radius: 0.5em;
+        width: min(400px, 100%);
+        padding: 0.5em;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+    #reorder-list reorder-item {
+        background: #fff;
+        border-radius: 0.25em;
+        padding: 0.5em;
+        box-shadow: 0 0.1em 0.15em #0002;
+    }
+    #reorder-list ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+        padding: 0;
+        margin: 0;
+        font-size: 90%;
+        color: #2573C1;
+    }
+</style>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">reorder-list</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Cobb Salad<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Fried Rice<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Chimichanga<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Banana Pancake<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Philly Cheese Sandwich<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-list</span>&gt;</span>
+</code></pre>
 <h2>The tab-list Element</h2>
 <p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/tab-list">The tab-list Element</a></p>
 <p>A set of elements (<code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code>) that work together to make a tabbing interface:</p>
@@ -191,8 +283,8 @@
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="p64po2">
-			import { start } from "/web-components/_app/immutable/start-ae6966a9.js";
+		<script type="module" data-sveltekit-hydrate="zvvkcg">
+			import { start } from "/web-components/_app/immutable/start-ae246e17.js";
 
 			start({
 				env: {},
@@ -206,7 +298,7 @@
 					form: null
 				},
 				paths: {"base":"/web-components","assets":"/web-components"},
-				target: document.querySelector('[data-sveltekit-hydrate="p64po2"]').parentNode,
+				target: document.querySelector('[data-sveltekit-hydrate="zvvkcg"]').parentNode,
 				trailing_slash: "never"
 			});
 		</script>

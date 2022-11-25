@@ -1,42 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="/web-components/logo-032.png" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-		<meta http-equiv="content-security-policy" content="">
-		<link href="/web-components/_app/immutable/assets/_layout-37a574ce.css" rel="stylesheet">
-		<link rel="modulepreload" href="/web-components/_app/immutable/start-ae246e17.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/index-4befff42.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/singletons-eef77936.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/paths-6fea91d4.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/preload-helper-b21cceae.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-be0de978.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/modules/pages/_layout.js-7b9cbfbc.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/_layout-8d2a742b.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/reorder-list/_page.svelte-65bec245.js"><title>The reorder-list Element</title><!-- HEAD_svelte-1pq5n9w_START --><!-- HEAD_svelte-1pq5n9w_END -->
-	</head>
-	<body>
-		<div>
-
-
-<div class="full-screen horizontal-on-large svelte-1km5v2u"><header class="svelte-115rb9m"><div class="container"><div class="site-nav svelte-115rb9m"><div class="site-links svelte-115rb9m"><a class="skip-link svelte-115rb9m" href="#main">Skip to content</a>
-                <a class="site-title svelte-115rb9m" href="/web-components">Web Components</a>
-                <address class="svelte-115rb9m">By <a href="https://auroratide.com">Auroratide</a></address></div>
-            <a class="site-logo svelte-115rb9m" href="/web-components" aria-hidden="true" tabindex="-1"><img src="/web-components/logo-256.png" alt="Web Components" class="svelte-115rb9m"></a></div>
-        <hr class="svelte-115rb9m">
-        <nav><ul class="svelte-p7odg2"><li class="svelte-p7odg2"><a href="/web-components/reorder-list">reorder-list</a></li>
-        <li class="svelte-p7odg2"><a href="/web-components/tab-list">tab-list</a></li>
-        <li class="svelte-p7odg2"><a href="/web-components/toggle-switch">toggle-switch</a></li></ul>
-</nav></div>
-</header>
-    <main id="main" class="container svelte-1km5v2u">
-
-<article><!-- HTML_TAG_START --><h1>The reorder-list Elements</h1>
+import{_ as o}from"../../../chunks/preload-helper-b21cceae.js";import{S as d,i as c,s as h,a as m,k as u,J as g,h as a,c as b,l as j,m as f,b as i,B as l}from"../../../chunks/index-4befff42.js";const y=`<h1>The reorder-list Elements</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/reorder-list">View this page with live demos!</a></strong></p>
 <p>The <code>reorder-list</code> and <code>reorder-item</code> elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html">rearrangable listboxes</a>.</p>
 <wc-demo>
@@ -208,29 +170,4 @@ reorder-item <span class="hljs-selector-tag">ul</span> {
 <li><kbd>Up</kbd> and <kbd>Down</kbd> can be used to navigate the list, focusing on an element that will be reordered.</li>
 <li><kbd>Alt</kbd> + <kbd>Up</kbd>/<kbd>Down</kbd> moves the currently selected list item up or down in the order.</li>
 </ul>
-<!-- HTML_TAG_END --></article></main>
-</div>
-
-
-		<script type="module" data-sveltekit-hydrate="13a7hib">
-			import { start } from "/web-components/_app/immutable/start-ae246e17.js";
-
-			start({
-				env: {},
-				hydrate: {
-					status: 200,
-					error: null,
-					node_ids: [0, 4],
-					params: {},
-					route: {"id":"/reorder-list"},
-					data: [null,null],
-					form: null
-				},
-				paths: {"base":"/web-components","assets":"/web-components"},
-				target: document.querySelector('[data-sveltekit-hydrate="13a7hib"]').parentNode,
-				trailing_slash: "never"
-			});
-		</script>
-	</div>
-	</body>
-</html>
+`;function w(r){let e,n;return{c(){e=m(),n=u("article"),this.h()},l(s){g("svelte-1pq5n9w",document.head).forEach(a),e=b(s),n=j(s,"ARTICLE",{});var p=f(n);p.forEach(a),this.h()},h(){document.title="The reorder-list Element"},m(s,t){i(s,e,t),i(s,n,t),n.innerHTML=y},p:l,i:l,o:l,d(s){s&&a(e),s&&a(n)}}}function x(r){return o(()=>import("../../../chunks/define-a3c3ba96.js"),[],import.meta.url),[]}class v extends d{constructor(e){super(),c(this,e,x,w,h,{})}}export{v as default};
