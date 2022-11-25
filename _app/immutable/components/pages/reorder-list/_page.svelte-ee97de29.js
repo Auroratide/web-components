@@ -1,41 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="/web-components/logo-032.png" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-		<meta http-equiv="content-security-policy" content="">
-		<link href="/web-components/_app/immutable/assets/_layout-37a574ce.css" rel="stylesheet">
-		<link rel="modulepreload" href="/web-components/_app/immutable/start-ae6966a9.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/index-4befff42.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/singletons-e1988094.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/paths-6fea91d4.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/preload-helper-b21cceae.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/_layout.svelte-8254afe7.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/modules/pages/_layout.js-7b9cbfbc.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/chunks/_layout-8d2a742b.js">
-		<link rel="modulepreload" href="/web-components/_app/immutable/components/pages/reorder-list/_page.svelte-ee97de29.js"><title>The reorder-list Element</title><!-- HEAD_svelte-1pq5n9w_START --><!-- HEAD_svelte-1pq5n9w_END -->
-	</head>
-	<body>
-		<div>
-
-
-<div class="full-screen horizontal-on-large svelte-1km5v2u"><header class="svelte-115rb9m"><div class="container"><div class="site-nav svelte-115rb9m"><div class="site-links svelte-115rb9m"><a class="skip-link svelte-115rb9m" href="#main">Skip to content</a>
-                <a class="site-title svelte-115rb9m" href="/web-components">Web Components</a>
-                <address class="svelte-115rb9m">By <a href="https://auroratide.com">Auroratide</a></address></div>
-            <a class="site-logo svelte-115rb9m" href="/web-components" aria-hidden="true" tabindex="-1"><img src="/web-components/logo-256.png" alt="Web Components" class="svelte-115rb9m"></a></div>
-        <hr class="svelte-115rb9m">
-        <nav><ul class="svelte-p7odg2"><li class="svelte-p7odg2"><a href="/web-components/tab-list">tab-list</a></li>
-        <li class="svelte-p7odg2"><a href="/web-components/toggle-switch">toggle-switch</a></li></ul>
-</nav></div>
-</header>
-    <main id="main" class="container svelte-1km5v2u">
-
-<article><!-- HTML_TAG_START --><h1>The reorder-list Elements</h1>
+import{_ as d}from"../../../chunks/preload-helper-b21cceae.js";import{S as p,i as c,s as m,a as h,k as g,J as u,h as a,c as j,l as f,m as y,b as o,B as t}from"../../../chunks/index-4befff42.js";const b=`<h1>The reorder-list Elements</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/reorder-list">View this page with live demos!</a></strong></p>
 <p>The <code>reorder-list</code> and <code>reorder-item</code> elements represent an ordered list of items that can be reordered.</p>
 <wc-demo>
@@ -133,29 +96,4 @@
         color: #2573C1;
     }
 </style>
-<!-- HTML_TAG_END --></article></main>
-</div>
-
-
-		<script type="module" data-sveltekit-hydrate="t2zg2m">
-			import { start } from "/web-components/_app/immutable/start-ae6966a9.js";
-
-			start({
-				env: {},
-				hydrate: {
-					status: 200,
-					error: null,
-					node_ids: [0, 4],
-					params: {},
-					route: {"id":"/reorder-list"},
-					data: [null,null],
-					form: null
-				},
-				paths: {"base":"/web-components","assets":"/web-components"},
-				target: document.querySelector('[data-sveltekit-hydrate="t2zg2m"]').parentNode,
-				trailing_slash: "never"
-			});
-		</script>
-	</div>
-	</body>
-</html>
+`;function w(l){let s,n;return{c(){s=h(),n=g("article"),this.h()},l(e){u("svelte-1pq5n9w",document.head).forEach(a),s=j(e),n=f(e,"ARTICLE",{});var i=y(n);i.forEach(a),this.h()},h(){document.title="The reorder-list Element"},m(e,r){o(e,s,r),o(e,n,r),n.innerHTML=b},p:t,i:t,o:t,d(e){e&&a(s),e&&a(n)}}}function _(l){return d(()=>import("../../../chunks/define-9aa48dc9.js"),[],import.meta.url),[]}class T extends p{constructor(s){super(),c(this,s,_,w,m,{})}}export{T as default};
