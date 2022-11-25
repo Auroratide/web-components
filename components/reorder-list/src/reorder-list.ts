@@ -1,3 +1,4 @@
+import { changeEvent } from './events.js'
 import { ReorderItemElement } from './reorder-item.js'
 
 export class ReorderListElement extends HTMLElement {
@@ -34,11 +35,14 @@ export class ReorderListElement extends HTMLElement {
     }
 
     reorder = (curIndex: number, newIndex: number, list: ReorderItemElement[] = this.items()) => {
+        const item = list[curIndex]
         if (curIndex < newIndex) {
-            list[newIndex].after(list[curIndex])
+            list[newIndex].after(item)
         } else {
-            this.insertBefore(list[curIndex], list[newIndex])
+            this.insertBefore(item, list[newIndex])
         }
+
+        this.dispatchEvent(changeEvent(item, curIndex, newIndex))
 
         list[curIndex].focus()
     }

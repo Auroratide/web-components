@@ -1,4 +1,5 @@
 import { fixture, expect } from '@open-wc/testing'
+import { CHANGED } from '../lib/events'
 import { ReorderItemElement } from '../lib'
 import '../lib/define.js'
 
@@ -245,6 +246,30 @@ describe('reorder-list', () => {
             expect(items[0].textContent).to.equal('Banana')
             expect(items[1].textContent).to.equal('Apple')
             expect(items[2].textContent).to.equal('Orange')
+        })
+    })
+
+    describe('events', () => {
+        it('reordering', async () => {
+            const container = await fixture(`
+                <reorder-list>
+                    <reorder-item>Apple</reorder-item>
+                    <reorder-item>Orange</reorder-item>
+                    <reorder-item>Banana</reorder-item>
+                </reorder-list>
+            `)
+
+            let emitted = undefined
+            container.addEventListener(CHANGED, e => {
+                emitted = e.detail
+            })
+
+            const expectedTarget = container.items()[2]
+            container.reorder(2, 1)
+
+            expect(emitted.item).to.equal(expectedTarget)
+            expect(emitted.oldIndex).to.equal(2)
+            expect(emitted.newIndex).to.equal(1)
         })
     })
 })
