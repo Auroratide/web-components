@@ -4,6 +4,7 @@
 
 <nav>
     <ul>
+        <li><a href="{base}/reorder-list">reorder-list</a></li>
         <li><a href="{base}/tab-list">tab-list</a></li>
         <li><a href="{base}/toggle-switch">toggle-switch</a></li>
     </ul>
