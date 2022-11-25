@@ -11,11 +11,12 @@ export class ReorderItemElement extends HTMLElement {
         :host {
             display: list-item;
             touch-action: none;
+            cursor: grab;
         }
         
         :host([data-dragging]) {
             opacity: 0.5;
-            cursor: ns-resize;
+            cursor: grabbing;
         }
     `
 
