@@ -65,6 +65,7 @@ export class ReorderItemElement extends HTMLElement {
         document.addEventListener('pointermove', this.#onDragMove)
         document.addEventListener('pointerup', this.#onDragEnd)
         document.addEventListener('pointercancel', this.#onDragEnd)
+        document.addEventListener('touchmove', this.#preventScroll)
     }
 
     #onDragMove = (e: PointerEvent) => {
@@ -96,6 +97,11 @@ export class ReorderItemElement extends HTMLElement {
         document.removeEventListener('pointermove', this.#onDragMove)
         document.removeEventListener('pointerup', this.#onDragEnd)
         document.removeEventListener('pointercancel', this.#onDragEnd)
+        document.removeEventListener('touchmove', this.#preventScroll)
+    }
+
+    #preventScroll = (e: TouchEvent) => {
+        e.preventDefault()
     }
 
     attributeChangedCallback() {
