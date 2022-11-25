@@ -12,6 +12,105 @@ This is just a bunch of highly reusable, fully accessible **[web components](htt
 
 <small>Made by <a href="https://auroratide.com">Auroratide</a>, a developer with a passion for the web, inclusive design, and storytelling ❤️</small>
 
+## The reorder-list Element
+
+**View**: [The reorder-list Element](https://auroratide.github.io/web-components/reorder-list)
+
+A set of elements (`reorder-list` and `reorder-item`) that work together to make a rearrangeable list:
+
+<!--DEMO
+<wc-demo id="reorder-list">
+    <reorder-list>
+        <reorder-item>
+            <strong>Cobb Salad</strong>
+            <ul>
+                <li>chicken</li>
+                <li>egg</li>
+                <li>tomato</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Fried Rice</strong>
+            <ul>
+                <li>rice</li>
+                <li>shrimp</li>
+                <li>egg</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Chimichanga</strong>
+            <ul>
+                <li>chicken</li>
+                <li>beans</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Banana Pancake</strong>
+            <ul>
+                <li>breakfast</li>
+                <li>banana</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Philly Cheese Sandwich</strong>
+            <ul>
+                <li>steak</li>
+                <li>cheese</li>
+                <li>bread</li>
+            </ul>
+        </reorder-item>
+    </reorder-list>
+</wc-demo>
+<style>
+    #reorder-list reorder-list {
+        list-style: none;
+        background: #ddd;
+        border-radius: 0.5em;
+        width: min(400px, 100%);
+        padding: 0.5em;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+    #reorder-list reorder-item {
+        background: #fff;
+        border-radius: 0.25em;
+        padding: 0.5em;
+        box-shadow: 0 0.1em 0.15em #0002;
+    }
+    #reorder-list ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+        padding: 0;
+        margin: 0;
+        font-size: 90%;
+        color: #2573C1;
+    }
+</style>
+/DEMO-->
+
+```html
+<reorder-list>
+    <reorder-item>
+        <strong>Cobb Salad</strong>
+    </reorder-item>
+    <reorder-item>
+        <strong>Fried Rice</strong>
+    </reorder-item>
+    <reorder-item>
+        <strong>Chimichanga</strong>
+    </reorder-item>
+    <reorder-item>
+        <strong>Banana Pancake</strong>
+    </reorder-item>
+    <reorder-item>
+        <strong>Philly Cheese Sandwich</strong>
+    </reorder-item>
+</reorder-list>
+```
+
 ## The tab-list Element
 
 **View**: [The tab-list Element](https://auroratide.github.io/web-components/tab-list)

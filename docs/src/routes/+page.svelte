@@ -3,6 +3,7 @@
     import { html } from '../../../README.md'
 
     if (browser) {
+        import('@auroratide/reorder-list/lib/define')
         import('@auroratide/tab-list/lib/define')
         import('@auroratide/toggle-switch/lib/define')
     }
