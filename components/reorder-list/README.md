@@ -2,7 +2,7 @@
 
 <p hidden><strong><a href="https://auroratide.github.io/web-components/reorder-list">View this page with live demos!</a></strong></p>
 
-The `reorder-list` and `reorder-item` elements represent an ordered list of items that can be reordered.
+The `reorder-list` and `reorder-item` elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement the WAI-ARIA guidelines for [rearrangable listboxes](https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html).
 
 <!--DEMO
 <wc-demo>
@@ -88,6 +88,21 @@ Here's an example of a customized list meant to look like reorderable cards.
                 <li>beans</li>
             </ul>
         </reorder-item>
+        <reorder-item>
+            <strong>Banana Pancake</strong>
+            <ul>
+                <li>breakfast</li>
+                <li>banana</li>
+            </ul>
+        </reorder-item>
+        <reorder-item>
+            <strong>Philly Cheese Sandwich</strong>
+            <ul>
+                <li>steak</li>
+                <li>cheese</li>
+                <li>bread</li>
+            </ul>
+        </reorder-item>
     </reorder-list>
 </wc-demo>
 <style>
@@ -119,3 +134,60 @@ Here's an example of a customized list meant to look like reorderable cards.
     }
 </style>
 /DEMO-->
+
+```css
+reorder-list {
+    list-style: none;
+    background: #ddd;
+    border-radius: 0.5em;
+    width: min(400px, 100%);
+    padding: 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+reorder-item {
+    background: #fff;
+    border-radius: 0.25em;
+    padding: 0.5em;
+    box-shadow: 0 0.1em 0.15em #0002;
+}
+
+reorder-item ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    padding: 0;
+    margin: 0;
+    font-size: 90%;
+    color: #2573C1;
+}
+```
+
+## Events
+
+The `reorder-list` element dispatches the following events:
+
+| Name | When Triggered |
+| ------------- | ------------- |
+| `reorder-list:change` | Whenever an item in the list is reordered |
+
+The `reorder-list:change` event contains a reference to the item that was reordered, its previous position in the list, and its new position.
+
+```js
+list.addEventListener('reorder-list:change', e => {
+    console.log(e.detail.item)
+    console.log(e.detail.oldIndex)
+    console.log(e.detail.newIndex)
+})
+```
+
+## Accessibility
+
+This custom element is build with accessibility in mind! It follows the WAI-ARIA guidelines for [rearrangable listboxes](https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html) (the `listbox` and `option` roles).
+
+* When focus enters the list, focus goes to the currently active list item.
+* <kbd>Up</kbd> and <kbd>Down</kbd> can be used to navigate the list, focusing on an element that will be reordered.
+* <kbd>Alt</kbd> + <kbd>Up</kbd>/<kbd>Down</kbd> moves the currently selected list item up or down in the order.
