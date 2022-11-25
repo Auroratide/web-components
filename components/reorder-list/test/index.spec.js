@@ -68,6 +68,16 @@ const drag = async (item, destination) => {
     }))
 }
 
+const tap = async (element) => {
+    element.dispatchEvent(new PointerEvent('pointerdown', {
+        bubbles: true,
+    }))
+    await wait(1)
+    element.dispatchEvent(new PointerEvent('pointerup', {
+        bubbles: true,
+    }))
+}
+
 describe('reorder-list', () => {
     describe('aria-requirements', () => {
         it('roles', async () => {
@@ -180,6 +190,26 @@ describe('reorder-list', () => {
             expect(items[0].textContent).to.equal('Orange')
             expect(items[1].textContent).to.equal('Banana')
             expect(items[2].textContent).to.equal('Apple')
+        })
+
+        it('clicking on an item', async () => {
+            const container = await fixture(`<div>
+                <button id="focus-start">Focusable</button>
+                <reorder-list>
+                    <reorder-item>Apple</reorder-item>
+                    <reorder-item>Orange</reorder-item>
+                    <reorder-item>Banana</reorder-item>
+                </reorder-list>
+                <button id="focus-end">Focusable</button>
+            </div>`)
+
+            container.querySelector('#focus-start').focus()
+
+            await tap(container.querySelectorAll('reorder-item')[1])
+
+            expect(document.activeElement).to.equal(
+                container.querySelectorAll('reorder-item')[1]
+            )
         })
     })
 

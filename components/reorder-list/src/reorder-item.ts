@@ -46,6 +46,8 @@ export class ReorderItemElement extends HTMLElement {
 
     #onTouchStart = (e: PointerEvent) => {
         e.preventDefault()
+        this.list().changeFocus(this)
+
         const timeout = setTimeout(() => this.#onDragStart(), ReorderItemElement.START_DRAG_DELAY_MS)
         const cancelDrag = () => {
             clearTimeout(timeout)

@@ -47,6 +47,15 @@ export class ReorderListElement extends HTMLElement {
         list[curIndex].focus()
     }
 
+    changeFocus = (newItem: ReorderItemElement, list: ReorderItemElement[] = this.items()) => {
+        list.forEach((item) => {
+            item.setAttribute('aria-selected', 'false')
+        })
+
+        newItem.setAttribute('aria-selected', 'true')
+        newItem.focus()
+    }
+
     #handleNav = (e: KeyboardEvent) => {
         const keys = this.#keysForOrientation()
         if (keys.includes(e.key)) {
@@ -70,22 +79,13 @@ export class ReorderListElement extends HTMLElement {
             } else if (currentFocusable !== nextFocusable) {
                 e.preventDefault()
 
-                this.#changeFocus(items, items[nextFocusable])
+                this.changeFocus(items[nextFocusable], items)
             }
         }
     }
 
     #keysForOrientation = () => {
         return ['ArrowUp', 'ArrowDown']
-    }
-
-    #changeFocus = (items: ReorderItemElement[], newItem: ReorderItemElement) => {
-        items.forEach((item) => {
-            item.setAttribute('aria-selected', 'false')
-        })
-
-        newItem.setAttribute('aria-selected', 'true')
-        newItem.focus()
     }
 
     #createRoot = () => {
