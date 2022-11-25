@@ -1,7 +1,14 @@
 {
   "name": "@auroratide/reorder-list",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Web component for a rearrangeable list of items",
+  "keywords": [
+    "reorder",
+    "list",
+    "rearrange",
+    "element",
+    "web component"
+  ],
   "type": "module",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -12,10 +19,13 @@
     "test": "wtr --node-resolve --port 10004 test",
     "test:clean": "pnpm clean && pnpm build && pnpm test"
   },
-  "keywords": [],
   "author": {
     "name": "Timothy Foster",
     "url": "https://auroratide.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Auroratide/web-components/tree/main/components/reorder-list"
   },
   "license": "ISC",
   "devDependencies": {
