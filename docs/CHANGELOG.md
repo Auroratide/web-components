@@ -1,5 +1,16 @@
 # @auroratide/wc-docs
 
+## 0.1.4
+
+### Patch Changes
+
+- b6cdb71: Update dependencies to their latest versions
+- Updated dependencies [b6cdb71]
+  - @auroratide/example-component@0.0.2
+  - @auroratide/reorder-list@0.1.1
+  - @auroratide/tab-list@0.2.6
+  - @auroratide/toggle-switch@0.2.3
+
 ## 0.1.3
 
 ### Patch Changes

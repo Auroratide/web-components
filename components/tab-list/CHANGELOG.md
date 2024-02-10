@@ -1,5 +1,11 @@
 # @auroratide/tab-list
 
+## 0.2.6
+
+### Patch Changes
+
+- b6cdb71: Update dependencies to their latest versions
+
 ## 0.2.5
 
 ### Patch Changes
