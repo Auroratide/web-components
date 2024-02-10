@@ -74,7 +74,7 @@ const makeRouteInDocs = async (newName) => {
 
     // (3) Add to doc package
     const packageJson = await readJson(path.join('docs', 'package.json'))
-    packageJson.dependencies[`@auroratide/${newName}`] = 'workspace:^0.0.1'
+    packageJson.dependencies[`@auroratide/${newName}`] = 'workspace:^'
 
     await writeJson(path.join('docs', 'package.json'), packageJson)
 }
