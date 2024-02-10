@@ -1,4 +1,4 @@
-import{_ as c}from"../../../chunks/preload-helper-b21cceae.js";import{S as r,i as b,s as h,a as d,k as u,J as m,h as t,c as g,l as j,m as f,b as i,B as l}from"../../../chunks/index-4befff42.js";const y=`<h1>The tab-list Elements</h1>
+import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as p}from"../chunks/scheduler.Ce_0Mfso.js";import{S as b,i as d,s as u,e as m,H as g,k as j,d as e,f,c as y,a as w,l as q,g as c}from"../chunks/index.CGY-0lOs.js";const x=`<h1>The tab-list Elements</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/tab-list">View this page with live demos!</a></strong></p>
 <p>The <code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code> elements together represent content that is presented one panel at a time. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://w3c.github.io/aria-practices/#tabpanel">tabs</a>.</p>
 <ul>
@@ -199,11 +199,11 @@ import{_ as c}from"../../../chunks/preload-helper-b21cceae.js";import{S as r,i a
                 <p>Ingredients for making apple pie:</p>
                 <ul>
                     <li>8 Granny Smith apples</li>
-                    <li>\xBD cup butter</li>
+                    <li>½ cup butter</li>
                     <li>3 tablespoons flour</li>
-                    <li>\xBD cup white sugar</li>
-                    <li>\xBD cup brown sugar</li>
-                    <li>\xBC water</li>
+                    <li>½ cup white sugar</li>
+                    <li>½ cup brown sugar</li>
+                    <li>¼ water</li>
                     <li>A double-crust pie pastry</li>
                 </ul>
             </tab-panel>
@@ -211,12 +211,12 @@ import{_ as c}from"../../../chunks/preload-helper-b21cceae.js";import{S as r,i a
                 <p>Ingredients for making orange sorbet:</p>
                 <ul>
                     <li>2 cups orange juice pulp</li>
-                    <li>1\xBD cup almond milk</li>
+                    <li>1½ cup almond milk</li>
                     <li>1 tablespoon orange zest</li>
                     <li>1 tablespoon lemon juice</li>
-                    <li>\xBC teaspoon salt</li>
+                    <li>¼ teaspoon salt</li>
                     <li>1 teaspoon vanilla extract</li>
-                    <li>\xBD teaspoon sweetener</li>
+                    <li>½ teaspoon sweetener</li>
                 </ul>
             </tab-panel>
             <tab-panel id="example-4-tab-3">
@@ -356,4 +356,10 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
 <li>Native support for removable tabs.</li>
 <li>Tabs that open popup menus.</li>
 </ul>
-`;function w(p){let s,n;return{c(){s=d(),n=u("article"),this.h()},l(a){m("svelte-vr2uw0",document.head).forEach(t),s=g(a),n=j(a,"ARTICLE",{});var o=f(n);o.forEach(t),this.h()},h(){document.title="The tab-list Element"},m(a,e){i(a,s,e),i(a,n,e),n.innerHTML=y},p:l,i:l,o:l,d(a){a&&t(s),a&&t(n)}}}function q(p){return c(()=>import("../../../chunks/define-151efada.js"),[],import.meta.url),[]}class k extends r{constructor(s){super(),b(this,s,q,w,h,{})}}export{k as default};
+`;function v(o){let s,n,t;return{c(){s=u(),n=m("article"),t=new g(!1),this.h()},l(a){j("svelte-vr2uw0",document.head).forEach(e),s=f(a),n=y(a,"ARTICLE",{});var i=w(n);t=q(i,!1),i.forEach(e),this.h()},h(){document.title="The tab-list Element",t.a=null},m(a,l){c(a,s,l),c(a,n,l),t.m(x,n)},p,i:p,o:p,d(a){a&&(e(s),e(n))}}}function k(o){return r(()=>import("../chunks/define.CJ6ZdpBe.js"),__vite__mapDeps([]),import.meta.url),[]}class I extends b{constructor(s){super(),d(this,s,k,v,h,{})}}export{I as component};
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = []
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}

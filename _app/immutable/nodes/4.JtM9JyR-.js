@@ -1,4 +1,4 @@
-import{_ as o}from"../../../chunks/preload-helper-b21cceae.js";import{S as d,i as c,s as h,a as m,k as u,J as g,h as a,c as b,l as j,m as f,b as i,B as l}from"../../../chunks/index-4befff42.js";const y=`<h1>The reorder-list Elements</h1>
+import{_ as d}from"../chunks/preload-helper.BQ24v_F8.js";import{s as c,n as r}from"../chunks/scheduler.Ce_0Mfso.js";import{S as h,i as m,s as u,e as g,H as b,k as j,d as t,f,c as y,a as w,l as x,g as o}from"../chunks/index.CGY-0lOs.js";const _=`<h1>The reorder-list Elements</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/reorder-list">View this page with live demos!</a></strong></p>
 <p>The <code>reorder-list</code> and <code>reorder-item</code> elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html">rearrangable listboxes</a>.</p>
 <wc-demo>
@@ -170,4 +170,10 @@ reorder-item <span class="hljs-selector-tag">ul</span> {
 <li><kbd>Up</kbd> and <kbd>Down</kbd> can be used to navigate the list, focusing on an element that will be reordered.</li>
 <li><kbd>Alt</kbd> + <kbd>Up</kbd>/<kbd>Down</kbd> moves the currently selected list item up or down in the order.</li>
 </ul>
-`;function w(r){let e,n;return{c(){e=m(),n=u("article"),this.h()},l(s){g("svelte-1pq5n9w",document.head).forEach(a),e=b(s),n=j(s,"ARTICLE",{});var p=f(n);p.forEach(a),this.h()},h(){document.title="The reorder-list Element"},m(s,t){i(s,e,t),i(s,n,t),n.innerHTML=y},p:l,i:l,o:l,d(s){s&&a(e),s&&a(n)}}}function x(r){return o(()=>import("../../../chunks/define-a3c3ba96.js"),[],import.meta.url),[]}class v extends d{constructor(e){super(),c(this,e,x,w,h,{})}}export{v as default};
+`;function k(i){let e,n,a;return{c(){e=u(),n=g("article"),a=new b(!1),this.h()},l(s){j("svelte-1pq5n9w",document.head).forEach(t),e=f(s),n=y(s,"ARTICLE",{});var p=w(n);a=x(p,!1),p.forEach(t),this.h()},h(){document.title="The reorder-list Element",a.a=null},m(s,l){o(s,e,l),o(s,n,l),a.m(_,n)},p:r,i:r,o:r,d(s){s&&(t(e),t(n))}}}function v(i){return d(()=>import("../chunks/define.Cxgo7aog.js"),__vite__mapDeps([]),import.meta.url),[]}class C extends h{constructor(e){super(),m(this,e,v,k,c,{})}}export{C as component};
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = []
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}

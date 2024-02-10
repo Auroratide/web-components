@@ -1,4 +1,4 @@
-import{_ as i}from"../../../chunks/preload-helper-b21cceae.js";import{S as r,i as d,s as g,a as m,k as u,J as b,h as e,c as j,l as w,m as f,b as p,B as l,o as y,K as k}from"../../../chunks/index-4befff42.js";import{C as _}from"../../../chunks/events-19830ba9.js";const x=`<h1>The toggle-switch Element</h1>
+import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as d,n as c,o as g}from"../chunks/scheduler.Ce_0Mfso.js";import{S as m,i as u,s as b,e as j,H as w,k as f,d as t,f as y,c as k,a as x,l as _,g as h}from"../chunks/index.CGY-0lOs.js";import{C as v}from"../chunks/events.C44j2o98.js";const T=typeof window<"u"?window:typeof globalThis<"u"?globalThis:global,q=`<h1>The toggle-switch Element</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/toggle-switch">View this page with live demos!</a></strong></p>
 <p>The <code>toggle-switch</code> element represents a control that is either on or off. This component is built with accessibility in mind and implements the WAI-ARIA <a href="https://www.w3.org/TR/wai-aria-1.1/#switch">switch role</a>.</p>
 <wc-demo>
@@ -166,4 +166,10 @@ toggle-switch<span class="hljs-selector-attr">[checked]</span><span class="hljs-
 <li>The element can be focused</li>
 <li>The element can be toggled with <kbd>Enter</kbd> or <kbd>Space</kbd></li>
 </ul>
-`;const{document:o}=k;function v(c){let a,s;return{c(){a=m(),s=u("article"),this.h()},l(n){b("svelte-836m89",o.head).forEach(e),a=j(n),s=w(n,"ARTICLE",{});var h=f(s);h.forEach(e),this.h()},h(){o.title="The toggle-switch Element"},m(n,t){p(n,a,t),p(n,s,t),s.innerHTML=x},p:l,i:l,o:l,d(n){n&&e(a),n&&e(s)}}}function q(c){return i(()=>import("../../../chunks/define-c522fdf3.js"),["../../../chunks/define-c522fdf3.js","../../../chunks/events-19830ba9.js"],import.meta.url),y(()=>{const a=document.querySelector("#example-01"),s=document.querySelector("#example-01-output");a&&s&&(a==null||a.addEventListener(_,n=>{n.detail.checked?(s.textContent="On",s.classList.add("example-active")):(s.textContent="Off",s.classList.remove("example-active"))}))}),[]}class E extends r{constructor(a){super(),d(this,a,q,v,g,{})}}export{E as default};
+`,{document:i}=T;function A(o){let a,s,e;return{c(){a=b(),s=j("article"),e=new w(!1),this.h()},l(n){f("svelte-836m89",i.head).forEach(t),a=y(n),s=k(n,"ARTICLE",{});var p=x(s);e=_(p,!1),p.forEach(t),this.h()},h(){i.title="The toggle-switch Element",e.a=null},m(n,l){h(n,a,l),h(n,s,l),e.m(q,s)},p:c,i:c,o:c,d(n){n&&(t(a),t(s))}}}function C(o){return r(()=>import("../chunks/define.BEaBwacd.js"),__vite__mapDeps([0,1]),import.meta.url),g(()=>{const a=document.querySelector("#example-01"),s=document.querySelector("#example-01-output");a&&s&&(a==null||a.addEventListener(v,e=>{e.detail.checked?(s.textContent="On",s.classList.add("example-active")):(s.textContent="Off",s.classList.remove("example-active"))}))}),[]}class D extends m{constructor(a){super(),u(this,a,C,A,d,{})}}export{D as component};
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = ["../chunks/define.BEaBwacd.js","../chunks/events.C44j2o98.js"]
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}
