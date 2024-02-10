@@ -9,8 +9,6 @@ export class TypewrittenTextMirror extends HTMLElement {
 	constructor(mirrorOf: HTMLElement) {
 		super()
 
-		console.log("IN HERE!!! ")
-
 		this.mirrorOf = mirrorOf
 		this.characters = []
 	}

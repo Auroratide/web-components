@@ -202,13 +202,9 @@ export class TypewrittenTextElement extends HTMLElement {
 	}
 
 	createMirror = () => {
-		console.log("1")
 		this.mirror = new TypewrittenTextMirror(this)
-		console.log("2")
 		this.mirror.slot = "mirror"
-		console.log("3")
 		this.mirror.innerHTML = "<span class=\"typewritten-text_start typewritten-text_current\"></span>" + this.divideIntoCharacters()
-		console.log("4", this.mirror.innerHTML)
 	}
 
 	insertMirror = () => {
