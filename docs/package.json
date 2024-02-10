@@ -27,6 +27,7 @@
 		"@auroratide/example-component": "workspace:^",
 		"@auroratide/reorder-list": "workspace:^",
 		"@auroratide/tab-list": "workspace:^",
-		"@auroratide/toggle-switch": "workspace:^"
+		"@auroratide/toggle-switch": "workspace:^",
+		"@auroratide/typewritten-text": "workspace:^"
 	}
 }

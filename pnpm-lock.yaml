@@ -81,6 +81,18 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
+  components/typewritten-text:
+    devDependencies:
+      '@open-wc/testing':
+        specifier: ^4.0.0
+        version: 4.0.0
+      '@web/test-runner':
+        specifier: ^0.18.0
+        version: 0.18.0(typescript@5.3.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+
   docs:
     dependencies:
       '@auroratide/example-component':
@@ -95,6 +107,9 @@ importers:
       '@auroratide/toggle-switch':
         specifier: workspace:^
         version: link:../components/toggle-switch
+      '@auroratide/typewritten-text':
+        specifier: workspace:^
+        version: link:../components/typewritten-text
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^3.1.1

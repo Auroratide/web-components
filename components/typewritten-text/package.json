@@ -1,0 +1,32 @@
+{
+	"name": "@auroratide/typewritten-text",
+	"version": "0.1.4",
+	"description": "The text types itself out!",
+	"keywords": [
+		"text",
+		"element",
+		"typing",
+		"web-component",
+		"typewriter"
+	],
+	"type": "module",
+	"main": "lib/index.js",
+	"module": "lib/index.js",
+	"scripts": {
+		"clean": "rm -rf lib",
+		"build": "cp src/*.css lib/ && tsc",
+		"build:watch": "cp src/*.css lib/ && tsc -w",
+		"test": "wtr --node-resolve --port 10005 test",
+		"test:clean": "pnpm clean && pnpm build && pnpm test"
+	},
+	"author": {
+		"name": "Timothy Foster",
+		"url": "https://auroratide.com"
+	},
+	"license": "ISC",
+	"devDependencies": {
+		"@open-wc/testing": "^4.0.0",
+		"@web/test-runner": "^0.18.0",
+		"typescript": "^5.3.3"
+	}
+}

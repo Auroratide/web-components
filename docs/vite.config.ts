@@ -4,7 +4,7 @@ import { plugin as mdPlugin, Mode } from "vite-plugin-markdown"
 import MarkdownIt from "markdown-it"
 import hljs from "highlight.js"
 
-const unleashTheDemos = (str) => str
+const unleashTheDemos = (str: string) => str
 	.replaceAll("<!--DEMO", "")
 	.replaceAll("/DEMO-->", "")
 
