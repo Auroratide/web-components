@@ -1,36 +1,36 @@
 {
-  "name": "@auroratide/tab-list",
-  "version": "0.2.6",
-  "description": "Web component for tabs and tab panels",
-  "keywords": [
-    "tablist",
-    "tabs",
-    "html",
-    "element",
-    "web component"
-  ],
-  "type": "module",
-  "main": "lib/index.js",
-  "module": "lib/index.js",
-  "scripts": {
-    "clean": "rm -rf lib",
-    "build": "tsc",
-    "build:watch": "tsc -w",
-    "test": "wtr --node-resolve --port 10003 test",
-    "test:clean": "pnpm clean && pnpm build && pnpm test"
-  },
-  "author": {
-    "name": "Timothy Foster",
-    "url": "https://auroratide.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Auroratide/web-components/tree/main/components/tab-list"
-  },
-  "license": "ISC",
-  "devDependencies": {
-    "@open-wc/testing": "^4.0.0",
-    "@web/test-runner": "^0.18.0",
-    "typescript": "^5.3.3"
-  }
+	"name": "@auroratide/tab-list",
+	"version": "0.2.6",
+	"description": "Web component for tabs and tab panels",
+	"keywords": [
+		"tablist",
+		"tabs",
+		"html",
+		"element",
+		"web component"
+	],
+	"type": "module",
+	"main": "lib/index.js",
+	"module": "lib/index.js",
+	"scripts": {
+		"clean": "rm -rf lib",
+		"build": "tsc",
+		"build:watch": "tsc -w",
+		"test": "wtr --node-resolve --port 10003 test",
+		"test:clean": "pnpm clean && pnpm build && pnpm test"
+	},
+	"author": {
+		"name": "Timothy Foster",
+		"url": "https://auroratide.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Auroratide/web-components/tree/main/components/tab-list"
+	},
+	"license": "ISC",
+	"devDependencies": {
+		"@open-wc/testing": "^4.0.0",
+		"@web/test-runner": "^0.18.0",
+		"typescript": "^5.3.3"
+	}
 }

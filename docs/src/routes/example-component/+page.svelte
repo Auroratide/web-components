@@ -1,15 +1,15 @@
 <script>
-    import { browser } from '$app/environment'
-    import { html } from '../../../../components/example-component/README.md'
+	import { browser } from "$app/environment"
+	import { html } from "@auroratide/example-component/README.md"
 
-    if (browser)    
-        import('@auroratide/example-component/lib/define.js')
+	if (browser)    
+		import("@auroratide/example-component/lib/define.js")
 </script>
 
 <svelte:head>
-    <title>The example-component Element</title>
+	<title>The example-component Element</title>
 </svelte:head>
 
 <article>
-    {@html html}
+	{@html html}
 </article>

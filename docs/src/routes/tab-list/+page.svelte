@@ -1,15 +1,15 @@
 <script>
-    import { browser } from '$app/environment'
-    import { html } from '../../../../components/tab-list/README.md'
+	import { browser } from "$app/environment"
+	import { html } from "@auroratide/tab-list/README.md"
 
-    if (browser)    
-        import('@auroratide/tab-list/lib/define.js')
+	if (browser)
+		import("@auroratide/tab-list/lib/define.js")
 </script>
 
 <svelte:head>
-    <title>The tab-list Element</title>
+	<title>The tab-list Element</title>
 </svelte:head>
 
 <article>
-    {@html html}
+	{@html html}
 </article>

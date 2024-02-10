@@ -1,5 +1,5 @@
-import { ToggleSwitchElement } from './toggle-switch.js'
+import { ToggleSwitchElement } from "./toggle-switch.js"
 
 if (!window.customElements.get(ToggleSwitchElement.defaultElementName)) {
-    window.customElements.define(ToggleSwitchElement.defaultElementName, ToggleSwitchElement)
+	window.customElements.define(ToggleSwitchElement.defaultElementName, ToggleSwitchElement)
 }

@@ -1,18 +1,18 @@
 <script>
-    import { browser } from '$app/environment'
-    import { html } from '../../../README.md'
+	import { browser } from "$app/environment"
+	import { html } from "../../../README.md"
 
-    if (browser) {
-        import('@auroratide/reorder-list/lib/define')
-        import('@auroratide/tab-list/lib/define')
-        import('@auroratide/toggle-switch/lib/define')
-    }
+	if (browser) {
+		import("@auroratide/reorder-list/lib/define")
+		import("@auroratide/tab-list/lib/define")
+		import("@auroratide/toggle-switch/lib/define")
+	}
 </script>
 
 <svelte:head>
-    <title>Web Components by Auroratide</title>
+	<title>Web Components by Auroratide</title>
 </svelte:head>
 
 <article>
-    {@html html}
+	{@html html}
 </article>

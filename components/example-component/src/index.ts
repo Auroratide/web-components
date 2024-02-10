@@ -1,75 +1,75 @@
 export class ExampleComponentElement extends HTMLElement {
-    static defaultElementName = 'example-component'
+	static defaultElementName = "example-component"
 
-    static html = `
-        <button id="decrease">Decrease</button>
-        <span id="value">0</span>
-        <button id="increase">Increase</button>
-    `
+	static html = `
+		  <button id="decrease">Decrease</button>
+		  <span id="value">0</span>
+		  <button id="increase">Increase</button>
+	 `
 
-    static css = `
-        #value {
-            font-weight: bold;
-        }
-    `
+	static css = `
+		  #value {
+				font-weight: bold;
+		  }
+	 `
 
-    static get observedAttributes() {
-        return ['value']
-    }
+	static get observedAttributes() {
+		return ["value"]
+	}
 
-    constructor() {
-        super()
+	constructor() {
+		super()
 
-        this.#createRoot()
-    }
+		this.#createRoot()
+	}
 
-    get value() {
-        return parseInt(this.getAttribute('value') ?? '0')
-    }
-    set value(value) {
-        this.setAttribute('value', value.toString())
-    }
+	get value() {
+		return parseInt(this.getAttribute("value") ?? "0")
+	}
+	set value(value) {
+		this.setAttribute("value", value.toString())
+	}
 
-    decrease = () => {
-        this.value -= 1
-    }
+	decrease = () => {
+		this.value -= 1
+	}
 
-    increase = () => {
-        this.value += 1
-    }
+	increase = () => {
+		this.value += 1
+	}
 
-    connectedCallback() {
-        this.shadowRoot!
-            .querySelector('#decrease')!
-            .addEventListener('click', this.decrease)
-        
-        this.shadowRoot!
-            .querySelector('#increase')!
-            .addEventListener('click', this.increase)
-        
-        this.#updateValue()
-    }
+	connectedCallback() {
+		this.shadowRoot!
+			.querySelector("#decrease")!
+			.addEventListener("click", this.decrease)
 
-    attributeChangedCallback() {
-        this.#updateValue()
-    }
+		this.shadowRoot!
+			.querySelector("#increase")!
+			.addEventListener("click", this.increase)
 
-    #updateValue = () => {
-        this.shadowRoot!.querySelector('#value')!.textContent = this.value.toString()
-    }
+		this.#updateValue()
+	}
 
-    #createRoot = () => {
-        const root = this.shadowRoot ?? this.attachShadow({ mode: 'open' })
+	attributeChangedCallback() {
+		this.#updateValue()
+	}
 
-        const style = document.createElement('style')
-        style.innerHTML = ExampleComponentElement.css
+	#updateValue = () => {
+		this.shadowRoot!.querySelector("#value")!.textContent = this.value.toString()
+	}
 
-        const template = document.createElement('template')
-        template.innerHTML = ExampleComponentElement.html
+	#createRoot = () => {
+		const root = this.shadowRoot ?? this.attachShadow({ mode: "open" })
 
-        root.appendChild(style)
-        root.appendChild(template.content)
+		const style = document.createElement("style")
+		style.innerHTML = ExampleComponentElement.css
 
-        return root
-    }
+		const template = document.createElement("template")
+		template.innerHTML = ExampleComponentElement.html
+
+		root.appendChild(style)
+		root.appendChild(template.content)
+
+		return root
+	}
 }

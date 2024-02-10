@@ -1,11 +1,11 @@
 export class WcDemoElement extends HTMLElement {
-    constructor() {
-        super()
+	constructor() {
+		super()
 
-        this.hidden = false
-    }
+		this.hidden = false
+	}
 }
 
-if (!window.customElements.get('wc-demo')) {
-    window.customElements.define('wc-demo', WcDemoElement)
+if (!window.customElements.get("wc-demo")) {
+	window.customElements.define("wc-demo", WcDemoElement)
 }

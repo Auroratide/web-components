@@ -1,15 +1,15 @@
 <script>
-    import { browser } from '$app/environment'
-    import { html } from '../../../../components/reorder-list/README.md'
+	import { browser } from "$app/environment"
+	import { html } from "@auroratide/reorder-list/README.md"
 
-    if (browser)    
-        import('@auroratide/reorder-list/lib/define.js')
+	if (browser)    
+		import("@auroratide/reorder-list/lib/define.js")
 </script>
 
 <svelte:head>
-    <title>The reorder-list Element</title>
+	<title>The reorder-list Element</title>
 </svelte:head>
 
 <article>
-    {@html html}
+	{@html html}
 </article>

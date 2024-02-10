@@ -1,18 +1,18 @@
-import { changeEvent } from './events.js'
+import { changeEvent } from "./events.js"
 
-const CHECKED_ATTR = 'checked'
-const DISABLED_ATTR = 'disabled'
+const CHECKED_ATTR = "checked"
+const DISABLED_ATTR = "disabled"
 
 export class ToggleSwitchElement extends HTMLElement {
-    static defaultElementName = 'toggle-switch'
+	static defaultElementName = "toggle-switch"
 
-    static html = `
+	static html = `
         <span part="track">
             <span part="slider"></span>
         </span>
     `
 
-    static css = `
+	static css = `
         :host {
             display: inline-block;
             width: 2em;
@@ -52,86 +52,86 @@ export class ToggleSwitchElement extends HTMLElement {
         }
     `
 
-    static formAssociated = true
+	static formAssociated = true
 
-    static get observedAttributes() {
-        return [CHECKED_ATTR]
-    }
+	static get observedAttributes() {
+		return [CHECKED_ATTR]
+	}
 
-    constructor() {
-        super()
+	constructor() {
+		super()
 
-        this.#createRoot()
-    }
+		this.#createRoot()
+	}
 
-    get checked() { return this.hasAttribute(CHECKED_ATTR) }
-    set checked(value) { this.toggleAttribute(CHECKED_ATTR, value) }
+	get checked() { return this.hasAttribute(CHECKED_ATTR) }
+	set checked(value) { this.toggleAttribute(CHECKED_ATTR, value) }
 
-    get disabled() { return this.hasAttribute(DISABLED_ATTR) }
-    set disabled(value) { this.toggleAttribute(DISABLED_ATTR, value) }
+	get disabled() { return this.hasAttribute(DISABLED_ATTR) }
+	set disabled(value) { this.toggleAttribute(DISABLED_ATTR, value) }
 
-    toggle = () => {
-        if (!this.disabled) {
-            this.checked = !this.checked
-        }
-    }
+	toggle = () => {
+		if (!this.disabled) {
+			this.checked = !this.checked
+		}
+	}
 
-    connectedCallback() {
-        if (!this.hasAttribute('role')) {
-            this.setAttribute('role', 'switch')
-        }
+	connectedCallback() {
+		if (!this.hasAttribute("role")) {
+			this.setAttribute("role", "switch")
+		}
 
-        if (!this.hasAttribute('tabindex')) {
-            this.setAttribute('tabindex', '0')
-        }
+		if (!this.hasAttribute("tabindex")) {
+			this.setAttribute("tabindex", "0")
+		}
 
-        this.#updateChecked(false)
+		this.#updateChecked(false)
 
-        this.addEventListener('click', this.toggle)
-        this.addEventListener('keydown', this.#onKeyDown)
-    }
+		this.addEventListener("click", this.toggle)
+		this.addEventListener("keydown", this.#onKeyDown)
+	}
 
-    disconnectedCallback() {
-        this.removeEventListener('click', this.toggle)
-        this.removeEventListener('keydown', this.#onKeyDown)
-    }
+	disconnectedCallback() {
+		this.removeEventListener("click", this.toggle)
+		this.removeEventListener("keydown", this.#onKeyDown)
+	}
 
-    attributeChangedCallback(name) {
-        if (name === CHECKED_ATTR) {
-            this.#updateChecked(true)
-        }
-    }
+	attributeChangedCallback(name) {
+		if (name === CHECKED_ATTR) {
+			this.#updateChecked(true)
+		}
+	}
 
-    #onKeyDown = (e) => {
-        switch(e.key) {
-            case ' ':
-            case 'Enter':
-                e.preventDefault()
-                this.toggle()
-                break;
-            default:
-                break;
-        }
-    }
+	#onKeyDown = (e) => {
+		switch(e.key) {
+		case " ":
+		case "Enter":
+			e.preventDefault()
+			this.toggle()
+			break
+		default:
+			break
+		}
+	}
 
-    #updateChecked = (dispatch = false) => {
-        this.setAttribute('aria-checked', this.checked.toString())
-        if (dispatch)
-            this.dispatchEvent(changeEvent(this.checked))
-    }
+	#updateChecked = (dispatch = false) => {
+		this.setAttribute("aria-checked", this.checked.toString())
+		if (dispatch)
+			this.dispatchEvent(changeEvent(this.checked))
+	}
 
-    #createRoot = () => {
-        const root = this.shadowRoot ?? this.attachShadow({ mode: 'open' })
+	#createRoot = () => {
+		const root = this.shadowRoot ?? this.attachShadow({ mode: "open" })
 
-        const style = document.createElement('style')
-        style.innerHTML = ToggleSwitchElement.css
+		const style = document.createElement("style")
+		style.innerHTML = ToggleSwitchElement.css
 
-        const template = document.createElement('template')
-        template.innerHTML = ToggleSwitchElement.html
+		const template = document.createElement("template")
+		template.innerHTML = ToggleSwitchElement.html
 
-        root.appendChild(style)
-        root.appendChild(template.content)
+		root.appendChild(style)
+		root.appendChild(template.content)
 
-        return root
-    }
+		return root
+	}
 }

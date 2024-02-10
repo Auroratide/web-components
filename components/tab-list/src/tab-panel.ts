@@ -2,13 +2,13 @@
  * Represents a panel of information.
  */
 export class TabPanelElement extends HTMLElement {
-    static defaultElementName = 'tab-panel'
+	static defaultElementName = "tab-panel"
 
-    static html = `
+	static html = `
         <slot></slot>
     `
 
-    static css = `
+	static css = `
         :host {
             border: 1px solid black;
             padding: 4px;
@@ -19,33 +19,33 @@ export class TabPanelElement extends HTMLElement {
         }
     `
 
-    static get observedAttributes() {
-        return []
-    }
+	static get observedAttributes() {
+		return []
+	}
 
-    constructor() {
-        super()
+	constructor() {
+		super()
 
-        this.#createRoot()
-    }
+		this.#createRoot()
+	}
 
-    connectedCallback() {
-        this.setAttribute('role', 'tabpanel')
-        this.setAttribute('tabindex', '0')
-    }
+	connectedCallback() {
+		this.setAttribute("role", "tabpanel")
+		this.setAttribute("tabindex", "0")
+	}
 
-    #createRoot = () => {
-        const root = this.shadowRoot ?? this.attachShadow({ mode: 'open' })
+	#createRoot = () => {
+		const root = this.shadowRoot ?? this.attachShadow({ mode: "open" })
 
-        const style = document.createElement('style')
-        style.innerHTML = TabPanelElement.css
+		const style = document.createElement("style")
+		style.innerHTML = TabPanelElement.css
 
-        const template = document.createElement('template')
-        template.innerHTML = TabPanelElement.html
+		const template = document.createElement("template")
+		template.innerHTML = TabPanelElement.html
 
-        root.appendChild(style)
-        root.appendChild(template.content)
+		root.appendChild(style)
+		root.appendChild(template.content)
 
-        return root
-    }
+		return root
+	}
 }

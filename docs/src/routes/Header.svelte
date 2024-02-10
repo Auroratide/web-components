@@ -1,5 +1,5 @@
 <script>
-    import { base, assets } from '$app/paths'
+    import { base, assets } from "$app/paths"
 </script>
 
 <header>

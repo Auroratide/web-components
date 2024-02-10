@@ -1,14 +1,14 @@
-import { changeEvent } from './events.js'
-import { ReorderItemElement } from './reorder-item.js'
+import { changeEvent } from "./events.js"
+import { ReorderItemElement } from "./reorder-item.js"
 
 export class ReorderListElement extends HTMLElement {
-    static defaultElementName = 'reorder-list'
+	static defaultElementName = "reorder-list"
 
-    static html = `
+	static html = `
         <slot></slot>
     `
 
-    static css = `
+	static css = `
         :host {
             display: block;
             list-style: disc;
@@ -16,90 +16,90 @@ export class ReorderListElement extends HTMLElement {
         }
     `
 
-    constructor() {
-        super()
+	constructor() {
+		super()
 
-        this.#createRoot()
-    }
+		this.#createRoot()
+	}
 
-    items = (): ReorderItemElement[] =>
-        Array.from(this.querySelectorAll(ReorderItemElement.defaultElementName))
+	items = (): ReorderItemElement[] =>
+		Array.from(this.querySelectorAll(ReorderItemElement.defaultElementName))
 
-    current = (): ReorderItemElement =>
-        this.querySelector(`${ReorderItemElement.defaultElementName}[tabindex="0"]`)
+	current = (): ReorderItemElement =>
+		this.querySelector(`${ReorderItemElement.defaultElementName}[tabindex="0"]`)
 
-    connectedCallback() {
-        this.setAttribute('role', 'listbox')
+	connectedCallback() {
+		this.setAttribute("role", "listbox")
 
-        this.addEventListener('keydown', this.#handleNav)
-    }
+		this.addEventListener("keydown", this.#handleNav)
+	}
 
-    reorder = (curIndex: number, newIndex: number, list: ReorderItemElement[] = this.items()) => {
-        const item = list[curIndex]
-        if (curIndex < newIndex) {
-            list[newIndex].after(item)
-        } else {
-            this.insertBefore(item, list[newIndex])
-        }
+	reorder = (curIndex: number, newIndex: number, list: ReorderItemElement[] = this.items()) => {
+		const item = list[curIndex]
+		if (curIndex < newIndex) {
+			list[newIndex].after(item)
+		} else {
+			this.insertBefore(item, list[newIndex])
+		}
 
-        this.dispatchEvent(changeEvent(item, curIndex, newIndex))
+		this.dispatchEvent(changeEvent(item, curIndex, newIndex))
 
-        list[curIndex].focus()
-    }
+		list[curIndex].focus()
+	}
 
-    changeFocus = (newItem: ReorderItemElement, list: ReorderItemElement[] = this.items()) => {
-        list.forEach((item) => {
-            item.setAttribute('aria-selected', 'false')
-        })
+	changeFocus = (newItem: ReorderItemElement, list: ReorderItemElement[] = this.items()) => {
+		list.forEach((item) => {
+			item.setAttribute("aria-selected", "false")
+		})
 
-        newItem.setAttribute('aria-selected', 'true')
-        newItem.focus()
-    }
+		newItem.setAttribute("aria-selected", "true")
+		newItem.focus()
+	}
 
-    #handleNav = (e: KeyboardEvent) => {
-        const keys = this.#keysForOrientation()
-        if (keys.includes(e.key)) {
-            const items = this.items()
-            items.indexOf(this.current())
-            let currentFocusable = items.indexOf(this.current())
-            if (currentFocusable < 0) {
-                currentFocusable = 0
-            }
+	#handleNav = (e: KeyboardEvent) => {
+		const keys = this.#keysForOrientation()
+		if (keys.includes(e.key)) {
+			const items = this.items()
+			items.indexOf(this.current())
+			let currentFocusable = items.indexOf(this.current())
+			if (currentFocusable < 0) {
+				currentFocusable = 0
+			}
 
-            const nextFocusable = Math.max(0,
-                Math.min(items.length - 1,
-                    currentFocusable + (e.key === keys[0] ? -1 : 1)
-                )
-            )
+			const nextFocusable = Math.max(0,
+				Math.min(items.length - 1,
+					currentFocusable + (e.key === keys[0] ? -1 : 1),
+				),
+			)
 
-            if (e.altKey && currentFocusable !== nextFocusable) {
-                e.preventDefault()
+			if (e.altKey && currentFocusable !== nextFocusable) {
+				e.preventDefault()
 
-                this.reorder(currentFocusable, nextFocusable, items)
-            } else if (currentFocusable !== nextFocusable) {
-                e.preventDefault()
+				this.reorder(currentFocusable, nextFocusable, items)
+			} else if (currentFocusable !== nextFocusable) {
+				e.preventDefault()
 
-                this.changeFocus(items[nextFocusable], items)
-            }
-        }
-    }
+				this.changeFocus(items[nextFocusable], items)
+			}
+		}
+	}
 
-    #keysForOrientation = () => {
-        return ['ArrowUp', 'ArrowDown']
-    }
+	#keysForOrientation = () => {
+		return ["ArrowUp", "ArrowDown"]
+	}
 
-    #createRoot = () => {
-        const root = this.shadowRoot ?? this.attachShadow({ mode: 'open' })
+	#createRoot = () => {
+		const root = this.shadowRoot ?? this.attachShadow({ mode: "open" })
 
-        const style = document.createElement('style')
-        style.innerHTML = ReorderListElement.css
+		const style = document.createElement("style")
+		style.innerHTML = ReorderListElement.css
 
-        const template = document.createElement('template')
-        template.innerHTML = ReorderListElement.html
+		const template = document.createElement("template")
+		template.innerHTML = ReorderListElement.html
 
-        root.appendChild(style)
-        root.appendChild(template.content)
+		root.appendChild(style)
+		root.appendChild(template.content)
 
-        return root
-    }
+		return root
+	}
 }

@@ -1,6 +1,6 @@
-import type { TabItemElement } from './tab-item'
+import type { TabItemElement } from "./tab-item"
 
-export const CHANGED = 'tab-list:change'
+export const CHANGED = "tab-list:change"
 
 export type TabListChangeEventDetail = {
     from: TabItemElement,
@@ -8,6 +8,6 @@ export type TabListChangeEventDetail = {
 }
 
 export const changeEvent = (from: TabItemElement, to: TabItemElement): CustomEvent<TabListChangeEventDetail> =>
-    new CustomEvent(CHANGED, {
-        detail: { from, to }
-    })
+	new CustomEvent(CHANGED, {
+		detail: { from, to },
+	})
