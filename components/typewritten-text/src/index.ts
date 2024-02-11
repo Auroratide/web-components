@@ -9,13 +9,9 @@ export class TypewrittenText extends HTMLElement {
 	static html = `
 		<span hidden><slot></slot></span>
 		<slot name="mirror"></slot>
-	 `
+	`
 
-	static css = `
-		#value {
-			font-weight: bold;
-		}
-	 `
+	static css = ""
 
 	static get observedAttributes() {
 		return ["paused"]
