@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
 	import { browser } from "$app/environment"
 	import { html } from "@auroratide/reorder-list/README.md"
+	import Readme from "$lib/Readme.svelte"
 
 	if (browser)    
 		import("@auroratide/reorder-list/lib/define.js")
@@ -10,6 +11,4 @@
 	<title>The reorder-list Element</title>
 </svelte:head>
 
-<article>
-	{@html html}
-</article>
+<Readme {html} />

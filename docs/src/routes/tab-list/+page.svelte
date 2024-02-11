@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
 	import { browser } from "$app/environment"
 	import { html } from "@auroratide/tab-list/README.md"
+	import Readme from "$lib/Readme.svelte"
 
 	if (browser)
 		import("@auroratide/tab-list/lib/define.js")
@@ -10,6 +11,4 @@
 	<title>The tab-list Element</title>
 </svelte:head>
 
-<article>
-	{@html html}
-</article>
+<Readme {html} />

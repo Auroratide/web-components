@@ -1,18 +1,19 @@
-<script>
+<script lang="ts">
 	import { onMount } from "svelte"
 	import { browser } from "$app/environment"
 	import { html } from "@auroratide/typewritten-text/README.md"
+	import type { TypewrittenText } from "@auroratide/typewritten-text"
+	import gif from "@auroratide/typewritten-text/demo.gif"
+	import Readme from "$lib/Readme.svelte"
 
-	if (browser){
+	if (browser) {
 		import("@auroratide/typewritten-text/lib/style.css")
 		import("@auroratide/typewritten-text/lib/define.js")
 	}
 
-	// @ts-ignore
-	const setupRun = (name) => {
+	const setupRun = (name: string) => {
 		document.querySelector(`#${name} .run`)?.addEventListener("click", () => {
-			document.querySelectorAll(`#${name} typewritten-text`).forEach((elem) => {
-				// @ts-ignore
+			document.querySelectorAll<TypewrittenText>(`#${name} typewritten-text`).forEach((elem) => {
 				elem.start()
 			})
 		})
@@ -30,9 +31,10 @@
 	<title>The typewritten-text Element</title>
 </svelte:head>
 
-<article>
-	{@html html}
-</article>
+<Readme {html} assets={[ {
+	replace: "./demo.gif",
+	with: gif,
+} ]} />
 
 <style>
 	:global(typewritten-text[paused] .typewritten-text_character::after) {

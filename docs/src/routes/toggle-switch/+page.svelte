@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
 	import { browser } from "$app/environment"
 	import { html } from "@auroratide/toggle-switch/README.md"
 	import { onMount } from "svelte"
 	import { CHANGED as toggleSwitchChange } from "@auroratide/toggle-switch/lib/events"
+	import Readme from "$lib/Readme.svelte"
 
 	if (browser)    
 		import("@auroratide/toggle-switch/lib/define.js")
@@ -29,9 +30,7 @@
 	<title>The toggle-switch Element</title>
 </svelte:head>
 
-<article>
-	{@html html}
-</article>
+<Readme {html} />
 
 <style>
 	:global(.example-active) {
