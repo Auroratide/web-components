@@ -17,7 +17,7 @@ const kebabify = (text: string) => text
 
 const idHeaders = (html: string) => html
 	.replaceAll(/<h(\d)>(.*?)<\/h\d>/g, (_, level, text) =>
-		`<h${level} id="${kebabify(text)}">${text}</h${level}>`
+		`<h${level} id="${kebabify(text)}">${text}</h${level}>`,
 	)
 
 const parseMarkdown = new MarkdownIt({
