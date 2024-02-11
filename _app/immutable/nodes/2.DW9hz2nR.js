@@ -1,4 +1,4 @@
-import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r}from"../chunks/scheduler.Ce_0Mfso.js";import{S as g,i as m,s as d,e as b,H as u,k as j,d as e,f as w,c as f,a as y,l as k,g as c}from"../chunks/index.CGY-0lOs.js";const v=`<h1>Web Components by Auroratide</h1>
+import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r}from"../chunks/scheduler.Ce_0Mfso.js";import{S as g,i as m,s as d,e as b,H as u,l as j,d as e,h as w,c as f,a as y,b as k,f as c}from"../chunks/index.QmGHi4hh.js";const v=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/">View this page with live demos!</a></strong></p>
 <p>This is just a bunch of highly reusable, fully accessible <strong><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a></strong> you can use on your websites! Why web components?</p>
 <ul>
@@ -8,7 +8,7 @@ import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r}fr
 </ul>
 <p>...And many more reasons! Wanna learn more? Join the <a href="https://community.webcomponents.dev/">Web Component Community</a>!</p>
 <p><small>Made by <a href="https://auroratide.com">Auroratide</a>, a developer with a passion for the web, inclusive design, and storytelling ❤️</small></p>
-<h2>The reorder-list Element</h2>
+<h2 id="the-reorder-list-element">The reorder-list Element</h2>
 <p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/reorder-list">The reorder-list Element</a></p>
 <p>A set of elements (<code>reorder-list</code> and <code>reorder-item</code>) that work together to make a rearrangeable list:</p>
 <wc-demo id="reorder-list">
@@ -99,7 +99,7 @@ import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r}fr
     <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-list</span>&gt;</span>
 </code></pre>
-<h2>The tab-list Element</h2>
+<h2 id="the-tab-list-element">The tab-list Element</h2>
 <p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/tab-list">The tab-list Element</a></p>
 <p>A set of elements (<code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code>) that work together to make a tabbing interface:</p>
 <wc-demo id="tab-list">
@@ -208,7 +208,7 @@ import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r}fr
     <span class="hljs-tag">&lt;/<span class="hljs-name">tab-panel</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
-<h2>The toggle-switch Element</h2>
+<h2 id="the-toggle-switch-element">The toggle-switch Element</h2>
 <p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/toggle-switch">The toggle-switch Element</a></p>
 <p>A form control representing something is on or off.</p>
 <wc-demo>
@@ -241,7 +241,7 @@ import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r}fr
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;toggle-switch&quot;</span>&gt;</span>Fancy Switch<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">toggle-switch</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;toggle-switch&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toggle-switch</span>&gt;</span>
 </code></pre>
-`;function _(i){let a,n,t;return{c(){a=d(),n=b("article"),t=new u(!1),this.h()},l(s){j("svelte-ueg07q",document.head).forEach(e),a=w(s),n=f(s,"ARTICLE",{});var o=y(n);t=k(o,!1),o.forEach(e),this.h()},h(){document.title="Web Components by Auroratide",t.a=null},m(s,l){c(s,a,l),c(s,n,l),t.m(v,n)},p:r,i:r,o:r,d(s){s&&(e(a),e(n))}}}function x(i){return p(()=>import("../chunks/define.Cxgo7aog.js"),__vite__mapDeps([]),import.meta.url),p(()=>import("../chunks/define.CJ6ZdpBe.js"),__vite__mapDeps([]),import.meta.url),p(()=>import("../chunks/define.BEaBwacd.js"),__vite__mapDeps([0,1]),import.meta.url),[]}class A extends g{constructor(a){super(),m(this,a,x,_,h,{})}}export{A as component};
+`;function _(i){let a,n,t;return{c(){a=d(),n=b("article"),t=new u(!1),this.h()},l(s){j("svelte-9qjnth",document.head).forEach(e),a=w(s),n=f(s,"ARTICLE",{});var o=y(n);t=k(o,!1),o.forEach(e),this.h()},h(){document.title="Web Components by Auroratide",t.a=null},m(s,l){c(s,a,l),c(s,n,l),t.m(v,n)},p:r,i:r,o:r,d(s){s&&(e(a),e(n))}}}function x(i){return p(()=>import("../chunks/define.Cxgo7aog.js"),__vite__mapDeps([]),import.meta.url),p(()=>import("../chunks/define.CJ6ZdpBe.js"),__vite__mapDeps([]),import.meta.url),p(()=>import("../chunks/define.BEaBwacd.js"),__vite__mapDeps([0,1]),import.meta.url),[]}class A extends g{constructor(a){super(),m(this,a,x,_,h,{})}}export{A as component};
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
     __vite__mapDeps.viteFileDeps = ["../chunks/define.BEaBwacd.js","../chunks/events.C44j2o98.js"]

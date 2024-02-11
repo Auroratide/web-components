@@ -1,4 +1,4 @@
-import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as p}from"../chunks/scheduler.Ce_0Mfso.js";import{S as b,i as d,s as u,e as m,H as g,k as j,d as e,f,c as y,a as w,l as q,g as c}from"../chunks/index.CGY-0lOs.js";const x=`<h1>The tab-list Elements</h1>
+import{_ as i}from"../chunks/preload-helper.BQ24v_F8.js";import{s as o,n as c}from"../chunks/scheduler.Ce_0Mfso.js";import{S as r,i as b,s as h,m as d,l as u,d as p,h as m,n as g,f as j,o as f,p as y,q,r as w}from"../chunks/index.QmGHi4hh.js";import{R as x}from"../chunks/Readme.BbztUA8r.js";const v=`<h1 id="the-tab-list-elements">The tab-list Elements</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/tab-list">View this page with live demos!</a></strong></p>
 <p>The <code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code> elements together represent content that is presented one panel at a time. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://w3c.github.io/aria-practices/#tabpanel">tabs</a>.</p>
 <ul>
@@ -37,7 +37,7 @@ import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as p}fr
     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Bananas are yellow and usually curved.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">tab-panel</span>&gt;</span>
 </code></pre>
-<h2>Installation</h2>
+<h2 id="installation">Installation</h2>
 <p>You can import through CDN:</p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/@auroratide/tab-list/lib/define.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
@@ -46,7 +46,7 @@ import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as p}fr
 </code></pre>
 <pre><code class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;@auroratide/tab-list/lib/define.js&#x27;</span>
 </code></pre>
-<h2>Usage</h2>
+<h2 id="usage">Usage</h2>
 <p><code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code> are <strong>markup elements</strong> that you can use in your HTML document. To use them together, it is best to follow these guidelines:</p>
 <ul>
 <li><code>tab-item</code> elements <strong>must</strong> be contained within a <code>tab-list</code>. They need not be <em>direct</em> descendents.</li>
@@ -68,7 +68,7 @@ import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as p}fr
 <li><code>tab-list</code> should be labelled with a name representing the collection of tabs, either with <code>aria-label</code> or <code>aria-labelledby</code>.</li>
 <li><code>tab-panel</code> elements can theoretically be anywhere on the page, though it's best if they are the next focusable item after the <code>tab-list</code>.</li>
 </ul>
-<h3>Automatic Activation</h3>
+<h3 id="automatic-activation">Automatic Activation</h3>
 <p>By default, a tab must be clicked in order for its panel to be revealed. With automatic activation, a tab only needs to acquire focus to show its tab. In general, <a href="https://w3c.github.io/aria-practices/#kbd_selection_follows_focus">WAI-ARIA recommends automatic activation</a> for the best accessibility, unless animations induce lag.</p>
 <p>You can enable automatic activation by setting the <code>activation</code> attribute to <code>&quot;automatic&quot;</code> on the tab list element.</p>
 <wc-demo>
@@ -93,7 +93,7 @@ import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as p}fr
     <span class="hljs-tag">&lt;<span class="hljs-name">tab-item</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-5-tab-3&quot;</span>&gt;</span>Squashes<span class="hljs-tag">&lt;/<span class="hljs-name">tab-item</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">tab-list</span>&gt;</span>
 </code></pre>
-<h3>Vertical Tab List</h3>
+<h3 id="vertical-tab-list">Vertical Tab List</h3>
 <p>By default, tabs are listed horizontally, and they can be navigated with the <kbd>left</kbd> and <kbd>right</kbd> arrow keys.</p>
 <p>By setting the <code>orientation</code> attribute to <code>&quot;vertical&quot;</code>, you can make a vertical tab list. This makes it navigable with the <kbd>up</kbd> and <kbd>down</kbd> arrow keys instead.</p>
 <wc-demo>
@@ -118,7 +118,7 @@ import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as p}fr
     <span class="hljs-tag">&lt;<span class="hljs-name">tab-item</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-2-tab-3&quot;</span>&gt;</span>Squashes<span class="hljs-tag">&lt;/<span class="hljs-name">tab-item</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">tab-list</span>&gt;</span>
 </code></pre>
-<h3>Setting a selected tab</h3>
+<h3 id="setting-a-selected-tab">Setting a selected tab</h3>
 <p>You can set the <code>selected</code> attribute on one <code>tab-item</code> in a <code>tab-list</code>. This will mark that item as selected and show its panel.</p>
 <wc-demo>
     <tab-list aria-label="Learn about fruits">
@@ -139,7 +139,7 @@ import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as p}fr
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">tab-item</span> <span class="hljs-attr">selected</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-3-tab-3&quot;</span>&gt;</span>Bananas<span class="hljs-tag">&lt;/<span class="hljs-name">tab-item</span>&gt;</span>
 </code></pre>
 <p><strong>Note</strong>: Only one <code>tab-item</code> can be selected at a time! If you attempt to set multiple as selected, only the first selected tabl's panel will be shown.</p>
-<h3>All Attributes</h3>
+<h3 id="all-attributes">All Attributes</h3>
 <p>For <code>tab-list</code>:</p>
 <table>
 <thead>
@@ -178,7 +178,7 @@ import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as p}fr
 </tr>
 </tbody>
 </table>
-<h2>CSS Customization</h2>
+<h2 id="css-customization">CSS Customization</h2>
 <p>Since these are native custom elements, they can be styled the same way as regular HTML elements.</p>
 <p>Of note:</p>
 <ul>
@@ -319,7 +319,7 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
     <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
 }
 </code></pre>
-<h2>Events</h2>
+<h2 id="events">Events</h2>
 <p>The <code>tab-list</code> element dispatches the following events:</p>
 <table>
 <thead>
@@ -341,7 +341,7 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e.<span class="hljs-property">detail</span>.<span class="hljs-property">to</span>)
 })
 </code></pre>
-<h2>Accessibility</h2>
+<h2 id="accessibility">Accessibility</h2>
 <p>This custom element is built with accessibility in mind! It follows the WAI-ARIA guidelines for <a href="https://w3c.github.io/aria-practices/#tabpanel">tabs</a> (the <code>tablist</code>, <code>tab</code>, and <code>tabpanel</code> roles).</p>
 <ul>
 <li>When focus enters the tab list, the currently active tab item is focused.</li>
@@ -349,14 +349,14 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
 <li><kbd>Enter</kbd> or <kbd>Space</kbd> select the currently focused tab.</li>
 <li><kbd>Home</kbd> goes to the first tab, and <kbd>End</kbd> goes to the last tab.</li>
 </ul>
-<h2>Not (yet) Implemented</h2>
+<h2 id="not-yet-implemented">Not (yet) Implemented</h2>
 <p>The following features are desired of tab lists, but are not yet implemented:</p>
 <ul>
 <li>Auto-opening a panel when its corresponding tab receives focus.</li>
 <li>Native support for removable tabs.</li>
 <li>Tabs that open popup menus.</li>
 </ul>
-`;function v(o){let s,n,t;return{c(){s=u(),n=m("article"),t=new g(!1),this.h()},l(a){j("svelte-vr2uw0",document.head).forEach(e),s=f(a),n=y(a,"ARTICLE",{});var i=w(n);t=q(i,!1),i.forEach(e),this.h()},h(){document.title="The tab-list Element",t.a=null},m(a,l){c(a,s,l),c(a,n,l),t.m(x,n)},p,i:p,o:p,d(a){a&&(e(s),e(n))}}}function k(o){return r(()=>import("../chunks/define.CJ6ZdpBe.js"),__vite__mapDeps([]),import.meta.url),[]}class I extends b{constructor(s){super(),d(this,s,k,v,h,{})}}export{I as component};
+`;function k(l){let n,s,t;return s=new x({props:{html:v}}),{c(){n=h(),d(s.$$.fragment),this.h()},l(a){u("svelte-qyq54j",document.head).forEach(p),n=m(a),g(s.$$.fragment,a),this.h()},h(){document.title="The tab-list Element"},m(a,e){j(a,n,e),f(s,a,e),t=!0},p:c,i(a){t||(y(s.$$.fragment,a),t=!0)},o(a){q(s.$$.fragment,a),t=!1},d(a){a&&p(n),w(s,a)}}}function _(l){return i(()=>import("../chunks/define.CJ6ZdpBe.js"),__vite__mapDeps([]),import.meta.url),[]}class L extends r{constructor(n){super(),b(this,n,_,k,o,{})}}export{L as component};
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
     __vite__mapDeps.viteFileDeps = []

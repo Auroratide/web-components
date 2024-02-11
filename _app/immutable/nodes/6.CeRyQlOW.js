@@ -1,4 +1,4 @@
-import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as d,n as c,o as g}from"../chunks/scheduler.Ce_0Mfso.js";import{S as m,i as u,s as b,e as j,H as w,k as f,d as t,f as y,c as k,a as x,l as _,g as h}from"../chunks/index.CGY-0lOs.js";import{C as v}from"../chunks/events.C44j2o98.js";const T=typeof window<"u"?window:typeof globalThis<"u"?globalThis:global,q=`<h1>The toggle-switch Element</h1>
+import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as i,o as r}from"../chunks/scheduler.Ce_0Mfso.js";import{S as d,i as g,s as m,m as u,l as b,d as c,h as j,n as w,f,o as y,p as k,q as x,r as _}from"../chunks/index.QmGHi4hh.js";import{g as v}from"../chunks/globals.D0QH3NT1.js";import{C as q}from"../chunks/events.C44j2o98.js";import{R as A}from"../chunks/Readme.BbztUA8r.js";const T=`<h1 id="the-toggle-switch-element">The toggle-switch Element</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/toggle-switch">View this page with live demos!</a></strong></p>
 <p>The <code>toggle-switch</code> element represents a control that is either on or off. This component is built with accessibility in mind and implements the WAI-ARIA <a href="https://www.w3.org/TR/wai-aria-1.1/#switch">switch role</a>.</p>
 <wc-demo>
@@ -15,7 +15,7 @@ import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as d,n as c,o 
 <span class="hljs-tag">&lt;<span class="hljs-name">toggle-switch</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;example-01&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toggle-switch</span>&gt;</span>
 </code></pre>
 <p><strong>Note</strong>: The on/off semantic is slightly different from the checked/unchecked semantic of input checkboxes. Additionally, checkboxes can have a third indeterminant value that does not make sense for a toggle switch.</p>
-<h2>Installation</h2>
+<h2 id="installation">Installation</h2>
 <p>You can import through CDN:</p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/@auroratide/toggle-switch/lib/define.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
@@ -24,7 +24,7 @@ import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as d,n as c,o 
 </code></pre>
 <pre><code class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;@auroratide/toggle-switch/lib/define.js&#x27;</span>
 </code></pre>
-<h2>Usage</h2>
+<h2 id="usage">Usage</h2>
 <p><code>toggle-switch</code> is an <strong>inline markup element</strong> that you can use in your HTML document. It is a form control, meaning it is appropriate to properly <a href="https://html.spec.whatwg.org/#the-label-element">label</a> it like so:</p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-02&quot;</span>&gt;</span>Can upload cat images: <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">toggle-switch</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;example-02&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toggle-switch</span>&gt;</span>
@@ -37,7 +37,7 @@ import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as d,n as c,o 
     <label for="example-03">Can upload cat images: </label>
     <toggle-switch checked id="example-03"></toggle-switch>
 </wc-demo>
-<h3>Attributes</h3>
+<h3 id="attributes">Attributes</h3>
 <table>
 <thead>
 <tr>
@@ -59,7 +59,7 @@ import{_ as r}from"../chunks/preload-helper.BQ24v_F8.js";import{s as d,n as c,o 
 </tr>
 </tbody>
 </table>
-<h3>CSS Customization</h3>
+<h3 id="css-customization">CSS Customization</h3>
 <p>The <code>toggle-switch</code> is composed of a <strong>slider</strong> and a <strong>track</strong> which can be individually customized:</p>
 <ul>
 <li><code>slider</code>, the element that slides when toggled</li>
@@ -117,7 +117,7 @@ toggle-switch<span class="hljs-selector-attr">[checked]</span><span class="hljs-
     <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">211</span>, <span class="hljs-number">69%</span>, <span class="hljs-number">57%</span>);
 }
 </code></pre>
-<h2>Javascript API</h2>
+<h2 id="javascript-api">Javascript API</h2>
 <p>The element exposes a function to programmatically toggle its state:</p>
 <table>
 <thead>
@@ -133,13 +133,13 @@ toggle-switch<span class="hljs-selector-attr">[checked]</span><span class="hljs-
 </tr>
 </tbody>
 </table>
-<h3>Properties</h3>
+<h3 id="properties">Properties</h3>
 <p>Each attribute can be accessed as a Javascript property.</p>
 <ul>
 <li><code>elem.checked</code></li>
 <li><code>elem.disabled</code></li>
 </ul>
-<h3>Events</h3>
+<h3 id="events">Events</h3>
 <p>The <code>toggle-switch</code> element dispatches the following events:</p>
 <table>
 <thead>
@@ -160,13 +160,13 @@ toggle-switch<span class="hljs-selector-attr">[checked]</span><span class="hljs-
     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e.<span class="hljs-property">detail</span>.<span class="hljs-property">checked</span>)
 })
 </code></pre>
-<h2>Accessibility</h2>
+<h2 id="accessibility">Accessibility</h2>
 <p>This custom element is built with accessibility in mind! It follows the WAI-ARIA guidelines for the <a href="https://www.w3.org/TR/wai-aria-1.1/#switch">switch role</a>.</p>
 <ul>
 <li>The element can be focused</li>
 <li>The element can be toggled with <kbd>Enter</kbd> or <kbd>Space</kbd></li>
 </ul>
-`,{document:i}=T;function A(o){let a,s,e;return{c(){a=b(),s=j("article"),e=new w(!1),this.h()},l(n){f("svelte-836m89",i.head).forEach(t),a=y(n),s=k(n,"ARTICLE",{});var p=x(s);e=_(p,!1),p.forEach(t),this.h()},h(){i.title="The toggle-switch Element",e.a=null},m(n,l){h(n,a,l),h(n,s,l),e.m(q,s)},p:c,i:c,o:c,d(n){n&&(t(a),t(s))}}}function C(o){return r(()=>import("../chunks/define.BEaBwacd.js"),__vite__mapDeps([0,1]),import.meta.url),g(()=>{const a=document.querySelector("#example-01"),s=document.querySelector("#example-01-output");a&&s&&(a==null||a.addEventListener(v,e=>{e.detail.checked?(s.textContent="On",s.classList.add("example-active")):(s.textContent="Off",s.classList.remove("example-active"))}))}),[]}class D extends m{constructor(a){super(),u(this,a,C,A,d,{})}}export{D as component};
+`,{document:o}=v;function C(l){let n,s,t;return s=new A({props:{html:T}}),{c(){n=m(),u(s.$$.fragment),this.h()},l(a){b("svelte-h9oq7s",o.head).forEach(c),n=j(a),w(s.$$.fragment,a),this.h()},h(){o.title="The toggle-switch Element"},m(a,e){f(a,n,e),y(s,a,e),t=!0},p:i,i(a){t||(k(s.$$.fragment,a),t=!0)},o(a){x(s.$$.fragment,a),t=!1},d(a){a&&c(n),_(s,a)}}}function E(l){return p(()=>import("../chunks/define.BEaBwacd.js"),__vite__mapDeps([0,1]),import.meta.url),r(()=>{const n=document.querySelector("#example-01"),s=document.querySelector("#example-01-output");n&&s&&(n==null||n.addEventListener(q,t=>{t.detail.checked?(s.textContent="On",s.classList.add("example-active")):(s.textContent="Off",s.classList.remove("example-active"))}))}),[]}class O extends d{constructor(n){super(),g(this,n,E,C,h,{})}}export{O as component};
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
     __vite__mapDeps.viteFileDeps = ["../chunks/define.BEaBwacd.js","../chunks/events.C44j2o98.js"]

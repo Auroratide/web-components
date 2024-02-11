@@ -1,4 +1,4 @@
-import{_ as d}from"../chunks/preload-helper.BQ24v_F8.js";import{s as c,n as r}from"../chunks/scheduler.Ce_0Mfso.js";import{S as h,i as m,s as u,e as g,H as b,k as j,d as t,f,c as y,a as w,l as x,g as o}from"../chunks/index.CGY-0lOs.js";const _=`<h1>The reorder-list Elements</h1>
+import{_ as i}from"../chunks/preload-helper.BQ24v_F8.js";import{s as o,n as p}from"../chunks/scheduler.Ce_0Mfso.js";import{S as d,i as c,s as h,m,l as u,d as l,h as g,n as b,f as j,o as f,p as y,q as w,r as x}from"../chunks/index.QmGHi4hh.js";import{R as _}from"../chunks/Readme.BbztUA8r.js";const k=`<h1 id="the-reorder-list-elements">The reorder-list Elements</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/reorder-list">View this page with live demos!</a></strong></p>
 <p>The <code>reorder-list</code> and <code>reorder-item</code> elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html">rearrangable listboxes</a>.</p>
 <wc-demo>
@@ -20,7 +20,7 @@ import{_ as d}from"../chunks/preload-helper.BQ24v_F8.js";import{s as c,n as r}fr
     <span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Plum<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-list</span>&gt;</span>
 </code></pre>
-<h2>Installation</h2>
+<h2 id="installation">Installation</h2>
 <p>You can import through CDN:</p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/@auroratide/reorder-list/lib/define.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
@@ -29,12 +29,12 @@ import{_ as d}from"../chunks/preload-helper.BQ24v_F8.js";import{s as c,n as r}fr
 </code></pre>
 <pre><code class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;@auroratide/reorder-list/lib/define.js&#x27;</span>
 </code></pre>
-<h2>Usage</h2>
+<h2 id="usage">Usage</h2>
 <p><code>reorder-list</code> and <code>reorder-item</code> are <strong>markup elements</strong> that you can use in your HTML document. To use them together, it is best to follow these guidelines:</p>
 <ul>
 <li><code>reorder-item</code> elements <strong>must</strong> be <em>direct</em> descendents of a <code>reorder-list</code> element. This is similar to how <code>li</code> must directly descend <code>ol</code>.</li>
 </ul>
-<h2>CSS Customization</h2>
+<h2 id="css-customization">CSS Customization</h2>
 <p>Since these are native custom elements, they can be styled the same way as regular HTML elements.</p>
 <p>Of note:</p>
 <ul>
@@ -140,7 +140,7 @@ reorder-item <span class="hljs-selector-tag">ul</span> {
     <span class="hljs-attribute">color</span>: <span class="hljs-number">#2573C1</span>;
 }
 </code></pre>
-<h2>Events</h2>
+<h2 id="events">Events</h2>
 <p>The <code>reorder-list</code> element dispatches the following events:</p>
 <table>
 <thead>
@@ -163,14 +163,14 @@ reorder-item <span class="hljs-selector-tag">ul</span> {
     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e.<span class="hljs-property">detail</span>.<span class="hljs-property">newIndex</span>)
 })
 </code></pre>
-<h2>Accessibility</h2>
+<h2 id="accessibility">Accessibility</h2>
 <p>This custom element is build with accessibility in mind! It follows the WAI-ARIA guidelines for <a href="https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html">rearrangable listboxes</a> (the <code>listbox</code> and <code>option</code> roles).</p>
 <ul>
 <li>When focus enters the list, focus goes to the currently active list item.</li>
 <li><kbd>Up</kbd> and <kbd>Down</kbd> can be used to navigate the list, focusing on an element that will be reordered.</li>
 <li><kbd>Alt</kbd> + <kbd>Up</kbd>/<kbd>Down</kbd> moves the currently selected list item up or down in the order.</li>
 </ul>
-`;function k(i){let e,n,a;return{c(){e=u(),n=g("article"),a=new b(!1),this.h()},l(s){j("svelte-1pq5n9w",document.head).forEach(t),e=f(s),n=y(s,"ARTICLE",{});var p=w(n);a=x(p,!1),p.forEach(t),this.h()},h(){document.title="The reorder-list Element",a.a=null},m(s,l){o(s,e,l),o(s,n,l),a.m(_,n)},p:r,i:r,o:r,d(s){s&&(t(e),t(n))}}}function v(i){return d(()=>import("../chunks/define.Cxgo7aog.js"),__vite__mapDeps([]),import.meta.url),[]}class C extends h{constructor(e){super(),m(this,e,v,k,c,{})}}export{C as component};
+`;function v(r){let n,e,a;return e=new _({props:{html:k}}),{c(){n=h(),m(e.$$.fragment),this.h()},l(s){u("svelte-n8c5fz",document.head).forEach(l),n=g(s),b(e.$$.fragment,s),this.h()},h(){document.title="The reorder-list Element"},m(s,t){j(s,n,t),f(e,s,t),a=!0},p,i(s){a||(y(e.$$.fragment,s),a=!0)},o(s){w(e.$$.fragment,s),a=!1},d(s){s&&l(n),x(e,s)}}}function A(r){return i(()=>import("../chunks/define.Cxgo7aog.js"),__vite__mapDeps([]),import.meta.url),[]}class P extends d{constructor(n){super(),c(this,n,A,v,o,{})}}export{P as component};
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
     __vite__mapDeps.viteFileDeps = []
