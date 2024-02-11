@@ -1,7 +1,7 @@
 import { nextCharEvent, pausedEvent, phraseRemovedEvent, phraseTypedEvent, prevCharEvent, startedEvent } from "./events.js"
 import { TypewrittenTextMirror } from "./mirror.js"
 
-export class TypewrittenText extends HTMLElement {
+export class TypewrittenTextElement extends HTMLElement {
 	static defaultElementName = "typewritten-text"
 	static defaultLetterInterval = 100
 	static defaultPhraseInterval = 1000
@@ -60,7 +60,7 @@ export class TypewrittenText extends HTMLElement {
 	}
 
 	get letterInterval(): number | undefined {
-		return parseInt(this.getAttribute("letter-interval")) || TypewrittenText.defaultLetterInterval
+		return parseInt(this.getAttribute("letter-interval")) || TypewrittenTextElement.defaultLetterInterval
 	}
 	set letterInterval(value: number | undefined | null) {
 		if (value == null) {
@@ -71,7 +71,7 @@ export class TypewrittenText extends HTMLElement {
 	}
 
 	get phraseInterval(): number | undefined {
-		return parseInt(this.getAttribute("phrase-interval")) || TypewrittenText.defaultPhraseInterval
+		return parseInt(this.getAttribute("phrase-interval")) || TypewrittenTextElement.defaultPhraseInterval
 	}
 	set phraseInterval(value: number | undefined | null) {
 		if (value == null) {
@@ -211,10 +211,10 @@ export class TypewrittenText extends HTMLElement {
 		const root = this.shadowRoot ?? this.attachShadow({ mode: "open" })
 
 		const style = document.createElement("style")
-		style.innerHTML = TypewrittenText.css
+		style.innerHTML = TypewrittenTextElement.css
 
 		const template = document.createElement("template")
-		template.innerHTML = TypewrittenText.html
+		template.innerHTML = TypewrittenTextElement.html
 
 		root.appendChild(style)
 		root.appendChild(template.content)
@@ -222,3 +222,8 @@ export class TypewrittenText extends HTMLElement {
 		return root
 	}
 }
+
+/**
+ * @deprecated Use TypewrittenTextElement instead
+ */
+export const TypewrittenText = TypewrittenTextElement
