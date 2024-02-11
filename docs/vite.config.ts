@@ -8,6 +8,18 @@ const unleashTheDemos = (str: string) => str
 	.replaceAll("<!--DEMO", "")
 	.replaceAll("/DEMO-->", "")
 
+
+const kebabify = (text: string) => text
+	.toLocaleLowerCase()
+	.replaceAll(/[^a-z0-9]+/g, "-")
+	.replaceAll(/--/g, "-")
+	.replaceAll(/^-|-$/g, "")
+
+const idHeaders = (html: string) => html
+	.replaceAll(/<h(\d)>(.*?)<\/h\d>/g, (_, level, text) =>
+		`<h${level} id="${kebabify(text)}">${text}</h${level}>`
+	)
+
 const parseMarkdown = new MarkdownIt({
 	html: true,
 	highlight: (str, lang) => {
@@ -29,6 +41,6 @@ export default defineConfig({
 	},
 	plugins: [ mdPlugin({
 		mode: [Mode.HTML],
-		markdown: (str) => parseMarkdown.render(unleashTheDemos(str)),
+		markdown: (str) => idHeaders(parseMarkdown.render(unleashTheDemos(str))),
 	}), sveltekit() ],
 })
