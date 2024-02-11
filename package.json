@@ -9,7 +9,7 @@
 		"docs:watch": "pnpm -F wc-docs dev",
 		"dev": "npm-run-all --parallel components:watch docs:watch",
 		"test": "pnpm -F \"./components/**\" run test:clean",
-		"lint": "eslint .",
+		"lint": "eslint . && pnpm -F wc-docs check",
 		"new": "node new.js"
 	},
 	"keywords": [],
