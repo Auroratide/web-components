@@ -132,6 +132,7 @@
 		background: var(--c-code-bg);
 		border-radius: 0.25em;
 		padding: 0.0625em 0.25em;
+		tab-size: 3;
 	}
 
 	:global(pre) {
