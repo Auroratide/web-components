@@ -14,7 +14,13 @@
 	const setupRun = (name: string) => {
 		document.querySelector(`#${name} .run`)?.addEventListener("click", () => {
 			document.querySelectorAll<TypewrittenTextElement>(`#${name} typewritten-text`).forEach((elem) => {
-				elem.start()
+				elem.resume()
+			})
+		})
+
+		document.querySelector(`#${name} .pause`)?.addEventListener("click", () => {
+			document.querySelectorAll<TypewrittenTextElement>(`#${name} typewritten-text`).forEach((elem) => {
+				elem.switchDirection()
 			})
 		})
 	}

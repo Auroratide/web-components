@@ -1,21 +1,9 @@
-export const NEXT_CHAR = "typewritten-text:nextchar"
-export const nextCharEvent = (position: number) => new CustomEvent(NEXT_CHAR, {
-	detail: { position },
-})
+export const TYPING = "typing"
+export const TYPE = "type"
+export const TYPED = "typed"
 
-export const PREV_CHAR = "typewritten-text:prevchar"
-export const prevCharEvent = (position: number) => new CustomEvent(PREV_CHAR, {
-	detail: { position },
-})
+export const PAUSED = "paused"
 
-export const PHRASE_TYPED = "typewritten-text:phrasetyped"
-export const phraseTypedEvent = () => new CustomEvent(PHRASE_TYPED)
-
-export const PHRASE_REMOVED = "typewritten-text:phraseremoved"
-export const phraseRemovedEvent = () => new CustomEvent(PHRASE_REMOVED)
-
-export const STARTED = "typewritten-text:started"
-export const startedEvent = () => new CustomEvent(STARTED)
-
-export const PAUSED = "typewritten-text:paused"
-export const pausedEvent = () => new CustomEvent(PAUSED)
+export const ERASING = "erasing"
+export const ERASE = "erase"
+export const ERASED = "erased"

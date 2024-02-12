@@ -8,8 +8,8 @@ The `typewritten-text` element represents text that should be typed out one lett
 
 <!--DEMO
 <wc-demo id="main-demo">
-	<p>This <typewritten-text paused>typewriter effect</typewritten-text> is achieved using <typewritten-text paused>custom elements!</typewritten-text></p>
-	<button class="run">Run</button>
+	<p>d <typewritten-text type-speed="200"><span>hello</span> world</typewritten-text> d</p>
+	<button class="run">Run</button><button class="pause">Pause</button>
 </wc-demo>
 /DEMO-->
 
@@ -58,19 +58,6 @@ This works with <typewritten-text paused>
 	<span class="special">elements</span>
 </typewritten-text> as well!
 ```
-
-<!--DEMO
-<wc-demo id="markup-demo">
-	<p>This works with <typewritten-text paused> <strong>other</strong> <em>markdown</em> <span class="special">elements</span> </typewritten-text> as well!</p>
-	<button class="run">Run</button>
-</wc-demo>
-<style>
-	.special {
-		font-size: 1.25em;
-		color: oklch(45% 0.1 20);
-	}
-</style>
-/DEMO-->
 
 **Note:** `typewritten-text` has text-level semantics, meaning it can contain anything that a `span` can contain. See [Phrasing Content](https://html.spec.whatwg.org/#phrasing-content-2).
 
