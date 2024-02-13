@@ -89,7 +89,7 @@ export class TypewrittenTextElement extends HTMLElement {
 			return this.phraseInterval
 		}
 
-		return this.#getNumAttribute("repeat-speed", 1000)
+		return this.#getNumAttribute("repeat-interval", 1000)
 	}
 	set repeatInterval(value: number) { this.setAttribute("repeat-interval", value.toString()) }
 
