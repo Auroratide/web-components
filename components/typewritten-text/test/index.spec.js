@@ -43,6 +43,7 @@ describe("typewritten-text", () => {
 		const start = Date.now()
 		const attempt = () => {
 			try {
+				console.log("attempting at ", Date.now() - start)
 				fn()
 				resolve()
 			} catch (e) {
