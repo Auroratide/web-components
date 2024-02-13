@@ -1,10 +1,13 @@
 <script lang="ts">
+	import "./style.css"
 	import { onMount } from "svelte"
 	import { browser } from "$app/environment"
 	import { html } from "@auroratide/typewritten-text/README.md"
 	import gif from "@auroratide/typewritten-text/demo.gif"
 	import Readme from "$lib/Readme.svelte"
-	import { setupRun } from "./setup-run"
+	import { setupDemos } from "./setup-demos"
+	import { setupCycleDemo } from "./setup-cycle-demo"
+	import { setupDialogDemo } from "./setup-dialog-demo"
 
 	if (browser) {
 		import("@auroratide/typewritten-text/lib/style.css")
@@ -13,10 +16,9 @@
 
 	onMount(() => {
 		if (browser) {
-			setupRun("main-demo")
-			setupRun("markup-demo")
-			setupRun("speed-demo")
-			setupRun("cursor-demo")
+			setupDemos()
+			setupCycleDemo()
+			setupDialogDemo()
 		}
 	})
 </script>

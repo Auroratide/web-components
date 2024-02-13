@@ -9,7 +9,9 @@ The `typewritten-text` element represents text that should be typed out one lett
 <!--DEMO
 <wc-demo id="main-demo">
 	<p>This <typewritten-text paused>typewriter effect</typewritten-text> is achieved using <typewritten-text paused>custom elements!</typewritten-text></p>
-	<button class="run">Run</button>
+	<div slot="actions">
+		<button class="run">Run</button>
+	</div>
 </wc-demo>
 /DEMO-->
 
@@ -54,14 +56,10 @@ Since this is Just HTML<sup>TM</sup>, you can use `typewritten-text` with other 
 <!--DEMO
 <wc-demo id="markup-demo">
 	<p>This works with <typewritten-text paused> <strong>other</strong> <em>markdown</em> <span class="special">elements</span> </typewritten-text> as well!</p>
-	<button class="run">Run</button>
+	<div slot="actions">
+		<button class="run">Run</button>
+	</div>
 </wc-demo>
-<style>
-	.special {
-		font-size: 1.25em;
-		color: oklch(45% 0.1 20);
-	}
-</style>
 /DEMO-->
 
 ```html
@@ -85,7 +83,9 @@ Use `type-speed` or `erase-speed` to adjust timing. The time provided is number 
 		<li><typewritten-text type-speed="200" erase-speed="30">Slow to type, fast to erase</typewritten-text></li>
 		<li><typewritten-text type-speed="30" erase-speed="200">Fast to type, slow to erase</typewritten-text></li>
 	</ul>
-	<button class="run">Run</button>
+	<div slot="actions">
+		<button class="run">Run</button>
+	</div>
 </wc-demo>
 /DEMO-->
 
@@ -162,17 +162,10 @@ typewritten-text .cursor.current::after { }
 <!--DEMO
 <wc-demo id="cursor-demo">
 	<p>Here's a <typewritten-text paused>fancy cursor.</typewritten-text></p>
-	<button class="run">Run</button>
+	<div slot="actions">
+		<button class="run">Run</button>
+	</div>
 </wc-demo>
-<style>
-	#cursor-demo typewritten-text .cursor.current::after {
-		border-inline-end: none;
-		border-block-end: 0.125em solid red;
-		width: 1ch;
-		inset-inline-end: -1ch;
-		visibility: visible;
-	}
-</style>
 /DEMO-->
 
 ```css
@@ -278,3 +271,114 @@ This architecture has the following explicit goals:
 * Allow the use of semantic markup within `typewritten-text` so it acts as much as possible like a native text-level element.
 * Prevent layout shift as a result of characters coming into view; the entire content will exist, but will be invisible until typed.
 * Allow CSS customizations of the inner markup to apply. This would not be true if the content was cloned into the element's shadow dom.
+
+## Showcases
+
+Using the Javascript and Styling interfaces allows you to do all sorts of things.
+
+### Typewriter Cycle
+
+You can cycle between different phrases by attaching listeners to the `typed` and `erased` events.
+
+**[View the Typewriter Cycle demo on Codepen!](https://codepen.io/auroratide/pen/BaZWWwQ)**
+
+<!--DEMO
+<wc-demo id="cycle-demo">
+	<div class="sentence">
+		<p>Have you tried our</p>
+		<ul class="typewriter-cycle">
+			<li><typewritten-text class="active">fresh salads? 🥗</typewritten-text></li>
+			<li><typewritten-text paused>hearty burgers? 🍔</typewritten-text></li>
+			<li><typewritten-text paused>delicious pies? 🥧</typewritten-text></li>
+		</ul>
+	</div>
+</wc-demo>
+/DEMO-->
+
+```html
+<div class="sentence">
+	<p>Have you tried our</p>
+	<ul class="typewriter-cycle">
+		<li><typewritten-text class="active">fresh salads? 🥗</typewritten-text></li>
+		<li><typewritten-text paused>hearty burgers? 🍔</typewritten-text></li>
+		<li><typewritten-text paused>delicious pies? 🥧</typewritten-text></li>
+	</ul>
+</div>
+```
+
+```css
+.sentence p { display: inline; }
+
+.typewriter-cycle {
+	display: inline-block;
+	position: relative;
+	width: 20ch;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.typewriter-cycle li:not(:first-child) {
+	position: absolute;
+	inset: 0;
+}
+
+typewritten-text { font-weight: bold; }
+typewritten-text:not(.active) .cursor::after {
+	visibility: hidden;
+}
+```
+
+```js
+document.querySelectorAll(".typewriter-cycle").forEach((cycle) => {
+	const items = cycle.querySelectorAll("typewritten-text")
+	for (let i = 0; i < items.length; ++i) {
+		const cur = items[i]
+		const next = items[(i + 1) % items.length]
+
+		cur.addEventListener("typed", () => setTimeout(() => cur.erase(), cur.repeatInterval))
+		cur.addEventListener("erased", () => {
+			cur.classList.remove("active")
+			next.classList.add("active")
+			setTimeout(() => next.type(), next.repeatInterval)
+		})
+	}
+})
+```
+
+### Dialog
+
+Dialog is often portrayed as typewritten text in games. Using the `typed` event, you can chain several together.
+
+**[View the Dialog demo on Codepen!](https://codepen.io/auroratide/pen/rNwyYyW)**
+
+<!--DEMO
+<wc-demo id="dialog-demo">
+	<section id="janet" style="--bubble: oklch(83% 0.041 227);">
+		<figure>
+			<img src="https://i.imgur.com/W1l95nt.png" alt="A girl with brown hair and blue eyes." />
+			<figcaption>Janet</figcaption>
+		</figure>
+		<blockquote><typewritten-text type-speed="45" paused>Hi! I'm <strong>Janet</strong>, the new gal on the team. What's your name?</typewritten-text></blockquote>
+	</section>
+	<section id="dinesh" class="flipped" style="--bubble: oklch(80% 0.024 34);">
+		<blockquote><typewritten-text type-speed="50" paused>I'm <strong>Dinesh</strong>, the UI designer. The first thing you should know is our team lead is always <em>at least</em> five minutes late.</typewritten-text></blockquote>
+		<figure>
+			<img src="https://i.imgur.com/HVReWxe.png" alt="A boy with black hair and brown eyes." />
+			<figcaption>Dinesh</figcaption>
+		</figure>
+	</section>
+	<div slot="actions">
+		<button class="rerun">Rerun</button>
+	</div>
+</wc-demo>
+/DEMO-->
+
+```js
+const janet = document.querySelector("#janet typewritten-text")
+const dinesh = document.querySelector("#dinesh typewritten-text")
+
+janet?.addEventListener("typed", () => {
+	timeout = setTimeout(() => dinesh?.type(), dinesh?.repeatInterval)
+})
+```
