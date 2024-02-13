@@ -182,7 +182,7 @@ describe("typewritten-text", () => {
 	describe.only("repeat", () => {
 		it("repeats", async () => {
 			const container = await render(`
-				<typewritten-text repeat type-speed="5" erase-speed="5" repeat-interval="5">hi</typewritten-text>
+				<typewritten-text repeat type-speed="10" erase-speed="10" repeat-interval="10">hi</typewritten-text>
 			`)
 
 			await eventually(() => expect(visibleText(container)).to.equal("hi"))
