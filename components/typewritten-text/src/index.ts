@@ -261,6 +261,7 @@ export class TypewrittenTextElement extends HTMLElement {
 			}
 
 			if (this.#isAtEnd() && this.repeat && !this.paused) {
+				console.log("IN THE REPEAT BLOCK")
 				await wait(this.repeatInterval)
 				this.switchDirection()
 			}

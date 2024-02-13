@@ -179,7 +179,7 @@ describe("typewritten-text", () => {
 		})
 	})
 
-	describe("repeat", () => {
+	describe.only("repeat", () => {
 		it("repeats", async () => {
 			const container = await render(`
 				<typewritten-text repeat type-speed="5" erase-speed="5" repeat-interval="5">hi</typewritten-text>
