@@ -14,4 +14,4 @@ jobs:
           node-version: '18.x'
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm -F typewritten-text test
+      - run: pnpm -F typewritten-text test:clean
