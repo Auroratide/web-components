@@ -1,4 +1,19 @@
-import { TYPING, TYPE, TYPED, ERASING, ERASE, ERASED } from "./events.js"
+import {
+	TYPING,
+	TYPE,
+	TYPED,
+	ERASING,
+	ERASE,
+	ERASED,
+	PAUSED_ANY,
+	RESUMED_ANY,
+	NEXT_CHAR,
+	PREV_CHAR,
+	PHRASE_TYPED,
+	PHRASE_REMOVED,
+	STARTED,
+	PAUSED,
+} from "./events.js"
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -48,11 +63,35 @@ export class TypewrittenTextElement extends HTMLElement {
 	get paused() { return this.hasAttribute("paused") }
 	set paused(value: boolean) { this.toggleAttribute("paused", value) }
 
-	get typeSpeed() { return this.#getNumAttribute("type-speed", 80) }
+	get typeSpeed() {
+		if (!this.hasAttribute("type-speed") && this.hasAttribute("letter-interval")) {
+			return this.letterInterval
+		}
+
+		return this.#getNumAttribute("type-speed", 80)
+	}
 	set typeSpeed(value: number) { this.setAttribute("type-speed", value.toString()) }
 
-	get eraseSpeed() { return this.#getNumAttribute("erase-speed", 50) }
+	get eraseSpeed() {
+		if (!this.hasAttribute("erase-speed") && this.hasAttribute("letter-interval")) {
+			return this.letterInterval
+		}
+
+		return this.#getNumAttribute("erase-speed", 50)
+	}
 	set eraseSpeed(value: number) { this.setAttribute("erase-speed", value.toString()) }
+
+	get repeat() { return this.hasAttribute("repeat") }
+	set repeat(value: boolean) { this.toggleAttribute("repeat", value) }
+
+	get repeatInterval() {
+		if (!this.hasAttribute("repeat-interval") && this.hasAttribute("phrase-interval")) {
+			return this.phraseInterval
+		}
+
+		return this.#getNumAttribute("repeat-speed", 1000)
+	}
+	set repeatInterval(value: number) { this.setAttribute("repeat-interval", value.toString()) }
 
 	get position() { return this.#position }
 	get length() { return this.#chars.length }
@@ -62,13 +101,19 @@ export class TypewrittenTextElement extends HTMLElement {
 		if (this.#position >= this.length) return
 
 		this.#chars[this.#position].hidden = false
+		this.#chars[this.#position].classList.add("typewritten-text_revealed")
+
 		this.#emit(TYPE)
+		this.#emit(NEXT_CHAR)
 
 		this.#updateCursorPosition("typing")
 
 		this.#position += 1
 
-		if (this.#isAtEnd("typing")) this.#emit(TYPED)
+		if (this.#isAtEnd("typing")) {
+			this.#emit(TYPED)
+			this.#emit(PHRASE_TYPED)
+		}
 	}
 
 	async erase() { await this.#run("erasing") }
@@ -77,11 +122,17 @@ export class TypewrittenTextElement extends HTMLElement {
 
 		this.#position -= 1
 		this.#chars[this.#position].hidden = true
+		this.#chars[this.#position].classList.remove("typewritten-text_revealed")
+
 		this.#emit(ERASE)
+		this.#emit(PREV_CHAR)
 
 		this.#updateCursorPosition("erasing")
 
-		if (this.#isAtEnd("erasing")) this.#emit(ERASED)
+		if (this.#isAtEnd("erasing")) {
+			this.#emit(ERASED)
+			this.#emit(PHRASE_REMOVED)
+		}
 	}
 
 	switchDirection() {
@@ -96,23 +147,20 @@ export class TypewrittenTextElement extends HTMLElement {
 			this.type()
 	}
 
-	reset() {		
-		this.paused = true
+	reset() {
 		this.#position = 0
 		this.#running = false
 		this.#direction = "typing"
 		
 		this.#mirrorSlot.assignedNodes().forEach((node: HTMLElement) => node.remove())
 		this.#createMirror()
-	}
-
-	connectedCallback() {
-		if (!this.#mirror) this.#createMirror()
 
 		if (!this.paused) {
 			this.resume()
 		}
+	}
 
+	connectedCallback() {
 		this.#mainSlot.addEventListener("slotchange", this.#onMainSlotChange)
 		this.#mirrorSlot.addEventListener("slotchange", this.#onMirrorSlotChange)
 	}
@@ -124,7 +172,14 @@ export class TypewrittenTextElement extends HTMLElement {
 
 	attributeChangedCallback(name: string, oldValue: string, newValue: string) {
 		if (name === "paused" && newValue == null) {
+			this.#emit(RESUMED_ANY)
+			this.#emit(STARTED)
 			this.resume()
+		}
+
+		if (name === "paused" && newValue != null) {
+			this.#emit(PAUSED_ANY)
+			this.#emit(PAUSED)
 		}
 	}
 
@@ -141,7 +196,7 @@ export class TypewrittenTextElement extends HTMLElement {
 	#createMirror() {
 		this.#mirror = document.createElement("span")
 		this.#mirror.slot = "mirror"
-		this.#mirror.innerHTML = "<span class=\"cursor current\"></span>" + this.#splitNode()
+		this.#mirror.innerHTML = "<span class=\"cursor current typewritten-text_start typewritten-text_current\"></span>" + this.#splitNode()
 
 		this.appendChild(this.#mirror)
 
@@ -164,13 +219,14 @@ export class TypewrittenTextElement extends HTMLElement {
 	#splitTextIntoWords(text: string): string {
 		return text
 			.split(/(\s)/g)
-			.map((word) => `<span class="word">${this.#splitTextIntoChars(word)}</span>`)
+			.filter((word) => word.length > 0)
+			.map((word) => `<span class="word typewritten-text_word">${this.#splitTextIntoChars(word)}</span>`)
 			.join("")
 	}
 
 	#splitTextIntoChars(text: string): string {
 		return [...text]
-			.map((char) => `<span class="char cursor" hidden>${char}</span>`)
+			.map((char) => `<span class="char cursor typewritten-text_character" hidden>${char}</span>`)
 			.join("")
 	}
 
@@ -197,9 +253,17 @@ export class TypewrittenTextElement extends HTMLElement {
 		this.#direction = direction
 
 		this.#emit(this.#direction === "typing" ? TYPING : ERASING)
-		while (!this.paused && !this.#isAtEnd()) {
+		while (!this.paused && (!this.#isAtEnd() || this.repeat)) {
 			await (this.#direction === "typing" ? this.typeOne() : this.eraseOne())
-			await wait(this.typeSpeed)
+
+			if (!this.#isAtEnd()) {
+				await wait(this.#direction === "typing" ? this.typeSpeed : this.eraseSpeed)
+			}
+
+			if (this.#isAtEnd() && this.repeat && !this.paused) {
+				await wait(this.repeatInterval)
+				this.switchDirection()
+			}
 		}
 
 		if (this.#isAtEnd()) this.switchDirection()
@@ -214,10 +278,13 @@ export class TypewrittenTextElement extends HTMLElement {
 
 		this.#cursors[this.#position + 1]?.classList[forCurrent]("current")
 		this.#cursors[this.#position]?.classList[forPrevious]("current")
+
+		this.#cursors[this.#position + 1]?.classList[forCurrent]("typewritten-text_current")
+		this.#cursors[this.#position]?.classList[forPrevious]("typewritten-text_current")
 	}
 
 	#isAtEnd = (direction?: Direction) =>
-		this.#position === ((direction ?? this.#direction === "typing") ? this.length : 0)
+		this.#position === ((direction ?? this.#direction) === "typing" ? this.length : 0)
 
 	#createRoot = () => {
 		const root = this.shadowRoot ?? this.attachShadow({ mode: "open" })
@@ -233,9 +300,109 @@ export class TypewrittenTextElement extends HTMLElement {
 
 		return root
 	}
+
+	/* DEPRECATED STUFF from before v0.2.0 */
+	/**
+	 * @deprecated Use `type-speed` or `erase-speed` instead
+	 */
+	get letterInterval() {
+		return this.#deprecated("letterInterval", ["type-speed", "erase-speed"], () => this.#getNumAttribute("letter-interval", 100))
+	}
+	/**
+	 * @deprecated Use `type-speed` or `erase-speed` instead
+	 */
+	set letterInterval(value: number) {
+		this.#deprecated("letterInterval", ["type-speed", "erase-speed"], () => this.setAttribute("letter-interval", value.toString()))
+	}
+
+	/**
+	 * @deprecated Use `repeat-interval` instead
+	 */
+	get phraseInterval() {
+		return this.#deprecated("phraseInterval", ["repeat-interval"], () => this.#getNumAttribute("phrase-interval", 1000))
+	}
+	/**
+	 * @deprecated Use `repeat-interval` instead
+	 */
+	set phraseInterval(value: number) {
+		this.#deprecated("phraseInterval", ["repeat-interval"], () => this.setAttribute("phrase-interval", value.toString()))
+	}
+
+	/**
+	 * @deprecated Use `position` instead
+	 */
+	get currentPosition() {
+		return this.#deprecated("currentPosition", ["position"], () => this.#position)
+	}
+
+	/**
+	 * @deprecated Use `typeOne` instead
+	 */
+	typeNext() {
+		this.#deprecated("typeNext", ["typeOne"], () => this.typeOne())
+	}
+
+	/**
+	 * @deprecated Use `eraseOne` instead
+	 */
+	backspace() {
+		this.#deprecated("backspace", ["eraseOne"], () => this.eraseOne())
+	}
+
+	/**
+	 * @deprecated Use `resume` instead
+	 */
+	start() {
+		this.#deprecated("start", ["resume"], () => this.resume())
+	}
+
+	/**
+	 * @deprecated Use `typeOne` or `eraseOne` instead
+	 */
+	tick() {
+		this.#deprecated("tick", ["typeOne", "eraseOne"], () => {
+			if (this.paused) return
+
+			if (this.#direction === "typing") {
+				this.typeOne()
+			} else {
+				this.eraseOne()
+			}
+
+			if (this.#isAtEnd()) this.switchDirection()
+		})
+	}
+
+	/**
+	 * @deprecated Use `typeOne` or `eraseOne` instead
+	 */
+	forceTick() {
+		this.#deprecated("tick", ["typeOne", "eraseOne"], () => {
+			if (this.#direction === "typing") {
+				this.typeOne()
+			} else {
+				this.eraseOne()
+			}
+
+			if (this.#isAtEnd()) this.switchDirection()
+		})
+	}
+
+	/**
+	 * @deprecated Use `switchDirection`
+	 */
+	reverse() {
+		this.#deprecated("reverse", ["switchDirection"], () => this.switchDirection())
+	}
+
+	#deprecated = <T>(old: string, neww: string[], fn: () => T): T => {
+		// eslint-disable-next-line no-console
+		console.warn(`typewritten-text: \`${old}\` is deprecated. Use \`${neww.join("`, `")}\` instead.`)
+		return fn()
+	}
 }
 
 /**
- * @deprecated Use TypewrittenTextElement instead
+ * @deprecated Use `TypewrittenTextElement` instead
  */
 export const TypewrittenText = TypewrittenTextElement

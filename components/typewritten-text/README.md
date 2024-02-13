@@ -8,8 +8,8 @@ The `typewritten-text` element represents text that should be typed out one lett
 
 <!--DEMO
 <wc-demo id="main-demo">
-	<p>d <typewritten-text type-speed="200"><span>hello</span> world</typewritten-text> d</p>
-	<button class="run">Run</button><button class="pause">Pause</button>
+	<p>This <typewritten-text paused>typewriter effect</typewritten-text> is achieved using <typewritten-text paused>custom elements!</typewritten-text></p>
+	<button class="run">Run</button>
 </wc-demo>
 /DEMO-->
 
@@ -51,6 +51,19 @@ Some <typewritten-text>text to type out!</typewritten-text>
 
 Since this is Just HTML<sup>TM</sup>, you can use `typewritten-text` with other markup tags:
 
+<!--DEMO
+<wc-demo id="markup-demo">
+	<p>This works with <typewritten-text paused> <strong>other</strong> <em>markdown</em> <span class="special">elements</span> </typewritten-text> as well!</p>
+	<button class="run">Run</button>
+</wc-demo>
+<style>
+	.special {
+		font-size: 1.25em;
+		color: oklch(45% 0.1 20);
+	}
+</style>
+/DEMO-->
+
 ```html
 This works with <typewritten-text paused>
 	<strong>other</strong>
@@ -61,44 +74,59 @@ This works with <typewritten-text paused>
 
 **Note:** `typewritten-text` has text-level semantics, meaning it can contain anything that a `span` can contain. See [Phrasing Content](https://html.spec.whatwg.org/#phrasing-content-2).
 
-### Repeat Indefinitely
-
-This types and backspaces the text on a loop.
-
-```html
-<p>Some <typewritten-text repeat>text to type out!</typewritten-text></p>
-```
 
 ### Adjust Timing
 
-The time provided is number of milliseconds between each letter.
+Use `type-speed` or `erase-speed` to adjust timing. The time provided is number of milliseconds between each letter.
+
+<!--DEMO
+<wc-demo id="speed-demo">
+	<ul>
+		<li><typewritten-text type-speed="200" erase-speed="30">Slow to type, fast to erase</typewritten-text></li>
+		<li><typewritten-text type-speed="30" erase-speed="200">Fast to type, slow to erase</typewritten-text></li>
+	</ul>
+	<button class="run">Run</button>
+</wc-demo>
+/DEMO-->
 
 ```html
-<p>Some <typewritten-text letter-interval="400">text to type out!</typewritten-text></p>
-```
-
-The `phrase-interval` is the time between when the text is typed out and when it starts to be removed during a repetition loop.
-
-```html
-<p>Some <typewritten-text repeat phrase-interval="2000">text to type out!</typewritten-text></p>
+<ul>
+	<li><typewritten-text type-speed="200" erase-speed="30">Slow to type, fast to erase</typewritten-text></li>
+	<li><typewritten-text type-speed="30" erase-speed="200">Fast to type, slow to erase</typewritten-text></li>
+</ul>
 ```
 
 ### Start Paused
 
-This will start paused until invoked by **javascript**.
+When `paused` is specified, it will start paused until invoked by **javascript**.
 
 ```html
 <p>Some <typewritten-text paused>text to type out!</typewritten-text></p>
+```
+
+### Repeat
+
+Use `repeat` to automatically type and erase the phrase. The `repeat-interval` attribute can be used to adjust how long between typing and erasing.
+
+<!--DEMO
+<wc-demo id="repeat-demo">
+	<p><typewritten-text repeat repeat-interval="1000">It just keeps typing.</typewritten-text></p>
+</wc-demo>
+/DEMO-->
+
+```html
+<p><typewritten-text repeat repeat-interval="1000">It just keeps typing.</typewritten-text></p>
 ```
 
 ### All Attributes
 
 | Attribute | Default | Description |
 | ------------- | --------- | ------------- |
-| `repeat` | - | Whether the text should type itself repeatedly on a loop |
-| `letter-interval` | 100 | Time between each letter in milliseconds |
-| `phrase-interval` | 1000 | Time between completion and restart during a repeat loop in milliseconds |
 | `paused` | - | Whether the animation should start paused |
+| `type-speed` | 80 | Time between each letter in milliseconds |
+| `erase-speed` | 50 | Time between completion and restart during a repeat loop in milliseconds |
+| `repeat` | - | Whether the animation should repeat itself after it types or erases |
+| `repeat-interval` | 1000 | Amount of time between typing and erasing when in repeat mode |
 
 ## Style API
 
@@ -106,7 +134,7 @@ Since `typewritten-text` is Just HTML<sup>TM</sup>, you can style it the same wa
 
 ```css
 typewritten-text {
-    color: red;
+	color: red;
 }
 ```
 
@@ -118,29 +146,47 @@ The blinking cursor can be customized with either CSS variables or directly via 
 
 | Variable | Default | Description |
 | ------------- | --------- | ------------- |
-| `--typewritten-text_cursor-width` | 0.125em | How wide the cursor is |
-| `--typewritten-text_cursor-style` | solid | Whether the cursor is solid, dashed, dotted, etc; can be any border-style value |
-| `--typewritten-text_cursor-color` | currentColor | Color of the cursor |
-| `--typewriten-text_cursor-interval` | 700ms | The duration of the blink animation |
+| `--cursor-width` | 0.125em | How wide the cursor is |
+| `--cursor-style` | solid | Whether the cursor is solid, dashed, dotted, etc; can be any border-style value |
+| `--cursor-color` | currentColor | Color of the cursor |
+| `--cursor-interval` | 0.7s | The duration of the blink animation |
 
-The cursor can be arbitrarily customized with the following CSS selectors:
+The cursor can be arbitrarily customized with the following CSS selector:
 
 ```css
-.typewritten-text_character::after,
-.typewritten-text_start::after { }
+typewritten-text .cursor.current::after { }
 ```
 
-The `*_start` selector represents the start of the text and can be used to style the initial cursor differently than the cursor-in-motion. For example, to hide the cursor while the animation is paused and yet show it at the start, you can do:
+### Example Fancy Cursor
+
+<!--DEMO
+<wc-demo id="cursor-demo">
+	<p>Here's a <typewritten-text paused>fancy cursor.</typewritten-text></p>
+	<button class="run">Run</button>
+</wc-demo>
+<style>
+	#cursor-demo typewritten-text .cursor.current::after {
+		border-inline-end: none;
+		border-block-end: 0.125em solid red;
+		width: 1ch;
+		inset-inline-end: -1ch;
+		visibility: visible;
+	}
+</style>
+/DEMO-->
 
 ```css
-typewritten-text[paused] .typewritten-text_character::after {
-    visibility: hidden;
+typewritten-text .cursor.current::after {
+	border-inline-end: none;
+	border-block-end: 0.125em solid red;
+	width: 1ch;
+	inset-inline-end: -1ch;
 }
 ```
 
 ## Javascript API
 
-The element exposes some useful methods to enable custom animation. Once you have obtained a reference to a `TypewrittenText` element:
+The element exposes some useful methods to enable custom animation. Once you have obtained a reference to a `TypewrittenTextElement` element:
 
 ```js
 const elem = document.querySelector('typewritten-text')
@@ -150,27 +196,27 @@ You can use the following methods:
 
 | Method | Description |
 | ------------- | ------------- |
-| `start()` | Start the animation cycle if it is currently paused |
+| `type()` | Start typing characters until the end |
+| `typeOne()` | Type one character |
+| `erase()` | Start erasing characters until the beginning |
+| `eraseOne()` | Erase one character |
 | `pause()` | Pause the animation cycle if it is currently running |
-| `typeNext()` | Manually type the next character |
-| `backspace()` | Manually remove one character |
-| `tick()` | Run one frame of the animation; only works if not paused |
-| `forceTick()` | Run one frame of the animation regardless of paused state |
-| `reverse()` | Reverse the direction of the animation |
+| `resume()` | If paused while typing, continue typing and vice versa; if paused as a result of reaching the end of either typing or erasing, will perform the opposite action. |
+| `switchDirection()` | Switch from typing to erasing or vice versa; can be done in the middle of typing or erasing |
 | `reset()` | Completely resets the element and animation; may be useful if the content within the element is dynamic |
 
 ### Properties
 
 Each attribute can be accessed as a Javascript property.
 
-* `elem.repeat`
 * `elem.paused`
-* `elem.letterInterval`
-* `elem.phraseInterval`
+* `elem.typeSpeed`
+* `elem.eraseSpeed`
 
-One additional property is provided:
+Other readonly attributes are provided:
 
 * `elem.length`: The total number of typeable characters
+* `elem.position`: The numerical position of the character to type next
 
 ### Events
 
@@ -178,19 +224,21 @@ The `typewritten-text` element dispatches the following events:
 
 | Name | When Triggered |
 | ------------- | ------------- |
-| `typewritten-text:nextchar` | Anytime a character is typed into view |
-| `typewritten-text:prevchar` | Anytime a character is removed from view |
-| `typewritten-text:phrasetyped` | When the full phrase becomes fully typed |
-| `typewritten-text:phraseremoved` | When the full phrase becomes untyped |
-| `typewritten-text:started` | When the animation is started |
-| `typewritten-text:paused` | When the animation is paused |
+| `type` | Anytime a character is typed into view |
+| `typed` | When the full phrase becomes fully typed |
+| `typing` | When it starts typing after having been paused |
+| `erase` | Anytime a character is removed from view |
+| `erased` | When the full phrase becomes erased |
+| `erasing` | When it starts erasing after having been paused |
+| `resume` | When the animation is started |
+| `paused` | When the animation is paused |
 
 ### Element Class
 
-The element interface can be accessed in javascript as well.
+The element interface can be accessed in javascript as well, perhaps to be created manually or for typescript type notation.
 
 ```js
-import { TypewrittenText } from '@auroratide/typewritten-text'
+import { TypewrittenTextElement } from '@auroratide/typewritten-text'
 ```
 
 ## Accessibility
@@ -205,27 +253,28 @@ This custom element is built with accessibility in mind!
 
 It is possible the non-trivial implementation of `typewritten-text` can lead to unexpected complications with advanced customization.
 
-Most notably, `typewritten-text` works by **cloning** its inner content into a separate custom element called `typewritten-text-mirror`, within which each letter is wrapped with a `span` denoted with the class `typewritten-text_character`. The following is an example before-and-after of what the resulting markup looks like once the element has finished rendering:
+`typewritten-text` works by **cloning** its inner content into a `mirror` slot, within which each letter is wrapped with a `span`. The following is an example before-and-after of what the resulting markup looks like once the element has finished rendering:
 
 ```html
 <typewritten-text>Hey</typewritten-text>
 
 <!-- ...becomes... -->
 
-<typewritten-text>Hey<typewritten-text-mirror slot="mirror" aria-label="Hey">
-    <span class="typewritten-text_word">
-        <span class="typewritten-text_character" aria-hidden="true"></span>
-        <span class="typewritten-text_character" aria-hidden="true">H</span>
-        <span class="typewritten-text_character" aria-hidden="true">e</span>
-        <span class="typewritten-text_character" aria-hidden="true">y</span>
-    </span>
-</typewritten-text-mirror></typewritten-text>
+<typewritten-text>Hey<span slot="mirror">
+	<span class="cursor current">
+	<span class="word">
+		<span class="char">H</span>
+		<span class="char">e</span>
+		<span class="char">y</span>
+	</span>
+</span></typewritten-text>
 ```
 
-The only part that becomes visible to the viewer is the contents of `typewritten-text-mirror`. As a result, a selector like `typewritten-text > span` will have unexpected results.
+As a result, a selector like `typewritten-text > span` will have unexpected results.
 
 This architecture has the following explicit goals:
 
-* Preserve, as much as possible, the way the web developer has specified the usage of the element. This means not overriding the inner content of `typewritten-text`.
-* Allow the use of semantic markup within `typewritten-text` so it acts as much as possible like a native text-level element
-* Enable typing each individual character regardless of its formatting, allowing for size- and position-independence.
+* Preserve, as much as possible, the way the web developer has specified the usage of the element. This means not overriding the default slot of `typewritten-text`.
+* Allow the use of semantic markup within `typewritten-text` so it acts as much as possible like a native text-level element.
+* Prevent layout shift as a result of characters coming into view; the entire content will exist, but will be invisible until typed.
+* Allow CSS customizations of the inner markup to apply. This would not be true if the content was cloned into the element's shadow dom.
