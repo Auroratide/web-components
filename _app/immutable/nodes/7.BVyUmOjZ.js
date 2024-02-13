@@ -1,32 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="./logo-032.png" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-		
-		<link href="./_app/immutable/assets/0.B_NuJIsv.css" rel="stylesheet">
-		<link href="./_app/immutable/assets/7.DO5ct1Un.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.Du8GhIFY.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/entry.oQX7gGWe.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.Ce_0Mfso.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/paths.CUgi0kj2.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.Dz2AtLt7.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/preload-helper.BQ24v_F8.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.QmGHi4hh.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/0.BnXLpBsg.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/7.BVyUmOjZ.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/Readme.BbztUA8r.js"><title>The typewritten-text Element</title><!-- HEAD_svelte-i80zog_START --><!-- HEAD_svelte-i80zog_END -->
-	</head>
-	<body>
-		<div>  <div class="full-screen horizontal-on-large"><header class="svelte-115rb9m"><div class="container"><div class="site-nav svelte-115rb9m" data-svelte-h="svelte-1ljyi8a"><div class="site-links svelte-115rb9m"><a class="skip-link svelte-115rb9m" href="#main">Skip to content</a> <a class="site-title svelte-115rb9m" href=".">Web Components</a> <address class="svelte-115rb9m">By <a href="https://auroratide.com">Auroratide</a></address></div> <a class="site-logo svelte-115rb9m" href="." aria-hidden="true" tabindex="-1"><img src="./logo-256.png" alt="Web Components" class="svelte-115rb9m"></a></div> <hr class="svelte-115rb9m"> <nav data-svelte-h="svelte-14uh1vl"><ul class="svelte-p7odg2"><li class="svelte-p7odg2"><a href="./reorder-list">reorder-list</a></li> <li class="svelte-p7odg2"><a href="./tab-list">tab-list</a></li> <li class="svelte-p7odg2"><a href="./toggle-switch">toggle-switch</a></li></ul> </nav></div> </header> <main id="main" class="container"> <article><!-- HTML_TAG_START --><h1 id="the-typewritten-text-element">The typewritten-text Element</h1>
+import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as r,n as o,o as i}from"../chunks/scheduler.Ce_0Mfso.js";import{S as d,i as h,s as u,m as g,l as m,d as c,h as j,n as y,f as w,o as f,p as b,q as x,r as v}from"../chunks/index.QmGHi4hh.js";import{R as q}from"../chunks/Readme.BbztUA8r.js";const T=`<h1 id="the-typewritten-text-element">The typewritten-text Element</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/typewritten-text">View this page with live demos!</a></strong></p>
 <p>The <code>typewritten-text</code> element represents text that should be typed out one letter at a time when displayed.</p>
-<p><img src="/web-components/_app/immutable/assets/demo.BbQyX9Y4.gif" alt="Text is automatically typed out one letter at a time"></p>
+<p><img src="./demo.gif" alt="Text is automatically typed out one letter at a time"></p>
 <wc-demo id="main-demo">
 	<p>This <typewritten-text paused>typewriter effect</typewritten-text> is achieved using <typewritten-text paused>custom elements!</typewritten-text></p>
 	<div slot="actions">
@@ -414,32 +389,10 @@ janet?.<span class="hljs-title function_">addEventListener</span>(<span class="h
 	timeout = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> dinesh?.<span class="hljs-title function_">type</span>(), dinesh?.<span class="hljs-property">repeatInterval</span>)
 })
 </code></pre>
-<!-- HTML_TAG_END --></article></main></div> 
-			
-			<script>
-				{
-					__sveltekit_1wrbq48 = {
-						base: new URL(".", location).pathname.slice(0, -1),
-						assets: "/web-components"
-					};
-
-					const element = document.currentScript.parentElement;
-
-					const data = [null,null];
-
-					Promise.all([
-						import("./_app/immutable/entry/start.Du8GhIFY.js"),
-						import("./_app/immutable/entry/app.Dz2AtLt7.js")
-					]).then(([kit, app]) => {
-						kit.start(app, element, {
-							node_ids: [0, 7],
-							data,
-							form: null,
-							error: null
-						});
-					});
-				}
-			</script>
-		</div>
-	</body>
-</html>
+`,k=""+new URL("../assets/demo.BbQyX9Y4.gif",import.meta.url).href,_=()=>{document.querySelectorAll("wc-demo").forEach(n=>{const s=n.querySelector(".run"),t=n.querySelectorAll("typewritten-text");t.forEach(l=>{l.addEventListener("paused",()=>{(s==null?void 0:s.textContent)==="Pause"&&(s.textContent="Run")}),l.addEventListener("typed",()=>{l.classList.add("typed")}),l.addEventListener("resumed",()=>{l.classList.remove("typed")})});const a=()=>{t.forEach(l=>l.resume())},e=()=>{t.forEach(l=>l.pause())};s==null||s.addEventListener("click",()=>{(s==null?void 0:s.textContent)==="Run"?(s.textContent="Pause",a()):(s.textContent="Run",e())})})},S=()=>{document.querySelectorAll(".typewriter-cycle").forEach(n=>{const s=n.querySelectorAll("typewritten-text");for(let t=0;t<s.length;++t){const a=s[t],e=s[(t+1)%s.length];a.addEventListener("typed",()=>setTimeout(()=>a.erase(),a.repeatInterval)),a.addEventListener("erased",()=>{a.classList.remove("active"),e.classList.add("active"),setTimeout(()=>e.type(),e.repeatInterval)})}})},E=()=>{const n=document.querySelector("#janet typewritten-text"),s=document.querySelector("#dinesh typewritten-text"),t=document.querySelector("#dialog-demo .rerun");let a=0;n==null||n.addEventListener("typed",()=>{a=setTimeout(()=>s==null?void 0:s.type(),s==null?void 0:s.repeatInterval)}),t==null||t.addEventListener("click",()=>{clearTimeout(a),s==null||s.pause(),n==null||n.reset(),s==null||s.reset(),n==null||n.type()})};function A(n){let s,t,a;return t=new q({props:{html:T,assets:[{replace:"./demo.gif",with:k}]}}),{c(){s=u(),g(t.$$.fragment),this.h()},l(e){m("svelte-i80zog",document.head).forEach(c),s=j(e),y(t.$$.fragment,e),this.h()},h(){document.title="The typewritten-text Element"},m(e,l){w(e,s,l),f(t,e,l),a=!0},p:o,i(e){a||(b(t.$$.fragment,e),a=!0)},o(e){x(t.$$.fragment,e),a=!1},d(e){e&&c(s),v(t,e)}}}function C(n){return p(()=>Promise.resolve({}),__vite__mapDeps([0]),import.meta.url),p(()=>import("../chunks/define.BFzeFfcw.js"),__vite__mapDeps([]),import.meta.url),i(()=>{_(),S(),E()}),[]}class P extends d{constructor(s){super(),h(this,s,C,A,r,{})}}export{P as component};
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = ["../assets/style.yDHeHSfA.css"]
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}
