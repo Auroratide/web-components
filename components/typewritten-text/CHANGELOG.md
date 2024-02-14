@@ -1,5 +1,11 @@
 # @auroratide/typewritten-text
 
+## 0.2.1
+
+### Patch Changes
+
+- 6307966: Do not break words
+
 ## 0.2.0
 
 ### Minor Changes
