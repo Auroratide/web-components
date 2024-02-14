@@ -1,5 +1,11 @@
 # @auroratide/typewritten-text
 
+## 0.2.2
+
+### Patch Changes
+
+- 30aca7a: The previous css never got published for some reason
+
 ## 0.2.1
 
 ### Patch Changes
