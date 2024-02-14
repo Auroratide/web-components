@@ -1,5 +1,12 @@
 # @auroratide/wc-docs
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies [b0fa976]
+  - @auroratide/typewritten-text@0.2.3
+
 ## 0.1.8
 
 ### Patch Changes

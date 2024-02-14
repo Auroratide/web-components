@@ -1,5 +1,11 @@
 # @auroratide/typewritten-text
 
+## 0.2.3
+
+### Patch Changes
+
+- b0fa976: Actually correctly determine words so that the white-space css breaks at the right places
+
 ## 0.2.2
 
 ### Patch Changes
