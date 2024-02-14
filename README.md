@@ -268,3 +268,52 @@ A form control representing something is on or off.
 <label for="toggle-switch">Fancy Switch</label>
 <toggle-switch id="toggle-switch"></toggle-switch>
 ```
+
+## The typewritten-text Element
+
+**View**: [The typewritten-text Element](https://auroratide.github.io/web-components/typewritten-text)
+
+An element that types one letter at a time to the screen.
+
+<!--DEMO
+<wc-demo id="typewritten-text-demo">
+	<div class="sentence">
+		<p>Have you tried our</p>
+		<ul class="typewriter-cycle">
+			<li><typewritten-text class="active">fresh salads? 🥗</typewritten-text></li>
+			<li><typewritten-text paused>hearty burgers? 🍔</typewritten-text></li>
+			<li><typewritten-text paused>delicious pies? 🥧</typewritten-text></li>
+		</ul>
+	</div>
+</wc-demo>
+<style>
+    #typewritten-text-demo .sentence p { display: inline; }
+    #typewritten-text-demo .typewriter-cycle {
+        display: inline-block;
+        position: relative;
+        width: 20ch;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    #typewritten-text-demo .typewriter-cycle li:not(:first-child) {
+        position: absolute;
+        inset: 0;
+    }
+    #typewritten-text-demo typewritten-text { font-weight: bold; }
+    #typewritten-text-demo typewritten-text:not(.active) .cursor::after {
+        visibility: hidden;
+    }
+</style>
+/DEMO-->
+
+```html
+<div class="sentence">
+	<p>Have you tried our</p>
+	<ul class="typewriter-cycle">
+		<li><typewritten-text>fresh salads? 🥗</typewritten-text></li>
+		<li><typewritten-text paused>hearty burgers? 🍔</typewritten-text></li>
+		<li><typewritten-text paused>delicious pies? 🥧</typewritten-text></li>
+	</ul>
+</div>
+```
