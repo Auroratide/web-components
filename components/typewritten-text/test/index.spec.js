@@ -245,8 +245,8 @@ describe("typewritten-text", () => {
 			`)
 
 			// includes spaces as "words"
-			expect(words(container).length).to.equal(5)
-			expect(words(container)[2]).to.equal("two")
+			expect(words(container).length).to.equal(3)
+			expect(words(container)[1]).to.equal("two")
 		})
 
 		it("nested nodes", async () => {
@@ -254,10 +254,9 @@ describe("typewritten-text", () => {
 				<typewritten-text><span>hello</span> world</typewritten-text>
 			`)
 
-			expect(words(container).length).to.equal(3)
+			expect(words(container).length).to.equal(2)
 			expect(words(container)[0]).to.equal("hello")
-			expect(words(container)[1]).to.equal(" ")
-			expect(words(container)[2]).to.equal("world")
+			expect(words(container)[1]).to.equal("world")
 		})
 	})
 
@@ -646,8 +645,8 @@ describe("typewritten-text backwards compatibility", () => {
                 <typewritten-text>one two three</typewritten-text>
             `)
 
-			expect(words(container).length).to.equal(5)
-			expect(words(container)[2]).to.equal("two")
+			expect(words(container).length).to.equal(3)
+			expect(words(container)[1]).to.equal("two")
 		})
 
 		it("nested nodes", async () => {
@@ -655,10 +654,9 @@ describe("typewritten-text backwards compatibility", () => {
                 <typewritten-text><span>hello</span> world</typewritten-text>
             `)
 
-			expect(words(container).length).to.equal(3)
+			expect(words(container).length).to.equal(2)
 			expect(words(container)[0]).to.equal("hello")
-			expect(words(container)[1]).to.equal(" ")
-			expect(words(container)[2]).to.equal("world")
+			expect(words(container)[1]).to.equal("world")
 		})
 	})
 

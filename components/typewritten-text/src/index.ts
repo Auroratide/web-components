@@ -217,10 +217,12 @@ export class TypewrittenTextElement extends HTMLElement {
 	}
 
 	#splitTextIntoWords(text: string): string {
+		const delimeters = /([\s-])/g
+
 		return text
-			.split(/(\s)/g)
+			.split(delimeters)
 			.filter((word) => word.length > 0)
-			.map((word) => `<span class="word typewritten-text_word">${this.#splitTextIntoChars(word)}</span>`)
+			.map((word) => `<span class="${delimeters.test(word) ? "" : "word typewritten-text_word"}">${this.#splitTextIntoChars(word)}</span>`)
 			.join("")
 	}
 
