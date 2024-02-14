@@ -1,4 +1,4 @@
-import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r}from"../chunks/scheduler.Ce_0Mfso.js";import{S as g,i as m,s as d,e as b,H as u,l as j,d as e,h as w,c as f,a as y,b as k,f as c}from"../chunks/index.QmGHi4hh.js";const v=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
+import{_ as t}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as i,o as g}from"../chunks/scheduler.Ce_0Mfso.js";import{S as m,i as d,s as b,e as j,H as u,l as w,d as l,h as y,c as f,a as x,b as v,f as c}from"../chunks/index.QmGHi4hh.js";import{s as k}from"../chunks/setup-cycle-demo.DlallKuY.js";const _=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/">View this page with live demos!</a></strong></p>
 <p>This is just a bunch of highly reusable, fully accessible <strong><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a></strong> you can use on your websites! Why web components?</p>
 <ul>
@@ -241,10 +241,51 @@ import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r}fr
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;toggle-switch&quot;</span>&gt;</span>Fancy Switch<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">toggle-switch</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;toggle-switch&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toggle-switch</span>&gt;</span>
 </code></pre>
-`;function _(i){let a,n,t;return{c(){a=d(),n=b("article"),t=new u(!1),this.h()},l(s){j("svelte-9qjnth",document.head).forEach(e),a=w(s),n=f(s,"ARTICLE",{});var o=y(n);t=k(o,!1),o.forEach(e),this.h()},h(){document.title="Web Components by Auroratide",t.a=null},m(s,l){c(s,a,l),c(s,n,l),t.m(v,n)},p:r,i:r,o:r,d(s){s&&(e(a),e(n))}}}function x(i){return p(()=>import("../chunks/define.Cxgo7aog.js"),__vite__mapDeps([]),import.meta.url),p(()=>import("../chunks/define.CJ6ZdpBe.js"),__vite__mapDeps([]),import.meta.url),p(()=>import("../chunks/define.BEaBwacd.js"),__vite__mapDeps([0,1]),import.meta.url),[]}class A extends g{constructor(a){super(),m(this,a,x,_,h,{})}}export{A as component};
+<h2 id="the-typewritten-text-element">The typewritten-text Element</h2>
+<p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/typewritten-text">The typewritten-text Element</a></p>
+<p>An element that types one letter at a time to the screen.</p>
+<wc-demo id="typewritten-text-demo">
+	<div class="sentence">
+		<p>Have you tried our</p>
+		<ul class="typewriter-cycle">
+			<li><typewritten-text class="active">fresh salads? 🥗</typewritten-text></li>
+			<li><typewritten-text paused>hearty burgers? 🍔</typewritten-text></li>
+			<li><typewritten-text paused>delicious pies? 🥧</typewritten-text></li>
+		</ul>
+	</div>
+</wc-demo>
+<style>
+    #typewritten-text-demo .sentence p { display: inline; }
+    #typewritten-text-demo .typewriter-cycle {
+        display: inline-block;
+        position: relative;
+        width: 20ch;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    #typewritten-text-demo .typewriter-cycle li:not(:first-child) {
+        position: absolute;
+        inset: 0;
+    }
+    #typewritten-text-demo typewritten-text { font-weight: bold; }
+    #typewritten-text-demo typewritten-text:not(.active) .cursor::after {
+        visibility: hidden;
+    }
+</style>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;sentence&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Have you tried our<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;typewriter-cycle&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">typewritten-text</span>&gt;</span>fresh salads? 🥗<span class="hljs-tag">&lt;/<span class="hljs-name">typewritten-text</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">typewritten-text</span> <span class="hljs-attr">paused</span>&gt;</span>hearty burgers? 🍔<span class="hljs-tag">&lt;/<span class="hljs-name">typewritten-text</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">typewritten-text</span> <span class="hljs-attr">paused</span>&gt;</span>delicious pies? 🥧<span class="hljs-tag">&lt;/<span class="hljs-name">typewritten-text</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+`;function q(r){let a,n,e;return{c(){a=b(),n=j("article"),e=new u(!1),this.h()},l(s){w("svelte-9qjnth",document.head).forEach(l),a=y(s),n=f(s,"ARTICLE",{});var o=x(n);e=v(o,!1),o.forEach(l),this.h()},h(){document.title="Web Components by Auroratide",e.a=null},m(s,p){c(s,a,p),c(s,n,p),e.m(_,n)},p:i,i,o:i,d(s){s&&(l(a),l(n))}}}function E(r){return t(()=>import("../chunks/define.Cxgo7aog.js"),__vite__mapDeps([]),import.meta.url),t(()=>import("../chunks/define.CJ6ZdpBe.js"),__vite__mapDeps([]),import.meta.url),t(()=>import("../chunks/define.BEaBwacd.js"),__vite__mapDeps([0,1]),import.meta.url),t(()=>Promise.resolve({}),__vite__mapDeps([2]),import.meta.url),t(()=>import("../chunks/define.BFzeFfcw.js"),__vite__mapDeps([]),import.meta.url),g(()=>{k()}),[]}class P extends m{constructor(a){super(),d(this,a,E,q,h,{})}}export{P as component};
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = ["../chunks/define.BEaBwacd.js","../chunks/events.C44j2o98.js"]
+    __vite__mapDeps.viteFileDeps = ["../chunks/define.BEaBwacd.js","../chunks/events.C44j2o98.js","../assets/style.yDHeHSfA.css"]
   }
   return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
 }

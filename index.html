@@ -10,18 +10,19 @@
 
 		
 		<link href="./_app/immutable/assets/0.B_NuJIsv.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.Du8GhIFY.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/entry.oQX7gGWe.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.DGQ_3ChR.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/entry.DX8ZY4g0.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.Ce_0Mfso.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/paths.CUgi0kj2.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.Dz2AtLt7.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/paths.BllrTnu1.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.BfxDnQQJ.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/preload-helper.BQ24v_F8.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.QmGHi4hh.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/0.BnXLpBsg.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/2.DW9hz2nR.js"><title>Web Components by Auroratide</title><!-- HEAD_svelte-9qjnth_START --><!-- HEAD_svelte-9qjnth_END -->
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.kGQSyxVV.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.DmbLmNWX.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/setup-cycle-demo.DlallKuY.js"><title>Web Components by Auroratide</title><!-- HEAD_svelte-9qjnth_START --><!-- HEAD_svelte-9qjnth_END -->
 	</head>
 	<body>
-		<div>  <div class="full-screen horizontal-on-large"><header class="svelte-115rb9m"><div class="container"><div class="site-nav svelte-115rb9m" data-svelte-h="svelte-1ljyi8a"><div class="site-links svelte-115rb9m"><a class="skip-link svelte-115rb9m" href="#main">Skip to content</a> <a class="site-title svelte-115rb9m" href=".">Web Components</a> <address class="svelte-115rb9m">By <a href="https://auroratide.com">Auroratide</a></address></div> <a class="site-logo svelte-115rb9m" href="." aria-hidden="true" tabindex="-1"><img src="./logo-256.png" alt="Web Components" class="svelte-115rb9m"></a></div> <hr class="svelte-115rb9m"> <nav data-svelte-h="svelte-14uh1vl"><ul class="svelte-p7odg2"><li class="svelte-p7odg2"><a href="./reorder-list">reorder-list</a></li> <li class="svelte-p7odg2"><a href="./tab-list">tab-list</a></li> <li class="svelte-p7odg2"><a href="./toggle-switch">toggle-switch</a></li></ul> </nav></div> </header> <main id="main" class="container"> <article><!-- HTML_TAG_START --><h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
+		<div>  <div class="full-screen horizontal-on-large"><header class="svelte-115rb9m"><div class="container"><div class="site-nav svelte-115rb9m" data-svelte-h="svelte-1ljyi8a"><div class="site-links svelte-115rb9m"><a class="skip-link svelte-115rb9m" href="#main">Skip to content</a> <a class="site-title svelte-115rb9m" href=".">Web Components</a> <address class="svelte-115rb9m">By <a href="https://auroratide.com">Auroratide</a></address></div> <a class="site-logo svelte-115rb9m" href="." aria-hidden="true" tabindex="-1"><img src="./logo-256.png" alt="Web Components" class="svelte-115rb9m"></a></div> <hr class="svelte-115rb9m"> <nav data-svelte-h="svelte-hs4qjr"><ul class="svelte-p7odg2"><li class="svelte-p7odg2"><a href="./reorder-list">reorder-list</a></li> <li class="svelte-p7odg2"><a href="./tab-list">tab-list</a></li> <li class="svelte-p7odg2"><a href="./toggle-switch">toggle-switch</a></li> <li class="svelte-p7odg2"><a href="./typewritten-text">typewritten-text</a></li></ul> </nav></div> </header> <main id="main" class="container"> <article><!-- HTML_TAG_START --><h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/">View this page with live demos!</a></strong></p>
 <p>This is just a bunch of highly reusable, fully accessible <strong><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a></strong> you can use on your websites! Why web components?</p>
 <ul>
@@ -264,11 +265,52 @@
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;toggle-switch&quot;</span>&gt;</span>Fancy Switch<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">toggle-switch</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;toggle-switch&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toggle-switch</span>&gt;</span>
 </code></pre>
+<h2 id="the-typewritten-text-element">The typewritten-text Element</h2>
+<p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/typewritten-text">The typewritten-text Element</a></p>
+<p>An element that types one letter at a time to the screen.</p>
+<wc-demo id="typewritten-text-demo">
+	<div class="sentence">
+		<p>Have you tried our</p>
+		<ul class="typewriter-cycle">
+			<li><typewritten-text class="active">fresh salads? 🥗</typewritten-text></li>
+			<li><typewritten-text paused>hearty burgers? 🍔</typewritten-text></li>
+			<li><typewritten-text paused>delicious pies? 🥧</typewritten-text></li>
+		</ul>
+	</div>
+</wc-demo>
+<style>
+    #typewritten-text-demo .sentence p { display: inline; }
+    #typewritten-text-demo .typewriter-cycle {
+        display: inline-block;
+        position: relative;
+        width: 20ch;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    #typewritten-text-demo .typewriter-cycle li:not(:first-child) {
+        position: absolute;
+        inset: 0;
+    }
+    #typewritten-text-demo typewritten-text { font-weight: bold; }
+    #typewritten-text-demo typewritten-text:not(.active) .cursor::after {
+        visibility: hidden;
+    }
+</style>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;sentence&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Have you tried our<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;typewriter-cycle&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">typewritten-text</span>&gt;</span>fresh salads? 🥗<span class="hljs-tag">&lt;/<span class="hljs-name">typewritten-text</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">typewritten-text</span> <span class="hljs-attr">paused</span>&gt;</span>hearty burgers? 🍔<span class="hljs-tag">&lt;/<span class="hljs-name">typewritten-text</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">typewritten-text</span> <span class="hljs-attr">paused</span>&gt;</span>delicious pies? 🥧<span class="hljs-tag">&lt;/<span class="hljs-name">typewritten-text</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
 <!-- HTML_TAG_END --></article></main></div> 
 			
 			<script>
 				{
-					__sveltekit_1wrbq48 = {
+					__sveltekit_930okb = {
 						base: new URL(".", location).pathname.slice(0, -1),
 						assets: "/web-components"
 					};
@@ -278,8 +320,8 @@
 					const data = [null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.Du8GhIFY.js"),
-						import("./_app/immutable/entry/app.Dz2AtLt7.js")
+						import("./_app/immutable/entry/start.DGQ_3ChR.js"),
+						import("./_app/immutable/entry/app.BfxDnQQJ.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2],
