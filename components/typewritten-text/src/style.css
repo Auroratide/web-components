@@ -22,6 +22,10 @@ typewritten-text .cursor.current::after {
 	visibility: visible;
 }
 
+typewritten-text .word {
+	white-space: nowrap;
+}
+
 @keyframes typewritten-text-blink {
 	0% { opacity: 0; }
 	50% { opacity: 1; }
