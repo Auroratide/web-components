@@ -150,6 +150,9 @@ flip-card::part(edge) {
 
 ### Rounded corners
 
+* Use the `border-radius` CSS property to make rounded corners, but it must be a single absolute length.
+* The `--corner-granularity` CSS property is an integer that represents how smooth the 3D curve is on a card's rounded corners. Higher is smoother; default is `4`.
+
 `border-radius` on the card rounds the corners (mostly) like you would expect. It's a bit of a magic trick to make the card's edge rounded, as curved 3D surfaces don't exist in HTML/CSS. As a result there are some limitations.
 
 The following won't look very good unless the card's thickness is 0.
@@ -158,6 +161,43 @@ The following won't look very good unless the card's thickness is 0.
 * Different border radii for different corners (e.g. `border-radius: 1em 0.5em`)
 * Elliptical border radius (e.g. `border-radius: 1em / 0.5em`)
 * Dynamically changing the border radius on the fly
+
+Additionally, because curved 3D surfaces don't exist, the element must _simulate_ a curved surface using lots of small flat surfaces. You can use the `--corner-granularity` CSS property to control how smooth the border-radius looks edge-on. In general, if you have a large border radius, you want a bigger `--corner-granularity`. It is an integer.
+
+For example, the first coin has low corner granularity, and the second coin has high corner granularity.
+
+<!--DEMO
+<wc-demo class="flip-card-demo">
+	<div class="card-container" style="--flip-duration: 2s;">
+		<flip-card class="coin" style="--corner-granularity: 3;">
+			<section slot="front">
+				<p>Front</p>
+			</section>
+			<section slot="back">
+				<p>Back</p>
+			</section>
+		</flip-card>
+		<flip-card class="coin" style="--corner-granularity: 16;">
+			<section slot="front">
+				<p>Front</p>
+			</section>
+			<section slot="back">
+				<p>Back</p>
+			</section>
+		</flip-card>
+	</div>
+	<div slot="actions">
+		<button>Flip!</button>
+	</div>
+</wc-demo>
+/DEMO-->
+
+```css
+flip-card {
+	--corner-granularity: 16;
+	border-radius: 5em;
+}
+```
 
 ### Flip height and duration
 
@@ -259,7 +299,20 @@ TODO
 
 ## Events
 
-TODO
+The `flip-card` element dispatches the following events:
+
+| Name | When Triggered |
+| ------------- | ------------- |
+| `flipping` | Whenever the card begins to flip. |
+| `flipped` | Whenever the card's flip animation ends. |
+
+Both events contain in their details a property `facedown` indicating to which side the card is flipping or flipped.
+
+```js
+card.addEventListener('flipping', e => {
+	console.log(e.detail.facedown)
+})
+```
 
 ## Accessibility
 
@@ -274,6 +327,4 @@ TODO. Test/consider:
 
 ## OTHER TODO
 
-* Make corner-accuracy a CSS property so it can be applied en-masse
 * custom animations in the shadow dom is janky doodle
-* Add events (flipping, flipped)

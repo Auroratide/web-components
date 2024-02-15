@@ -1,6 +1,7 @@
 flip-card.default {
 	--card-depth: 0.5em;
 	--corner-granularity: 0;
+	width: 100%;
 	max-width: 10em;
 	height: 12.5em;
 }
@@ -73,7 +74,6 @@ flip-card.long-and-high {
 }
 
 .card-container flip-card {
-	width: 100%;
 	perspective: none;
 }
 
