@@ -25,6 +25,7 @@
 	:global(flip-card) {
 		width: 200px;
 		height: 300px;
+		border-radius: 0.5em;
 	}
 
 	:global(flip-card > :first-child) {
