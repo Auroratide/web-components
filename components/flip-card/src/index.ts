@@ -29,6 +29,7 @@ export class FlipCardElement extends HTMLElement {
 			--_depth: var(--card-depth, 0.15em);
 			--_animation-front: var(--flip-to-front-animation, flip-to-front linear var(--_duration) 1 both);
 			--_animation-back: var(--flip-to-back-animation, flip-to-back linear var(--_duration) 1 both);
+			--_granularity: var(--corner-granularity, 4);
 
 			display: block;
 			perspective: 100em;
@@ -104,12 +105,12 @@ export class FlipCardElement extends HTMLElement {
 			position: absolute;
 			inset-block-end: 0;
 			width: var(--_depth);
-			height: calc(2 * var(--_radius) * sin(45deg / var(--_n)));
+			height: calc(2 * var(--_radius) * sin(45deg / var(--_granularity)));
 			transform-origin: bottom center;
 			transform:
-				translateZ(calc(var(--_radius) * cos(var(--_i) * 90deg / var(--_n))))
-				translateY(calc(-1 * var(--_radius) * sin(var(--_i) * 90deg / var(--_n))))
-				rotateX(calc(45deg * (2 * var(--_i) + 1) / var(--_n)));
+				translateZ(calc(var(--_radius) * cos(var(--_i) * 90deg / var(--_granularity))))
+				translateY(calc(-1 * var(--_radius) * sin(var(--_i) * 90deg / var(--_granularity))))
+				rotateX(calc(45deg * (2 * var(--_i) + 1) / var(--_granularity)));
 		}
 
 		.top-right {
@@ -189,7 +190,7 @@ export class FlipCardElement extends HTMLElement {
 	`
 
 	static get observedAttributes() {
-		return ["facedown", "corner-accuracy"]
+		return ["facedown"]
 	}
 
 	constructor() {
@@ -200,9 +201,6 @@ export class FlipCardElement extends HTMLElement {
 
 	get facedown() { return this.hasAttribute("facedown") }
 	set facedown(value: boolean) { this.toggleAttribute("facedown", value) }
-
-	get cornerAccuracy() { return parseInt(this.getAttribute("corner-accuracy") ?? "4") }
-	set cornerAccuracy(value: number) { this.setAttribute("corner-accuracy", value.toString()) }
 
 	flip() { this.facedown = !this.facedown }
 
@@ -222,7 +220,7 @@ export class FlipCardElement extends HTMLElement {
 		this.#corners = this.shadowRoot!.querySelectorAll<HTMLElement>(".corner")
 
 		this.#setAccessibleSide(this.facedown)
-		this.#createCorners(this.cornerAccuracy)
+		this.#createCorners()
 		this.recalculateBorderRadius()
 
 		this.#container?.addEventListener("animationend", this.#onAnimationEnd)
@@ -244,9 +242,6 @@ export class FlipCardElement extends HTMLElement {
 			this.#setAccessibleSide(newValue != null)
 			this.#animate()
 		},
-		"corner-accuracy": (newValue: string | undefined | null) => {
-			this.#createCorners(parseInt(newValue))
-		},
 	}
 
 	#setAccessibleSide(facedown: boolean) {
@@ -254,10 +249,10 @@ export class FlipCardElement extends HTMLElement {
 		this.#back?.setAttribute("aria-hidden", (!facedown).toString())
 	}
 
-	#createCorners(accuracy: number) {
+	#createCorners() {
+		const granularity = parseInt(getComputedStyle(this).getPropertyValue("--_granularity"))
 		this.#corners?.forEach((corner) => {
-			corner.style.setProperty("--_n", accuracy.toString())
-			corner.replaceChildren(...Array.from({ length: accuracy }).map((_, i) => {
+			corner.replaceChildren(...Array.from({ length: granularity }).map((_, i) => {
 				const cornerPart = document.createElement("div")
 				cornerPart.style.setProperty("--_i", i.toString())
 				cornerPart.setAttribute("part", "edge")

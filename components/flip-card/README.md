@@ -6,7 +6,7 @@ The `flip-card` element represents content with a front side and a back side, wi
 
 <!--DEMO
 <wc-demo class="flip-card-demo">
-	<flip-card class="default" corner-accuracy="0">
+	<flip-card class="default">
 		<section slot="front">
 			<p>The front!</p>
 		</section>
@@ -72,7 +72,7 @@ By default, the front of the card is show, and the backside is hidden. Using the
 
 <!--DEMO
 <wc-demo class="flip-card-demo">
-	<flip-card class="default" facedown corner-accuracy="0">
+	<flip-card class="default" facedown>
 		<section slot="front">
 			<p>The front!</p>
 		</section>
@@ -124,7 +124,7 @@ Like in real life, these cards have some thickness! The effect is subtle, but ma
 
 <!--DEMO
 <wc-demo class="flip-card-demo">
-	<flip-card class="coin" corner-accuracy="16">
+	<flip-card class="coin">
 		<section slot="front">
 			<p>Heads</p>
 		</section>
@@ -168,7 +168,7 @@ The following apply to the default animation.
 
 <!--DEMO
 <wc-demo class="flip-card-demo">
-	<flip-card class="default long-and-high" corner-accuracy="0">
+	<flip-card class="default long-and-high">
 		<section slot="front">
 			<p>Front</p>
 		</section>
@@ -203,7 +203,7 @@ As such, to get the most realistic card flips when there are multiple cards, you
 <!--DEMO
 <wc-demo class="flip-card-demo">
 	<div class="card-container">
-		<flip-card class="default" corner-accuracy="0">
+		<flip-card class="default">
 			<section slot="front">
 				<p>Front</p>
 			</section>
@@ -211,7 +211,7 @@ As such, to get the most realistic card flips when there are multiple cards, you
 				<p>Back</p>
 			</section>
 		</flip-card>
-		<flip-card class="default" corner-accuracy="0">
+		<flip-card class="default">
 			<section slot="front">
 				<p>Front</p>
 			</section>
@@ -219,7 +219,7 @@ As such, to get the most realistic card flips when there are multiple cards, you
 				<p>Back</p>
 			</section>
 		</flip-card>
-		<flip-card class="default" corner-accuracy="0">
+		<flip-card class="default">
 			<section slot="front">
 				<p>Front</p>
 			</section>
@@ -227,7 +227,7 @@ As such, to get the most realistic card flips when there are multiple cards, you
 				<p>Back</p>
 			</section>
 		</flip-card>
-		<flip-card class="default" corner-accuracy="0">
+		<flip-card class="default">
 			<section slot="front">
 				<p>Front</p>
 			</section>

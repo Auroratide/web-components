@@ -1,5 +1,6 @@
 flip-card.default {
 	--card-depth: 0.5em;
+	--corner-granularity: 0;
 	max-width: 10em;
 	height: 12.5em;
 }
@@ -28,6 +29,7 @@ flip-card.default::part(edge) {
 
 flip-card.coin {
 	--card-depth: 1em;
+	--corner-granularity: 16;
 	width: 10em;
 	aspect-ratio: 1;
 	border-radius: 5em;
