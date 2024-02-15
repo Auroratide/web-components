@@ -26,6 +26,8 @@ export class FlipCardElement extends HTMLElement {
 			--_perspective: var(--flip-perspective, 100em);
 			--_height: var(--flip-height, 20em);
 			--_depth: var(--card-depth, 0.15em);
+			--_animation-front: var(--flip-to-front-animation, flip-to-front linear var(--_duration) 1 both);
+			--_animation-back: var(--flip-to-back-animation, flip-to-back linear var(--_duration) 1 both);
 
 			display: block;
 			perspective: var(--_perspective);
@@ -147,9 +149,9 @@ export class FlipCardElement extends HTMLElement {
 		}
 
 		:host(:not([facedown])) .container {
-			animation: flip-to-front linear var(--_duration) 1 both;
+			transform: rotateY(0deg);
 		} :host([facedown]) .container {
-			animation: flip-to-back linear var(--_duration) 1 both;
+			transform: rotateY(-180deg);
 		}
 
 		@keyframes flip-to-back {
@@ -218,7 +220,7 @@ export class FlipCardElement extends HTMLElement {
 		this.#container = this.shadowRoot!.querySelector<HTMLElement>(".container")
 		this.#corners = this.shadowRoot!.querySelectorAll<HTMLElement>(".corner")
 
-		this.#setAccessibleText(this.facedown)
+		this.#setAccessibleSide(this.facedown)
 		this.#createCorners(this.cornerAccuracy)
 		this.recalculateBorderRadius()
 	}
@@ -229,14 +231,15 @@ export class FlipCardElement extends HTMLElement {
 
 	#attributeCallbacks = {
 		"facedown": (newValue: string | undefined | null) => {
-			this.#setAccessibleText(newValue != null)
+			this.#setAccessibleSide(newValue != null)
+			this.#animate()
 		},
 		"corner-accuracy": (newValue: string | undefined | null) => {
 			this.#createCorners(parseInt(newValue))
 		},
 	}
 
-	#setAccessibleText(facedown: boolean) {
+	#setAccessibleSide(facedown: boolean) {
 		this.#front?.setAttribute("aria-hidden", facedown.toString())
 		this.#back?.setAttribute("aria-hidden", (!facedown).toString())
 	}
@@ -251,6 +254,12 @@ export class FlipCardElement extends HTMLElement {
 				return cornerPart
 			}))
 		})
+	}
+
+	#animate() {
+		if (this.#container) {
+			this.#container.style.animation = this.facedown ? "var(--_animation-back)" : "var(--_animation-front)"
+		}
 	}
 
 	#createRoot = () => {

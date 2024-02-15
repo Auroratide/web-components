@@ -15,4 +15,13 @@ This example component just lets you decrease and increase a number.
 
 <button id="btn">Flip</button>
 
+<flip-card id="card2" facedown>
+	<section slot="front">
+		<p>Front content</p>
+	</section>
+	<section slot="back">
+		<p>Back content</p>
+	</section>
+</flip-card>
+
 After card.
