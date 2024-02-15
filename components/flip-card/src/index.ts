@@ -1,3 +1,5 @@
+import { FLIPPING, FLIPPED } from "./events.js"
+
 export class FlipCardElement extends HTMLElement {
 	static defaultElementName = "flip-card"
 
@@ -222,7 +224,15 @@ export class FlipCardElement extends HTMLElement {
 		this.#setAccessibleSide(this.facedown)
 		this.#createCorners(this.cornerAccuracy)
 		this.recalculateBorderRadius()
+
+		this.#container?.addEventListener("animationend", this.#onAnimationEnd)
 	}
+
+	disconnectedCallback() {
+		this.#container?.removeEventListener("animationend", this.#onAnimationEnd)
+	}
+
+	#onAnimationEnd = () => this.#emit(FLIPPED)
 
 	attributeChangedCallback(attribute: string, oldValue: string, newValue: string) {
 		this.#attributeCallbacks[attribute]?.(newValue, oldValue)
@@ -230,6 +240,7 @@ export class FlipCardElement extends HTMLElement {
 
 	#attributeCallbacks = {
 		"facedown": (newValue: string | undefined | null) => {
+			this.#emit(FLIPPING)
 			this.#setAccessibleSide(newValue != null)
 			this.#animate()
 		},
@@ -259,6 +270,14 @@ export class FlipCardElement extends HTMLElement {
 		if (this.#container) {
 			this.#container.style.animation = this.facedown ? "var(--_animation-back)" : "var(--_animation-front)"
 		}
+	}
+
+	#emit(event: string) {
+		this.dispatchEvent(new CustomEvent(event, {
+			detail: {
+				facedown: this.facedown,
+			},
+		}))
 	}
 
 	#createRoot = () => {
