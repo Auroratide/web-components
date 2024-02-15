@@ -23,14 +23,13 @@ export class FlipCardElement extends HTMLElement {
 	static css = `
 		:host {
 			--_duration: var(--flip-duration, 0.75s);
-			--_perspective: var(--flip-perspective, 100em);
 			--_height: var(--flip-height, 20em);
 			--_depth: var(--card-depth, 0.15em);
 			--_animation-front: var(--flip-to-front-animation, flip-to-front linear var(--_duration) 1 both);
 			--_animation-back: var(--flip-to-back-animation, flip-to-back linear var(--_duration) 1 both);
 
 			display: block;
-			perspective: var(--_perspective);
+			perspective: 100em;
 			transform-style: preserve-3d;
 		}
 
