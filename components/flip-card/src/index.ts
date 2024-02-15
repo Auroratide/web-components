@@ -204,8 +204,9 @@ export class FlipCardElement extends HTMLElement {
 
 	flip() { this.facedown = !this.facedown }
 
-	recalculateBorderRadius() {
+	recreateBorderRadius() {
 		this.#container?.style.setProperty("--_radius", getComputedStyle(this).borderRadius)
+		this.#createCorners()
 	}
 
 	#front: HTMLElement
@@ -220,8 +221,7 @@ export class FlipCardElement extends HTMLElement {
 		this.#corners = this.shadowRoot!.querySelectorAll<HTMLElement>(".corner")
 
 		this.#setAccessibleSide(this.facedown)
-		this.#createCorners()
-		this.recalculateBorderRadius()
+		this.recreateBorderRadius()
 
 		this.#container?.addEventListener("animationend", this.#onAnimationEnd)
 	}
