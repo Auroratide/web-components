@@ -1,5 +1,12 @@
 # @auroratide/wc-docs
 
+## 0.1.10
+
+### Patch Changes
+
+- Updated dependencies [675116f]
+  - @auroratide/flip-card@0.1.0
+
 ## 0.1.9
 
 ### Patch Changes
