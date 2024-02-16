@@ -406,12 +406,12 @@ card.addEventListener('flipping', e => {
 
 This custom element is build with accessibility in mind!
 
-TODO. Test/consider:
+* Screenreaders only announce the side that is visible.
+* Screenreaders announce which side is visible to inform that another side to the card exists ("Frontside" and "Backside").
+* Tabbable elements on the non-facing side of the card cannot be focused until the card is flipped.
+* The flip animation is disabled for people who [prefer reduced motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion).
 
-* What the screenreader reads
-* Labelling the card so we know it's a card with a front and a back
-* what if the card contains focusable elements inside? Tabbing order?
-* aria-live recommendations?
+If you attach `aria-live="polite"` to the `flip-card`, then flipping the card will announce the new side's contents to screen readers. As this may not always be desired behaviour, it is up to you to discern whether adding `aria-live` will make your content more accessible.
 
 ## TODOS
 

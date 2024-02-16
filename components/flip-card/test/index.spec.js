@@ -31,13 +31,13 @@ describe("flip-card", () => {
 				</flip-card>
 			`)
 	
-			expect(accessibleText(elem)).to.equal("Front")
+			expect(accessibleText(elem)).to.equal("(Frontside)Front")
 	
 			await elem.flip()
-			expect(accessibleText(elem)).to.equal("Back")
+			expect(accessibleText(elem)).to.equal("(Backside)Back")
 	
 			await elem.flip()
-			expect(accessibleText(elem)).to.equal("Front")
+			expect(accessibleText(elem)).to.equal("(Frontside)Front")
 		})
 
 		it("using the property", async () => {
@@ -48,13 +48,13 @@ describe("flip-card", () => {
 				</flip-card>
 			`)
 	
-			expect(accessibleText(elem)).to.equal("Front")
+			expect(accessibleText(elem)).to.equal("(Frontside)Front")
 	
 			elem.facedown = true
-			expect(accessibleText(elem)).to.equal("Back")
+			expect(accessibleText(elem)).to.equal("(Backside)Back")
 	
 			elem.facedown = false
-			expect(accessibleText(elem)).to.equal("Front")
+			expect(accessibleText(elem)).to.equal("(Frontside)Front")
 		})
 
 		it("using attributes", async () => {
@@ -65,13 +65,67 @@ describe("flip-card", () => {
 				</flip-card>
 			`)
 	
-			expect(accessibleText(elem)).to.equal("Front")
+			expect(accessibleText(elem)).to.equal("(Frontside)Front")
 	
 			elem.toggleAttribute("facedown", true)
-			expect(accessibleText(elem)).to.equal("Back")
+			expect(accessibleText(elem)).to.equal("(Backside)Back")
 	
 			elem.toggleAttribute("facedown", false)
-			expect(accessibleText(elem)).to.equal("Front")
+			expect(accessibleText(elem)).to.equal("(Frontside)Front")
+		})
+	})
+
+	describe("focus", () => {
+		it.only("skip button on non-visible side", async () => {
+			const container = await fixture(`
+				<div>
+					<button id="start">Start</button>
+					<flip-card>
+						<section slot="front">
+							<button id="front">Front</button>
+						</section>
+						<section slot="back">
+							<button id="back">Back</button>
+						</section>
+					</flip-card>
+					<button id="end">End</button>
+				</div>
+			`)
+
+			container.querySelector("#start").focus()
+
+			pressTab()
+			expect(document.activeElement).to.equal(container.querySelector("#front"))
+
+			pressTab()
+			expect(document.activeElement).to.equal(container.querySelector("#end"))
+		})
+
+		it("card flipped while focused on visible side", async () => {
+			const container = await fixture(`
+				<div>
+					<button id="start">Start</button>
+					<flip-card>
+						<section slot="front">
+							<button id="front">Front</button>
+						</section>
+						<section slot="back">
+							<button id="back">Back</button>
+						</section>
+					</flip-card>
+					<button id="end">End</button>
+				</div>
+			`)
+
+			container.querySelector("#start").focus()
+
+			pressTab()
+			expect(document.activeElement).to.equal(container.querySelector("#front"))
+
+			container.querySelector("flip-card").flip()
+
+			pressTab()
+			expect(document.activeElement).to.equal(container.querySelector("#back"))
 		})
 	})
 
@@ -132,3 +186,39 @@ describe("flip-card", () => {
 		})
 	})
 })
+
+// It feels pretty insane simulating this...
+const pressTab = () => {
+	const tabOrder = getTabOrder()
+
+	const index = tabOrder.indexOf(document.activeElement)
+	if (index > -1) {
+		const nextElement = tabOrder[index + 1] || tabOrder[0]
+		nextElement.focus()
+	}
+}
+
+const getTabOrder = (elem = document.body) => {
+	if (isInteractive(elem))
+		return [elem]
+
+	if (elem.nodeName === "STYLE" || elem.nodeName === "SCRIPT" || elem.nodeName === "TEMPLATE")
+		return []
+	if (elem.hasAttribute?.("inert"))
+		return []
+	if (elem.nodeName === "SLOT")
+		return Array.from(elem.assignedNodes()).flatMap(getTabOrder)
+	if (elem.shadowRoot)
+		return getTabOrder(elem.shadowRoot)
+
+	return Array.from(elem.childNodes).flatMap(getTabOrder)
+}
+
+const isInteractive = (element) => {
+	return (
+		(element.tagName === "A" || element.tagName === "BUTTON" || element.tagName === "INPUT") &&
+		!element.disabled &&
+		!element.hidden &&
+		!element.inert
+	)
+}

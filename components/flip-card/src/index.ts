@@ -168,12 +168,6 @@ export class FlipCardElement extends HTMLElement {
 		} :host([facedown]) .container {
 			transform: rotateY(-180deg);
 		}
-
-		@media (prefers-reduced-motion: reduce) {
-			.container {
-				--_duraction: 0s;
-			}
-		}
 	`
 
 	static get observedAttributes() {
@@ -261,6 +255,9 @@ export class FlipCardElement extends HTMLElement {
 		this.#front?.setAttribute("aria-hidden", facedown.toString())
 		this.#back?.setAttribute("aria-hidden", (!facedown).toString())
 
+		this.#front?.toggleAttribute("inert", facedown)
+		this.#back?.toggleAttribute("inert", !facedown)
+
 		if (!this.#label) return
 		this.#label.textContent = facedown ? "(Backside)" : "(Frontside)"
 	}
@@ -278,12 +275,15 @@ export class FlipCardElement extends HTMLElement {
 	}
 
 	#animate() {
-		const duration = cssTimeToMs(getComputedStyle(this).getPropertyValue("--_duration"))
+		const duration = prefersReducedMotion()
+			? 0
+			: cssTimeToMs(getComputedStyle(this).getPropertyValue("--_duration"))
+
 		const animationToPlay = this.facedown ? this.#flipToBackAnimation : this.#flipToFrontAnimation
 		const animation = this.#container?.animate(animationToPlay.keyframes, {
-			duration,
 			fill: "both",
 			...animationToPlay.options,
+			duration,
 		})
 
 		animation?.addEventListener("finish", () => {
@@ -322,3 +322,5 @@ type AnimationDescription = {
 }
 
 const cssTimeToMs = (time: string) => parseFloat(time) * (time.endsWith("ms") ? 1 : 1000)
+
+const prefersReducedMotion = () => window?.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
