@@ -7,7 +7,6 @@ The `flip-card` element represents content with a front side and a back side, wi
 <!--DEMO
 <wc-demo class="flip-card-demo">
 	<flip-card class="default">
-		<label>Basic Card</label>
 		<section slot="front">
 			<p>The front!</p>
 		</section>
@@ -23,7 +22,6 @@ The `flip-card` element represents content with a front side and a back side, wi
 
 ```html
 <flip-card>
-	<label>Basic Card</label>
 	<section slot="front">
 		<p>The front!</p>
 	</section>
@@ -57,11 +55,8 @@ import "@auroratide/flip-card/lib/define.js"
 
 `flip-card` is a **markup element** that can be used in your HTML. When you use it, you must specify a **front** slot and a **back** slot, using the `slot` attribute on the direct descendents.
 
-It is also highly recommended to specify a `label` that describes the card's overall purpose. This helps make your content more accessible.
-
 ```html
 <flip-card>
-	<label>Basic Card</label>
 	<section slot="front">
 		<p>The front!</p>
 	</section>
@@ -78,7 +73,6 @@ By default, the front of the card is show, and the backside is hidden. Using the
 <!--DEMO
 <wc-demo class="flip-card-demo">
 	<flip-card class="default" facedown>
-		<label>Facedown at first</label>
 		<section slot="front">
 			<p>The front!</p>
 		</section>
@@ -131,7 +125,6 @@ Like in real life, these cards have some thickness! The effect is subtle, but ma
 <!--DEMO
 <wc-demo class="flip-card-demo">
 	<flip-card class="coin">
-		<label>Thick coin</label>
 		<section slot="front">
 			<p>Heads</p>
 		</section>
@@ -178,7 +171,6 @@ For example, the first coin has low corner granularity, and the second coin has 
 <wc-demo class="flip-card-demo">
 	<div class="card-container" style="--flip-duration: 2s;">
 		<flip-card class="coin" style="--corner-granularity: 3;">
-			<label>Granularity 3</label>
 			<section slot="front">
 				<p>Front</p>
 			</section>
@@ -187,7 +179,6 @@ For example, the first coin has low corner granularity, and the second coin has 
 			</section>
 		</flip-card>
 		<flip-card class="coin" style="--corner-granularity: 16;">
-			<label>Granularity 16</label>
 			<section slot="front">
 				<p>Front</p>
 			</section>
@@ -221,7 +212,6 @@ The following apply to the default animation.
 <!--DEMO
 <wc-demo class="flip-card-demo">
 	<flip-card class="default long-and-high">
-		<label>Longer animation</label>
 		<section slot="front">
 			<p>Front</p>
 		</section>
@@ -315,7 +305,6 @@ Here's an example for a vertical flip, rather than a horizontal flip.
 <!--DEMO
 <wc-demo class="flip-card-demo">
 	<flip-card class="default vertical-flip">
-		<label>Flips vertically</label>
 		<section slot="front">
 			<p>The front!</p>
 		</section>
@@ -407,12 +396,19 @@ card.addEventListener('flipping', e => {
 This custom element is build with accessibility in mind!
 
 * Screenreaders only announce the side that is visible.
-* Screenreaders announce which side is visible to inform that another side to the card exists ("Frontside" and "Backside").
+* Screenreaders announce "Frontside" or "Backside" to denote which side is visible.
 * Tabbable elements on the non-facing side of the card cannot be focused until the card is flipped.
 * The flip animation is disabled for people who [prefer reduced motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion).
 
+### Labelling Cards
+
+The `flip-card` element does not prescribe a specific way to accessibly label the card's content, as the best way to do this depends on the card's context. Possibilities include:
+
+* Wrapping the card in an `article` element if its contents are self-contained.
+* Labelling the card with text within the card itself using `aria-labelledby`, with `role="region"`.
+* Simply putting a heading element above the card.
+* Wrapping the card in a `figure` element and using `figcaption` to label it.
+
+### Announcing when the card flips
+
 If you attach `aria-live="polite"` to the `flip-card`, then flipping the card will announce the new side's contents to screen readers. As this may not always be desired behaviour, it is up to you to discern whether adding `aria-live` will make your content more accessible.
-
-## TODOS
-
-* ::slotted() and label interaction?

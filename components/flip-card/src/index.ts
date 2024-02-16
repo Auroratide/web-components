@@ -4,10 +4,7 @@ export class FlipCardElement extends HTMLElement {
 	static defaultElementName = "flip-card"
 
 	static html = `
-		<div class="label">
-			<slot></slot>
-			<span class="visually-hidden" id="side-label-text">(Frontside)</span>
-		</div>
+		<p class="visually-hidden" id="side-label-text">(Frontside)</p>
 		<div class="container">
 			<div class="front face">
 				<slot name="front"></slot>

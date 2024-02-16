@@ -1,11 +1,3 @@
-flip-card > label {
-	font-size: var(--f-m1);
-	font-weight: bold;
-	text-align: center;
-	cursor: text;
-	margin-block-end: 0.5em;
-}
-
 flip-card.default {
 	--card-depth: 0.5em;
 	--corner-granularity: 0;
