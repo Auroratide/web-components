@@ -18,6 +18,10 @@
 		"name": "Timothy Foster",
 		"url": "https://auroratide.com"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Auroratide/web-components"
+	},
 	"license": "ISC",
 	"devDependencies": {
 		"@open-wc/testing": "^4.0.0",

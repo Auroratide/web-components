@@ -1,8 +1,7 @@
 {
 	"name": "@auroratide/flip-card",
 	"version": "0.1.0",
-	"private": true,
-	"description": "",
+	"description": "A card of content with a front and back, beautifully flips.",
 	"type": "module",
 	"main": "lib/index.js",
 	"module": "lib/index.js",
@@ -13,10 +12,15 @@
 		"test": "wtr --node-resolve --port 10007 test",
 		"test:clean": "pnpm clean && pnpm build && pnpm test"
 	},
-	"keywords": [],
+	"keywords": ["card", "web component", "flip"],
 	"author": {
 		"name": "Timothy Foster",
 		"url": "https://auroratide.com"
+	},
+	"homepage": "https://auroratide.github.io/web-components/flip-card",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Auroratide/web-components"
 	},
 	"license": "ISC",
 	"devDependencies": {
