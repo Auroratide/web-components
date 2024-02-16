@@ -1,4 +1,4 @@
-import{_ as c}from"../chunks/preload-helper.BQ24v_F8.js";import{s as r,n as i,o as p}from"../chunks/scheduler.Ce_0Mfso.js";import{S as d,i as h,s as u,m as f,l as m,d as l,h as g,n as j,f as b,o as y,p as v,q as w,r as k}from"../chunks/index.QmGHi4hh.js";import{R as T}from"../chunks/Readme.BbztUA8r.js";const _=`<h1 id="the-flip-card-element">The flip-card Element</h1>
+import{_ as c}from"../chunks/preload-helper.BQ24v_F8.js";import{s as i,n as r,o as p}from"../chunks/scheduler.Ce_0Mfso.js";import{S as d,i as h,s as u,m as f,l as m,d as l,h as g,n as b,f as j,o as y,p as w,q as v,r as k}from"../chunks/index.QmGHi4hh.js";import{R as q}from"../chunks/Readme.BbztUA8r.js";const T=`<h1 id="the-flip-card-element">The flip-card Element</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/flip-card">View this page with live demos!</a></strong></p>
 <p>The <code>flip-card</code> element represents content with a front side and a back side, with one side presented at a time.</p>
 <wc-demo class="flip-card-demo">
@@ -356,14 +356,23 @@ card.<span class="hljs-title function_">setFlipToBackAnimation</span>(
 </code></pre>
 <h2 id="accessibility">Accessibility</h2>
 <p>This custom element is build with accessibility in mind!</p>
-<p>TODO. Test/consider:</p>
 <ul>
-<li>What the screenreader reads</li>
-<li>Labelling the card so we know it's a card with a front and a back</li>
-<li>what if the card contains focusable elements inside? Tabbing order?</li>
-<li>aria-live recommendations?</li>
+<li>Screenreaders only announce the side that is visible.</li>
+<li>Screenreaders announce &quot;Frontside&quot; or &quot;Backside&quot; to denote which side is visible.</li>
+<li>Tabbable elements on the non-facing side of the card cannot be focused until the card is flipped.</li>
+<li>The flip animation is disabled for people who <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion">prefer reduced motion</a>.</li>
 </ul>
-`,q=()=>{document.querySelectorAll(".flip-card-demo").forEach(n=>{const a=n.querySelectorAll("flip-card"),s=n.querySelector("button");s==null||s.addEventListener("click",()=>{a.forEach(e=>e.flip())})}),customElements.whenDefined("flip-card").then(()=>{document.querySelectorAll(".vertical-flip").forEach(n=>{n.setFlipToFrontAnimation([{transform:"translateZ(calc(-1 * var(--_depth))) rotateX(180deg)"},{transform:"translateZ(var(--_height)) rotateX(270deg)"},{transform:"translateZ(0em) rotateX(360deg)"}],{easing:"ease-in-out"}),n.setFlipToBackAnimation([{transform:"translateZ(0em) rotateX(0deg)"},{transform:"translateZ(var(--_height)) rotateX(90deg)"},{transform:"translateZ(calc(-1 * var(--_depth))) rotateX(180deg)"}],{easing:"ease-in-out"})})})};function S(n){let a,s,e;return s=new T({props:{html:_}}),{c(){a=u(),f(s.$$.fragment),this.h()},l(t){m("svelte-8ek0hh",document.head).forEach(l),a=g(t),j(s.$$.fragment,t),this.h()},h(){document.title="The flip-card Element"},m(t,o){b(t,a,o),y(s,t,o),e=!0},p:i,i(t){e||(v(s.$$.fragment,t),e=!0)},o(t){w(s.$$.fragment,t),e=!1},d(t){t&&l(a),k(s,t)}}}function F(n){return c(()=>import("../chunks/define.CtiRW07H.js"),__vite__mapDeps([]),import.meta.url),p(()=>{q()}),[]}class B extends d{constructor(a){super(),h(this,a,F,S,r,{})}}export{B as component};
+<h3 id="labelling-cards">Labelling Cards</h3>
+<p>The <code>flip-card</code> element does not prescribe a specific way to accessibly label the card's content, as the best way to do this depends on the card's context. Possibilities include:</p>
+<ul>
+<li>Wrapping the card in an <code>article</code> element if its contents are self-contained.</li>
+<li>Labelling the card with text within the card itself using <code>aria-labelledby</code>, with <code>role=&quot;region&quot;</code>.</li>
+<li>Simply putting a heading element above the card.</li>
+<li>Wrapping the card in a <code>figure</code> element and using <code>figcaption</code> to label it.</li>
+</ul>
+<h3 id="announcing-when-the-card-flips">Announcing when the card flips</h3>
+<p>If you attach <code>aria-live=&quot;polite&quot;</code> to the <code>flip-card</code>, then flipping the card will announce the new side's contents to screen readers. As this may not always be desired behaviour, it is up to you to discern whether adding <code>aria-live</code> will make your content more accessible.</p>
+`,S=()=>{document.querySelectorAll(".flip-card-demo").forEach(s=>{const e=s.querySelectorAll("flip-card"),n=s.querySelector('[slot="actions"] button');n==null||n.addEventListener("click",()=>{e.forEach(a=>a.flip())})}),customElements.whenDefined("flip-card").then(()=>{document.querySelectorAll(".vertical-flip").forEach(s=>{s.setFlipToFrontAnimation([{transform:"translateZ(calc(-1 * var(--_depth))) rotateX(180deg)"},{transform:"translateZ(var(--_height)) rotateX(270deg)"},{transform:"translateZ(0em) rotateX(360deg)"}],{easing:"ease-in-out"}),s.setFlipToBackAnimation([{transform:"translateZ(0em) rotateX(0deg)"},{transform:"translateZ(var(--_height)) rotateX(90deg)"},{transform:"translateZ(calc(-1 * var(--_depth))) rotateX(180deg)"}],{easing:"ease-in-out"})})})};function _(s){let e,n,a;return n=new q({props:{html:T}}),{c(){e=u(),f(n.$$.fragment),this.h()},l(t){m("svelte-8ek0hh",document.head).forEach(l),e=g(t),b(n.$$.fragment,t),this.h()},h(){document.title="The flip-card Element"},m(t,o){j(t,e,o),y(n,t,o),a=!0},p:r,i(t){a||(w(n.$$.fragment,t),a=!0)},o(t){v(n.$$.fragment,t),a=!1},d(t){t&&l(e),k(n,t)}}}function F(s){return c(()=>import("../chunks/define.Bj-Sr4zv.js"),__vite__mapDeps([]),import.meta.url),p(()=>{S()}),[]}class B extends d{constructor(e){super(),h(this,e,F,_,i,{})}}export{B as component};
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
     __vite__mapDeps.viteFileDeps = []
