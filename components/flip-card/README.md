@@ -152,6 +152,7 @@ flip-card::part(edge) {
 
 * Use the `border-radius` CSS property to make rounded corners, but it must be a single absolute length.
 * The `--corner-granularity` CSS property is an integer that represents how smooth the 3D curve is on a card's rounded corners. Higher is smoother; default is `4`.
+* Call `recreateBorderRadius()` anytime the card's sizes or border-radius's sizes change.
 
 `border-radius` on the card rounds the corners (mostly) like you would expect. It's a bit of a magic trick to make the card's edge rounded, as curved 3D surfaces don't exist in HTML/CSS. As a result there are some limitations.
 
@@ -198,6 +199,8 @@ flip-card {
 	border-radius: 5em;
 }
 ```
+
+Finally, there is an escape hatch! If you find yourself dynamically changing the dimensions of the card or its border radius, you can manually call the `recreateBorderRadius()` method to reformat the corners. It's up to you to decide when this is needed, but if you have an unchanging card, then it probably isn't needed at all.
 
 ### Flip height and duration
 
@@ -295,7 +298,81 @@ As such, to get the most realistic card flips when there are multiple cards, you
 
 ### Fully custom animations
 
-TODO
+You can use the `setFlipToFrontAnimation()` and `setFlipToBackAnimation()` methods in Javascript to give the card a different flip animation.
+
+Here's an example for a vertical flip, rather than a horizontal flip.
+
+<!--DEMO
+<wc-demo class="flip-card-demo">
+	<flip-card class="default vertical-flip">
+		<section slot="front">
+			<p>The front!</p>
+		</section>
+		<section slot="back">
+			<p>The back!</p>
+		</section>
+	</flip-card>
+	<div slot="actions">
+		<button>Flip!</button>
+	</div>
+</wc-demo>
+/DEMO-->
+
+```js
+card.setFlipToFrontAnimation(
+	[ {
+		transform: "translateZ(calc(-1 * var(--_depth))) rotateX(180deg)",
+	}, {
+		transform: "translateZ(var(--_height)) rotateX(270deg)",
+	}, {
+		transform: "translateZ(0em) rotateX(360deg)",
+	} ],
+	{
+		easing: "ease-in-out",
+	},
+)
+
+card.setFlipToBackAnimation(
+	[ {
+		transform: "translateZ(0em) rotateX(0deg)",
+	}, {
+		transform: "translateZ(var(--_height)) rotateX(90deg)",
+	}, {
+		transform: "translateZ(calc(-1 * var(--_depth))) rotateX(180deg)",
+	} ],
+	{
+		easing: "ease-in-out",
+	},
+)
+```
+
+(and a dash of CSS too, to orient the backside properly at rest)
+
+```css
+flip-card > [slot="back"] {
+	transform: scale(-1);
+}
+```
+
+
+The `flip-card` component uses the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) to perform animations, rather than CSS. This confers some advantages, such as being able to generate animations on the fly or apply easing to the entire animation rather than just keyframes. It's also necessary in order to penetrate the Shadow DOM properly.
+
+Each method has the same interface as the Element's [animate()](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate) method:
+
+* The first parameter is a list of keyframes. The `offset` property is equivalent to defining percentage in CSS's equivalent `@keyframes`. See [Keyframe Formats](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats) for details.
+* The second parameter are options, such as number of iterations or easing. See [KeyframeEffect's object parameter](https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect/KeyframeEffect#parameters) for details.
+
+### All customization options in a single list
+
+| Name | Default | Description |
+| ------------- | ------------- | ------------- |
+| `--card-depth` | `0.15em` | How thick the card's edge is. |
+| `--flip-height` | `20em` | How high the card travels vertically when flipped. |
+| `--flip-duration` | `0.75s` | How long it takes the card to complete a flip. |
+| `--flip-duration` | `0.75s` | How long it takes the card to complete a flip. |
+| `--corner-granularity` | `4` | How smooth the card's corner edges should be when rounded. Higher is smoother. |
+| `setFlipToFrontAnimation()` | a horizontal flip | Animation to play when flipping the card from being face down to being face up. Parameters are keyframes and options. |
+| `setFlipToBackAnimation()` | a horizontal flip | Animation to play when flipping the card from being face up to being face down. Parameters are keyframes and options. |
 
 ## Events
 
@@ -324,7 +401,3 @@ TODO. Test/consider:
 * Labelling the card so we know it's a card with a front and a back
 * what if the card contains focusable elements inside? Tabbing order?
 * aria-live recommendations?
-
-## OTHER TODO
-
-* custom animations in the shadow dom is janky doodle

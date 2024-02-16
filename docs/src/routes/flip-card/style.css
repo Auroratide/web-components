@@ -77,4 +77,8 @@ flip-card.long-and-high {
 	perspective: none;
 }
 
+flip-card.vertical-flip > [slot="back"] {
+	transform: scale(-1);
+}
+
 flip-card p:last-child { margin: 0; }

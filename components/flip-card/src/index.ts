@@ -27,8 +27,6 @@ export class FlipCardElement extends HTMLElement {
 			--_duration: var(--flip-duration, 0.75s);
 			--_height: var(--flip-height, 20em);
 			--_depth: var(--card-depth, 0.15em);
-			--_animation-front: var(--flip-to-front-animation, flip-to-front linear var(--_duration) 1 both);
-			--_animation-back: var(--flip-to-back-animation, flip-to-back linear var(--_duration) 1 both);
 			--_granularity: var(--corner-granularity, 4);
 
 			display: block;
@@ -85,8 +83,8 @@ export class FlipCardElement extends HTMLElement {
 		}
 
 		.top, .bottom {
-			width: calc(100% - 2 * var(--_radius));;
-			height: var(--flip-depth);
+			width: calc(100% - 2 * var(--_radius));
+			height: var(--_depth);
 			inset-inline: var(--_radius);
 		} .top {
 			inset-block-start: 0;
@@ -156,35 +154,9 @@ export class FlipCardElement extends HTMLElement {
 			transform: rotateY(-180deg);
 		}
 
-		@keyframes flip-to-back {
-			0% {
-				transform: translateZ(0em) rotateY(0deg);
-				animation-timing-function: ease-in;
-			} 50% {
-				transform: translateZ(var(--_height)) rotateY(-90deg);
-				animation-timing-function: ease-out;
-			} 100% {
-				transform: translateZ(calc(-1 * var(--_depth))) rotateY(-180deg);
-				animation-timing-function: ease-out;
-			}
-		}
-
-		@keyframes flip-to-front {
-			0% {
-				transform: translateZ(calc(-1 * var(--_depth))) rotateY(-180deg);
-				animation-timing-function: ease-in;
-			} 50% {
-				transform: translateZ(var(--_height)) rotateY(-270deg);
-				animation-timing-function: ease-out;
-			} 100% {
-				transform: translateZ(0em) rotateY(-360deg);
-				animation-timing-function: ease-out;
-			}
-		}
-
 		@media (prefers-reduced-motion: reduce) {
 			.container {
-				animation-duration: 0s !important;
+				--_duraction: 0s;
 			}
 		}
 	`
@@ -204,6 +176,38 @@ export class FlipCardElement extends HTMLElement {
 
 	flip() { this.facedown = !this.facedown }
 
+	#flipToFrontAnimation: AnimationDescription = {
+		keyframes: [ {
+			transform: "translateZ(calc(-1 * var(--_depth))) rotateY(-180deg)",
+		}, {
+			transform: "translateZ(var(--_height)) rotateY(-270deg)",
+		}, {
+			transform: "translateZ(0em) rotateY(-360deg)",
+		} ],
+		options: {
+			easing: "ease-in-out",
+		},
+	}
+	setFlipToFrontAnimation(keyframes: AnimationDescription["keyframes"], options?: AnimationDescription["options"]) {
+		this.#flipToFrontAnimation = { keyframes, options }
+	}
+
+	#flipToBackAnimation: AnimationDescription = {
+		keyframes: [ {
+			transform: "translateZ(0em) rotateY(0deg)",
+		}, {
+			transform: "translateZ(var(--_height)) rotateY(-90deg)",
+		}, {
+			transform: "translateZ(calc(-1 * var(--_depth))) rotateY(-180deg)",
+		} ],
+		options: {
+			easing: "ease-in-out",
+		},
+	}
+	setFlipToBackAnimation(keyframes: AnimationDescription["keyframes"], options?: AnimationDescription["options"]) {
+		this.#flipToBackAnimation = { keyframes, options }
+	}
+
 	recreateBorderRadius() {
 		this.#container?.style.setProperty("--_radius", getComputedStyle(this).borderRadius)
 		this.#createCorners()
@@ -222,15 +226,7 @@ export class FlipCardElement extends HTMLElement {
 
 		this.#setAccessibleSide(this.facedown)
 		this.recreateBorderRadius()
-
-		this.#container?.addEventListener("animationend", this.#onAnimationEnd)
 	}
-
-	disconnectedCallback() {
-		this.#container?.removeEventListener("animationend", this.#onAnimationEnd)
-	}
-
-	#onAnimationEnd = () => this.#emit(FLIPPED)
 
 	attributeChangedCallback(attribute: string, oldValue: string, newValue: string) {
 		this.#attributeCallbacks[attribute]?.(newValue, oldValue)
@@ -262,9 +258,18 @@ export class FlipCardElement extends HTMLElement {
 	}
 
 	#animate() {
-		if (this.#container) {
-			this.#container.style.animation = this.facedown ? "var(--_animation-back)" : "var(--_animation-front)"
-		}
+		const duration = cssTimeToMs(getComputedStyle(this).getPropertyValue("--_duration"))
+		const animationToPlay = this.facedown ? this.#flipToBackAnimation : this.#flipToFrontAnimation
+		const animation = this.#container?.animate(animationToPlay.keyframes, {
+			duration,
+			fill: "both",
+			...animationToPlay.options,
+		})
+
+		animation?.addEventListener("finish", () => {
+			animation.commitStyles()
+			this.#emit(FLIPPED)
+		}, { once: true })
 	}
 
 	#emit(event: string) {
@@ -290,3 +295,10 @@ export class FlipCardElement extends HTMLElement {
 		return root
 	}
 }
+
+type AnimationDescription = {
+	keyframes: Keyframe[] | PropertyIndexedKeyframes,
+	options?: Omit<KeyframeAnimationOptions, "duration">,
+}
+
+const cssTimeToMs = (time: string) => parseFloat(time) * (time.endsWith("ms") ? 1 : 1000)
