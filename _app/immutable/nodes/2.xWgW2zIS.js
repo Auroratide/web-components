@@ -1,29 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="./logo-032.png" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-		
-		<link href="./_app/immutable/assets/0.B_NuJIsv.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.BzpR3LB6.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/entry.E_38PBjM.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.Ce_0Mfso.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/paths.DHRg4wF9.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.Bpoc5d2G.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/preload-helper.BQ24v_F8.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.QmGHi4hh.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/0.i02PKm-P.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/2.xWgW2zIS.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/setup-cycle-demo.DlallKuY.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/setup-flip-card-demos.e7UggXcj.js"><title>Web Components by Auroratide</title><!-- HEAD_svelte-9qjnth_START --><!-- HEAD_svelte-9qjnth_END -->
-	</head>
-	<body>
-		<div>  <div class="full-screen horizontal-on-large"><header class="svelte-115rb9m"><div class="container"><div class="site-nav svelte-115rb9m" data-svelte-h="svelte-1ljyi8a"><div class="site-links svelte-115rb9m"><a class="skip-link svelte-115rb9m" href="#main">Skip to content</a> <a class="site-title svelte-115rb9m" href=".">Web Components</a> <address class="svelte-115rb9m">By <a href="https://auroratide.com">Auroratide</a></address></div> <a class="site-logo svelte-115rb9m" href="." aria-hidden="true" tabindex="-1"><img src="./logo-256.png" alt="Web Components" class="svelte-115rb9m"></a></div> <hr class="svelte-115rb9m"> <nav data-svelte-h="svelte-12z6x7h"><ul class="svelte-p7odg2"><li class="svelte-p7odg2"><a href="./flip-card">flip-card</a></li> <li class="svelte-p7odg2"><a href="./reorder-list">reorder-list</a></li> <li class="svelte-p7odg2"><a href="./tab-list">tab-list</a></li> <li class="svelte-p7odg2"><a href="./toggle-switch">toggle-switch</a></li> <li class="svelte-p7odg2"><a href="./typewritten-text">typewritten-text</a></li></ul> </nav></div> </header> <main id="main" class="container"> <article><!-- HTML_TAG_START --><h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
+import{_ as n}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r,o as g}from"../chunks/scheduler.Ce_0Mfso.js";import{S as d,i as m,s as j,e as b,H as u,l as f,d as l,h as w,c as y,a as x,b as v,f as c}from"../chunks/index.QmGHi4hh.js";import{s as k}from"../chunks/setup-cycle-demo.DlallKuY.js";import{s as _}from"../chunks/setup-flip-card-demos.e7UggXcj.js";const q=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/">View this page with live demos!</a></strong></p>
 <p>This is just a bunch of highly reusable, fully accessible <strong><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a></strong> you can use on your websites! Why web components?</p>
 <ul>
@@ -360,32 +335,10 @@
 	<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
-<!-- HTML_TAG_END --></article></main></div> 
-			
-			<script>
-				{
-					__sveltekit_lcnsaj = {
-						base: new URL(".", location).pathname.slice(0, -1),
-						assets: "/web-components"
-					};
-
-					const element = document.currentScript.parentElement;
-
-					const data = [null,null];
-
-					Promise.all([
-						import("./_app/immutable/entry/start.BzpR3LB6.js"),
-						import("./_app/immutable/entry/app.Bpoc5d2G.js")
-					]).then(([kit, app]) => {
-						kit.start(app, element, {
-							node_ids: [0, 2],
-							data,
-							form: null,
-							error: null
-						});
-					});
-				}
-			</script>
-		</div>
-	</body>
-</html>
+`;function T(i){let s,a,e;return{c(){s=j(),a=b("article"),e=new u(!1),this.h()},l(t){f("svelte-9qjnth",document.head).forEach(l),s=w(t),a=y(t,"ARTICLE",{});var o=x(a);e=v(o,!1),o.forEach(l),this.h()},h(){document.title="Web Components by Auroratide",e.a=null},m(t,p){c(t,s,p),c(t,a,p),e.m(q,a)},p:r,i:r,o:r,d(t){t&&(l(s),l(a))}}}function E(i){return n(()=>import("../chunks/define.Bj-Sr4zv.js"),__vite__mapDeps([]),import.meta.url),n(()=>import("../chunks/define.Cxgo7aog.js"),__vite__mapDeps([]),import.meta.url),n(()=>import("../chunks/define.CJ6ZdpBe.js"),__vite__mapDeps([]),import.meta.url),n(()=>import("../chunks/define.BEaBwacd.js"),__vite__mapDeps([0,1]),import.meta.url),n(()=>Promise.resolve({}),__vite__mapDeps([2]),import.meta.url),n(()=>import("../chunks/define.BjUYNyY-.js"),__vite__mapDeps([]),import.meta.url),g(()=>{_(),k()}),[]}class S extends d{constructor(s){super(),m(this,s,E,T,h,{})}}export{S as component};
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = ["../chunks/define.BEaBwacd.js","../chunks/events.C44j2o98.js","../assets/style.DZNs7oul.css"]
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}
