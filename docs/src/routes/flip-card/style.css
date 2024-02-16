@@ -1,3 +1,11 @@
+flip-card > label {
+	font-size: var(--f-m1);
+	font-weight: bold;
+	text-align: center;
+	cursor: text;
+	margin-block-end: 0.5em;
+}
+
 flip-card.default {
 	--card-depth: 0.5em;
 	--corner-granularity: 0;
@@ -6,7 +14,7 @@ flip-card.default {
 	height: 12.5em;
 }
 
-flip-card.default > * {
+flip-card.default > section {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -16,11 +24,11 @@ flip-card.default > * {
 	font-size: var(--f-p1);
 }
 
-flip-card.default > :first-child {
+flip-card.default > [slot="front"] {
 	background-color: var(--c-primary);
 }
 
-flip-card.default > :last-child {
+flip-card.default > [slot="back"] {
 	background-color: var(--c-secondary);
 }
 
@@ -36,7 +44,7 @@ flip-card.coin {
 	border-radius: 5em;
 }
 
-flip-card.coin > * {
+flip-card.coin > section {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -46,11 +54,11 @@ flip-card.coin > * {
 	font-size: var(--f-p2);
 }
 
-flip-card.coin > :first-child {
+flip-card.coin > [slot="front"] {
 	background-color: var(--c-primary);
 }
 
-flip-card.coin > :last-child {
+flip-card.coin > [slot="back"] {
 	background-color: var(--c-secondary);
 }
 

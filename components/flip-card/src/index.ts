@@ -4,6 +4,10 @@ export class FlipCardElement extends HTMLElement {
 	static defaultElementName = "flip-card"
 
 	static html = `
+		<div class="label">
+			<slot></slot>
+			<span class="visually-hidden" id="side-label-text">(Frontside)</span>
+		</div>
 		<div class="container">
 			<div class="front face">
 				<slot name="front"></slot>
@@ -39,6 +43,17 @@ export class FlipCardElement extends HTMLElement {
 			width: 100%;
 			height: 100%;
 			border-radius: inherit;
+		}
+
+		.visually-hidden {
+			clip: rect(1px, 1px, 1px, 1px);
+			clip-path: inset(50%);
+			height: 1px;
+			width: 1px;
+			margin: -1px;
+			overflow: hidden;
+			padding: 0;
+			position: absolute;
 		}
 
 		.container {
@@ -213,12 +228,14 @@ export class FlipCardElement extends HTMLElement {
 		this.#createCorners()
 	}
 
+	#label: HTMLElement
 	#front: HTMLElement
 	#back: HTMLElement
 	#container: HTMLElement
 	#corners: NodeListOf<HTMLElement>
 
 	connectedCallback() {
+		this.#label = this.shadowRoot!.querySelector<HTMLElement>("#side-label-text")
 		this.#front = this.shadowRoot!.querySelector<HTMLElement>(".front")
 		this.#back = this.shadowRoot!.querySelector<HTMLElement>(".back")
 		this.#container = this.shadowRoot!.querySelector<HTMLElement>(".container")
@@ -243,6 +260,9 @@ export class FlipCardElement extends HTMLElement {
 	#setAccessibleSide(facedown: boolean) {
 		this.#front?.setAttribute("aria-hidden", facedown.toString())
 		this.#back?.setAttribute("aria-hidden", (!facedown).toString())
+
+		if (!this.#label) return
+		this.#label.textContent = facedown ? "(Backside)" : "(Frontside)"
 	}
 
 	#createCorners() {

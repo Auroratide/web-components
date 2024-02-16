@@ -7,6 +7,7 @@ The `flip-card` element represents content with a front side and a back side, wi
 <!--DEMO
 <wc-demo class="flip-card-demo">
 	<flip-card class="default">
+		<label>Basic Card</label>
 		<section slot="front">
 			<p>The front!</p>
 		</section>
@@ -22,6 +23,7 @@ The `flip-card` element represents content with a front side and a back side, wi
 
 ```html
 <flip-card>
+	<label>Basic Card</label>
 	<section slot="front">
 		<p>The front!</p>
 	</section>
@@ -55,8 +57,11 @@ import "@auroratide/flip-card/lib/define.js"
 
 `flip-card` is a **markup element** that can be used in your HTML. When you use it, you must specify a **front** slot and a **back** slot, using the `slot` attribute on the direct descendents.
 
+It is also highly recommended to specify a `label` that describes the card's overall purpose. This helps make your content more accessible.
+
 ```html
 <flip-card>
+	<label>Basic Card</label>
 	<section slot="front">
 		<p>The front!</p>
 	</section>
@@ -73,6 +78,7 @@ By default, the front of the card is show, and the backside is hidden. Using the
 <!--DEMO
 <wc-demo class="flip-card-demo">
 	<flip-card class="default" facedown>
+		<label>Facedown at first</label>
 		<section slot="front">
 			<p>The front!</p>
 		</section>
@@ -125,6 +131,7 @@ Like in real life, these cards have some thickness! The effect is subtle, but ma
 <!--DEMO
 <wc-demo class="flip-card-demo">
 	<flip-card class="coin">
+		<label>Thick coin</label>
 		<section slot="front">
 			<p>Heads</p>
 		</section>
@@ -171,6 +178,7 @@ For example, the first coin has low corner granularity, and the second coin has 
 <wc-demo class="flip-card-demo">
 	<div class="card-container" style="--flip-duration: 2s;">
 		<flip-card class="coin" style="--corner-granularity: 3;">
+			<label>Granularity 3</label>
 			<section slot="front">
 				<p>Front</p>
 			</section>
@@ -179,6 +187,7 @@ For example, the first coin has low corner granularity, and the second coin has 
 			</section>
 		</flip-card>
 		<flip-card class="coin" style="--corner-granularity: 16;">
+			<label>Granularity 16</label>
 			<section slot="front">
 				<p>Front</p>
 			</section>
@@ -212,6 +221,7 @@ The following apply to the default animation.
 <!--DEMO
 <wc-demo class="flip-card-demo">
 	<flip-card class="default long-and-high">
+		<label>Longer animation</label>
 		<section slot="front">
 			<p>Front</p>
 		</section>
@@ -305,6 +315,7 @@ Here's an example for a vertical flip, rather than a horizontal flip.
 <!--DEMO
 <wc-demo class="flip-card-demo">
 	<flip-card class="default vertical-flip">
+		<label>Flips vertically</label>
 		<section slot="front">
 			<p>The front!</p>
 		</section>
@@ -401,3 +412,7 @@ TODO. Test/consider:
 * Labelling the card so we know it's a card with a front and a back
 * what if the card contains focusable elements inside? Tabbing order?
 * aria-live recommendations?
+
+## TODOS
+
+* ::slotted() and label interaction?
