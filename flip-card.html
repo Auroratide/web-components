@@ -10,16 +10,16 @@
 
 		
 		<link href="./_app/immutable/assets/0.B_NuJIsv.css" rel="stylesheet">
-		<link href="./_app/immutable/assets/4.ChWBTVLd.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.65mjNb3O.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/entry.BMSOaflO.js">
+		<link href="./_app/immutable/assets/4.D5sNU1tT.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.Bco7Xj5V.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/entry.fy4H6cnN.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.Ce_0Mfso.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/paths.CE_sOdH5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.Bmu2r-XN.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/paths.BAU9Pk0H.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.2YTFeZ-A.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/preload-helper.BQ24v_F8.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.QmGHi4hh.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/0.Di2pelY9.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/4.DKR_4x7x.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.DHS7z2B2.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/4.DzgB-G_7.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/Readme.BbztUA8r.js"><title>The flip-card Element</title><!-- HEAD_svelte-8ek0hh_START --><!-- HEAD_svelte-8ek0hh_END -->
 	</head>
 	<body>
@@ -27,7 +27,7 @@
 <p hidden><strong><a href="https://auroratide.github.io/web-components/flip-card">View this page with live demos!</a></strong></p>
 <p>The <code>flip-card</code> element represents content with a front side and a back side, with one side presented at a time.</p>
 <wc-demo class="flip-card-demo">
-	<flip-card class="default" corner-accuracy="0">
+	<flip-card class="default">
 		<section slot="front">
 			<p>The front!</p>
 		</section>
@@ -71,7 +71,7 @@
 <h3 id="controlling-the-visible-side">Controlling the visible side</h3>
 <p>By default, the front of the card is show, and the backside is hidden. Using the <code>facedown</code> attribute, you can make the backside show instead.</p>
 <wc-demo class="flip-card-demo">
-	<flip-card class="default" facedown corner-accuracy="0">
+	<flip-card class="default" facedown>
 		<section slot="front">
 			<p>The front!</p>
 		</section>
@@ -109,7 +109,7 @@ card.<span class="hljs-title function_">flip</span>()
 <li>The <code>::part(edge)</code> CSS selector lets you customize the edge's color and other properties.</li>
 </ul>
 <wc-demo class="flip-card-demo">
-	<flip-card class="coin" corner-accuracy="16">
+	<flip-card class="coin">
 		<section slot="front">
 			<p>Heads</p>
 		</section>
@@ -130,6 +130,11 @@ flip-card<span class="hljs-selector-pseudo">::part</span>(edge) {
 }
 </code></pre>
 <h3 id="rounded-corners">Rounded corners</h3>
+<ul>
+<li>Use the <code>border-radius</code> CSS property to make rounded corners, but it must be a single absolute length.</li>
+<li>The <code>--corner-granularity</code> CSS property is an integer that represents how smooth the 3D curve is on a card's rounded corners. Higher is smoother; default is <code>4</code>.</li>
+<li>Call <code>recreateBorderRadius()</code> anytime the card's sizes or border-radius's sizes change.</li>
+</ul>
 <p><code>border-radius</code> on the card rounds the corners (mostly) like you would expect. It's a bit of a magic trick to make the card's edge rounded, as curved 3D surfaces don't exist in HTML/CSS. As a result there are some limitations.</p>
 <p>The following won't look very good unless the card's thickness is 0.</p>
 <ul>
@@ -138,6 +143,37 @@ flip-card<span class="hljs-selector-pseudo">::part</span>(edge) {
 <li>Elliptical border radius (e.g. <code>border-radius: 1em / 0.5em</code>)</li>
 <li>Dynamically changing the border radius on the fly</li>
 </ul>
+<p>Additionally, because curved 3D surfaces don't exist, the element must <em>simulate</em> a curved surface using lots of small flat surfaces. You can use the <code>--corner-granularity</code> CSS property to control how smooth the border-radius looks edge-on. In general, if you have a large border radius, you want a bigger <code>--corner-granularity</code>. It is an integer.</p>
+<p>For example, the first coin has low corner granularity, and the second coin has high corner granularity.</p>
+<wc-demo class="flip-card-demo">
+	<div class="card-container" style="--flip-duration: 2s;">
+		<flip-card class="coin" style="--corner-granularity: 3;">
+			<section slot="front">
+				<p>Front</p>
+			</section>
+			<section slot="back">
+				<p>Back</p>
+			</section>
+		</flip-card>
+		<flip-card class="coin" style="--corner-granularity: 16;">
+			<section slot="front">
+				<p>Front</p>
+			</section>
+			<section slot="back">
+				<p>Back</p>
+			</section>
+		</flip-card>
+	</div>
+	<div slot="actions">
+		<button>Flip!</button>
+	</div>
+</wc-demo>
+<pre><code class="language-css">flip-card {
+	<span class="hljs-attr">--corner-granularity</span>: <span class="hljs-number">16</span>;
+	<span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5em</span>;
+}
+</code></pre>
+<p>Finally, there is an escape hatch! If you find yourself dynamically changing the dimensions of the card or its border radius, you can manually call the <code>recreateBorderRadius()</code> method to reformat the corners. It's up to you to decide when this is needed, but if you have an unchanging card, then it probably isn't needed at all.</p>
 <h3 id="flip-height-and-duration">Flip height and duration</h3>
 <p>The following apply to the default animation.</p>
 <ul>
@@ -145,7 +181,7 @@ flip-card<span class="hljs-selector-pseudo">::part</span>(edge) {
 <li>The <code>--flip-duration</code> CSS property customizes how long the flip lasts.</li>
 </ul>
 <wc-demo class="flip-card-demo">
-	<flip-card class="default long-and-high" corner-accuracy="0">
+	<flip-card class="default long-and-high">
 		<section slot="front">
 			<p>Front</p>
 		</section>
@@ -172,7 +208,7 @@ flip-card<span class="hljs-selector-pseudo">::part</span>(edge) {
 </ol>
 <wc-demo class="flip-card-demo">
 	<div class="card-container">
-		<flip-card class="default" corner-accuracy="0">
+		<flip-card class="default">
 			<section slot="front">
 				<p>Front</p>
 			</section>
@@ -180,7 +216,7 @@ flip-card<span class="hljs-selector-pseudo">::part</span>(edge) {
 				<p>Back</p>
 			</section>
 		</flip-card>
-		<flip-card class="default" corner-accuracy="0">
+		<flip-card class="default">
 			<section slot="front">
 				<p>Front</p>
 			</section>
@@ -188,7 +224,7 @@ flip-card<span class="hljs-selector-pseudo">::part</span>(edge) {
 				<p>Back</p>
 			</section>
 		</flip-card>
-		<flip-card class="default" corner-accuracy="0">
+		<flip-card class="default">
 			<section slot="front">
 				<p>Front</p>
 			</section>
@@ -196,7 +232,7 @@ flip-card<span class="hljs-selector-pseudo">::part</span>(edge) {
 				<p>Back</p>
 			</section>
 		</flip-card>
-		<flip-card class="default" corner-accuracy="0">
+		<flip-card class="default">
 			<section slot="front">
 				<p>Front</p>
 			</section>
@@ -219,9 +255,130 @@ flip-card<span class="hljs-selector-pseudo">::part</span>(edge) {
 }
 </code></pre>
 <h3 id="fully-custom-animations">Fully custom animations</h3>
-<p>TODO</p>
+<p>You can use the <code>setFlipToFrontAnimation()</code> and <code>setFlipToBackAnimation()</code> methods in Javascript to give the card a different flip animation.</p>
+<p>Here's an example for a vertical flip, rather than a horizontal flip.</p>
+<wc-demo class="flip-card-demo">
+	<flip-card class="default vertical-flip">
+		<section slot="front">
+			<p>The front!</p>
+		</section>
+		<section slot="back">
+			<p>The back!</p>
+		</section>
+	</flip-card>
+	<div slot="actions">
+		<button>Flip!</button>
+	</div>
+</wc-demo>
+<pre><code class="language-js">card.<span class="hljs-title function_">setFlipToFrontAnimation</span>(
+	[ {
+		<span class="hljs-attr">transform</span>: <span class="hljs-string">&quot;translateZ(calc(-1 * var(--_depth))) rotateX(180deg)&quot;</span>,
+	}, {
+		<span class="hljs-attr">transform</span>: <span class="hljs-string">&quot;translateZ(var(--_height)) rotateX(270deg)&quot;</span>,
+	}, {
+		<span class="hljs-attr">transform</span>: <span class="hljs-string">&quot;translateZ(0em) rotateX(360deg)&quot;</span>,
+	} ],
+	{
+		<span class="hljs-attr">easing</span>: <span class="hljs-string">&quot;ease-in-out&quot;</span>,
+	},
+)
+
+card.<span class="hljs-title function_">setFlipToBackAnimation</span>(
+	[ {
+		<span class="hljs-attr">transform</span>: <span class="hljs-string">&quot;translateZ(0em) rotateX(0deg)&quot;</span>,
+	}, {
+		<span class="hljs-attr">transform</span>: <span class="hljs-string">&quot;translateZ(var(--_height)) rotateX(90deg)&quot;</span>,
+	}, {
+		<span class="hljs-attr">transform</span>: <span class="hljs-string">&quot;translateZ(calc(-1 * var(--_depth))) rotateX(180deg)&quot;</span>,
+	} ],
+	{
+		<span class="hljs-attr">easing</span>: <span class="hljs-string">&quot;ease-in-out&quot;</span>,
+	},
+)
+</code></pre>
+<p>(and a dash of CSS too, to orient the backside properly at rest)</p>
+<pre><code class="language-css">flip-card &gt; <span class="hljs-selector-attr">[slot=<span class="hljs-string">&quot;back&quot;</span>]</span> {
+	<span class="hljs-attribute">transform</span>: <span class="hljs-built_in">scale</span>(-<span class="hljs-number">1</span>);
+}
+</code></pre>
+<p>The <code>flip-card</code> component uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API">Web Animations API</a> to perform animations, rather than CSS. This confers some advantages, such as being able to generate animations on the fly or apply easing to the entire animation rather than just keyframes. It's also necessary in order to penetrate the Shadow DOM properly.</p>
+<p>Each method has the same interface as the Element's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/animate">animate()</a> method:</p>
+<ul>
+<li>The first parameter is a list of keyframes. The <code>offset</code> property is equivalent to defining percentage in CSS's equivalent <code>@keyframes</code>. See <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats">Keyframe Formats</a> for details.</li>
+<li>The second parameter are options, such as number of iterations or easing. See <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyframeEffect/KeyframeEffect#parameters">KeyframeEffect's object parameter</a> for details.</li>
+</ul>
+<h3 id="all-customization-options-in-a-single-list">All customization options in a single list</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--card-depth</code></td>
+<td><code>0.15em</code></td>
+<td>How thick the card's edge is.</td>
+</tr>
+<tr>
+<td><code>--flip-height</code></td>
+<td><code>20em</code></td>
+<td>How high the card travels vertically when flipped.</td>
+</tr>
+<tr>
+<td><code>--flip-duration</code></td>
+<td><code>0.75s</code></td>
+<td>How long it takes the card to complete a flip.</td>
+</tr>
+<tr>
+<td><code>--flip-duration</code></td>
+<td><code>0.75s</code></td>
+<td>How long it takes the card to complete a flip.</td>
+</tr>
+<tr>
+<td><code>--corner-granularity</code></td>
+<td><code>4</code></td>
+<td>How smooth the card's corner edges should be when rounded. Higher is smoother.</td>
+</tr>
+<tr>
+<td><code>setFlipToFrontAnimation()</code></td>
+<td>a horizontal flip</td>
+<td>Animation to play when flipping the card from being face down to being face up. Parameters are keyframes and options.</td>
+</tr>
+<tr>
+<td><code>setFlipToBackAnimation()</code></td>
+<td>a horizontal flip</td>
+<td>Animation to play when flipping the card from being face up to being face down. Parameters are keyframes and options.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="events">Events</h2>
-<p>TODO</p>
+<p>The <code>flip-card</code> element dispatches the following events:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>When Triggered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flipping</code></td>
+<td>Whenever the card begins to flip.</td>
+</tr>
+<tr>
+<td><code>flipped</code></td>
+<td>Whenever the card's flip animation ends.</td>
+</tr>
+</tbody>
+</table>
+<p>Both events contain in their details a property <code>facedown</code> indicating to which side the card is flipping or flipped.</p>
+<pre><code class="language-js">card.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;flipping&#x27;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> {
+	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e.<span class="hljs-property">detail</span>.<span class="hljs-property">facedown</span>)
+})
+</code></pre>
 <h2 id="accessibility">Accessibility</h2>
 <p>This custom element is build with accessibility in mind!</p>
 <p>TODO. Test/consider:</p>
@@ -231,17 +388,11 @@ flip-card<span class="hljs-selector-pseudo">::part</span>(edge) {
 <li>what if the card contains focusable elements inside? Tabbing order?</li>
 <li>aria-live recommendations?</li>
 </ul>
-<h2 id="other-todo">OTHER TODO</h2>
-<ul>
-<li>Make corner-accuracy a CSS property so it can be applied en-masse</li>
-<li>custom animations in the shadow dom is janky doodle</li>
-<li>Add events (flipping, flipped)</li>
-</ul>
 <!-- HTML_TAG_END --></article></main></div> 
 			
 			<script>
 				{
-					__sveltekit_5bvouy = {
+					__sveltekit_jidlfd = {
 						base: new URL(".", location).pathname.slice(0, -1),
 						assets: "/web-components"
 					};
@@ -251,8 +402,8 @@ flip-card<span class="hljs-selector-pseudo">::part</span>(edge) {
 					const data = [null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.65mjNb3O.js"),
-						import("./_app/immutable/entry/app.Bmu2r-XN.js")
+						import("./_app/immutable/entry/start.Bco7Xj5V.js"),
+						import("./_app/immutable/entry/app.2YTFeZ-A.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 4],
