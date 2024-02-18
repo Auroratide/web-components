@@ -166,10 +166,10 @@ toggle-switch<span class="hljs-selector-attr">[checked]</span><span class="hljs-
 <li>The element can be focused</li>
 <li>The element can be toggled with <kbd>Enter</kbd> or <kbd>Space</kbd></li>
 </ul>
-`,{document:o}=T;function C(l){let n,s,t;return s=new q({props:{html:A}}),{c(){n=m(),u(s.$$.fragment),this.h()},l(a){b("svelte-h9oq7s",o.head).forEach(c),n=j(a),w(s.$$.fragment,a),this.h()},h(){o.title="The toggle-switch Element"},m(a,e){f(a,n,e),y(s,a,e),t=!0},p:i,i(a){t||(k(s.$$.fragment,a),t=!0)},o(a){x(s.$$.fragment,a),t=!1},d(a){a&&c(n),_(s,a)}}}function E(l){return p(()=>import("../chunks/define.BEaBwacd.js"),__vite__mapDeps([0,1]),import.meta.url),r(()=>{const n=document.querySelector("#example-01"),s=document.querySelector("#example-01-output");n&&s&&(n==null||n.addEventListener(v,t=>{t.detail.checked?(s.textContent="On",s.classList.add("example-active")):(s.textContent="Off",s.classList.remove("example-active"))}))}),[]}class L extends d{constructor(n){super(),g(this,n,E,C,h,{})}}export{L as component};
+`,{document:o}=T;function C(l){let n,s,t;return s=new q({props:{html:A}}),{c(){n=m(),u(s.$$.fragment),this.h()},l(a){b("svelte-h9oq7s",o.head).forEach(c),n=j(a),w(s.$$.fragment,a),this.h()},h(){o.title="The toggle-switch Element"},m(a,e){f(a,n,e),y(s,a,e),t=!0},p:i,i(a){t||(k(s.$$.fragment,a),t=!0)},o(a){x(s.$$.fragment,a),t=!1},d(a){a&&c(n),_(s,a)}}}function E(l){return p(()=>import("../chunks/define.VLajUROJ.js"),__vite__mapDeps([0,1]),import.meta.url),r(()=>{const n=document.querySelector("#example-01"),s=document.querySelector("#example-01-output");n&&s&&(n==null||n.addEventListener(v,t=>{t.detail.checked?(s.textContent="On",s.classList.add("example-active")):(s.textContent="Off",s.classList.remove("example-active"))}))}),[]}class L extends d{constructor(n){super(),g(this,n,E,C,h,{})}}export{L as component};
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = ["../chunks/define.BEaBwacd.js","../chunks/events.C44j2o98.js"]
+    __vite__mapDeps.viteFileDeps = ["../chunks/define.VLajUROJ.js","../chunks/events.C44j2o98.js"]
   }
   return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
 }
