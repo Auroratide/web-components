@@ -7,50 +7,50 @@ export class ToggleSwitchElement extends HTMLElement {
 	static defaultElementName = "toggle-switch"
 
 	static html = `
-        <span part="track">
-            <span part="slider"></span>
-        </span>
-    `
+		<span part="track">
+			<span part="slider"></span>
+		</span>
+	`
 
 	static css = `
-        :host {
-            display: inline-block;
-            width: 2em;
-            height: 1em;
-            cursor: pointer;
-        }
+		:host {
+			display: inline-block;
+			width: 2em;
+			height: 1em;
+			cursor: pointer;
+		}
 
-        span {
-            box-sizing: border-box;
-            display: inline-block;
-            line-height: 1;
-        }
+		span {
+			box-sizing: border-box;
+			display: inline-block;
+			line-height: 1;
+		}
 
-        [part="track"] {
-            width: 100%;
-            height: 100%;
-            background-color: #dddddd;
-            text-align: left;
-            transition: all 0.256s;
-        }
+		[part="track"] {
+			width: 100%;
+			height: 100%;
+			background-color: #dddddd;
+			text-align: left;
+			transition: all 0.256s;
+		}
 
-        [part="slider"] {
-            width: 50%;
-            height: 100%;
-            background-color: #777777;
-            transition: all 0.256s;
-            vertical-align: text-top;
-        }
+		[part="slider"] {
+			width: 50%;
+			height: 100%;
+			background-color: #777777;
+			transition: all 0.256s;
+			vertical-align: text-top;
+		}
 
-        :host([checked]) [part="slider"] {
-            transform: translateX(100%);
-        }
+		:host([checked]) [part="slider"] {
+			transform: translateX(100%);
+		}
 
-        :host([disabled]) {
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
-    `
+		:host([disabled]) {
+			cursor: not-allowed;
+			opacity: 0.5;
+		}
+	`
 
 	static formAssociated = true
 
@@ -104,13 +104,13 @@ export class ToggleSwitchElement extends HTMLElement {
 
 	#onKeyDown = (e) => {
 		switch(e.key) {
-		case " ":
-		case "Enter":
-			e.preventDefault()
-			this.toggle()
-			break
-		default:
-			break
+			case " ":
+			case "Enter":
+				e.preventDefault()
+				this.toggle()
+				break
+			default:
+				break
 		}
 	}
 

@@ -76,7 +76,7 @@ describe("flip-card", () => {
 	})
 
 	describe("focus", () => {
-		it.only("skip button on non-visible side", async () => {
+		it("skip button on non-visible side", async () => {
 			const container = await fixture(`
 				<div>
 					<button id="start">Start</button>
@@ -195,6 +195,13 @@ const pressTab = () => {
 	if (index > -1) {
 		const nextElement = tabOrder[index + 1] || tabOrder[0]
 		nextElement.focus()
+	} else {
+		const allNodes = getAllNodes()
+		const index = allNodes.indexOf(document.activeElement)
+		if (index > -1) {
+			const nextElement = allNodes.slice(index + 1).find((node) => tabOrder.includes(node))
+			nextElement?.focus()
+		}
 	}
 }
 
@@ -221,4 +228,11 @@ const isInteractive = (element) => {
 		!element.hidden &&
 		!element.inert
 	)
+}
+
+const getAllNodes = (node = document.body, nodes = []) => {
+	nodes.push(node)
+	nodes.push(...(Array.from(node.childNodes ?? []).map((node) => getAllNodes(node, nodes))))
+
+	return nodes.filter((node) => node?.nodeType === Node.ELEMENT_NODE)
 }
