@@ -40,5 +40,25 @@ describe("img-zoom", () => {
 			elem.zoomOut()
 			expect(dialog.open).to.be.false
 		})
+
+		it("disabled", async () => {
+			const elem = await fixture(`
+				<img-zoom disabled>
+					<img src="" alt="image" />
+				</img-zoom>
+			`)
+
+			const zoomIn = elem.shadowRoot.querySelector("#zoom-in")
+			const dialog = elem.shadowRoot.querySelector("dialog")
+
+			expect(dialog.open).to.be.false
+
+			await zoomIn.click()
+			expect(dialog.open).to.be.false
+
+			elem.disabled = false
+			await zoomIn.click()
+			expect(dialog.open).to.be.true
+		})
 	})
 })

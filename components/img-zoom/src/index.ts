@@ -21,6 +21,7 @@ export class ImgZoomElement extends HTMLElement {
 		button { all: unset; }
 		#zoom-in { cursor: zoom-in; }
 		#zoom-out { cursor: zoom-out; }
+		#zoom-in:disabled { cursor: auto; }
 
 		::slotted(*) {
 			display: inline-block;
@@ -70,7 +71,7 @@ export class ImgZoomElement extends HTMLElement {
 	`
 
 	static get observedAttributes() {
-		return []
+		return ["disabled"]
 	}
 
 	constructor() {
@@ -78,6 +79,9 @@ export class ImgZoomElement extends HTMLElement {
 
 		this.#createRoot()
 	}
+
+	get disabled() { return this.hasAttribute("disabled") }
+	set disabled(value: boolean) { this.toggleAttribute("disabled", value) }
 
 	zoomIn = () => {
 		this.#modal().showModal()
@@ -105,7 +109,14 @@ export class ImgZoomElement extends HTMLElement {
 		this.#slot().removeEventListener("slotchange", this.#cloneIntoContent)
 	}
 
-	attributeChangedCallback() {
+	attributeChangedCallback(attribute: string, oldValue: string, newValue: string) {
+		this.#attributeCallbacks[attribute]?.(newValue, oldValue)
+	}
+
+	#attributeCallbacks = {
+		"disabled": (newValue: string | undefined | null) => {
+			this.#zoomInBtn().disabled = newValue != null
+		},
 	}
 
 	#cloneIntoContent = () => {
