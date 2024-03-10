@@ -30,6 +30,7 @@
         "@auroratide/tab-list": "workspace:^",
         "@auroratide/toggle-switch": "workspace:^",
         "@auroratide/typewritten-text": "workspace:^",
-        "@auroratide/flip-card": "workspace:^"
+        "@auroratide/flip-card": "workspace:^",
+        "@auroratide/img-zoom": "workspace:^"
     }
 }

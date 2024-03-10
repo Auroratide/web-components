@@ -60,6 +60,18 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
+  components/img-zoom:
+    devDependencies:
+      '@open-wc/testing':
+        specifier: ^4.0.0
+        version: 4.0.0
+      '@web/test-runner':
+        specifier: ^0.18.0
+        version: 0.18.0(typescript@5.3.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+
   components/reorder-list:
     devDependencies:
       '@open-wc/testing':
@@ -116,6 +128,9 @@ importers:
       '@auroratide/flip-card':
         specifier: workspace:^
         version: link:../components/flip-card
+      '@auroratide/img-zoom':
+        specifier: workspace:^
+        version: link:../components/img-zoom
       '@auroratide/reorder-list':
         specifier: workspace:^
         version: link:../components/reorder-list
