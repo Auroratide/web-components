@@ -30,7 +30,6 @@ export class ImgZoomElement extends HTMLElement {
 		}
 
 		dialog {
-			position: relative;
 			background: none;
 			border: none;
 			padding: 0;
