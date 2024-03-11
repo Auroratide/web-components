@@ -355,7 +355,7 @@ card.<span class="hljs-title function_">setFlipToBackAnimation</span>(
 })
 </code></pre>
 <h2 id="accessibility">Accessibility</h2>
-<p>This custom element is build with accessibility in mind!</p>
+<p>This custom element is built with accessibility in mind!</p>
 <ul>
 <li>Screenreaders only announce the side that is visible.</li>
 <li>Screenreaders announce &quot;Frontside&quot; or &quot;Backside&quot; to denote which side is visible.</li>

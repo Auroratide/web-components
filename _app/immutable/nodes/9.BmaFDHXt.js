@@ -14,7 +14,7 @@ using <span class="hljs-tag">&lt;<span class="hljs-name">typewritten-text</span>
 <h2 id="installation">Installation</h2>
 <p>You can import through CDN:</p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://unpkg.com/@auroratide/typewritten-text/lib/style.css&quot;</span> /&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/@auroratide/typewritten/lib/define.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/@auroratide/typewritten-text/lib/define.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
 <p>Or, you may install through <a href="https://www.npmjs.com/package/@auroratide/typewritten-text">NPM</a> and include it as part of your build process:</p>
 <pre><code>$ npm i @auroratide/typewritten-text
