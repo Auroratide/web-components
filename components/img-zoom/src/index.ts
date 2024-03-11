@@ -20,6 +20,12 @@ export class ImgZoomElement extends HTMLElement {
 	static css = `
 		:host { display: inline-block; }
 
+		:host(:focus-within) {
+			outline: 2px solid Highlight;
+			outline: 2px auto -webkit-focus-ring-color;
+			outline-offset: 2px;
+		}
+
 		::slotted(*) {
 			display: inline-block;
 			inline-size: 100%;
