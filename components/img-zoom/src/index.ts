@@ -1,3 +1,5 @@
+import { pop, fade } from "./animation.js"
+
 export class ImgZoomElement extends HTMLElement {
 	static defaultElementName = "img-zoom"
 
@@ -130,6 +132,9 @@ export class ImgZoomElement extends HTMLElement {
 		return ["disabled"]
 	}
 
+	#zoomAnimation = pop({ duration: 400 })
+	#reducedMotionAnimation = fade({ duration: 400 })
+
 	constructor() {
 		super()
 
@@ -185,39 +190,40 @@ export class ImgZoomElement extends HTMLElement {
 		this.#content().replaceChildren(cloned)
 	}
 
+	#getAnimation = () => {
+		const slotted = this.#findImg(this.#slotted() as HTMLElement)
+		const content = this.#findImg(this.#content().firstElementChild as HTMLElement)
+
+		if (slotted == null || content == null) return undefined
+
+		return prefersReducedMotion()
+			? this.#reducedMotionAnimation(slotted, content)
+			: this.#zoomAnimation(slotted, content)
+	}
+
 	#onOpen = () => {
 		this.#stopScroll()
-		const slotted = this.#slotted() as HTMLElement
-		const content = this.#content().firstElementChild as HTMLElement
 
-		const transform = getRelativeTransform(content, slotted)
+		const animation = this.#getAnimation()
+		if (animation == null) return
 
-		this.#content().animate([ {
-			transform: transform,
-		}, {
-			transform: "scale(1) translate(0px, 0px)",
-		} ], {
-			fill: "both",
-			duration: 400,
-			easing: "ease-in-out",
+		this.#content().animate(animation.keyframes, {
+			...animation.options,
+			fill: "none",
+			easing: "ease-out",
 		})
 	}
 
 	#onClose = () => {
 		this.#resumeScroll()
-		const slotted = this.#slotted() as HTMLElement
-		const content = this.#content().firstElementChild as HTMLElement
+		const animation = this.#getAnimation()
+		if (animation == null) return
 
-		const transform = getRelativeTransform(content, slotted)
-
-		this.#content().animate([ {
-			transform: "scale(1) translate(0px, 0px)",
-		}, {
-			transform: transform,
-		} ], {
-			fill: "backwards",
-			duration: 400,
-			easing: "ease-in-out",
+		this.#content().animate(animation.keyframes, {
+			...animation.options,
+			direction: "reverse",
+			fill: "none",
+			easing: "ease-in",
 		})
 	}
 
@@ -227,6 +233,9 @@ export class ImgZoomElement extends HTMLElement {
 		document.body.style.overflow = "hidden"
 	}
 	#resumeScroll = () => document.body.style.overflow = this.#originalOverflow
+
+	#findImg = (elem: HTMLElement): HTMLImageElement | null =>
+		elem instanceof HTMLImageElement ? elem : elem.querySelector("img")
 
 	#createRoot = () => {
 		const root = this.shadowRoot ?? this.attachShadow({ mode: "open" })
@@ -244,41 +253,4 @@ export class ImgZoomElement extends HTMLElement {
 	}
 }
 
-function getContainedSize(el: HTMLImageElement): [number, number] {
-	const ratio = el.naturalWidth / el.naturalHeight
-	let width = el.clientHeight * ratio
-	let height = el.clientHeight
-
-	if (width > el.clientWidth) {
-		width = el.clientWidth
-		height = el.clientWidth / ratio
-	}
-
-	return [width, height]
-}
-
-function getCenter(el: HTMLElement): [number, number] {
-	const rect = el.getBoundingClientRect()
-	return [rect.left + rect.width / 2, rect.top + rect.height / 2]
-}
-
-function getRelativeTransform(from: HTMLElement, dest: HTMLElement): string {
-	const f = from instanceof HTMLImageElement ? from : from.querySelector("img")
-	const d = dest instanceof HTMLImageElement ? dest : dest.querySelector("img")
-
-	if (f == null || d == null) {
-		return "scale(1) translate(0px, 0px)"
-	}
-
-	const [dw] = getContainedSize(d)
-	const [fw] = getContainedSize(f)
-
-	const [dx, dy] = getCenter(d)
-	const [fx, fy] = getCenter(f)
-
-	const r = dw / fw
-	const tx = (dx - fx) / r
-	const ty = (dy - fy) / r
-
-	return `scale(${r}) translate(${tx}px, ${ty}px)`
-}
+const prefersReducedMotion = () => window?.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false

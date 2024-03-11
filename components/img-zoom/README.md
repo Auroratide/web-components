@@ -105,3 +105,4 @@ This custom element is built with accessibility in mind! It treats the zoomed im
    * When opened, focus is automatically placed on a Close button that will close the zoomed image.
    * <kbd>Escape</kbd> will also exit the zoomed image.
 * Tab trapping: While zoomed, the tabbing order will remain within the image until dismissed.
+* Reduced Motion: The animation is simplified for people who prefer reduced motion.
