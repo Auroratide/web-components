@@ -114,6 +114,7 @@ export class ImgZoomElement extends HTMLElement {
 	set disabled(value: boolean) { this.toggleAttribute("disabled", value) }
 
 	zoomIn = () => {
+		this.#stopScroll()
 		this.#modal().showModal()
 		const slotted = this.#slotted() as HTMLImageElement
 		const content = this.#content().firstElementChild as HTMLImageElement
@@ -174,6 +175,7 @@ export class ImgZoomElement extends HTMLElement {
 	}
 
 	#onClose = () => {
+		this.#resumeScroll()
 		const slotted = this.#slotted() as HTMLImageElement
 		const content = this.#content().firstElementChild as HTMLImageElement
 
@@ -189,6 +191,13 @@ export class ImgZoomElement extends HTMLElement {
 			easing: "ease-in-out",
 		})
 	}
+
+	#originalOverflow: string | undefined
+	#stopScroll = () => {
+		this.#originalOverflow = document.body.style.overflow
+		document.body.style.overflow = "hidden"
+	}
+	#resumeScroll = () => document.body.style.overflow = this.#originalOverflow
 
 	#createRoot = () => {
 		const root = this.shadowRoot ?? this.attachShadow({ mode: "open" })
