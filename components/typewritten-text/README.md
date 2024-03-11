@@ -26,7 +26,7 @@ You can import through CDN:
 
 ```html
 <link rel="stylesheet" href="https://unpkg.com/@auroratide/typewritten-text/lib/style.css" />
-<script type="module" src="https://unpkg.com/@auroratide/typewritten/lib/define.js"></script>
+<script type="module" src="https://unpkg.com/@auroratide/typewritten-text/lib/define.js"></script>
 ```
 
 Or, you may install through [NPM](https://www.npmjs.com/package/@auroratide/typewritten-text) and include it as part of your build process:

@@ -393,7 +393,7 @@ card.addEventListener('flipping', e => {
 
 ## Accessibility
 
-This custom element is build with accessibility in mind!
+This custom element is built with accessibility in mind!
 
 * Screenreaders only announce the side that is visible.
 * Screenreaders announce "Frontside" or "Backside" to denote which side is visible.
