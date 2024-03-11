@@ -80,7 +80,7 @@ export class ImgZoomElement extends HTMLElement {
 			block-size: 95dvb;
 		}
 
-		#content > * {
+		#content img {
 			display: block;
 			inline-size: 100%;
 			block-size: 100%;
@@ -233,12 +233,19 @@ function getCenter(el: HTMLElement): [number, number] {
 	return [rect.left + rect.width / 2, rect.top + rect.height / 2]
 }
 
-function getRelativeTransform(from: HTMLImageElement, dest: HTMLImageElement): string {
-	const [dw] = getContainedSize(dest)
-	const [fw] = getContainedSize(from)
+function getRelativeTransform(from: HTMLElement, dest: HTMLElement): string {
+	const f = from instanceof HTMLImageElement ? from : from.querySelector("img")
+	const d = dest instanceof HTMLImageElement ? dest : dest.querySelector("img")
 
-	const [dx, dy] = getCenter(dest)
-	const [fx, fy] = getCenter(from)
+	if (f == null || d == null) {
+		return "scale(1) translate(0px, 0px)"
+	}
+
+	const [dw] = getContainedSize(d)
+	const [fw] = getContainedSize(f)
+
+	const [dx, dy] = getCenter(d)
+	const [fx, fy] = getCenter(f)
 
 	const r = dw / fw
 	const tx = (dx - fx) / r
