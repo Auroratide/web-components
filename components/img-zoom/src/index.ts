@@ -30,6 +30,7 @@ export class ImgZoomElement extends HTMLElement {
 		#zoom-in:disabled { cursor: auto; }
 
 		dialog {
+			position: fixed;
 			inset: 0;
 			max-width: none;
 			max-height: none;
@@ -97,6 +98,31 @@ export class ImgZoomElement extends HTMLElement {
 			overflow: hidden;
 			padding: 0;
 			position: absolute;
+		}
+
+		@supports not (transition-behavior: allow-discrete) {
+			dialog {
+				display: flex;
+				opacity: 0;
+				background: oklch(0% 0 0 / 0);
+				pointer-events: none;
+				transition:
+					opacity 0.4s step-end,
+					background 0.4s linear;
+			}
+
+			dialog[open] {
+				opacity: 1;
+				background: oklch(0% 0 0 / 0.5);
+				pointer-events: auto;
+				transition:
+					opacity 0.4s step-start,
+					background 0.4s linear;
+			}
+
+			dialog::backdrop, dialog[open]::backdrop {
+				display: none;
+			}
 		}
 	`
 
