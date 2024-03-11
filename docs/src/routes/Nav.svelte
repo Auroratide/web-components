@@ -5,6 +5,7 @@
 <nav>
     <ul>
         <li><a href="{base}/flip-card">flip-card</a></li>
+        <li><a href="{base}/img-zoom">img-zoom</a></li>
         <li><a href="{base}/reorder-list">reorder-list</a></li>
         <li><a href="{base}/tab-list">tab-list</a></li>
         <li><a href="{base}/toggle-switch">toggle-switch</a></li>
