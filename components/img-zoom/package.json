@@ -1,8 +1,7 @@
 {
 	"name": "@auroratide/img-zoom",
 	"version": "0.0.1",
-	"private": true,
-	"description": "",
+	"description": "Component for viewing images in more detail.",
 	"type": "module",
 	"main": "lib/index.js",
 	"module": "lib/index.js",
@@ -13,7 +12,14 @@
 		"test": "wtr --node-resolve --port 10008 test",
 		"test:clean": "pnpm clean && pnpm build && pnpm test"
 	},
-	"keywords": [],
+	"keywords": [
+		"image",
+		"zoom",
+		"img",
+		"web component",
+		"enlarge",
+		"picture"
+  ],
 	"author": {
 		"name": "Timothy Foster",
 		"url": "https://auroratide.com"
