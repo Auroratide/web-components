@@ -5,23 +5,18 @@ export class ImgZoomElement extends HTMLElement {
 		<button id="zoom-in">
 			<slot></slot>
 		</button>
-		<dialog part="dialog" id="modal">
+		<dialog id="modal">
 			<div id="content"></div>
-			<button id="zoom-out" autofocus>
-				<span class="visually-hidden">close zoom</span>
-			</button>
+			<form method="dialog">
+				<button id="zoom-out" autofocus>
+					<span class="visually-hidden">close zoom</span>
+				</button>
+			</form>
 		</dialog>
 	`
 
 	static css = `
-		:host {
-			display: inline-block;
-		}
-
-		button { all: unset; }
-		#zoom-in { cursor: zoom-in; }
-		#zoom-out { cursor: zoom-out; }
-		#zoom-in:disabled { cursor: auto; }
+		:host { display: inline-block; }
 
 		::slotted(*) {
 			display: inline-block;
@@ -29,20 +24,55 @@ export class ImgZoomElement extends HTMLElement {
 			block-size: auto;
 		}
 
+		button { all: unset; }
+		#zoom-in { cursor: zoom-in; }
+		#zoom-out { cursor: zoom-out; }
+		#zoom-in:disabled { cursor: auto; }
+
 		dialog {
+			inset: 0;
+			max-width: none;
+			max-height: none;
+			inline-size: 100%;
+			block-size: 100%;
+			margin: 0;
+			padding: 0;
 			background: none;
 			border: none;
-			padding: 0;
-			overflow: hidden;
+			overflow: visible;
+			align-items: center;
+			justify-content: center;
+			transition:
+				display 0.4s allow-discrete,
+				overlay 0.4s allow-discrete;
 		}
 
+		dialog[open] { display: flex; }
+
 		dialog::backdrop {
+			background: oklch(0% 0 0 / 0);
+			transition:
+				background 0.4s linear,
+				display 0.4s allow-discrete,
+				overlay 0.4s allow-discrete;
+		}
+
+		dialog[open]::backdrop {
 			background: oklch(0% 0 0 / 0.5);
+		}
+
+		@starting-style {
+			dialog[open]::backdrop {
+				background: oklch(0% 0 0 / 0);
+			}
 		}
 
 		#zoom-out {
 			position: absolute;
 			inset: 0;
+			display: block;
+			inline-size: 100%;
+			block-size: 100%;
 		}
 
 		#content {
@@ -55,6 +85,7 @@ export class ImgZoomElement extends HTMLElement {
 			inline-size: 100%;
 			block-size: 100%;
 			object-fit: contain;
+			transform-origin: center center;
 		}
 
 		.visually-hidden {
@@ -84,6 +115,20 @@ export class ImgZoomElement extends HTMLElement {
 
 	zoomIn = () => {
 		this.#modal().showModal()
+		const slotted = this.#slotted() as HTMLImageElement
+		const content = this.#content().firstElementChild as HTMLImageElement
+
+		const transform = getRelativeTransform(content, slotted)
+
+		this.#content().animate([ {
+			transform: transform,
+		}, {
+			transform: "scale(1) translate(0px, 0px)",
+		} ], {
+			fill: "both",
+			duration: 400,
+			easing: "ease-in-out",
+		})
 	}
 
 	zoomOut = () => {
@@ -95,17 +140,18 @@ export class ImgZoomElement extends HTMLElement {
 	#modal = () => this.shadowRoot!.querySelector("#modal") as HTMLDialogElement
 	#content = () => this.shadowRoot!.querySelector("#content") as HTMLDivElement
 	#slot = () => this.shadowRoot!.querySelector("slot") as HTMLSlotElement
+	#slotted = () => this.#slot().assignedElements()[0]
 
 	connectedCallback() {
 		this.#zoomInBtn().addEventListener("click", this.zoomIn)
-		this.#zoomOutBtn().addEventListener("click", this.zoomOut)
 		this.#slot().addEventListener("slotchange", this.#cloneIntoContent)
+		this.#modal().addEventListener("close", this.#onClose)
 	}
 
 	disconnectedCallback() {
 		this.#zoomInBtn().removeEventListener("click", this.zoomIn)
-		this.#zoomOutBtn().removeEventListener("click", this.zoomOut)
 		this.#slot().removeEventListener("slotchange", this.#cloneIntoContent)
+		this.#modal().removeEventListener("close", this.#onClose)
 	}
 
 	attributeChangedCallback(attribute: string, oldValue: string, newValue: string) {
@@ -119,15 +165,29 @@ export class ImgZoomElement extends HTMLElement {
 	}
 
 	#cloneIntoContent = () => {
-		const slotted = this.#slot().assignedElements()[0]
-		const cloned = slotted.cloneNode(true) as HTMLElement
+		const cloned = this.#slotted().cloneNode(true) as HTMLElement
 
-		if ("alt" in cloned) {
-			cloned.alt += " (zoomed)"
-		}
+		if ("alt" in cloned) cloned.alt += " (zoomed)"
 		cloned.setAttribute("part", "content")
 
-		this.#content().replaceChildren(slotted.cloneNode(true))
+		this.#content().replaceChildren(cloned)
+	}
+
+	#onClose = () => {
+		const slotted = this.#slotted() as HTMLImageElement
+		const content = this.#content().firstElementChild as HTMLImageElement
+
+		const transform = getRelativeTransform(content, slotted)
+
+		this.#content().animate([ {
+			transform: "scale(1) translate(0px, 0px)",
+		}, {
+			transform: transform,
+		} ], {
+			fill: "backwards",
+			duration: 400,
+			easing: "ease-in-out",
+		})
 	}
 
 	#createRoot = () => {
@@ -144,4 +204,36 @@ export class ImgZoomElement extends HTMLElement {
 
 		return root
 	}
+}
+
+function getContainedSize(el: HTMLImageElement): [number, number] {
+	const ratio = el.naturalWidth / el.naturalHeight
+	let width = el.clientHeight * ratio
+	let height = el.clientHeight
+
+	if (width > el.clientWidth) {
+		width = el.clientWidth
+		height = el.clientWidth / ratio
+	}
+
+	return [width, height]
+}
+
+function getCenter(el: HTMLElement): [number, number] {
+	const rect = el.getBoundingClientRect()
+	return [rect.left + rect.width / 2, rect.top + rect.height / 2]
+}
+
+function getRelativeTransform(from: HTMLImageElement, dest: HTMLImageElement): string {
+	const [dw] = getContainedSize(dest)
+	const [fw] = getContainedSize(from)
+
+	const [dx, dy] = getCenter(dest)
+	const [fx, fy] = getCenter(from)
+
+	const r = dw / fw
+	const tx = (dx - fx) / r
+	const ty = (dy - fy) / r
+
+	return `scale(${r}) translate(${tx}px, ${ty}px)`
 }
