@@ -114,22 +114,8 @@ export class ImgZoomElement extends HTMLElement {
 	set disabled(value: boolean) { this.toggleAttribute("disabled", value) }
 
 	zoomIn = () => {
-		this.#stopScroll()
 		this.#modal().showModal()
-		const slotted = this.#slotted() as HTMLImageElement
-		const content = this.#content().firstElementChild as HTMLImageElement
-
-		const transform = getRelativeTransform(content, slotted)
-
-		this.#content().animate([ {
-			transform: transform,
-		}, {
-			transform: "scale(1) translate(0px, 0px)",
-		} ], {
-			fill: "both",
-			duration: 400,
-			easing: "ease-in-out",
-		})
+		this.#onOpen()
 	}
 
 	zoomOut = () => {
@@ -137,7 +123,6 @@ export class ImgZoomElement extends HTMLElement {
 	}
 
 	#zoomInBtn = () => this.shadowRoot!.querySelector("#zoom-in") as HTMLButtonElement
-	#zoomOutBtn = () => this.shadowRoot!.querySelector("#zoom-out") as HTMLButtonElement
 	#modal = () => this.shadowRoot!.querySelector("#modal") as HTMLDialogElement
 	#content = () => this.shadowRoot!.querySelector("#content") as HTMLDivElement
 	#slot = () => this.shadowRoot!.querySelector("slot") as HTMLSlotElement
@@ -174,10 +159,28 @@ export class ImgZoomElement extends HTMLElement {
 		this.#content().replaceChildren(cloned)
 	}
 
+	#onOpen = () => {
+		this.#stopScroll()
+		const slotted = this.#slotted() as HTMLElement
+		const content = this.#content().firstElementChild as HTMLElement
+
+		const transform = getRelativeTransform(content, slotted)
+
+		this.#content().animate([ {
+			transform: transform,
+		}, {
+			transform: "scale(1) translate(0px, 0px)",
+		} ], {
+			fill: "both",
+			duration: 400,
+			easing: "ease-in-out",
+		})
+	}
+
 	#onClose = () => {
 		this.#resumeScroll()
-		const slotted = this.#slotted() as HTMLImageElement
-		const content = this.#content().firstElementChild as HTMLImageElement
+		const slotted = this.#slotted() as HTMLElement
+		const content = this.#content().firstElementChild as HTMLElement
 
 		const transform = getRelativeTransform(content, slotted)
 
