@@ -1,5 +1,11 @@
 # @auroratide/img-zoom
 
+## 0.1.2
+
+### Patch Changes
+
+- e0783e1: Make img-zoom components block-level so the descenders spacing can be eliminated
+
 ## 0.1.1
 
 ### Patch Changes
