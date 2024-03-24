@@ -27,12 +27,15 @@ export class ImgZoomElement extends HTMLElement {
 		}
 
 		::slotted(*) {
-			display: inline-block;
+			display: block;
 			inline-size: 100%;
 			block-size: auto;
 		}
 
-		button { all: unset; }
+		button {
+			all: unset;
+			display: block;
+		}
 		#zoom-in { cursor: zoom-in; }
 		#zoom-out { cursor: zoom-out; }
 		#zoom-in:disabled { cursor: auto; }
