@@ -20,12 +20,15 @@ var j=Object.defineProperty;var B=(e,o,t)=>o in e?j(e,o,{enumerable:!0,configura
 		}
 
 		::slotted(*) {
-			display: inline-block;
+			display: block;
 			inline-size: 100%;
 			block-size: auto;
 		}
 
-		button { all: unset; }
+		button {
+			all: unset;
+			display: block;
+		}
 		#zoom-in { cursor: zoom-in; }
 		#zoom-out { cursor: zoom-out; }
 		#zoom-in:disabled { cursor: auto; }
