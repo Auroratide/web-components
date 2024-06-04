@@ -1,11 +1,11 @@
 import type { ReorderItemElement } from "./reorder-item.js"
 
-export const CHANGED = "reorder-list:change"
+export const CHANGED = "change"
 
 export type ReorderListChangeEventDetail = {
-    item: ReorderItemElement,
-    oldIndex: number,
-    newIndex: number,
+	item: ReorderItemElement,
+	oldIndex: number,
+	newIndex: number,
 }
 
 export const changeEvent = (item: ReorderItemElement, oldIndex: number, newIndex: number): CustomEvent<ReorderListChangeEventDetail> =>

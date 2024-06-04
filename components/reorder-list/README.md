@@ -172,12 +172,12 @@ The `reorder-list` element dispatches the following events:
 
 | Name | When Triggered |
 | ------------- | ------------- |
-| `reorder-list:change` | Whenever an item in the list is reordered |
+| `change` | Whenever an item in the list is reordered |
 
-The `reorder-list:change` event contains a reference to the item that was reordered, its previous position in the list, and its new position.
+The `change` event contains a reference to the item that was reordered, its previous position in the list, and its new position.
 
 ```js
-list.addEventListener('reorder-list:change', e => {
+list.addEventListener('change', e => {
     console.log(e.detail.item)
     console.log(e.detail.oldIndex)
     console.log(e.detail.newIndex)
