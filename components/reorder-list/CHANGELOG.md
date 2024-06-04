@@ -1,5 +1,11 @@
 # @auroratide/reorder-list
 
+## 0.1.3
+
+### Patch Changes
+
+- 231c3f8: Build reorder-list so the changes are emitted
+
 ## 0.1.2
 
 ### Patch Changes
