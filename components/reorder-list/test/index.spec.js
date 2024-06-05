@@ -82,11 +82,11 @@ describe("reorder-list", () => {
 	describe("aria-requirements", () => {
 		it("roles", async () => {
 			const container = await fixture(`
-                <reorder-list>
-                    <reorder-item>Apple</reorder-item>
-                    <reorder-item>Orange</reorder-item>
-                </reorder-list>
-            `)
+				<reorder-list>
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+				</reorder-list>
+			`)
 
 			expect(container.getAttribute("role")).to.equal("listbox")
 			container.querySelectorAll("reorder-item").forEach((item) => {
@@ -96,11 +96,11 @@ describe("reorder-list", () => {
 
 		it("aria-selected and tabindex", async () => {
 			const container = await fixture(`
-                <reorder-list>
-                    <reorder-item>Apple</reorder-item>
-                    <reorder-item>Orange</reorder-item>
-                </reorder-list>
-            `)
+				<reorder-list>
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+				</reorder-list>
+			`)
 
 			const items = container.querySelectorAll("reorder-item")
 
@@ -115,13 +115,13 @@ describe("reorder-list", () => {
 	describe("keyboard navigation", () => {
 		it("tabbing through", async () => {
 			const container = await fixture(`<div>
-                <button id="focus-start">Focusable</button>
-                <reorder-list>
-                    <reorder-item>Apple</reorder-item>
-                    <reorder-item>Orange</reorder-item>
-                </reorder-list>
-                <button id="focus-end">Focusable</button>
-            </div>`)
+				<button id="focus-start">Focusable</button>
+				<reorder-list>
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+				</reorder-list>
+				<button id="focus-end">Focusable</button>
+			</div>`)
             
 			container.querySelector("#focus-start").focus()
 
@@ -139,12 +139,12 @@ describe("reorder-list", () => {
 
 		it("up/down navigation", async () => {
 			const container = await fixture(`
-                <reorder-list>
-                    <reorder-item>Apple</reorder-item>
-                    <reorder-item>Orange</reorder-item>
-                    <reorder-item>Banana</reorder-item>
-                </reorder-list>
-            `)
+				<reorder-list>
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+					<reorder-item>Banana</reorder-item>
+				</reorder-list>
+			`)
 
 			const items = container.querySelectorAll("reorder-item")
 			items[0].focus()
@@ -167,12 +167,12 @@ describe("reorder-list", () => {
 
 		it("reordering an item", async () => {
 			const container = await fixture(`
-                <reorder-list>
-                    <reorder-item>Apple</reorder-item>
-                    <reorder-item>Orange</reorder-item>
-                    <reorder-item>Banana</reorder-item>
-                </reorder-list>
-            `)
+				<reorder-list>
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+					<reorder-item>Banana</reorder-item>
+				</reorder-list>
+			`)
 
 			let items = container.querySelectorAll("reorder-item")
 			items[0].focus()
@@ -194,14 +194,14 @@ describe("reorder-list", () => {
 
 		it("clicking on an item", async () => {
 			const container = await fixture(`<div>
-                <button id="focus-start">Focusable</button>
-                <reorder-list>
-                    <reorder-item>Apple</reorder-item>
-                    <reorder-item>Orange</reorder-item>
-                    <reorder-item>Banana</reorder-item>
-                </reorder-list>
-                <button id="focus-end">Focusable</button>
-            </div>`)
+				<button id="focus-start">Focusable</button>
+				<reorder-list>
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+					<reorder-item>Banana</reorder-item>
+				</reorder-list>
+				<button id="focus-end">Focusable</button>
+			</div>`)
 
 			container.querySelector("#focus-start").focus()
 
@@ -226,12 +226,12 @@ describe("reorder-list", () => {
 
 		it("dragging an item up", async () => {
 			const container = await fixture(`
-                <reorder-list>
-                    <reorder-item>Apple</reorder-item>
-                    <reorder-item>Orange</reorder-item>
-                    <reorder-item>Banana</reorder-item>
-                </reorder-list>
-            `)
+				<reorder-list>
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+					<reorder-item>Banana</reorder-item>
+				</reorder-list>
+			`)
 
 			const boundingBox = container.getBoundingClientRect()
 			const itemHeight = boundingBox.height / 3
@@ -253,12 +253,12 @@ describe("reorder-list", () => {
 
 		it("dragging an item down", async () => {
 			const container = await fixture(`
-                <reorder-list>
-                    <reorder-item>Apple</reorder-item>
-                    <reorder-item>Orange</reorder-item>
-                    <reorder-item>Banana</reorder-item>
-                </reorder-list>
-            `)
+				<reorder-list>
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+					<reorder-item>Banana</reorder-item>
+				</reorder-list>
+			`)
 
 			const boundingBox = container.getBoundingClientRect()
 			const itemHeight = boundingBox.height / 3
@@ -277,17 +277,34 @@ describe("reorder-list", () => {
 			expect(items[1].textContent).to.equal("Apple")
 			expect(items[2].textContent).to.equal("Orange")
 		})
+
+		it("starting drag on an ignored element", async () => {
+			const container = await fixture(`
+				<reorder-list>
+					<reorder-item id="first-item">
+						<input id="input" data-ignore-reorder value="Apple" />
+					</reorder-item>
+					<reorder-item>Orange</reorder-item>
+				</reorder-list>
+			`)
+
+			const firstItem = container.querySelector("#first-item")
+			const input = container.querySelector("#input")
+			await tap(input)
+
+			expect(document.activeElement).not.to.eq(firstItem)
+		})
 	})
 
 	describe("events", () => {
 		it("reordering", async () => {
 			const container = await fixture(`
-                <reorder-list>
-                    <reorder-item>Apple</reorder-item>
-                    <reorder-item>Orange</reorder-item>
-                    <reorder-item>Banana</reorder-item>
-                </reorder-list>
-            `)
+				<reorder-list>
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+					<reorder-item>Banana</reorder-item>
+				</reorder-list>
+			`)
 
 			let emitted = undefined
 			container.addEventListener(CHANGED, e => {

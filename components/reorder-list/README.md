@@ -6,25 +6,25 @@ The `reorder-list` and `reorder-item` elements represent an ordered list of item
 
 <!--DEMO
 <wc-demo>
-    <reorder-list>
-        <reorder-item>Apple</reorder-item>
-        <reorder-item>Orange</reorder-item>
-        <reorder-item>Banana</reorder-item>
-        <reorder-item>Lime</reorder-item>
-        <reorder-item>Blueberry</reorder-item>
-        <reorder-item>Plum</reorder-item>
-    </reorder-list>
+	<reorder-list>
+		<reorder-item>Apple</reorder-item>
+		<reorder-item>Orange</reorder-item>
+		<reorder-item>Banana</reorder-item>
+		<reorder-item>Lime</reorder-item>
+		<reorder-item>Blueberry</reorder-item>
+		<reorder-item>Plum</reorder-item>
+	</reorder-list>
 </wc-demo>
 /DEMO-->
 
 ```html
 <reorder-list>
-    <reorder-item>Apple</reorder-item>
-    <reorder-item>Orange</reorder-item>
-    <reorder-item>Banana</reorder-item>
-    <reorder-item>Lime</reorder-item>
-    <reorder-item>Blueberry</reorder-item>
-    <reorder-item>Plum</reorder-item>
+	<reorder-item>Apple</reorder-item>
+	<reorder-item>Orange</reorder-item>
+	<reorder-item>Banana</reorder-item>
+	<reorder-item>Lime</reorder-item>
+	<reorder-item>Blueberry</reorder-item>
+	<reorder-item>Plum</reorder-item>
 </reorder-list>
 ```
 
@@ -52,6 +52,32 @@ import '@auroratide/reorder-list/lib/define.js'
 
 * `reorder-item` elements **must** be _direct_ descendents of a `reorder-list` element. This is similar to how `li` must directly descend `ol`.
 
+## Ignoring Reorder Trigger
+
+You may have an element within a `reorder-item` that you do not want triggering a reorder. For instance, an `input` element should not start dragging, and it should instead focus on the `input`.
+
+Use the `data-ignore-reorder` attribute on any element within `reorder-item` in order to make that element not start dragging.
+
+<!--DEMO
+<wc-demo id="ignore-reorder">
+	<reorder-list>
+		<reorder-item>Drag: <input data-ignore-reorder type="text" value="Apple" /></reorder-item>
+		<reorder-item>Drag: <input data-ignore-reorder type="text" value="Orange" /></reorder-item>
+		<reorder-item>Drag: <input data-ignore-reorder type="text" value="Banana" /></reorder-item>
+		<reorder-item>Drag: <input data-ignore-reorder type="text" value="Kiwi" /></reorder-item>
+	</reorder-list>
+</wc-demo>
+/DEMO-->
+
+```html
+<reorder-list>
+	<reorder-item>Drag: <input data-ignore-reorder type="text" value="Apple" /></reorder-item>
+	<reorder-item>Drag: <input data-ignore-reorder type="text" value="Orange" /></reorder-item>
+	<reorder-item>Drag: <input data-ignore-reorder type="text" value="Banana" /></reorder-item>
+	<reorder-item>Drag: <input data-ignore-reorder type="text" value="Kiwi" /></reorder-item>
+</reorder-list>
+```
+
 ## CSS Customization
 
 Since these are native custom elements, they can be styled the same way as regular HTML elements.
@@ -64,105 +90,105 @@ Here's an example of a customized list meant to look like reorderable cards.
 
 <!--DEMO
 <wc-demo id="fancy">
-    <reorder-list>
-        <reorder-item>
-            <strong>Cobb Salad</strong>
-            <ul>
-                <li>chicken</li>
-                <li>egg</li>
-                <li>tomato</li>
-            </ul>
-        </reorder-item>
-        <reorder-item>
-            <strong>Fried Rice</strong>
-            <ul>
-                <li>rice</li>
-                <li>shrimp</li>
-                <li>egg</li>
-            </ul>
-        </reorder-item>
-        <reorder-item>
-            <strong>Chimichanga</strong>
-            <ul>
-                <li>chicken</li>
-                <li>beans</li>
-            </ul>
-        </reorder-item>
-        <reorder-item>
-            <strong>Banana Pancake</strong>
-            <ul>
-                <li>breakfast</li>
-                <li>banana</li>
-            </ul>
-        </reorder-item>
-        <reorder-item>
-            <strong>Philly Cheese Sandwich</strong>
-            <ul>
-                <li>steak</li>
-                <li>cheese</li>
-                <li>bread</li>
-            </ul>
-        </reorder-item>
-    </reorder-list>
+	<reorder-list>
+		<reorder-item>
+			<strong>Cobb Salad</strong>
+			<ul>
+					<li>chicken</li>
+					<li>egg</li>
+					<li>tomato</li>
+			</ul>
+		</reorder-item>
+		<reorder-item>
+			<strong>Fried Rice</strong>
+			<ul>
+					<li>rice</li>
+					<li>shrimp</li>
+					<li>egg</li>
+			</ul>
+		</reorder-item>
+		<reorder-item>
+			<strong>Chimichanga</strong>
+			<ul>
+					<li>chicken</li>
+					<li>beans</li>
+			</ul>
+		</reorder-item>
+		<reorder-item>
+			<strong>Banana Pancake</strong>
+			<ul>
+					<li>breakfast</li>
+					<li>banana</li>
+			</ul>
+		</reorder-item>
+		<reorder-item>
+			<strong>Philly Cheese Sandwich</strong>
+			<ul>
+					<li>steak</li>
+					<li>cheese</li>
+					<li>bread</li>
+			</ul>
+		</reorder-item>
+	</reorder-list>
 </wc-demo>
 <style>
-    #fancy reorder-list {
-        list-style: none;
-        background: #ddd;
-        border-radius: 0.5em;
-        width: min(400px, 100%);
-        padding: 0.5em;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5em;
-    }
-    #fancy reorder-item {
-        background: #fff;
-        border-radius: 0.25em;
-        padding: 0.5em;
-        box-shadow: 0 0.1em 0.15em #0002;
-    }
-    #fancy ul {
-        list-style: none;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5em;
-        padding: 0;
-        margin: 0;
-        font-size: 90%;
-        color: #2573C1;
-    }
+	#fancy reorder-list {
+		list-style: none;
+		background: #ddd;
+		border-radius: 0.5em;
+		width: min(400px, 100%);
+		padding: 0.5em;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5em;
+	}
+	#fancy reorder-item {
+		background: #fff;
+		border-radius: 0.25em;
+		padding: 0.5em;
+		box-shadow: 0 0.1em 0.15em #0002;
+	}
+	#fancy ul {
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em;
+		padding: 0;
+		margin: 0;
+		font-size: 90%;
+		color: #2573C1;
+	}
 </style>
 /DEMO-->
 
 ```css
 reorder-list {
-    list-style: none;
-    background: #ddd;
-    border-radius: 0.5em;
-    width: min(400px, 100%);
-    padding: 0.5em;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
+	list-style: none;
+	background: #ddd;
+	border-radius: 0.5em;
+	width: min(400px, 100%);
+	padding: 0.5em;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
 }
 
 reorder-item {
-    background: #fff;
-    border-radius: 0.25em;
-    padding: 0.5em;
-    box-shadow: 0 0.1em 0.15em #0002;
+	background: #fff;
+	border-radius: 0.25em;
+	padding: 0.5em;
+	box-shadow: 0 0.1em 0.15em #0002;
 }
 
 reorder-item ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5em;
-    padding: 0;
-    margin: 0;
-    font-size: 90%;
-    color: #2573C1;
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+	padding: 0;
+	margin: 0;
+	font-size: 90%;
+	color: #2573C1;
 }
 ```
 
@@ -178,9 +204,9 @@ The `change` event contains a reference to the item that was reordered, its prev
 
 ```js
 list.addEventListener('change', e => {
-    console.log(e.detail.item)
-    console.log(e.detail.oldIndex)
-    console.log(e.detail.newIndex)
+	console.log(e.detail.item)
+	console.log(e.detail.oldIndex)
+	console.log(e.detail.newIndex)
 })
 ```
 

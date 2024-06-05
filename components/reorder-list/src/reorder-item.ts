@@ -4,21 +4,21 @@ export class ReorderItemElement extends HTMLElement {
 	static defaultElementName = "reorder-item"
 
 	static html = `
-        <slot></slot>
-    `
+		<slot></slot>
+	`
 
 	static css = `
-        :host {
-            display: list-item;
-            touch-action: none;
-            cursor: grab;
-        }
-        
-        :host([data-dragging]) {
-            opacity: 0.5;
-            cursor: grabbing;
-        }
-    `
+		:host {
+			display: list-item;
+			touch-action: none;
+			cursor: grab;
+		}
+		
+		:host([data-dragging]) {
+			opacity: 0.5;
+			cursor: grabbing;
+		}
+	`
 
 	static get observedAttributes() {
 		return ["aria-selected"]
@@ -45,6 +45,10 @@ export class ReorderItemElement extends HTMLElement {
 	}
 
 	#onTouchStart = (e: PointerEvent) => {
+		if (e.target instanceof HTMLElement && e.target.dataset.ignoreReorder != null) {
+			return
+		}
+
 		e.preventDefault()
 		this.list().changeFocus(this)
 
