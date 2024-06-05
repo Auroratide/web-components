@@ -1,5 +1,12 @@
 # @auroratide/wc-docs
 
+## 0.1.16
+
+### Patch Changes
+
+- Updated dependencies [015ca83]
+  - @auroratide/reorder-list@0.2.0
+
 ## 0.1.15
 
 ### Patch Changes

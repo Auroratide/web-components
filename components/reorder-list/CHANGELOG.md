@@ -1,5 +1,11 @@
 # @auroratide/reorder-list
 
+## 0.2.0
+
+### Minor Changes
+
+- 015ca83: Add data-ignore-reorder support, so elements within a reorder-item do not trigger reordering
+
 ## 0.1.3
 
 ### Patch Changes
