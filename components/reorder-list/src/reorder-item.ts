@@ -1,3 +1,4 @@
+import { commitEvent } from "./events.js"
 import { ReorderListElement } from "./reorder-list.js"
 
 export class ReorderItemElement extends HTMLElement {
@@ -69,6 +70,8 @@ export class ReorderItemElement extends HTMLElement {
 		e?.preventDefault()
 		this.dataset.dragging = ""
 
+		this.#startCommitTracking()
+
 		document.addEventListener("pointermove", this.#onDragMove)
 		document.addEventListener("pointerup", this.#onDragEnd)
 		document.addEventListener("pointercancel", this.#onDragEnd)
@@ -105,10 +108,25 @@ export class ReorderItemElement extends HTMLElement {
 		document.removeEventListener("pointerup", this.#onDragEnd)
 		document.removeEventListener("pointercancel", this.#onDragEnd)
 		document.removeEventListener("touchmove", this.#preventScroll)
+
+		this.#endCommitTracking()
 	}
 
 	#preventScroll = (e: TouchEvent) => {
 		e.preventDefault()
+	}
+
+	#originalPosition: number
+
+	#startCommitTracking = () => {
+		this.#originalPosition = this.list().items().indexOf(this)
+	}
+
+	#endCommitTracking = () => {
+		const list = this.list()
+		const newPosition = list.items().indexOf(this)
+		list.dispatchEvent(commitEvent(this, this.#originalPosition, newPosition))
+		this.#originalPosition = undefined
 	}
 
 	attributeChangedCallback() {

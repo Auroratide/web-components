@@ -1,5 +1,5 @@
 import { fixture, expect } from "@open-wc/testing"
-import { CHANGED } from "../lib/events"
+import { CHANGED, COMMIT } from "../lib/events"
 import { ReorderItemElement } from "../lib"
 import "../lib/define.js"
 
@@ -48,20 +48,22 @@ const press = (key, ...modifiers) => {
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-const drag = async (item, destination) => {
+const drag = async (item, destination, numberOfSlots = 1) => {
 	item.dispatchEvent(new PointerEvent("pointerdown", {
 		bubbles: true,
 	}))
 
-	await wait(1)
+	await wait(ReorderItemElement.START_DRAG_DELAY_MS + 10)
 
-	item.dispatchEvent(new PointerEvent("pointermove", {
-		clientX: destination.x,
-		clientY: destination.y,
-		bubbles: true,
-	}))
-
-	await wait(1)
+	for (let i = 0; i < numberOfSlots; ++i) {
+		item.dispatchEvent(new PointerEvent("pointermove", {
+			clientX: destination.x,
+			clientY: destination.y,
+			bubbles: true,
+		}))
+	
+		await wait(1)
+	}
 
 	item.dispatchEvent(new PointerEvent("pointerup", {
 		bubbles: true,
@@ -79,6 +81,10 @@ const tap = async (element) => {
 }
 
 describe("reorder-list", () => {
+	beforeEach(() => {
+		ReorderItemElement.START_DRAG_DELAY_MS = 10
+	})
+
 	describe("aria-requirements", () => {
 		it("roles", async () => {
 			const container = await fixture(`
@@ -317,6 +323,34 @@ describe("reorder-list", () => {
 			expect(emitted.item).to.equal(expectedTarget)
 			expect(emitted.oldIndex).to.equal(2)
 			expect(emitted.newIndex).to.equal(1)
+		})
+
+		it("committing", async () => {
+			const container = await fixture(`
+				<reorder-list>
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+					<reorder-item>Banana</reorder-item>
+				</reorder-list>
+			`)
+
+			let emitted = undefined
+			container.addEventListener(COMMIT, e => {
+				emitted = e.detail
+			})
+
+			const boundingBox = container.getBoundingClientRect()
+			const itemHeight = boundingBox.height / 3
+			const epsilon = 2
+			let items = container.querySelectorAll("reorder-item")
+
+			await drag(items[0], { y: boundingBox.top + itemHeight * 2 + epsilon }, 2)
+
+			const expectedTarget = container.items()[2]
+
+			expect(emitted.item).to.equal(expectedTarget)
+			expect(emitted.oldIndex).to.equal(0)
+			expect(emitted.newIndex).to.equal(2)
 		})
 	})
 })

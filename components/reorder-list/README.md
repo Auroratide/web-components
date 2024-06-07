@@ -199,8 +199,9 @@ The `reorder-list` element dispatches the following events:
 | Name | When Triggered |
 | ------------- | ------------- |
 | `change` | Whenever an item in the list is reordered |
+| `commit` | At the end of an item being dragged |
 
-The `change` event contains a reference to the item that was reordered, its previous position in the list, and its new position.
+Both events contain a reference to the item that was reordered, its previous position in the list, and its new position.
 
 ```js
 list.addEventListener('change', e => {
@@ -209,6 +210,8 @@ list.addEventListener('change', e => {
 	console.log(e.detail.newIndex)
 })
 ```
+
+The difference between `change` and `commit` is the `change` event happens any time an element changes order, including in the middle of a drag. The `commit` event only triggers at the end of a drag, so the old index in that event's details will represent the position of that item prior to the drag being started.
 
 ## Accessibility
 
