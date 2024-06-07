@@ -1,5 +1,11 @@
 # @auroratide/reorder-list
 
+## 0.3.0
+
+### Minor Changes
+
+- d192d83: Add commit event that only emits when dragging is done
+
 ## 0.2.0
 
 ### Minor Changes
