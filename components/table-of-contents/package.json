@@ -1,0 +1,36 @@
+{
+	"name": "@auroratide/table-of-contents",
+	"version": "0.0.1",
+	"description": "Web component for auto-generating a table of contents",
+	"keywords": [
+		"contents",
+		"web component",
+		"table of contents",
+		"links",
+		"navigation"
+	],
+	"type": "module",
+	"main": "lib/index.js",
+	"module": "lib/index.js",
+	"scripts": {
+		"clean": "rm -rf lib",
+		"build": "tsc",
+		"build:watch": "tsc -w",
+		"test": "wtr --node-resolve --port 10009 test",
+		"test:clean": "pnpm clean && pnpm build && pnpm test"
+	},
+	"author": {
+		"name": "Timothy Foster",
+		"url": "https://auroratide.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Auroratide/web-components"
+	},
+	"license": "ISC",
+	"devDependencies": {
+		"@open-wc/testing": "^4.0.0",
+		"@web/test-runner": "^0.18.0",
+		"typescript": "^5.3.3"
+	}
+}

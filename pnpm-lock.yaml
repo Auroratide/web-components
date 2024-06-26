@@ -96,6 +96,18 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
+  components/table-of-contents:
+    devDependencies:
+      '@open-wc/testing':
+        specifier: ^4.0.0
+        version: 4.0.0
+      '@web/test-runner':
+        specifier: ^0.18.0
+        version: 0.18.0(typescript@5.3.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+
   components/toggle-switch:
     devDependencies:
       '@open-wc/testing':
@@ -137,6 +149,9 @@ importers:
       '@auroratide/tab-list':
         specifier: workspace:^
         version: link:../components/tab-list
+      '@auroratide/table-of-contents':
+        specifier: workspace:^
+        version: link:../components/table-of-contents
       '@auroratide/toggle-switch':
         specifier: workspace:^
         version: link:../components/toggle-switch

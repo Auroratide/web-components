@@ -288,6 +288,25 @@ A set of elements (`tab-list`, `tab-item`, and `tab-panel`) that work together t
 </div>
 ```
 
+## The table-of-contents Element
+
+**View**: [The table-of-contents Element](https://auroratide.github.io/web-components/table-of-contents)
+
+A component that automatically generates a table of contents.
+
+<!--DEMO
+<wc-demo>
+	<table-of-contents for="main" aria-label="Demo Table of Contents Element"></table-of-contents>
+</wc-demo>
+/DEMO-->
+
+```html
+<table-of-contents
+	for="main"
+	aria-label="Table of Contents"
+></table-of-contents>
+```
+
 ## The toggle-switch Element
 
 **View**: [The toggle-switch Element](https://auroratide.github.io/web-components/toggle-switch)

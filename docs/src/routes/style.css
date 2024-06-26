@@ -55,16 +55,18 @@ main {
 	color: var(--c-content-text);
 }
 
-a {
+a, table-of-contents::part(anchor) {
 	color: var(--c-primary);
 	text-decoration: underline;
 }
 
-a:hover, a:focus {
+a:hover, a:focus,
+table-of-contents::part(anchor):hover, table-of-contents::part(anchor):focus {
 	text-decoration: none;
 }
 
-a:visited {
+a:visited,
+table-of-contents::part(anchor):visited {
 	color: var(--c-secondary);
 }
 
