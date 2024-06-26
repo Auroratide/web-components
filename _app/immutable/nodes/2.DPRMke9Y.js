@@ -1,4 +1,4 @@
-import{_ as n}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r,o as g}from"../chunks/scheduler.Ce_0Mfso.js";import{S as d,i as m,s as j,e as b,H as u,l as f,d as l,h as w,c as y,a as x,b as v,f as c}from"../chunks/index.QmGHi4hh.js";import{s as k}from"../chunks/setup-cycle-demo.DlallKuY.js";import{s as _}from"../chunks/setup-flip-card-demos.e7UggXcj.js";const q=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
+import{_ as s}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r,o as g}from"../chunks/scheduler.Ce_0Mfso.js";import{S as m,i as d,s as b,e as j,H as u,l as f,d as l,h as w,c as y,a as x,b as v,f as c}from"../chunks/index.QmGHi4hh.js";import{s as _}from"../chunks/setup-cycle-demo.DlallKuY.js";import{s as k}from"../chunks/setup-flip-card-demos.e7UggXcj.js";import{b as q}from"../chunks/build-tocs.2fh9akDk.js";const T=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/">View this page with live demos!</a></strong></p>
 <p>This is just a bunch of highly reusable, fully accessible <strong><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a></strong> you can use on your websites! Why web components?</p>
 <ul>
@@ -261,6 +261,17 @@ import{_ as n}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r,o 
 	<span class="hljs-tag">&lt;/<span class="hljs-name">tab-panel</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
+<h2 id="the-table-of-contents-element">The table-of-contents Element</h2>
+<p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/table-of-contents">The table-of-contents Element</a></p>
+<p>A component that automatically generates a table of contents.</p>
+<wc-demo>
+	<table-of-contents for="main" aria-label="Demo Table of Contents Element"></table-of-contents>
+</wc-demo>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">table-of-contents</span>
+	<span class="hljs-attr">for</span>=<span class="hljs-string">&quot;main&quot;</span>
+	<span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Table of Contents&quot;</span>
+&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">table-of-contents</span>&gt;</span>
+</code></pre>
 <h2 id="the-toggle-switch-element">The toggle-switch Element</h2>
 <p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/toggle-switch">The toggle-switch Element</a></p>
 <p>A form control representing something is on or off.</p>
@@ -335,7 +346,7 @@ import{_ as n}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r,o 
 	<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
-`;function T(i){let s,a,e;return{c(){s=j(),a=b("article"),e=new u(!1),this.h()},l(t){f("svelte-9qjnth",document.head).forEach(l),s=w(t),a=y(t,"ARTICLE",{});var o=x(a);e=v(o,!1),o.forEach(l),this.h()},h(){document.title="Web Components by Auroratide",e.a=null},m(t,p){c(t,s,p),c(t,a,p),e.m(q,a)},p:r,i:r,o:r,d(t){t&&(l(s),l(a))}}}function E(i){return n(()=>import("../chunks/define.Bj-Sr4zv.js"),__vite__mapDeps([]),import.meta.url),n(()=>import("../chunks/define.Bx9aw4Oi.js"),__vite__mapDeps([]),import.meta.url),n(()=>import("../chunks/define.CJ6ZdpBe.js"),__vite__mapDeps([]),import.meta.url),n(()=>import("../chunks/define.VLajUROJ.js"),__vite__mapDeps([0,1]),import.meta.url),n(()=>Promise.resolve({}),__vite__mapDeps([2]),import.meta.url),n(()=>import("../chunks/define.BjUYNyY-.js"),__vite__mapDeps([]),import.meta.url),g(()=>{_(),k()}),[]}class S extends d{constructor(s){super(),m(this,s,E,T,h,{})}}export{S as component};
+`;function E(i){let a,n,e;return{c(){a=b(),n=j("article"),e=new u(!1),this.h()},l(t){f("svelte-9qjnth",document.head).forEach(l),a=w(t),n=y(t,"ARTICLE",{});var o=x(n);e=v(o,!1),o.forEach(l),this.h()},h(){document.title="Web Components by Auroratide",e.a=null},m(t,p){c(t,a,p),c(t,n,p),e.m(T,n)},p:r,i:r,o:r,d(t){t&&(l(a),l(n))}}}function A(i){return s(()=>import("../chunks/define.Bj-Sr4zv.js"),__vite__mapDeps([]),import.meta.url),s(()=>import("../chunks/define.Bx9aw4Oi.js"),__vite__mapDeps([]),import.meta.url),s(()=>import("../chunks/define.CJ6ZdpBe.js"),__vite__mapDeps([]),import.meta.url),s(()=>import("../chunks/define.CM3FkMQf.js"),__vite__mapDeps([]),import.meta.url),s(()=>import("../chunks/define.VLajUROJ.js"),__vite__mapDeps([0,1]),import.meta.url),s(()=>Promise.resolve({}),__vite__mapDeps([2]),import.meta.url),s(()=>import("../chunks/define.BjUYNyY-.js"),__vite__mapDeps([]),import.meta.url),g(()=>{k(),_(),q()}),[]}class R extends m{constructor(a){super(),d(this,a,A,E,h,{})}}export{R as component};
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
     __vite__mapDeps.viteFileDeps = ["../chunks/define.VLajUROJ.js","../chunks/events.C44j2o98.js","../assets/style.DZNs7oul.css"]
