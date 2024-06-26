@@ -1,6 +1,6 @@
 {
 	"name": "@auroratide/table-of-contents",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "Web component for auto-generating a table of contents",
 	"keywords": [
 		"contents",

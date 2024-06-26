@@ -1,5 +1,12 @@
 # @auroratide/wc-docs
 
+## 0.1.18
+
+### Patch Changes
+
+- Updated dependencies [69c81c9]
+  - @auroratide/table-of-contents@0.1.0
+
 ## 0.1.17
 
 ### Patch Changes
