@@ -48,10 +48,10 @@ export class ReorderListElement extends HTMLElement {
 	}
 
 	items = (): ReorderItemElement[] =>
-		Array.from(this.querySelectorAll(ReorderItemElement.defaultElementName))
+		Array.from(this.querySelectorAll(`:scope > ${ReorderItemElement.defaultElementName}`))
 
 	current = (): ReorderItemElement =>
-		this.querySelector(`${ReorderItemElement.defaultElementName}[tabindex="0"]`)
+		this.querySelector(`:scope > ${ReorderItemElement.defaultElementName}[tabindex="0"]`)
 
 	connectedCallback() {
 		this.setAttribute("role", "listbox")
@@ -99,10 +99,12 @@ export class ReorderListElement extends HTMLElement {
 
 			if (e.altKey && currentFocusable !== nextFocusable) {
 				e.preventDefault()
+				e.stopPropagation()
 
 				this.reorder(currentFocusable, nextFocusable, items)
 			} else if (currentFocusable !== nextFocusable) {
 				e.preventDefault()
+				e.stopPropagation()
 
 				this.changeFocus(items[nextFocusable], items)
 			}

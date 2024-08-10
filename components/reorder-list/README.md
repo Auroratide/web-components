@@ -69,6 +69,7 @@ By default, `orientation` is "vertical", meaning you drag items up and down. Set
 	#horizontal-demo reorder-list {
 		list-style: none;
 		gap: 0.5em;
+		padding: 0;
 	}
 	#horizontal-demo reorder-item {
 		border: 0.0625em solid #2573C1;
@@ -131,39 +132,39 @@ Here's an example of a customized list meant to look like reorderable cards.
 		<reorder-item>
 			<strong>Cobb Salad</strong>
 			<ul>
-					<li>chicken</li>
-					<li>egg</li>
-					<li>tomato</li>
+				<li>chicken</li>
+				<li>egg</li>
+				<li>tomato</li>
 			</ul>
 		</reorder-item>
 		<reorder-item>
 			<strong>Fried Rice</strong>
 			<ul>
-					<li>rice</li>
-					<li>shrimp</li>
-					<li>egg</li>
+				<li>rice</li>
+				<li>shrimp</li>
+				<li>egg</li>
 			</ul>
 		</reorder-item>
 		<reorder-item>
 			<strong>Chimichanga</strong>
 			<ul>
-					<li>chicken</li>
-					<li>beans</li>
+				<li>chicken</li>
+				<li>beans</li>
 			</ul>
 		</reorder-item>
 		<reorder-item>
 			<strong>Banana Pancake</strong>
 			<ul>
-					<li>breakfast</li>
-					<li>banana</li>
+				<li>breakfast</li>
+				<li>banana</li>
 			</ul>
 		</reorder-item>
 		<reorder-item>
 			<strong>Philly Cheese Sandwich</strong>
 			<ul>
-					<li>steak</li>
-					<li>cheese</li>
-					<li>bread</li>
+				<li>steak</li>
+				<li>cheese</li>
+				<li>bread</li>
 			</ul>
 		</reorder-item>
 	</reorder-list>
@@ -249,6 +250,105 @@ list.addEventListener('change', e => {
 ```
 
 The difference between `change` and `commit` is the `change` event happens any time an element changes order, including in the middle of a drag. The `commit` event only triggers at the end of a drag, so the old index in that event's details will represent the position of that item prior to the drag being started.
+
+## Nesting Lists
+
+Nothing stops you from putting lists inside of lists.
+
+<!--DEMO
+<wc-demo id="nested-demo">
+	<reorder-list orientation="horizontal">
+		<reorder-item>
+			<strong>Fruit</strong>
+			<reorder-list>
+				<reorder-item>Apple</reorder-item>
+				<reorder-item>Orange</reorder-item>
+				<reorder-item>Banana</reorder-item>
+				<reorder-item>Kiwi</reorder-item>
+			</reorder-list>
+		</reorder-item>
+		<reorder-item>
+			<strong>Vegetable</strong>
+			<reorder-list>
+				<reorder-item>Tomato</reorder-item>
+				<reorder-item>Carrot</reorder-item>
+				<reorder-item>Squash</reorder-item>
+				<reorder-item>Lettuce</reorder-item>
+			</reorder-list>
+		</reorder-item>
+		<reorder-item>
+			<strong>Grain</strong>
+			<reorder-list>
+				<reorder-item>Wheat</reorder-item>
+				<reorder-item>Barley</reorder-item>
+				<reorder-item>Rye</reorder-item>
+				<reorder-item>Rice</reorder-item>
+			</reorder-list>
+		</reorder-item>
+	</reorder-list>
+</wc-demo>
+<style>
+	#nested-demo > reorder-list {
+		list-style: none;
+		gap: 0.5em;
+		padding: 0;
+	} #nested-demo > reorder-list strong {
+		display: block;
+		text-align: center;
+	} #nested-demo > reorder-list > reorder-item {
+		background: #ddd;
+		padding: 0.5em;
+		border-radius: 0.25em;
+		flex: 1;
+	}
+	#nested-demo reorder-list reorder-list {
+		list-style: none;
+		border-radius: 0.5em;
+		width: min(400px, 100%);
+		padding: 0.5em;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5em;
+	} #nested-demo reorder-list reorder-list reorder-item {
+		background: #fff;
+		border-radius: 0.25em;
+		padding: 0.5em;
+		box-shadow: 0 0.1em 0.15em #0002;
+	}
+</style>
+/DEMO-->
+
+```html
+<reorder-list orientation="horizontal">
+	<reorder-item>
+		<strong>Fruit</strong>
+		<reorder-list>
+			<reorder-item>Apple</reorder-item>
+			<reorder-item>Orange</reorder-item>
+			<reorder-item>Banana</reorder-item>
+			<reorder-item>Kiwi</reorder-item>
+		</reorder-list>
+	</reorder-item>
+	<reorder-item>
+		<strong>Vegetable</strong>
+		<reorder-list>
+			<reorder-item>Tomato</reorder-item>
+			<reorder-item>Carrot</reorder-item>
+			<reorder-item>Squash</reorder-item>
+			<reorder-item>Lettuce</reorder-item>
+		</reorder-list>
+	</reorder-item>
+	<reorder-item>
+		<strong>Grain</strong>
+		<reorder-list>
+			<reorder-item>Wheat</reorder-item>
+			<reorder-item>Barley</reorder-item>
+			<reorder-item>Rye</reorder-item>
+			<reorder-item>Rice</reorder-item>
+		</reorder-list>
+	</reorder-item>
+</reorder-list>
+```
 
 ## Accessibility
 

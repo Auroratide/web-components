@@ -51,6 +51,7 @@ export class ReorderItemElement extends HTMLElement {
 		}
 
 		e.preventDefault()
+		e.stopPropagation()
 		this.list().changeFocus(this)
 
 		const timeout = setTimeout(() => this.#onDragStart(), ReorderItemElement.START_DRAG_DELAY_MS)
