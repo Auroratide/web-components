@@ -1,4 +1,4 @@
-import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as i,n as o}from"../chunks/scheduler.Ce_0Mfso.js";import{S as d,i as c,s as h,m,l as g,d as l,h as u,n as j,f as b,o as f,p as y,q as w,r as x}from"../chunks/index.QmGHi4hh.js";import{R as v}from"../chunks/Readme.BbztUA8r.js";const _=`<h1 id="the-reorder-list-elements">The reorder-list Elements</h1>
+import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as o,n as i}from"../chunks/scheduler.Ce_0Mfso.js";import{S as d,i as c,s as m,m as h,l as g,d as l,h as j,n as u,f as b,o as f,p as y,q as w,r as x}from"../chunks/index.QmGHi4hh.js";import{R as k}from"../chunks/Readme.BbztUA8r.js";const v=`<h1 id="the-reorder-list-elements">The reorder-list Elements</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/reorder-list">View this page with live demos!</a></strong></p>
 <p>The <code>reorder-list</code> and <code>reorder-item</code> elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html">rearrangable listboxes</a>.</p>
 <wc-demo>
@@ -34,6 +34,36 @@ import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as i,n as o}fr
 <ul>
 <li><code>reorder-item</code> elements <strong>must</strong> be <em>direct</em> descendents of a <code>reorder-list</code> element. This is similar to how <code>li</code> must directly descend <code>ol</code>.</li>
 </ul>
+<h2 id="orientation">Orientation</h2>
+<p>By default, <code>orientation</code> is &quot;vertical&quot;, meaning you drag items up and down. Setting <code>orientation</code> to &quot;horizontal&quot; will allow you to reorder items left and right instead.</p>
+<wc-demo id="horizontal-demo">
+	<reorder-list orientation="horizontal">
+		<reorder-item>Apple</reorder-item>
+		<reorder-item>Orange</reorder-item>
+		<reorder-item>Banana</reorder-item>
+		<reorder-item>Kiwi</reorder-item>
+	</reorder-list>
+</wc-demo>
+<style>
+	#horizontal-demo reorder-list {
+		list-style: none;
+		gap: 0.5em;
+		padding: 0;
+	}
+	#horizontal-demo reorder-item {
+		border: 0.0625em solid #2573C1;
+		border-radius: 0.125em;
+		padding: 0.25em 1em;
+	}
+</style>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">reorder-list</span> <span class="hljs-attr">orientation</span>=<span class="hljs-string">&quot;horizontal&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Apple<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Orange<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Banana<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Kiwi<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-list</span>&gt;</span>
+</code></pre>
+<p><strong>Note</strong>: Bidirectional reordering is not possible with this component. <code>reorder-list</code> is for <em>lists</em>, whereas bidirectional reordering would be for a grid of some kind; they are different semantics.</p>
 <h2 id="ignoring-reorder-trigger">Ignoring Reorder Trigger</h2>
 <p>You may have an element within a <code>reorder-item</code> that you do not want triggering a reorder. For instance, an <code>input</code> element should not start dragging, and it should instead focus on the <code>input</code>.</p>
 <p>Use the <code>data-ignore-reorder</code> attribute on any element within <code>reorder-item</code> in order to make that element not start dragging.</p>
@@ -64,39 +94,39 @@ import{_ as p}from"../chunks/preload-helper.BQ24v_F8.js";import{s as i,n as o}fr
 		<reorder-item>
 			<strong>Cobb Salad</strong>
 			<ul>
-					<li>chicken</li>
-					<li>egg</li>
-					<li>tomato</li>
+				<li>chicken</li>
+				<li>egg</li>
+				<li>tomato</li>
 			</ul>
 		</reorder-item>
 		<reorder-item>
 			<strong>Fried Rice</strong>
 			<ul>
-					<li>rice</li>
-					<li>shrimp</li>
-					<li>egg</li>
+				<li>rice</li>
+				<li>shrimp</li>
+				<li>egg</li>
 			</ul>
 		</reorder-item>
 		<reorder-item>
 			<strong>Chimichanga</strong>
 			<ul>
-					<li>chicken</li>
-					<li>beans</li>
+				<li>chicken</li>
+				<li>beans</li>
 			</ul>
 		</reorder-item>
 		<reorder-item>
 			<strong>Banana Pancake</strong>
 			<ul>
-					<li>breakfast</li>
-					<li>banana</li>
+				<li>breakfast</li>
+				<li>banana</li>
 			</ul>
 		</reorder-item>
 		<reorder-item>
 			<strong>Philly Cheese Sandwich</strong>
 			<ul>
-					<li>steak</li>
-					<li>cheese</li>
-					<li>bread</li>
+				<li>steak</li>
+				<li>cheese</li>
+				<li>bread</li>
 			</ul>
 		</reorder-item>
 	</reorder-list>
@@ -186,14 +216,107 @@ reorder-item <span class="hljs-selector-tag">ul</span> {
 })
 </code></pre>
 <p>The difference between <code>change</code> and <code>commit</code> is the <code>change</code> event happens any time an element changes order, including in the middle of a drag. The <code>commit</code> event only triggers at the end of a drag, so the old index in that event's details will represent the position of that item prior to the drag being started.</p>
+<h2 id="nesting-lists">Nesting Lists</h2>
+<p>Nothing stops you from putting lists inside of lists.</p>
+<wc-demo id="nested-demo">
+	<reorder-list orientation="horizontal">
+		<reorder-item>
+			<strong>Fruit</strong>
+			<reorder-list>
+				<reorder-item>Apple</reorder-item>
+				<reorder-item>Orange</reorder-item>
+				<reorder-item>Banana</reorder-item>
+				<reorder-item>Kiwi</reorder-item>
+			</reorder-list>
+		</reorder-item>
+		<reorder-item>
+			<strong>Vegetable</strong>
+			<reorder-list>
+				<reorder-item>Tomato</reorder-item>
+				<reorder-item>Carrot</reorder-item>
+				<reorder-item>Squash</reorder-item>
+				<reorder-item>Lettuce</reorder-item>
+			</reorder-list>
+		</reorder-item>
+		<reorder-item>
+			<strong>Grain</strong>
+			<reorder-list>
+				<reorder-item>Wheat</reorder-item>
+				<reorder-item>Barley</reorder-item>
+				<reorder-item>Rye</reorder-item>
+				<reorder-item>Rice</reorder-item>
+			</reorder-list>
+		</reorder-item>
+	</reorder-list>
+</wc-demo>
+<style>
+	#nested-demo > reorder-list {
+		list-style: none;
+		gap: 0.5em;
+		padding: 0;
+	} #nested-demo > reorder-list strong {
+		display: block;
+		text-align: center;
+	} #nested-demo > reorder-list > reorder-item {
+		background: #ddd;
+		padding: 0.5em;
+		border-radius: 0.25em;
+		flex: 1;
+	}
+	#nested-demo reorder-list reorder-list {
+		list-style: none;
+		border-radius: 0.5em;
+		width: min(400px, 100%);
+		padding: 0.5em;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5em;
+	} #nested-demo reorder-list reorder-list reorder-item {
+		background: #fff;
+		border-radius: 0.25em;
+		padding: 0.5em;
+		box-shadow: 0 0.1em 0.15em #0002;
+	}
+</style>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">reorder-list</span> <span class="hljs-attr">orientation</span>=<span class="hljs-string">&quot;horizontal&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Fruit<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">reorder-list</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Apple<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Orange<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Banana<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Kiwi<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-list</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Vegetable<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">reorder-list</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Tomato<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Carrot<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Squash<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Lettuce<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-list</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Grain<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">reorder-list</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Wheat<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Barley<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Rye<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>Rice<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-list</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-list</span>&gt;</span>
+</code></pre>
 <h2 id="accessibility">Accessibility</h2>
 <p>This custom element is build with accessibility in mind! It follows the WAI-ARIA guidelines for <a href="https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html">rearrangable listboxes</a> (the <code>listbox</code> and <code>option</code> roles).</p>
 <ul>
 <li>When focus enters the list, focus goes to the currently active list item.</li>
 <li><kbd>Up</kbd> and <kbd>Down</kbd> can be used to navigate the list, focusing on an element that will be reordered.</li>
 <li><kbd>Alt</kbd> + <kbd>Up</kbd>/<kbd>Down</kbd> moves the currently selected list item up or down in the order.</li>
+<li>If orientation is horizontal, then <kbd>Left</kbd> and <kbd>Right</kbd> are used instead.</li>
 </ul>
-`;function k(r){let e,t,n;return t=new v({props:{html:_}}),{c(){e=h(),m(t.$$.fragment),this.h()},l(s){g("svelte-n8c5fz",document.head).forEach(l),e=u(s),j(t.$$.fragment,s),this.h()},h(){document.title="The reorder-list Element"},m(s,a){b(s,e,a),f(t,s,a),n=!0},p:o,i(s){n||(y(t.$$.fragment,s),n=!0)},o(s){w(t.$$.fragment,s),n=!1},d(s){s&&l(e),x(t,s)}}}function q(r){return p(()=>import("../chunks/define.Bx9aw4Oi.js"),__vite__mapDeps([]),import.meta.url),[]}class $ extends d{constructor(e){super(),c(this,e,q,k,i,{})}}export{$ as component};
+`;function q(r){let e,t,a;return t=new k({props:{html:v}}),{c(){e=m(),h(t.$$.fragment),this.h()},l(s){g("svelte-n8c5fz",document.head).forEach(l),e=j(s),u(t.$$.fragment,s),this.h()},h(){document.title="The reorder-list Element"},m(s,n){b(s,e,n),f(t,s,n),a=!0},p:i,i(s){a||(y(t.$$.fragment,s),a=!0)},o(s){w(t.$$.fragment,s),a=!1},d(s){s&&l(e),x(t,s)}}}function _(r){return p(()=>import("../chunks/define.s0Ny8EZU.js"),__vite__mapDeps([]),import.meta.url),[]}class I extends d{constructor(e){super(),c(this,e,_,q,o,{})}}export{I as component};
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
     __vite__mapDeps.viteFileDeps = []
