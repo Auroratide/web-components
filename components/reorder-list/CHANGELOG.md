@@ -1,5 +1,12 @@
 # @auroratide/reorder-list
 
+## 0.4.0
+
+### Minor Changes
+
+- 2c2e4a7: Allow reorder-list to be nested
+- fa0eb2b: reorder-list orientation can now be horizontal
+
 ## 0.3.0
 
 ### Minor Changes
