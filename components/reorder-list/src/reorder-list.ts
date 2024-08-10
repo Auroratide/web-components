@@ -1,25 +1,50 @@
 import { changeEvent } from "./events.js"
 import { ReorderItemElement } from "./reorder-item.js"
 
+export type Orientation = "vertical" | "horizontal"
+
 export class ReorderListElement extends HTMLElement {
 	static defaultElementName = "reorder-list"
 
 	static html = `
-        <slot></slot>
-    `
+		<slot></slot>
+	`
 
 	static css = `
-        :host {
-            display: block;
-            list-style: disc;
-            padding-left: 1em;
-        }
-    `
+		:host {
+			display: block;
+			list-style: disc;
+			padding-left: 1em;
+		}
+
+		:host([orientation="horizontal"]) {
+			display: flex;
+			flex-direction: row;
+			list-style-position: inside;
+		}
+	`
 
 	constructor() {
 		super()
 
 		this.#createRoot()
+	}
+
+	static get observedAttributes() {
+		return ["orientation"]
+	}
+
+	get orientation(): Orientation { return this.getAttribute("orientation") as Orientation ?? "vertical" }
+	set orientation(value: Orientation) { this.setAttribute("orientation", value) }
+
+	attributeChangedCallback(attribute: string, oldValue: string, newValue: string) {
+		this.#attributeCallbacks[attribute]?.(newValue, oldValue)
+	}
+
+	#attributeCallbacks = {
+		"orientation": () => {
+			this.#setAriaOrientation()
+		},
 	}
 
 	items = (): ReorderItemElement[] =>
@@ -85,7 +110,13 @@ export class ReorderListElement extends HTMLElement {
 	}
 
 	#keysForOrientation = () => {
-		return ["ArrowUp", "ArrowDown"]
+		return this.orientation === "horizontal"
+			? ["ArrowLeft", "ArrowRight"]
+			: ["ArrowUp", "ArrowDown"]
+	}
+
+	#setAriaOrientation = () => {
+		this.setAttribute("aria-orientation", this.orientation)
 	}
 
 	#createRoot = () => {

@@ -116,6 +116,20 @@ describe("reorder-list", () => {
 			expect(items[1].getAttribute("aria-selected")).to.equal("false")
 			expect(items[1].getAttribute("tabindex")).to.equal("-1")
 		})
+
+		it("aria-orientation", async () => {
+			const list = await fixture(`
+				<reorder-list orientation="horizontal">
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+				</reorder-list>
+			`)
+
+			expect(list.getAttribute("aria-orientation")).to.equal("horizontal")
+
+			list.orientation = "vertical"
+			expect(list.getAttribute("aria-orientation")).to.equal("vertical")
+		})
 	})
 
 	describe("keyboard navigation", () => {
@@ -143,7 +157,7 @@ describe("reorder-list", () => {
 			)
 		})
 
-		it("up/down navigation", async () => {
+		it("up/down navigation (vertical)", async () => {
 			const container = await fixture(`
 				<reorder-list>
 					<reorder-item>Apple</reorder-item>
@@ -171,7 +185,7 @@ describe("reorder-list", () => {
 			expect(document.activeElement).to.equal(items[0])
 		})
 
-		it("reordering an item", async () => {
+		it("reordering an item (vertical)", async () => {
 			const container = await fixture(`
 				<reorder-list>
 					<reorder-item>Apple</reorder-item>
@@ -191,6 +205,61 @@ describe("reorder-list", () => {
 
 			press(arrow("Down"))
 			press(arrow("Up"), alt())
+			items = container.querySelectorAll("reorder-item")
+			expect(document.activeElement).to.equal(items[1])
+			expect(items[0].textContent).to.equal("Orange")
+			expect(items[1].textContent).to.equal("Banana")
+			expect(items[2].textContent).to.equal("Apple")
+		})
+
+		it("left/right navigation (horizontal)", async () => {
+			const container = await fixture(`
+				<reorder-list orientation="horizontal">
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+					<reorder-item>Banana</reorder-item>
+				</reorder-list>
+			`)
+
+			const items = container.querySelectorAll("reorder-item")
+			items[0].focus()
+
+			press(arrow("Right"))
+			expect(document.activeElement).to.equal(items[1])
+
+			press(arrow("Right"))
+			expect(document.activeElement).to.equal(items[2])
+
+			press(arrow("Right"))
+			expect(document.activeElement).to.equal(items[2])
+
+			press(arrow("Left"))
+			expect(document.activeElement).to.equal(items[1])
+
+			press(arrow("Left"))
+			expect(document.activeElement).to.equal(items[0])
+		})
+
+		it("reordering an item (horizontal)", async () => {
+			const container = await fixture(`
+				<reorder-list orientation="horizontal">
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+					<reorder-item>Banana</reorder-item>
+				</reorder-list>
+			`)
+
+			let items = container.querySelectorAll("reorder-item")
+			items[0].focus()
+
+			press(arrow("Right"), alt())
+			items = container.querySelectorAll("reorder-item")
+			expect(document.activeElement).to.equal(items[1])
+			expect(items[0].textContent).to.equal("Orange")
+			expect(items[1].textContent).to.equal("Apple")
+
+			press(arrow("Right"))
+			press(arrow("Left"), alt())
 			items = container.querySelectorAll("reorder-item")
 			expect(document.activeElement).to.equal(items[1])
 			expect(items[0].textContent).to.equal("Orange")
@@ -278,6 +347,62 @@ describe("reorder-list", () => {
 			expect(items[2].textContent).to.equal("Orange")
 
 			await drag(items[0], { y: boundingBox.top + itemHeight + epsilon })
+			items = container.querySelectorAll("reorder-item")
+			expect(items[0].textContent).to.equal("Banana")
+			expect(items[1].textContent).to.equal("Apple")
+			expect(items[2].textContent).to.equal("Orange")
+		})
+
+		it("dragging an item left", async () => {
+			const container = await fixture(`
+				<reorder-list orientation="horizontal">
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+					<reorder-item>Banana</reorder-item>
+				</reorder-list>
+			`)
+
+			const epsilon = 2
+			let items = container.querySelectorAll("reorder-item")
+
+			let appleBound = items[0].getBoundingClientRect()
+			await drag(items[1], { x: appleBound.right - epsilon })
+
+			items = container.querySelectorAll("reorder-item")
+			expect(items[0].textContent).to.equal("Orange")
+			expect(items[1].textContent).to.equal("Apple")
+			expect(items[2].textContent).to.equal("Banana")
+
+			appleBound = items[1].getBoundingClientRect()
+			await drag(items[2], { x: appleBound.right - epsilon })
+			items = container.querySelectorAll("reorder-item")
+			expect(items[0].textContent).to.equal("Orange")
+			expect(items[1].textContent).to.equal("Banana")
+			expect(items[2].textContent).to.equal("Apple")
+		})
+
+		it("dragging an item right", async () => {
+			const container = await fixture(`
+				<reorder-list orientation="horizontal">
+					<reorder-item>Apple</reorder-item>
+					<reorder-item>Orange</reorder-item>
+					<reorder-item>Banana</reorder-item>
+				</reorder-list>
+			`)
+
+			const epsilon = 10
+			let items = container.querySelectorAll("reorder-item")
+
+
+			let bananaBound = items[2].getBoundingClientRect()
+			await drag(items[1], { x: bananaBound.left + epsilon })
+			items = container.querySelectorAll("reorder-item")
+			expect(items[0].textContent).to.equal("Apple")
+			expect(items[1].textContent).to.equal("Banana")
+			expect(items[2].textContent).to.equal("Orange")
+
+			bananaBound = items[1].getBoundingClientRect()
+			await drag(items[0], { x: bananaBound.left + epsilon })
 			items = container.querySelectorAll("reorder-item")
 			expect(items[0].textContent).to.equal("Banana")
 			expect(items[1].textContent).to.equal("Apple")

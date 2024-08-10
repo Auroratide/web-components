@@ -95,11 +95,25 @@ export class ReorderItemElement extends HTMLElement {
 			rect: items[cur.index + 1]?.getBoundingClientRect(),
 		}
 
-		if (prev.rect && e.clientY < Math.min(prev.rect.top + cur.rect.height, prev.rect.bottom)) {
+		if (prev.rect && this.#isOverPrevious(e, prev.rect, cur.rect)) {
 			list.reorder(cur.index, prev.index, items)
-		} else if (next.rect && e.clientY > Math.max(next.rect.bottom - cur.rect.height, next.rect.top)) {
+		} else if (next.rect && this.#isOverNext(e, next.rect, cur.rect)) {
 			list.reorder(cur.index, next.index, items)
 		}
+	}
+
+	#isOverPrevious = (mouse: MouseEvent, prev: DOMRect, cur: DOMRect): boolean => {
+		const orientation = this.list().orientation
+		return orientation === "horizontal"
+			? mouse.clientX < Math.min(prev.left + cur.width, prev.right)
+			: mouse.clientY < Math.min(prev.top + cur.height, prev.bottom)
+	}
+
+	#isOverNext = (mouse: MouseEvent, next: DOMRect, cur: DOMRect): boolean => {
+		const orientation = this.list().orientation
+		return orientation === "horizontal"
+			? mouse.clientX > Math.max(next.right - cur.width, next.left)
+			: mouse.clientY > Math.max(next.bottom - cur.height, next.top)
 	}
 
 	#onDragEnd = () => {

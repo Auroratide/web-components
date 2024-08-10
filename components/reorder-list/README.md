@@ -52,6 +52,43 @@ import '@auroratide/reorder-list/lib/define.js'
 
 * `reorder-item` elements **must** be _direct_ descendents of a `reorder-list` element. This is similar to how `li` must directly descend `ol`.
 
+## Orientation
+
+By default, `orientation` is "vertical", meaning you drag items up and down. Setting `orientation` to "horizontal" will allow you to reorder items left and right instead.
+
+<!--DEMO
+<wc-demo id="horizontal-demo">
+	<reorder-list orientation="horizontal">
+		<reorder-item>Apple</reorder-item>
+		<reorder-item>Orange</reorder-item>
+		<reorder-item>Banana</reorder-item>
+		<reorder-item>Kiwi</reorder-item>
+	</reorder-list>
+</wc-demo>
+<style>
+	#horizontal-demo reorder-list {
+		list-style: none;
+		gap: 0.5em;
+	}
+	#horizontal-demo reorder-item {
+		border: 0.0625em solid #2573C1;
+		border-radius: 0.125em;
+		padding: 0.25em 1em;
+	}
+</style>
+/DEMO-->
+
+```html
+<reorder-list orientation="horizontal">
+	<reorder-item>Apple</reorder-item>
+	<reorder-item>Orange</reorder-item>
+	<reorder-item>Banana</reorder-item>
+	<reorder-item>Kiwi</reorder-item>
+</reorder-list>
+```
+
+**Note**: Bidirectional reordering is not possible with this component. `reorder-list` is for _lists_, whereas bidirectional reordering would be for a grid of some kind; they are different semantics.
+
 ## Ignoring Reorder Trigger
 
 You may have an element within a `reorder-item` that you do not want triggering a reorder. For instance, an `input` element should not start dragging, and it should instead focus on the `input`.
@@ -220,3 +257,4 @@ This custom element is build with accessibility in mind! It follows the WAI-ARIA
 * When focus enters the list, focus goes to the currently active list item.
 * <kbd>Up</kbd> and <kbd>Down</kbd> can be used to navigate the list, focusing on an element that will be reordered.
 * <kbd>Alt</kbd> + <kbd>Up</kbd>/<kbd>Down</kbd> moves the currently selected list item up or down in the order.
+* If orientation is horizontal, then <kbd>Left</kbd> and <kbd>Right</kbd> are used instead.
