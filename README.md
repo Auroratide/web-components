@@ -88,12 +88,12 @@ An element that accessibly zooms in on an image when the user wants to see more 
 
 ```html
 <img-zoom>
-   <img
-      src="fruit.png"
-      alt="Apples and such arranged on a table."
-      width="1920"
-      height="1470"
-   />
+	<img
+		src="fruit.png"
+		alt="Apples and such arranged on a table."
+		width="1920"
+		height="1470"
+	/>
 </img-zoom>
 ```
 
