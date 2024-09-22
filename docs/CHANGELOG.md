@@ -1,5 +1,12 @@
 # @auroratide/wc-docs
 
+## 0.1.21
+
+### Patch Changes
+
+- Updated dependencies [88d983d]
+  - @auroratide/img-zoom@0.1.4
+
 ## 0.1.20
 
 ### Patch Changes

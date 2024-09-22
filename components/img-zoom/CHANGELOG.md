@@ -1,5 +1,11 @@
 # @auroratide/img-zoom
 
+## 0.1.4
+
+### Patch Changes
+
+- 88d983d: Invert translation and scale transformations so image does not fly offscreen
+
 ## 0.1.3
 
 ### Patch Changes
