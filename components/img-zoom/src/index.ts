@@ -1,4 +1,4 @@
-import { pop, fade } from "./animation.js"
+import { pop, fade, type AnimationDescription } from "./animation.js"
 
 export class ImgZoomElement extends HTMLElement {
 	static defaultElementName = "img-zoom"
@@ -212,28 +212,41 @@ export class ImgZoomElement extends HTMLElement {
 
 	#onOpen = () => {
 		this.#stopScroll()
+		const animations = this.#getAnimation()
 
-		const animation = this.#getAnimation()
-		if (animation == null) return
+		const animate = (animation: AnimationDescription) =>
+			this.#content().animate(animation.keyframes, {
+				easing: "ease-out",
+				...animation.options,
+				fill: "none",
+				composite: "add",
+			})
 
-		this.#content().animate(animation.keyframes, {
-			...animation.options,
-			fill: "none",
-			easing: "ease-out",
-		})
+		if (Array.isArray(animations)) {
+			animations?.forEach(animate)
+		} else {
+			animate(animations)
+		}
 	}
 
 	#onClose = () => {
 		this.#resumeScroll()
-		const animation = this.#getAnimation()
-		if (animation == null) return
+		const animations = this.#getAnimation()
 
-		this.#content().animate(animation.keyframes, {
-			...animation.options,
-			direction: "reverse",
-			fill: "none",
-			easing: "ease-in",
-		})
+		const animate = (animation: AnimationDescription) =>
+			this.#content().animate(animation.keyframes, {
+				...animation.options,
+				easing: invertEasing(animation.options?.easing ?? "ease-out"),
+				fill: "none",
+				direction: "reverse",
+				composite: "add",
+			})
+
+		if (Array.isArray(animations)) {
+			animations?.forEach(animate)
+		} else {
+			animate(animations)
+		}
 	}
 
 	#originalOverflow: string | undefined
@@ -263,3 +276,31 @@ export class ImgZoomElement extends HTMLElement {
 }
 
 const prefersReducedMotion = () => window?.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
+
+const invertEasing = (easing: string): string => {
+	const invertedNamedFunctions = {
+		"linear": "linear",
+		"ease": "cubic-bezier(0.75, 0, 0.75, 0.9)",
+		"ease-in": "cubic-bezier(0, 0, 0.58, 1)",
+		"ease-out": "cubic-bezier(0.42, 0, 1, 1)",
+		"ease-in-out": "ease-in-out",
+	}
+
+	if (invertedNamedFunctions[easing] != null) {
+		return invertedNamedFunctions[easing]
+	}
+
+	const cubicMatching = easing.match(/cubic-bezier\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*\)/)
+	if (cubicMatching) {
+		const x1 = parseFloat(cubicMatching[1])
+		const y1 = parseFloat(cubicMatching[2])
+		const x2 = parseFloat(cubicMatching[3])
+		const y2 = parseFloat(cubicMatching[4])
+
+		return `cubic-bezier(${1 - x2}, ${1 - y2}, ${1 - x1}, ${1 - y1})`
+	}
+
+	// eslint-disable-next-line no-console
+	console.warn("inverted linear() or steps() functions not yet supported; using same function instead")
+	return easing
+}

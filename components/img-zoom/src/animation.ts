@@ -1,33 +1,49 @@
 export type AnimationDescription = {
 	keyframes: Keyframe[] | PropertyIndexedKeyframes,
-	options?: Omit<KeyframeAnimationOptions, "direction" | "easing" | "fill">,
+	options?: Omit<KeyframeAnimationOptions, "direction" | "fill">,
 }
 
 export type AnimationConfig = {
 	duration?: number
 }
 
-export type Animator = (from: HTMLImageElement, dest: HTMLImageElement) => AnimationDescription
+export type Animator = (from: HTMLImageElement, dest: HTMLImageElement) => AnimationDescription | AnimationDescription[]
+
+const EASE_OUT_CUBIC = "cubic-bezier(0.33, 1, 0.68, 1)"
 
 export function pop({
 	duration = 400,
 }: AnimationConfig = {}): Animator {
-	return (from, dest) => ({
-		keyframes: [ {
-			transform: getRelativeTransform(dest, from),
+	return (from, dest) => {
+		const relativeTransform = getRelativeTransform(dest, from)
+		return [{
+			keyframes: [ {
+				transform: `scale(${relativeTransform.scale})`,
+			}, {
+				transform: "scale(1)",
+			} ],
+			options: {
+				duration,
+				easing: "ease-out",
+			},
 		}, {
-			transform: "scale(1) translate(0px, 0px)",
-		} ],
-		options: {
-			duration,
-		},
-	})
+			keyframes: [ {
+				transform: `translate(${relativeTransform.tx}px, ${relativeTransform.ty}px)`,
+			}, {
+				transform: "translate(0px, 0px)",
+			} ],
+			options: {
+				duration,
+				easing: EASE_OUT_CUBIC,
+			},
+		}]
+	}
 }
 
 export function fade({
 	duration = 400,
 }: AnimationConfig = {}): Animator {
-	return () => ({
+	return () => [{
 		keyframes: [ {
 			opacity: 0,
 		}, {
@@ -36,7 +52,7 @@ export function fade({
 		options: {
 			duration,
 		},
-	})
+	}]
 }
 
 function getContainedSize(el: HTMLImageElement): [number, number] {
@@ -57,12 +73,20 @@ function getCenter(el: HTMLElement): [number, number] {
 	return [rect.left + rect.width / 2, rect.top + rect.height / 2]
 }
 
-function getRelativeTransform(from: HTMLElement, dest: HTMLElement): string {
+function getRelativeTransform(from: HTMLElement, dest: HTMLElement): {
+	scale: number,
+	tx: number,
+	ty: number,
+} {
 	const f = from instanceof HTMLImageElement ? from : from.querySelector("img")
 	const d = dest instanceof HTMLImageElement ? dest : dest.querySelector("img")
 
 	if (f == null || d == null) {
-		return "scale(1) translate(0px, 0px)"
+		return {
+			scale: 1,
+			tx: 0,
+			ty: 0,
+		}
 	}
 
 	const [fw] = getContainedSize(f)
@@ -75,5 +99,9 @@ function getRelativeTransform(from: HTMLElement, dest: HTMLElement): string {
 	const tx = (dx - fx) / r
 	const ty = (dy - fy) / r
 
-	return `scale(${r}) translate(${tx}px, ${ty}px)`
+	return {
+		scale: r,
+		tx: tx,
+		ty: ty,
+	}
 }
