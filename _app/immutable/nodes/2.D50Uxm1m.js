@@ -70,12 +70,12 @@ import{_ as s}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as g,o 
    </img-zoom>
 </wc-demo>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">img-zoom</span>&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">img</span>
-      <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;fruit.png&quot;</span>
-      <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Apples and such arranged on a table.&quot;</span>
-      <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;1920&quot;</span>
-      <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;1470&quot;</span>
-   /&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">img</span>
+		<span class="hljs-attr">src</span>=<span class="hljs-string">&quot;fruit.png&quot;</span>
+		<span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Apples and such arranged on a table.&quot;</span>
+		<span class="hljs-attr">width</span>=<span class="hljs-string">&quot;1920&quot;</span>
+		<span class="hljs-attr">height</span>=<span class="hljs-string">&quot;1470&quot;</span>
+	/&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">img-zoom</span>&gt;</span>
 </code></pre>
 <h2 id="the-reorder-list-element">The reorder-list Element</h2>
