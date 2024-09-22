@@ -1,4 +1,4 @@
-import{_ as s}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r,o as g}from"../chunks/scheduler.Ce_0Mfso.js";import{S as m,i as d,s as b,e as j,H as u,l as f,d as l,h as w,c as y,a as x,b as v,f as c}from"../chunks/index.QmGHi4hh.js";import{s as _}from"../chunks/setup-cycle-demo.DlallKuY.js";import{s as k}from"../chunks/setup-flip-card-demos.e7UggXcj.js";import{b as q}from"../chunks/build-tocs.2fh9akDk.js";const T=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
+import{_ as s}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as g,o as m}from"../chunks/scheduler.Ce_0Mfso.js";import{S as d,i as u,s as j,e as b,l as f,m as w,d as p,h as y,c as v,a as _,n as x,w as k,f as c,o as q,p as E,q as T,r as A}from"../chunks/index.DV7c2iXt.js";import{s as z}from"../chunks/setup-cycle-demo.DlallKuY.js";import{s as V}from"../chunks/setup-flip-card-demos.e7UggXcj.js";import{b as I}from"../chunks/build-tocs.2fh9akDk.js";import{f as C}from"../chunks/fruit.BMJTztQG.js";import{R as P}from"../chunks/Readme.RdwmlXsj.js";const D=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/">View this page with live demos!</a></strong></p>
 <p>This is just a bunch of highly reusable, fully accessible <strong><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a></strong> you can use on your websites! Why web components?</p>
 <ul>
@@ -60,6 +60,23 @@ import{_ as s}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r,o 
 		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The back!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">flip-card</span>&gt;</span>
+</code></pre>
+<h2 id="the-img-zoom-element">The img-zoom Element</h2>
+<p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/img-zoom">The img-zoom Element</a></p>
+<p>An element that accessibly zooms in on an image when the user wants to see more details.</p>
+<wc-demo id="img-zoom" class="img-zoom-demo">
+	<img-zoom style="width: 50%">
+      <img src="./components/img-zoom/fruit.png" alt="Apples and such arranged on a table." width="1920" height="1470" />
+   </img-zoom>
+</wc-demo>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">img-zoom</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">img</span>
+      <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;fruit.png&quot;</span>
+      <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Apples and such arranged on a table.&quot;</span>
+      <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;1920&quot;</span>
+      <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;1470&quot;</span>
+   /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">img-zoom</span>&gt;</span>
 </code></pre>
 <h2 id="the-reorder-list-element">The reorder-list Element</h2>
 <p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/reorder-list">The reorder-list Element</a></p>
@@ -346,7 +363,7 @@ import{_ as s}from"../chunks/preload-helper.BQ24v_F8.js";import{s as h,n as r,o 
 	<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
-`;function E(i){let a,n,e;return{c(){a=b(),n=j("article"),e=new u(!1),this.h()},l(t){f("svelte-9qjnth",document.head).forEach(l),a=w(t),n=y(t,"ARTICLE",{});var o=x(n);e=v(o,!1),o.forEach(l),this.h()},h(){document.title="Web Components by Auroratide",e.a=null},m(t,p){c(t,a,p),c(t,n,p),e.m(T,n)},p:r,i:r,o:r,d(t){t&&(l(a),l(n))}}}function A(i){return s(()=>import("../chunks/define.Bj-Sr4zv.js"),__vite__mapDeps([]),import.meta.url),s(()=>import("../chunks/define.s0Ny8EZU.js"),__vite__mapDeps([]),import.meta.url),s(()=>import("../chunks/define.CJ6ZdpBe.js"),__vite__mapDeps([]),import.meta.url),s(()=>import("../chunks/define.CM3FkMQf.js"),__vite__mapDeps([]),import.meta.url),s(()=>import("../chunks/define.VLajUROJ.js"),__vite__mapDeps([0,1]),import.meta.url),s(()=>Promise.resolve({}),__vite__mapDeps([2]),import.meta.url),s(()=>import("../chunks/define.BjUYNyY-.js"),__vite__mapDeps([]),import.meta.url),g(()=>{k(),_(),q()}),[]}class R extends m{constructor(a){super(),d(this,a,A,E,h,{})}}export{R as component};
+`;function R(i){let e,a,n,l;return n=new P({props:{html:D,assets:[{replace:"./components/img-zoom/fruit.png",with:C}]}}),{c(){e=j(),a=b("div"),f(n.$$.fragment),this.h()},l(t){w("svelte-9qjnth",document.head).forEach(p),e=y(t),a=v(t,"DIV",{class:!0});var o=_(a);x(n.$$.fragment,o),o.forEach(p),this.h()},h(){document.title="Web Components by Auroratide",k(a,"class","img-contained svelte-w5efvt")},m(t,r){c(t,e,r),c(t,a,r),q(n,a,null),l=!0},p:g,i(t){l||(E(n.$$.fragment,t),l=!0)},o(t){T(n.$$.fragment,t),l=!1},d(t){t&&(p(e),p(a)),A(n)}}}function S(i){return s(()=>import("../chunks/define.Bj-Sr4zv.js"),__vite__mapDeps([]),import.meta.url),s(()=>import("../chunks/define.A-dZRAgB.js"),__vite__mapDeps([]),import.meta.url),s(()=>import("../chunks/define.s0Ny8EZU.js"),__vite__mapDeps([]),import.meta.url),s(()=>import("../chunks/define.CJ6ZdpBe.js"),__vite__mapDeps([]),import.meta.url),s(()=>import("../chunks/define.CM3FkMQf.js"),__vite__mapDeps([]),import.meta.url),s(()=>import("../chunks/define.VLajUROJ.js"),__vite__mapDeps([0,1]),import.meta.url),s(()=>Promise.resolve({}),__vite__mapDeps([2]),import.meta.url),s(()=>import("../chunks/define.BjUYNyY-.js"),__vite__mapDeps([]),import.meta.url),m(()=>{V(),z(),I()}),[]}class G extends d{constructor(e){super(),u(this,e,S,R,h,{})}}export{G as component};
 function __vite__mapDeps(indexes) {
   if (!__vite__mapDeps.viteFileDeps) {
     __vite__mapDeps.viteFileDeps = ["../chunks/define.VLajUROJ.js","../chunks/events.C44j2o98.js","../assets/style.DZNs7oul.css"]
