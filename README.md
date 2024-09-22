@@ -72,6 +72,31 @@ An element that flips beautifully between a front and back side.
 </flip-card>
 ```
 
+## The img-zoom Element
+
+**View**: [The img-zoom Element](https://auroratide.github.io/web-components/img-zoom)
+
+An element that accessibly zooms in on an image when the user wants to see more details.
+
+<!--DEMO
+<wc-demo id="img-zoom" class="img-zoom-demo">
+	<img-zoom style="width: 50%">
+      <img src="./components/img-zoom/fruit.png" alt="Apples and such arranged on a table." width="1920" height="1470" />
+   </img-zoom>
+</wc-demo>
+/DEMO-->
+
+```html
+<img-zoom>
+   <img
+      src="fruit.png"
+      alt="Apples and such arranged on a table."
+      width="1920"
+      height="1470"
+   />
+</img-zoom>
+```
+
 ## The reorder-list Element
 
 **View**: [The reorder-list Element](https://auroratide.github.io/web-components/reorder-list)

@@ -5,9 +5,12 @@
 	import { setupFlipCardDemos } from "./flip-card/setup-flip-card-demos"
 	import { onMount } from "svelte"
 	import { buildTocs } from "./table-of-contents/build-tocs"
+	import fruit from "@auroratide/img-zoom/fruit.png"
+	import Readme from "$lib/Readme.svelte"
 
 	if (browser) {
 		import("@auroratide/flip-card/lib/define.js")
+		import("@auroratide/img-zoom/lib/define.js")
 		import("@auroratide/reorder-list/lib/define.js")
 		import("@auroratide/tab-list/lib/define.js")
 		import("@auroratide/table-of-contents/lib/define.js")
@@ -29,6 +32,17 @@
 	<title>Web Components by Auroratide</title>
 </svelte:head>
 
-<article>
-	{@html html}
-</article>
+
+<div class="img-contained">
+	<Readme {html} assets={[ {
+		replace: "./components/img-zoom/fruit.png",
+		with: fruit,
+	} ]} />
+</div>
+
+<style>
+	.img-contained :global(img) {
+		width: 100%;
+		height: auto;
+	}
+</style>
