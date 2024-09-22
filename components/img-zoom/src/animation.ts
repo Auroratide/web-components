@@ -9,8 +9,6 @@ export type AnimationConfig = {
 
 export type Animator = (from: HTMLImageElement, dest: HTMLImageElement) => AnimationDescription | AnimationDescription[]
 
-const EASE_OUT_CUBIC = "cubic-bezier(0.33, 1, 0.68, 1)"
-
 export function pop({
 	duration = 400,
 }: AnimationConfig = {}): Animator {
@@ -18,23 +16,12 @@ export function pop({
 		const relativeTransform = getRelativeTransform(dest, from)
 		return [{
 			keyframes: [ {
-				transform: `scale(${relativeTransform.scale})`,
+				transform: `translate(${relativeTransform.tx}px, ${relativeTransform.ty}px) scale(${relativeTransform.scale})`,
 			}, {
-				transform: "scale(1)",
+				transform: "translate(0px, 0px) scale(1)",
 			} ],
 			options: {
 				duration,
-				easing: "ease-out",
-			},
-		}, {
-			keyframes: [ {
-				transform: `translate(${relativeTransform.tx}px, ${relativeTransform.ty}px)`,
-			}, {
-				transform: "translate(0px, 0px)",
-			} ],
-			options: {
-				duration,
-				easing: EASE_OUT_CUBIC,
 			},
 		}]
 	}
@@ -96,8 +83,8 @@ function getRelativeTransform(from: HTMLElement, dest: HTMLElement): {
 	const [dx, dy] = getCenter(d)
 
 	const r = dw / fw
-	const tx = (dx - fx) / r
-	const ty = (dy - fy) / r
+	const tx = dx - fx
+	const ty = dy - fy
 
 	return {
 		scale: r,
