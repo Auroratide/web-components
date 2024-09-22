@@ -1,5 +1,11 @@
 # @auroratide/img-zoom
 
+## 0.1.3
+
+### Patch Changes
+
+- 3117614: Adjust animation so the image pops into view rather than out-of-then-into view
+
 ## 0.1.2
 
 ### Patch Changes
