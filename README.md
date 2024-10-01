@@ -44,18 +44,19 @@ An element that flips beautifully between a front and back side.
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		border: 0.333em solid var(--c-banner);
-		color: var(--c-banner-text);
-		font-size: var(--f-p1);
+		border: 0.333em solid var(--t-fg-a);
+		color: var(--t-fg-b);
+		font-size: 1.25em;
+		box-shadow: 0.125em 0.125em 0.25em oklch(0% 0 0 / 0.25) inset;
 	}
 	#flip-card flip-card > [slot="front"] {
-		background-color: var(--c-primary);
+		background-color: var(--t-blue-a);
 	}
 	#flip-card flip-card > [slot="back"] {
-		background-color: var(--c-secondary);
+		background-color: var(--t-purple-a);
 	}
 	#flip-card flip-card::part(edge) {
-		background-color: var(--c-banner);
+		background-color: var(--t-fg-a);
 	}
 	#flip-card flip-card p:last-child { margin: 0; }
 </style>
@@ -149,16 +150,16 @@ A set of elements (`reorder-list` and `reorder-item`) that work together to make
 <style>
 	#reorder-list reorder-list {
 		list-style: none;
-		background: #ddd;
+		background: var(--t-bg-a);
 		border-radius: 0.5em;
 		width: min(400px, 100%);
-		padding: 0.5em;
+		padding: 0.75em;
 		display: flex;
 		flex-direction: column;
 		gap: 0.5em;
 	}
 	#reorder-list reorder-item {
-		background: #fff;
+		background: var(--t-bg-b);
 		border-radius: 0.25em;
 		padding: 0.5em;
 		box-shadow: 0 0.1em 0.15em #0002;
@@ -166,12 +167,13 @@ A set of elements (`reorder-list` and `reorder-item`) that work together to make
 	#reorder-list ul {
 		list-style: none;
 		display: flex;
+		flex-direction: row;
 		flex-wrap: wrap;
 		gap: 0.5em;
 		padding: 0;
 		margin: 0;
 		font-size: 90%;
-		color: #2573C1;
+		color: var(--t-primary-b);
 	}
 </style>
 /DEMO-->
@@ -252,45 +254,48 @@ A set of elements (`tab-list`, `tab-item`, and `tab-panel`) that work together t
 </wc-demo>
 <style>
 	#tab-list .tab-container {
-		box-shadow: 0 2px 4px hsla(0, 0%, 0%, 0.25);
-	}
-	#tab-list tab-list {
-		background: hsl(210, 68%, 45%);
-		gap: 0;
-	}
-	#tab-list tab-item {
-		border: none;
-		border-radius: 0;
-		background: hsl(210, 68%, 45%);
-		color: hsl(0, 0%, 100%);
-		padding: 12px 24px;
-		border-right: 2px solid hsl(210, 82%, 25%);
-	}
-	#tab-list tab-item:hover:not([selected]),
-	#tab-list tab-item:focus:not([selected]) {
-		background: hsl(210, 82%, 25%);
-	}
-	#tab-list tab-item[selected] {
-		background: hsl(0, 0%, 100%);
-		border-color: transparent;
-		color: hsl(0, 0%, 0%);
-	}
-	#tab-list .tab-panels-container { display: grid; }
-	#tab-list tab-panel {
-		grid-area: 1 / 1;
-		border: none;
-		padding: 12px 24px 24px;
-		opacity: 1;
-		transition: opacity 0.2s ease-in-out;
-		background: hsl(0, 0%, 100%);
-	}
-	#tab-list tab-panel[hidden] {
-		display: block;
-		opacity: 0;
-	}
-	#tab-list tab-panel *:last-child {
-		margin: 0;
-	}
+        box-shadow: 0 0.125em 0.25em oklch(0% 0 0 / 0.25);
+    }
+    #tab-list tab-list {
+        background: var(--t-primary-a);
+        gap: 0;
+    }
+    #tab-list tab-item {
+        border: none;
+        border-radius: 0;
+        background: var(--t-primary-a);
+        color: var(--t-fg-b);
+        padding: 0.625em 1.125em;
+        border-right: 0.125em solid oklch(38% 0.125 250);
+    }
+    #tab-list tab-item:hover:not([selected]),
+    #tab-list tab-item:focus:not([selected]) {
+        background: oklch(38% 0.125 250);
+    }
+    #tab-list tab-item[selected] {
+        background: var(--t-bg-a);
+        border-color: transparent;
+        color: var(--t-fg-b);
+    }
+    #tab-list .tab-panels-container { display: grid; }
+    #tab-list tab-panel {
+        grid-area: 1 / 1;
+        border: none;
+        padding: 0.625em 1.125em 1.125em;
+        opacity: 1;
+        transition: opacity 0.2s ease-in-out;
+        background: var(--t-bg-a);
+    }
+    #tab-list tab-panel[hidden] {
+        display: block;
+        opacity: 0;
+    }
+    #tab-list tab-panel *:last-child {
+        margin: 0;
+    }
+	 #tab-list tab-panel p {
+	     margin-block: 1.25em;
+	 }
 </style>
 /DEMO-->
 
@@ -345,24 +350,25 @@ A form control representing something is on or off.
 	<style>
 		#toggle-switch {
 			height: 1em;
+			margin-inline: 1em;
 			vertical-align: middle;
 		}
 		#toggle-switch::part(track) {
 			height: 0.75em;
 			border-radius: 1em;
-			background-color: hsl(0, 0%, 67%);
+			background-color: oklch(70% 0.005 255);
 			margin: 0.125em 0;
 		}
 		#toggle-switch::part(slider) {
 			width: 1em;
 			height: 1em;
 			border-radius: 50%;
-			background-color: hsl(0, 0%, 100%);
-			box-shadow: 0.0625em 0.0625em 0.125em hsla(0, 0%, 0%, 0.25);
+			background-color: oklch(97.5% 0.005 255);
+			box-shadow: 0.0625em 0.0625em 0.125em oklch(0% 0 0 / 0.25);
 			margin: -0.125em 0;
 		}
 		#toggle-switch[checked]::part(track) {
-			background-color: hsl(211, 69%, 57%);
+			background-color: oklch(64% 0.142 250);
 		}
 	</style>
 </wc-demo>

@@ -6,7 +6,7 @@
 	import { onMount } from "svelte"
 	import { buildTocs } from "./table-of-contents/build-tocs"
 	import fruit from "@auroratide/img-zoom/fruit.png"
-	import Readme from "$lib/Readme.svelte"
+	import { Readme } from "$lib/web-components/Readme"
 
 	if (browser) {
 		import("@auroratide/flip-card/lib/define.js")
@@ -27,11 +27,6 @@
 		}
 	})
 </script>
-
-<svelte:head>
-	<title>Web Components by Auroratide</title>
-</svelte:head>
-
 
 <div class="img-contained">
 	<Readme {html} assets={[ {

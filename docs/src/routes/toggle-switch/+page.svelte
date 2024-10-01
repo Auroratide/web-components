@@ -3,7 +3,7 @@
 	import { html } from "@auroratide/toggle-switch/README.md"
 	import { onMount } from "svelte"
 	import { CHANGED as toggleSwitchChange } from "@auroratide/toggle-switch/lib/events"
-	import Readme from "$lib/Readme.svelte"
+	import { Readme } from "$lib/web-components/Readme"
 
 	if (browser)    
 		import("@auroratide/toggle-switch/lib/define.js")
@@ -26,15 +26,11 @@
 	})
 </script>
 
-<svelte:head>
-	<title>The toggle-switch Element</title>
-</svelte:head>
-
 <Readme {html} />
 
 <style>
 	:global(.example-active) {
 		font-weight: bold;
-		color: var(--c-success);
+		color: var(--t-green-b);
 	}
 </style>

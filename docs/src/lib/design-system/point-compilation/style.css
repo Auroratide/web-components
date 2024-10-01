@@ -1,0 +1,52 @@
+point-compilation {
+	display: block;
+	border-block-start: 0.375em solid var(--t-primary-a);
+	border-block-end: 0.125em solid var(--t-primary-a);
+	background: var(--t-bg-b);
+	padding: 0.75em 1em 1em;
+	margin-block: 3em;
+	position: relative;
+	overflow: hidden;
+
+	[slot="title"] {
+		display: block;
+		font-weight: bold;
+		letter-spacing: 0.05ch;
+		font-size: 1.125em;
+		margin-block-end: 1em;
+	}
+
+	:is(ul, ol)[slot="items"] {
+		position: relative;
+		margin-block: 0;
+		padding-inline: 1em;
+
+		&:has([data-highlighted]) > *:not([data-highlighted]) {
+			opacity: 0.333;
+			font-size: 0.875em;
+		}
+
+		& > [data-highlighted] ~ *:not([data-highlighted]) {
+			display: none;
+		}
+	}
+
+	[slot="image"] {
+		position: absolute;
+		inset-block-start: -0.5em;
+		inset-inline-end: -0.5em;
+		opacity: 0.125;
+		transform: rotate(5deg);
+		inline-size: 18%;
+		pointer-events: none;
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(circle at calc(100% - 1em) 1em, var(--t-primary-a), transparent 75%);
+		pointer-events: none;
+		opacity: 0.11;
+	}
+}

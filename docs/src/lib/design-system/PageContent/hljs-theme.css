@@ -1,0 +1,51 @@
+.hljs-comment {
+	color: var(--t-fg-b);
+	opacity: 0.75;
+}
+
+.hljs-keyword,
+.hljs-variable.language_,
+.hljs-selector-tag {
+	color: var(--t-blue-b);
+}
+
+.hljs-number,
+.hljs-literal {
+	color: var(--t-purple-b);
+}
+
+.hljs-string {
+	color: var(--t-red-b);
+}
+
+.hljs-subst {
+	color: var(--t-fg-a);
+}
+
+.hljs-title.class_,
+.hljs-built_in,
+.hljs-tag,
+.hljs-selector-class,
+.hljs-selector-id,
+.hljs-type {
+	color: var(--t-yellow-b);
+}
+
+.hljs-meta {
+	color: var(--t-yellow-b);
+	font-weight: 600;
+	opacity: 0.75;
+}
+
+.hljs-tag .hljs-attr,
+.hljs-attribute {
+	color: var(--t-green-b);
+	font-weight: normal;
+}
+
+.hljs-property,
+.hljs-attr,
+.hljs-title.function_ {
+	font-weight: 600;
+	color: var(--t-green-b);
+}

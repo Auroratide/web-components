@@ -6,6 +6,7 @@ The `reorder-list` and `reorder-item` elements represent an ordered list of item
 
 <!--DEMO
 <wc-demo>
+	<p>Press and hold to drag items. Or, tab into the list and use <kbd>Alt</kbd> + <kbd>Up/Down</kbd>.</p>
 	<reorder-list>
 		<reorder-item>Apple</reorder-item>
 		<reorder-item>Orange</reorder-item>
@@ -67,6 +68,8 @@ By default, `orientation` is "vertical", meaning you drag items up and down. Set
 </wc-demo>
 <style>
 	#horizontal-demo reorder-list {
+		display: flex;
+		flex-direction: row;
 		list-style: none;
 		gap: 0.5em;
 		padding: 0;
@@ -172,16 +175,16 @@ Here's an example of a customized list meant to look like reorderable cards.
 <style>
 	#fancy reorder-list {
 		list-style: none;
-		background: #ddd;
+		background: var(--t-bg-a);
 		border-radius: 0.5em;
 		width: min(400px, 100%);
-		padding: 0.5em;
+		padding: 0.75em;
 		display: flex;
 		flex-direction: column;
 		gap: 0.5em;
 	}
 	#fancy reorder-item {
-		background: #fff;
+		background: var(--t-bg-b);
 		border-radius: 0.25em;
 		padding: 0.5em;
 		box-shadow: 0 0.1em 0.15em #0002;
@@ -189,12 +192,13 @@ Here's an example of a customized list meant to look like reorderable cards.
 	#fancy ul {
 		list-style: none;
 		display: flex;
+		flex-direction: row;
 		flex-wrap: wrap;
 		gap: 0.5em;
 		padding: 0;
 		margin: 0;
 		font-size: 90%;
-		color: #2573C1;
+		color: var(--t-primary-b);
 	}
 </style>
 /DEMO-->
@@ -202,7 +206,7 @@ Here's an example of a customized list meant to look like reorderable cards.
 ```css
 reorder-list {
 	list-style: none;
-	background: #ddd;
+	background: oklch(22% 0.021 255);
 	border-radius: 0.5em;
 	width: min(400px, 100%);
 	padding: 0.5em;
@@ -212,7 +216,7 @@ reorder-list {
 }
 
 reorder-item {
-	background: #fff;
+	background: oklch(27% 0.02 255);
 	border-radius: 0.25em;
 	padding: 0.5em;
 	box-shadow: 0 0.1em 0.15em #0002;
@@ -226,7 +230,7 @@ reorder-item ul {
 	padding: 0;
 	margin: 0;
 	font-size: 90%;
-	color: #2573C1;
+	color: oklch(64% 0.142 250);
 }
 ```
 
@@ -289,6 +293,7 @@ Nothing stops you from putting lists inside of lists.
 </wc-demo>
 <style>
 	#nested-demo > reorder-list {
+		flex-direction: row;
 		list-style: none;
 		gap: 0.5em;
 		padding: 0;
@@ -296,8 +301,8 @@ Nothing stops you from putting lists inside of lists.
 		display: block;
 		text-align: center;
 	} #nested-demo > reorder-list > reorder-item {
-		background: #ddd;
-		padding: 0.5em;
+		background: var(--t-bg-a);
+		padding: 0.75em;
 		border-radius: 0.25em;
 		flex: 1;
 	}
@@ -309,8 +314,9 @@ Nothing stops you from putting lists inside of lists.
 		display: flex;
 		flex-direction: column;
 		gap: 0.5em;
+		margin: 0;
 	} #nested-demo reorder-list reorder-list reorder-item {
-		background: #fff;
+		background: var(--t-bg-b);
 		border-radius: 0.25em;
 		padding: 0.5em;
 		box-shadow: 0 0.1em 0.15em #0002;

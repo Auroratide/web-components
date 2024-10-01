@@ -11,21 +11,22 @@ flip-card.default > section {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	border: 0.333em solid var(--c-banner);
-	color: var(--c-banner-text);
-	font-size: var(--f-p1);
+	border: 0.333em solid var(--t-fg-a);
+	color: var(--t-fg-b);
+	font-size: 1.25em;
+	box-shadow: 0.125em 0.125em 0.25em oklch(0% 0 0 / 0.25) inset;
 }
 
 flip-card.default > [slot="front"] {
-	background-color: var(--c-primary);
+	background-color: var(--t-blue-a);
 }
 
 flip-card.default > [slot="back"] {
-	background-color: var(--c-secondary);
+	background-color: var(--t-purple-a);
 }
 
 flip-card.default::part(edge) {
-	background-color: var(--c-banner);
+	background-color: var(--t-fg-a);
 }
 
 flip-card.coin {
@@ -41,21 +42,22 @@ flip-card.coin > section {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	border: 0.25em solid var(--c-banner);
-	color: var(--c-banner-text);
-	font-size: var(--f-p2);
+	border: 0.25em solid var(--t-fg-a);
+	color: var(--t-fg-b);
+	font-size: 1.5em;
+	box-shadow: 0.125em 0.125em 0.25em oklch(0% 0 0 / 0.25) inset;
 }
 
 flip-card.coin > [slot="front"] {
-	background-color: var(--c-primary);
+	background-color: var(--t-blue-a);
 }
 
 flip-card.coin > [slot="back"] {
-	background-color: var(--c-secondary);
+	background-color: var(--t-purple-a);
 }
 
 flip-card.coin::part(edge) {
-	background-color: var(--c-banner);
+	background-color: var(--t-fg-a);
 }
 
 flip-card.long-and-high {

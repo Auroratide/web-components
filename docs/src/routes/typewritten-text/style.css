@@ -11,14 +11,14 @@ typewritten-text.typed .cursor.current::after {
 #markup-demo {
 	.special {
 		font-size: 1.25em;
-		color: oklch(45% 0.1 20);
+		color: var(--t-red-b);
 	}
 }
 
 #cursor-demo {
 	typewritten-text .cursor.current::after {
 		border-inline-end: none;
-		border-block-end: 0.125em solid red;
+		border-block-end: 0.125em solid var(--t-red-b);
 		width: 1ch;
 		inset-inline-end: -1ch;
 		visibility: visible;
@@ -83,6 +83,7 @@ typewritten-text.typed .cursor.current::after {
 		flex: 0 1 33%;
 		max-width: 10rem;
 		margin-block-end: 1em;
+		gap: 0.25em;
 	}
 
 	section figcaption {
@@ -97,6 +98,11 @@ typewritten-text.typed .cursor.current::after {
 		padding: 1em;
 		border-radius: 0.5em;
 		position: relative;
+		overflow: visible;
+	}
+
+	section blockquote::before {
+		display: none;
 	}
 
 	section blockquote::after {
@@ -108,6 +114,7 @@ typewritten-text.typed .cursor.current::after {
 		left: 1.2em;
 		top: -0.2em;
 		transform: skew(-20deg, -20deg);
+		font-size: 1em;
 	}
 
 	section.flipped figure {

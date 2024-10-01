@@ -260,37 +260,37 @@ Here's an example of a fully customized tab list:
 </wc-demo>
 <style>
     #fancy .tab-container {
-        box-shadow: 0 2px 4px hsla(0, 0%, 0%, 0.25);
+        box-shadow: 0 0.125em 0.25em oklch(0% 0 0 / 0.25);
     }
     #fancy tab-list {
-        background: hsl(210, 68%, 45%);
+        background: var(--t-primary-a);
         gap: 0;
     }
     #fancy tab-item {
         border: none;
         border-radius: 0;
-        background: hsl(210, 68%, 45%);
-        color: hsl(0, 0%, 100%);
-        padding: 12px 24px;
-        border-right: 2px solid hsl(210, 82%, 25%);
+        background: var(--t-primary-a);
+        color: var(--t-fg-b);
+        padding: 0.625em 1.125em;
+        border-right: 0.125em solid oklch(38% 0.125 250);
     }
     #fancy tab-item:hover:not([selected]),
     #fancy tab-item:focus:not([selected]) {
-        background: hsl(210, 82%, 25%);
+        background: oklch(38% 0.125 250);
     }
     #fancy tab-item[selected] {
-        background: hsl(0, 0%, 100%);
+        background: var(--t-bg-a);
         border-color: transparent;
-        color: hsl(0, 0%, 0%);
+        color: var(--t-fg-b);
     }
     #fancy .tab-panels-container { display: grid; }
     #fancy tab-panel {
         grid-area: 1 / 1;
         border: none;
-        padding: 12px 24px 24px;
+        padding: 0.625em 1.125em 1.125em;
         opacity: 1;
         transition: opacity 0.2s ease-in-out;
-        background: hsl(0, 0%, 100%);
+        background: var(--t-bg-a);
     }
     #fancy tab-panel[hidden] {
         display: block;
@@ -299,51 +299,54 @@ Here's an example of a fully customized tab list:
     #fancy tab-panel *:last-child {
         margin: 0;
     }
+	 #fancy tab-panel p {
+	     margin-block: 1.25em;
+	 }
 </style>
 /DEMO-->
 
 ```css
 div.tab-container {
-    box-shadow: 0 2px 4px hsla(0, 0%, 0%, 0.25);
+	box-shadow: 0 0.125em 0.25em oklch(0% 0 0 / 0.25);
 }
 
 tab-list {
-    background: hsl(210, 68%, 45%);
-    gap: 0;
+	background: oklch(55% 0.119 250);
+	gap: 0;
 }
 
 tab-item {
-    border: none;
-    border-radius: 0;
-    background: hsl(210, 68%, 45%);
-    color: hsl(0, 0%, 100%);
-    padding: 12px 24px;
-    border-right: 2px solid hsl(210, 82%, 25%);
+	border: none;
+	border-radius: 0;
+	background: oklch(55% 0.119 250);
+	color: oklch(97.5% 0.005 255);
+	padding: 0.625em 1.125em;
+	border-right: 0.125em solid oklch(38% 0.125 250);
 }
 
 tab-item:hover:not([selected]),
 tab-item:focus:not([selected]) {
-    background: hsl(210, 82%, 25%);
+	background: oklch(38% 0.125 250);
 }
 
 tab-item[selected] {
-    background: hsl(0, 0%, 100%);
-    border-color: transparent;
-    color: hsl(0, 0%, 0%);
+	background: oklch(22% 0.021 255);
+	border-color: transparent;
+	color: oklch(80% 0.005 255);
 }
 
 div.tab-panels-container { display: grid; }
 tab-panel {
-    grid-area: 1 / 1;
-    border: none;
-    padding: 12px 24px 24px;
-    opacity: 1;
-    transition: opacity 0.2s ease-in-out;
+	grid-area: 1 / 1;
+	border: none;
+	padding: 0.625em 1.125em 1.125em;
+	opacity: 1;
+	transition: opacity 0.2s ease-in-out;
 }
 
 tab-panel[hidden] {
-    display: block;
-    opacity: 0;
+	display: block;
+	opacity: 0;
 }
 ```
 

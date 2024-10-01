@@ -1,0 +1,6 @@
+.transparent-list {
+	list-style: none;
+	padding: 0;
+} .transparent-list > li {
+	margin: 0;
+}

@@ -1,0 +1,223 @@
+@import url("/fonts/urbanist/font-face.css");
+@import url("/fonts/sono/font-face.css");
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Config
+ * ======================================================================= */
+:root {
+	--c-blue-dark: oklch(55% 0.119 250);
+	--c-blue-light: oklch(64% 0.142 250);
+	--c-purple-dark: oklch(53% 0.11 304);
+	--c-purple-light: oklch(64% 0.13 305);
+	--c-yellow-dark: oklch(56.5% 0.11 95.5);
+	--c-yellow-light: oklch(71% 0.14 96);
+	--c-green-dark: oklch(55% 0.111 134);
+	--c-green-light: oklch(66% 0.129 134);
+	--c-red-dark: oklch(50% 0.11 30);
+	--c-red-light: oklch(63% 0.13 30.5);
+	--c-dark-dark: oklch(22% 0.021 255);
+	--c-dark-light: oklch(27% 0.02 255);
+	--c-light-dark: oklch(80% 0.005 255);
+	--c-light-light: oklch(97.5% 0.005 255);
+
+	--c-brand-dev: #08090a;
+	--c-brand-github: #333333;
+	--c-brand-itch-io: #ff5c5b;
+	--c-brand-linked-in: #0077B5;
+	--c-brand-twitter: #29AAE1;
+	--c-brand-facebook: #3B5998;
+	--c-brand-windows: #1DAEEC;
+	--c-brand-android: #A4C639;
+	--c-brand-adobe: #E61A23;
+	--c-brand-stack-overflow: #f48024;
+	--c-brand-npm: #cb3837;
+	--c-brand-reddit: #ff4500;
+
+	--f-normal: "Urbanist", sans-serif;
+	--f-code: "Sono", monospace;
+
+	--c-logo-light: var(--c-light-light);
+	--c-logo-dark: var(--c-dark-dark);
+	--c-logo-main: var(--c-blue-dark);
+
+	--z-base: 1;
+	--z-nav: 10;
+	--z-dialog: 20;
+
+	--grounded: 0 0 0 0 oklch(0% 0 0 / 0.5);
+	--elevated: 0 1em 1em -0.5em oklch(0% 0 0 / 0.5);
+}
+
+/* Base Styles
+ * ======================================================================== */
+body {
+	font-family: var(--f-normal);
+	font-size: clamp(1rem, 2vw, 1.333rem);
+	background-color: var(--t-bg-a);
+	color: var(--t-fg-a);
+} body > * {
+	overflow: hidden;
+}
+
+*:focus-visible {
+	outline: 0.125em solid var(--t-primary-b);
+	outline-offset: 0.15em;
+}
+
+small {
+	font-size: 0.875em;
+	opacity: 0.8;
+}
+
+strong {
+	font-weight: 700;
+	filter: brightness(1.2);
+}
+
+strong strong { font-weight: 900; }
+
+button, summary {
+	cursor: pointer;
+}
+
+code, kbd {
+	font-family: var(--f-code);
+}
+
+img-zoom img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+img-colorscape img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+::view-transition-group(root) {
+	animation-duration: 0s;
+}
+
+/* Themes
+ * ======================================================================== */
+.theme-dark {
+	--t-blue-a: var(--c-blue-dark);
+	--t-blue-b: var(--c-blue-light);
+	--t-purple-a: var(--c-purple-dark);
+	--t-purple-b: var(--c-purple-light);
+	--t-yellow-a: var(--c-yellow-dark);
+	--t-yellow-b: var(--c-yellow-light);
+	--t-green-a: var(--c-green-dark);
+	--t-green-b: var(--c-green-light);
+	--t-red-a: var(--c-red-dark);
+	--t-red-b: var(--c-red-light);
+	--t-bg-a: var(--c-dark-dark);
+	--t-bg-b: var(--c-dark-light);
+	--t-fg-a: var(--c-light-dark);
+	--t-fg-b: var(--c-light-light);
+	--t-primary-a: var(--t-blue-a);
+	--t-primary-b: var(--t-blue-b);
+}
+
+.theme-blue {
+	--t-primary-a: var(--t-blue-a);
+	--t-primary-b: var(--t-blue-b);
+}
+
+.theme-purple {
+	--t-primary-a: var(--t-purple-a);
+	--t-primary-b: var(--t-purple-b);
+}
+
+.theme-yellow {
+	--t-primary-a: var(--t-yellow-a);
+	--t-primary-b: var(--t-yellow-b);
+}
+
+.theme-green {
+	--t-primary-a: var(--t-green-a);
+	--t-primary-b: var(--t-green-b);
+}
+
+.theme-red {
+	--t-primary-a: var(--t-red-a);
+	--t-primary-b: var(--t-red-b);
+}
+
+.theme-github {
+	--t-fg-a: oklch(100% 0 0);
+	--t-fg-b: oklch(100% 0 0);
+	--t-primary-a: var(--c-brand-github);
+	--t-primary-b: var(--c-brand-github);
+}
+
+.theme-dev {
+	--t-fg-a: oklch(100% 0 0);
+	--t-fg-b: oklch(100% 0 0);
+	--t-primary-a: var(--c-brand-dev);
+	--t-primary-b: var(--c-brand-dev);
+}
+
+.theme-reddit {
+	--t-fg-a: oklch(100% 0 0);
+	--t-fg-b: oklch(100% 0 0);
+	--t-primary-a: var(--c-brand-reddit);
+	--t-primary-b: var(--c-brand-reddit);
+}
+
+.theme-itch-io {
+	--t-fg-a: oklch(100% 0 0);
+	--t-fg-b: oklch(100% 0 0);
+	--t-primary-a: var(--c-brand-itch-io);
+	--t-primary-b: var(--c-brand-itch-io);
+}
+
+.theme-windows {
+	--t-fg-a: oklch(100% 0 0);
+	--t-fg-b: oklch(100% 0 0);
+	--t-primary-a: var(--c-brand-windows);
+	--t-primary-b: var(--c-brand-windows);
+}
+
+.theme-android {
+	--t-fg-a: oklch(100% 0 0);
+	--t-fg-b: oklch(100% 0 0);
+	--t-primary-a: var(--c-brand-android);
+	--t-primary-b: var(--c-brand-android);
+}
+
+.theme-adobe {
+	--t-fg-a: oklch(100% 0 0);
+	--t-fg-b: oklch(100% 0 0);
+	--t-primary-a: var(--c-brand-adobe);
+	--t-primary-b: var(--c-brand-adobe);
+}
+
+.theme-linked-in {
+	--t-fg-a: oklch(100% 0 0);
+	--t-fg-b: oklch(100% 0 0);
+	--t-primary-a: var(--c-brand-linked-in);
+	--t-primary-b: var(--c-brand-linked-in);
+}
+
+.theme-stack-overflow {
+	--t-fg-a: oklch(100% 0 0);
+	--t-fg-b: oklch(100% 0 0);
+	--t-primary-a: var(--c-brand-stack-overflow);
+	--t-primary-b: var(--c-brand-stack-overflow);
+}
+
+
+/* Print
+ * ======================================================================== */
+@media print {
+	.theme-dark {
+		--t-bg-a: white;
+		--t-bg-b: white;
+		--t-fg-a: black;
+		--t-fg-b: black;
+	}
+}

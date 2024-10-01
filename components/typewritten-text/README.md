@@ -354,14 +354,14 @@ Dialog is often portrayed as typewritten text in games. Using the `typed` event,
 
 <!--DEMO
 <wc-demo id="dialog-demo">
-	<section id="janet" style="--bubble: oklch(83% 0.041 227);">
+	<section id="janet" style="--bubble: oklch(30% 0.041 227);">
 		<figure>
 			<img src="https://i.imgur.com/W1l95nt.png" alt="A girl with brown hair and blue eyes." />
 			<figcaption>Janet</figcaption>
 		</figure>
 		<blockquote><typewritten-text type-speed="45" paused>Hi! I'm <strong>Janet</strong>, the new gal on the team. What's your name?</typewritten-text></blockquote>
 	</section>
-	<section id="dinesh" class="flipped" style="--bubble: oklch(80% 0.024 34);">
+	<section id="dinesh" class="flipped" style="--bubble: oklch(35% 0.024 34);">
 		<blockquote><typewritten-text type-speed="50" paused>I'm <strong>Dinesh</strong>, the UI designer. The first thing you should know is our team lead is always <em>at least</em> five minutes late.</typewritten-text></blockquote>
 		<figure>
 			<img src="https://i.imgur.com/HVReWxe.png" alt="A boy with black hair and brown eyes." />

@@ -90,23 +90,24 @@ Here's an example showing how to use CSS to make this look like a Material UI sw
     <style>
         #fancy-switch {
             height: 1em;
+				margin-inline: 1em;
         }
         #fancy-switch::part(track) {
             height: 0.75em;
             border-radius: 1em;
-            background-color: hsl(0, 0%, 67%);
+            background-color: oklch(70% 0.005 255);
             margin: 0.125em 0;
         }
         #fancy-switch::part(slider) {
             width: 1em;
             height: 1em;
             border-radius: 50%;
-            background-color: hsl(0, 0%, 100%);
-            box-shadow: 0.0625em 0.0625em 0.125em hsla(0, 0%, 0%, 0.25);
+            background-color: oklch(97.5% 0.005 255);
+            box-shadow: 0.0625em 0.0625em 0.125em oklch(0% 0 0 / 0.25);
             margin: -0.125em 0;
         }
         #fancy-switch[checked]::part(track) {
-            background-color: hsl(211, 69%, 57%);
+            background-color: oklch(64% 0.142 250);
         }
     </style>
 </wc-demo>
@@ -120,7 +121,7 @@ toggle-switch {
 toggle-switch::part(track) {
     height: 0.75em;
     border-radius: 1em;
-    background-color: hsl(0, 0%, 67%);
+    background-color: oklch(70% 0.005 255);
     margin: 0.125em 0;
 }
 
@@ -128,13 +129,13 @@ toggle-switch::part(slider) {
     width: 1em;
     height: 1em;
     border-radius: 50%;
-    background-color: hsl(0, 0%, 100%);
-    box-shadow: 0.0625em 0.0625em 0.125em hsla(0, 0%, 0%, 0.25);
+    background-color: oklch(97.5% 0.005 255);
+    box-shadow: 0.0625em 0.0625em 0.125em oklch(0% 0 0 / 0.25);
     margin: -0.125em 0;
 }
 
 toggle-switch[checked]::part(track) {
-    background-color: hsl(211, 69%, 57%);
+    background-color: oklch(64% 0.142 250);
 }
 ```
 

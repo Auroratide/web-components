@@ -1,0 +1,17 @@
+major-point {
+	display: block;
+	font-size: 1.875em;
+	line-height: 1.25em;
+	text-align: center;
+	padding-inline: 0.125em;
+	letter-spacing: 0.025ch;
+	font-weight: 200;
+	margin-block: 2em;
+	text-wrap: balance;
+
+	strong { font-weight: 600; }
+
+	@media screen and (min-width: 60rem) {
+		font-size: 2em;
+	}
+}
