@@ -1,38 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="./favicon.svg" />
-		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
-		<meta name="author" content="Timothy Foster, Auroratide" />
-
-		<link rel="stylesheet" href="./normalize.css" />
-		<link rel="stylesheet" href="./global.css" />
-
-		
-		<link href="./_app/immutable/assets/0.D2-jc4ml.css" rel="stylesheet">
-		<link href="./_app/immutable/assets/stores.fff5nLc5.css" rel="stylesheet">
-		<link href="./_app/immutable/assets/10.CruTrMe_.css" rel="stylesheet">
-		<link href="./_app/immutable/assets/ErrorPage.bfwPQM-X.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.D02dNOm2.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/entry.DT3J5-FI.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.uMbUtuGX.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.CbZpysKi.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/preload-helper.C1FmrZbK.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.Dz7ClLEz.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/0.5C8n0VTY.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/Button.CeDtS3_2.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/stores.Dy4ICy3h.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/10.B6VerusX.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/Readme.CkNnBTry.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/ErrorPage.svelte_svelte_type_style_lang.Ck9F3GX7.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/setup-cycle-demo.DlallKuY.js"><title>The typewritten-text Element | Web Components</title><!-- HEAD_svelte-wt2744_START --><meta name="description" content="The typewritten-text element represents text that should be typed out one letter at a time when displayed."><!-- HEAD_svelte-wt2744_END --><!-- HEAD_svelte-fi4ewo_START --><meta property="og:title" content="The typewritten-text Element"><meta property="og:image" content=""><meta property="og:image:alt" content="Auroratide's Web Components Logo"><meta property="og:url" content="https://components.auroratide.com/web-components/typewritten-text"><meta property="og:type" content="website"><meta property="og:site_name" content="Web Components"><meta property="og:description" content="The typewritten-text element represents text that should be typed out one letter at a time when displayed."><!-- HEAD_svelte-fi4ewo_END -->
-	</head>
-	<body class="theme-dark">
-		<div id="root" data-sveltekit-prefetch>  <div ><div class="skip-link svelte-s3ptch"><a href="#main" class="button text-fg-b bg-primary-a  svelte-1k3hv3h"> <span>Skip to Content</span></a> </div></div> <div class="container svelte-26xy8n"><div class="lg:two-columns svelte-ttfylw"><header aria-label="Site" class="overlap-root row lg:column large-spaces-between print:hide svelte-ttfylw"  aria-hidden="false"><section class="grid svelte-1t27qgt"><div class="svg-full-height svelte-1t27qgt" aria-hidden="true" style="grid-area: logo;"><a href="./" tabindex="-1" class="svelte-1t27qgt"><svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 317.5 317.5" class="svelte-1itcf0r"><title>Auroratide Web Components</title><path fill="var(--c-logo-dark)" d="M238.125 296.232H79.375L0 158.75 79.375 21.268h158.75L317.5 158.75z" style="fill-opacity:1;stroke:none;stroke-width:3.29073;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"></path><path fill="var(--c-logo-main)" d="M323.672 121.385 47.342 600l276.33 478.615h552.656L1152.658 600l-276.33-478.615ZM443.873 329.58h312.254L912.254 600 756.127 870.42H443.873L287.746 600Z" style="fill-opacity:1;stroke:none;stroke-width:11.4561;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers" transform="scale(.26458)"></path><path fill="var(--c-logo-light)" d="M85.638 32.116 12.526 158.75l73.112 126.634h63.607l-31.804-55.085-41.308-71.549 41.308-71.549 31.803-55.085Z" style="fill-opacity:1;stroke:none;stroke-width:3.03107;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke fill markers"></path><path fill="var(--c-logo-dark)" d="m117.441 230.299 31.804 55.085h14.664l-31.803-55.085zM163.91 32.116l-31.804 55.085H117.44l31.803-55.085z" style="fill-opacity:1;stroke:none;stroke-width:.499999;stroke-linecap:round;paint-order:stroke fill markers"></path></svg></a></div> <p class="larger svelte-1t27qgt" style="grid-area: title;"><a href="./" class="text-fg-b svelte-1t27qgt">Web Components</a></p> <p class="smaller text-fg-a svelte-1t27qgt" style="grid-area: subtitle;">By Auroratide</p> </section> <div class="lg:hide svelte-1t2gyqg"><details class="full-height svelte-1t2gyqg" style="--details-transition-dur: 0.2s;"><summary class="full-height no-marker dots-overlap-container text-fg-b bold-and-large svelte-1t2gyqg"><span class="overlapping-words svelte-176oh95"><span class="open:hide svelte-176oh95">Menu</span> <span class="open:show svelte-176oh95">Close</span> </span> <div class="dots svelte-1k6be58"><div class="svelte-1k6be58" style="--bg: var(--t-blue-a);"></div> <div class="svelte-1k6be58" style="--bg: var(--t-purple-a);"></div> <div class="svelte-1k6be58" style="--bg: var(--t-yellow-a);"></div> <div class="svelte-1k6be58" style="--bg: var(--t-green-a);"></div> <div class="svelte-1k6be58" style="--bg: var(--t-red-a);"></div> </div></summary> <div class="overlap-bottom animate-wipe svelte-1t2gyqg"><nav aria-label="Site" class="svelte-1t2gyqg"><ul class="no-list column space-start svelte-1t2gyqg"><li><a href="/web-components/flip-card" data-first-letter="F" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Flip Card" style="--bg-circle-color: var(--t-blue-a);">Flip Card</a> </li><li><a href="/web-components/img-zoom" data-first-letter="I" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Img Zoom" style="--bg-circle-color: var(--t-purple-a);">Img Zoom</a> </li><li><a href="/web-components/reorder-list" data-first-letter="R" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Reorder List" style="--bg-circle-color: var(--t-yellow-a);">Reorder List</a> </li><li><a href="/web-components/tab-list" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Tab List" style="--bg-circle-color: var(--t-green-a);">Tab List</a> </li><li><a href="/web-components/table-of-contents" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Table of Contents" style="--bg-circle-color: var(--t-red-a);">Table of Contents</a> </li><li><a href="/web-components/toggle-switch" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Toggle Switch" style="--bg-circle-color: var(--t-blue-a);">Toggle Switch</a> </li><li><a href="/web-components/typewritten-text" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Typewritten Text" style="--bg-circle-color: var(--t-purple-a);">Typewritten Text</a> </li></ul></nav> <section class="extra-content svelte-1t2gyqg"><div slot="header"><div class="table-of-contents svelte-1exerps"><p class="svelte-1exerps" data-svelte-h="svelte-vf08hv"><strong id="toc-id">Contents</strong></p> <table-of-contents for="page-content" aria-labelledby="toc-id" class="svelte-1exerps"></table-of-contents> </div></div></section></div></details></div> <div class="lg:show svelte-1t2gyqg"><nav aria-label="Site" class="svelte-1t2gyqg"><ul class="no-list column space-start svelte-1t2gyqg"><li><a href="/web-components/flip-card" data-first-letter="F" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Flip Card" style="--bg-circle-color: var(--t-blue-a);">Flip Card</a> </li><li><a href="/web-components/img-zoom" data-first-letter="I" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Img Zoom" style="--bg-circle-color: var(--t-purple-a);">Img Zoom</a> </li><li><a href="/web-components/reorder-list" data-first-letter="R" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Reorder List" style="--bg-circle-color: var(--t-yellow-a);">Reorder List</a> </li><li><a href="/web-components/tab-list" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Tab List" style="--bg-circle-color: var(--t-green-a);">Tab List</a> </li><li><a href="/web-components/table-of-contents" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Table of Contents" style="--bg-circle-color: var(--t-red-a);">Table of Contents</a> </li><li><a href="/web-components/toggle-switch" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Toggle Switch" style="--bg-circle-color: var(--t-blue-a);">Toggle Switch</a> </li><li><a href="/web-components/typewritten-text" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Typewritten Text" style="--bg-circle-color: var(--t-purple-a);">Typewritten Text</a> </li></ul></nav> <section class="extra-content slide-view-transition svelte-1t2gyqg"><div slot="header"><div class="table-of-contents svelte-1exerps"><p class="svelte-1exerps" data-svelte-h="svelte-vf08hv"><strong id="toc-id">Contents</strong></p> <table-of-contents for="page-content" aria-labelledby="toc-id" class="svelte-1exerps"></table-of-contents> </div></div></section> </div></header> <main id="main" class="circle-view-transition svelte-ttfylw">  <header class="medium-space-after svelte-zfgh82"><h1 class="text-fg-b very-large topmost-item-spacing balance svelte-1iio6qq">The typewritten-text Element </h1></header> <div id="page-content" slot="content"><div class="page-content"><!-- HTML_TAG_START -->
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["../assets/style.DZNs7oul.css"])))=>i.map(i=>d[i]);
+import{_ as p}from"../chunks/preload-helper.C1FmrZbK.js";import{s as c,n as r,o}from"../chunks/scheduler.uMbUtuGX.js";import{S as i,i as d,c as h,a as u,m as g,t as m,n as j,o as y}from"../chunks/index.Dz7ClLEz.js";import{R as w}from"../chunks/Readme.CkNnBTry.js";import{s as f}from"../chunks/setup-cycle-demo.DlallKuY.js";const b=`<h1 id="the-typewritten-text-element">The typewritten-text Element</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/typewritten-text">View this page with live demos!</a></strong></p>
 <p>The <code>typewritten-text</code> element represents text that should be typed out one letter at a time when displayed.</p>
-<p><img src="/web-components/_app/immutable/assets/demo.BbQyX9Y4.gif" alt="Text is automatically typed out one letter at a time"></p>
+<p><img src="./demo.gif" alt="Text is automatically typed out one letter at a time"></p>
 <wc-demo id="main-demo">
 	<p>This <typewritten-text paused>typewriter effect</typewritten-text> is achieved using <typewritten-text paused>custom elements!</typewritten-text></p>
 	<div slot="actions">
@@ -420,38 +390,4 @@ janet?.<span class="hljs-title function_">addEventListener</span>(<span class="h
 	timeout = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> dinesh?.<span class="hljs-title function_">type</span>(), dinesh?.<span class="hljs-property">repeatInterval</span>)
 })
 </code></pre>
-<!-- HTML_TAG_END --></div></div></main> <footer aria-label="Site" class="print:hide svelte-15hem8y"  aria-hidden="false"><section class="top-aligned-row svelte-ow9tni"><strong class="lg:show svelte-ow9tni">Find me on</strong> <span class="lg:show svelte-ow9tni"><span class="bullet-divider svelte-170zqmj" aria-hidden="true" data-svelte-h="svelte-1vne0dc">•</span></span> <ul class="transparent-list center-aligned-row no-space svelte-ow9tni" style="flex: 1;"><li class="theme-linked-in center-aligned-row svelte-ow9tni"><a href="https://www.linkedin.com/in/timothy-foster-224946120" class="icon-link svelte-ow9tni"><vector-icon icon="linked-in" class="circle-bg svelte-ow9tni"></vector-icon> <span class="svelte-ow9tni">Linked In</span> </a></li><li class="theme-github center-aligned-row svelte-ow9tni"><a href="https://github.com/Auroratide" class="icon-link svelte-ow9tni"><vector-icon icon="github-alt" class="circle-bg svelte-ow9tni"></vector-icon> <span class="svelte-ow9tni">Github</span> </a></li><li class="theme-stack-overflow center-aligned-row svelte-ow9tni"><a href="https://stackoverflow.com/users/6163066/auroratide" class="icon-link svelte-ow9tni"><vector-icon icon="stack-overflow" class="circle-bg svelte-ow9tni"></vector-icon> <span class="svelte-ow9tni">Stack Overflow</span> </a></li></ul> </section> <div class="column lg:row-reverse svelte-15hem8y"><ul class="row transparent-list small-text no-space svelte-15hem8y"><li><a href="/web-components/" class="text-fg-a svelte-15hem8y">All Components</a></li><li><a href="https://github.com/Auroratide/web-components" class="text-fg-a svelte-15hem8y">Source Code</a></li><li><a href="https://auroratide.com" class="text-fg-a svelte-15hem8y">My Website</a></li></ul> <small>© 2024 Auroratide, Timothy Foster</small></div> </footer></div> </div> 
-			
-			<script>
-				{
-					__sveltekit_1bb34hl = {
-						base: new URL(".", location).pathname.slice(0, -1),
-						assets: "/web-components"
-					};
-
-					const element = document.currentScript.parentElement;
-
-					const data = [null,null];
-
-					Promise.all([
-						import("./_app/immutable/entry/start.D02dNOm2.js"),
-						import("./_app/immutable/entry/app.CbZpysKi.js")
-					]).then(([kit, app]) => {
-						kit.start(app, element, {
-							node_ids: [0, 10],
-							data,
-							form: null,
-							error: null
-						});
-					});
-				}
-			</script>
-		</div>
-		<script>
-			// Ensure we do not get a flash of light mode
-			if (localStorage.getItem('darkmode') === 'true') {
-					document.body.classList.add('theme-dark')
-			}
-		</script>
-	</body>
-</html>
+`,x=""+new URL("../assets/demo.BbQyX9Y4.gif",import.meta.url).href,v=()=>{document.querySelectorAll("wc-demo").forEach(t=>{const s=t.querySelector(".run"),n=t.querySelectorAll("typewritten-text");n.forEach(a=>{a.addEventListener("paused",()=>{(s==null?void 0:s.textContent)==="Pause"&&(s.textContent="Run")}),a.addEventListener("typed",()=>{a.classList.add("typed")}),a.addEventListener("resumed",()=>{a.classList.remove("typed")})});const e=()=>{n.forEach(a=>a.resume())},l=()=>{n.forEach(a=>a.pause())};s==null||s.addEventListener("click",()=>{(s==null?void 0:s.textContent)==="Run"?(s.textContent="Pause",e()):(s.textContent="Run",l())})})},q=()=>{const t=document.querySelector("#janet typewritten-text"),s=document.querySelector("#dinesh typewritten-text"),n=document.querySelector("#dialog-demo .rerun");let e=0;t==null||t.addEventListener("typed",()=>{e=setTimeout(()=>s==null?void 0:s.type(),s==null?void 0:s.repeatInterval)}),n==null||n.addEventListener("click",()=>{clearTimeout(e),s==null||s.pause(),t==null||t.reset(),s==null||s.reset(),t==null||t.type()})};function T(t){let s,n;return s=new w({props:{html:b,assets:[{replace:"./demo.gif",with:x}]}}),{c(){h(s.$$.fragment)},l(e){u(s.$$.fragment,e)},m(e,l){g(s,e,l),n=!0},p:r,i(e){n||(m(s.$$.fragment,e),n=!0)},o(e){j(s.$$.fragment,e),n=!1},d(e){y(s,e)}}}function k(t){return p(()=>Promise.resolve({}),__vite__mapDeps([0]),import.meta.url),p(()=>import("../chunks/define.EotpxmhP.js"),[],import.meta.url),o(()=>{v(),f(),q()}),[]}class L extends i{constructor(s){super(),d(this,s,k,T,c,{})}}export{L as component};
