@@ -1,6 +1,6 @@
 # The table-of-contents Element
 
-<p hidden><strong><a href="https://auroratide.github.io/web-components/table-of-contents">View this page with live demos!</a></strong></p>
+<p hidden><strong><a href="https://components.auroratide.com/table-of-contents">View this page with live demos!</a></strong></p>
 
 The `table-of-contents` element represents a navigable list of headings for some content. This component is able to automatically generate links needed to navigate to all the different headings in an article.
 

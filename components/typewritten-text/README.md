@@ -1,6 +1,6 @@
 # The typewritten-text Element
 
-<p hidden><strong><a href="https://auroratide.github.io/web-components/typewritten-text">View this page with live demos!</a></strong></p>
+<p hidden><strong><a href="https://components.auroratide.com/typewritten-text">View this page with live demos!</a></strong></p>
 
 The `typewritten-text` element represents text that should be typed out one letter at a time when displayed.
 

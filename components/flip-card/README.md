@@ -1,6 +1,6 @@
 # The flip-card Element
 
-<p hidden><strong><a href="https://auroratide.github.io/web-components/flip-card">View this page with live demos!</a></strong></p>
+<p hidden><strong><a href="https://components.auroratide.com/flip-card">View this page with live demos!</a></strong></p>
 
 The `flip-card` element represents content with a front side and a back side, with one side presented at a time.
 

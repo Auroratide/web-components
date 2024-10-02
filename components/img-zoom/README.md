@@ -1,6 +1,6 @@
 # The img-zoom Element
 
-<p hidden><strong><a href="https://auroratide.github.io/web-components/img-zoom">View this page with live demos!</a></strong></p>
+<p hidden><strong><a href="https://components.auroratide.com/img-zoom">View this page with live demos!</a></strong></p>
 
 The `img-zoom` element represents an image that can be enlarged to fill the screen on demand.
 

@@ -25,7 +25,7 @@
 		title: "Web Components",
 		subtitle: "By Auroratide",
 		logo: {
-			url: "",
+			url: "https://auroratide.com/favicon.svg",
 			alt: "Auroratide's Web Components Logo",
 		},
 		url: "https://components.auroratide.com",

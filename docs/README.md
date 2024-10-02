@@ -1,5 +1,5 @@
 # Web Components Documentation
 
-**https://auroratide.github.io/web-components/**
+**https://components.auroratide.com/**
 
 This is the documentation for accessible web components made by [Auroratide](https://auroratide.com).

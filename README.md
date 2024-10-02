@@ -1,6 +1,6 @@
 # Web Components by Auroratide
 
-<p hidden><strong><a href="https://auroratide.github.io/web-components/">View this page with live demos!</a></strong></p>
+<p hidden><strong><a href="https://components.auroratide.com">View this page with live demos!</a></strong></p>
 
 This is just a bunch of highly reusable, fully accessible **[web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components)** you can use on your websites! Why web components?
 
@@ -12,7 +12,7 @@ This is just a bunch of highly reusable, fully accessible **[web components](htt
 
 ## The flip-card Element
 
-**View**: [The flip-card Element](https://auroratide.github.io/web-components/flip-card)
+**View**: [The flip-card Element](https://components.auroratide.com/flip-card)
 
 An element that flips beautifully between a front and back side.
 
@@ -75,7 +75,7 @@ An element that flips beautifully between a front and back side.
 
 ## The img-zoom Element
 
-**View**: [The img-zoom Element](https://auroratide.github.io/web-components/img-zoom)
+**View**: [The img-zoom Element](https://components.auroratide.com/img-zoom)
 
 An element that accessibly zooms in on an image when the user wants to see more details.
 
@@ -100,7 +100,7 @@ An element that accessibly zooms in on an image when the user wants to see more 
 
 ## The reorder-list Element
 
-**View**: [The reorder-list Element](https://auroratide.github.io/web-components/reorder-list)
+**View**: [The reorder-list Element](https://components.auroratide.com/reorder-list)
 
 A set of elements (`reorder-list` and `reorder-item`) that work together to make a rearrangeable list:
 
@@ -200,7 +200,7 @@ A set of elements (`reorder-list` and `reorder-item`) that work together to make
 
 ## The tab-list Element
 
-**View**: [The tab-list Element](https://auroratide.github.io/web-components/tab-list)
+**View**: [The tab-list Element](https://components.auroratide.com/tab-list)
 
 A set of elements (`tab-list`, `tab-item`, and `tab-panel`) that work together to make a tabbing interface:
 
@@ -320,7 +320,7 @@ A set of elements (`tab-list`, `tab-item`, and `tab-panel`) that work together t
 
 ## The table-of-contents Element
 
-**View**: [The table-of-contents Element](https://auroratide.github.io/web-components/table-of-contents)
+**View**: [The table-of-contents Element](https://components.auroratide.com/table-of-contents)
 
 A component that automatically generates a table of contents.
 
@@ -339,7 +339,7 @@ A component that automatically generates a table of contents.
 
 ## The toggle-switch Element
 
-**View**: [The toggle-switch Element](https://auroratide.github.io/web-components/toggle-switch)
+**View**: [The toggle-switch Element](https://components.auroratide.com/toggle-switch)
 
 A form control representing something is on or off.
 
@@ -381,7 +381,7 @@ A form control representing something is on or off.
 
 ## The typewritten-text Element
 
-**View**: [The typewritten-text Element](https://auroratide.github.io/web-components/typewritten-text)
+**View**: [The typewritten-text Element](https://components.auroratide.com/typewritten-text)
 
 An element that types one letter at a time to the screen.
 

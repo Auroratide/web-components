@@ -1,6 +1,6 @@
 # The reorder-list Elements
 
-<p hidden><strong><a href="https://auroratide.github.io/web-components/reorder-list">View this page with live demos!</a></strong></p>
+<p hidden><strong><a href="https://components.auroratide.com/reorder-list">View this page with live demos!</a></strong></p>
 
 The `reorder-list` and `reorder-item` elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement the WAI-ARIA guidelines for [rearrangable listboxes](https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html).
 
