@@ -1,6 +1,6 @@
 const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["../chunks/define.Dnpg-HA6.js","../chunks/events.C44j2o98.js","../assets/style.DZNs7oul.css"])))=>i.map(i=>d[i]);
-import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as o,o as c}from"../chunks/scheduler.uMbUtuGX.js";import{S as h,i as g,e as m,c as d,d as b,f as u,a as j,h as r,j as f,k as w,m as y,t as v,n as k,o as _}from"../chunks/index.Dz7ClLEz.js";import{s as x}from"../chunks/setup-cycle-demo.DlallKuY.js";import{s as q}from"../chunks/setup-flip-card-demos.e7UggXcj.js";import{b as T}from"../chunks/build-tocs.2fh9akDk.js";import{f as E}from"../chunks/fruit.BMJTztQG.js";import{R as A}from"../chunks/Readme.Bno68zAz.js";const z=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
-<p hidden><strong><a href="https://auroratide.github.io/web-components/">View this page with live demos!</a></strong></p>
+import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as o,n as i,o as c}from"../chunks/scheduler.uMbUtuGX.js";import{S as h,i as m,e as g,c as d,d as j,f as u,a as b,h as r,j as f,k as w,m as y,t as v,n as k,o as _}from"../chunks/index.Dz7ClLEz.js";import{s as x}from"../chunks/setup-cycle-demo.DlallKuY.js";import{s as q}from"../chunks/setup-flip-card-demos.e7UggXcj.js";import{b as T}from"../chunks/build-tocs.2fh9akDk.js";import{f as E}from"../chunks/fruit.BMJTztQG.js";import{R as A}from"../chunks/Readme.BouwOqHp.js";const z=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
+<p hidden><strong><a href="https://components.auroratide.com">View this page with live demos!</a></strong></p>
 <p>This is just a bunch of highly reusable, fully accessible <strong><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a></strong> you can use on your websites! Why web components?</p>
 <ul>
 <li>It's part of the <a href="https://html.spec.whatwg.org/#custom-elements">HTML Standard</a>, so they work in <a href="https://custom-elements-everywhere.com/">every web framework</a>, or with no framework at all.</li>
@@ -9,7 +9,7 @@ import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as o,o 
 </ul>
 <p><small>Made by <a href="https://auroratide.com">Auroratide</a>, a developer with a passion for the web, inclusive design, and storytelling ❤️</small></p>
 <h2 id="the-flip-card-element">The flip-card Element</h2>
-<p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/flip-card">The flip-card Element</a></p>
+<p><strong>View</strong>: <a href="https://components.auroratide.com/flip-card">The flip-card Element</a></p>
 <p>An element that flips beautifully between a front and back side.</p>
 <wc-demo id="flip-card" class="flip-card-demo">
 	<flip-card>
@@ -64,7 +64,7 @@ import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as o,o 
 <span class="hljs-tag">&lt;/<span class="hljs-name">flip-card</span>&gt;</span>
 </code></pre>
 <h2 id="the-img-zoom-element">The img-zoom Element</h2>
-<p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/img-zoom">The img-zoom Element</a></p>
+<p><strong>View</strong>: <a href="https://components.auroratide.com/img-zoom">The img-zoom Element</a></p>
 <p>An element that accessibly zooms in on an image when the user wants to see more details.</p>
 <wc-demo id="img-zoom" class="img-zoom-demo">
 	<img-zoom style="width: 50%">
@@ -81,7 +81,7 @@ import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as o,o 
 <span class="hljs-tag">&lt;/<span class="hljs-name">img-zoom</span>&gt;</span>
 </code></pre>
 <h2 id="the-reorder-list-element">The reorder-list Element</h2>
-<p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/reorder-list">The reorder-list Element</a></p>
+<p><strong>View</strong>: <a href="https://components.auroratide.com/reorder-list">The reorder-list Element</a></p>
 <p>A set of elements (<code>reorder-list</code> and <code>reorder-item</code>) that work together to make a rearrangeable list:</p>
 <wc-demo id="reorder-list">
 	<reorder-list>
@@ -173,7 +173,7 @@ import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as o,o 
 <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-list</span>&gt;</span>
 </code></pre>
 <h2 id="the-tab-list-element">The tab-list Element</h2>
-<p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/tab-list">The tab-list Element</a></p>
+<p><strong>View</strong>: <a href="https://components.auroratide.com/tab-list">The tab-list Element</a></p>
 <p>A set of elements (<code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code>) that work together to make a tabbing interface:</p>
 <wc-demo id="tab-list">
 	<div class="tab-container">
@@ -285,7 +285,7 @@ import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as o,o 
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
 <h2 id="the-table-of-contents-element">The table-of-contents Element</h2>
-<p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/table-of-contents">The table-of-contents Element</a></p>
+<p><strong>View</strong>: <a href="https://components.auroratide.com/table-of-contents">The table-of-contents Element</a></p>
 <p>A component that automatically generates a table of contents.</p>
 <wc-demo>
 	<table-of-contents for="main" aria-label="Demo Table of Contents Element"></table-of-contents>
@@ -296,7 +296,7 @@ import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as o,o 
 &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">table-of-contents</span>&gt;</span>
 </code></pre>
 <h2 id="the-toggle-switch-element">The toggle-switch Element</h2>
-<p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/toggle-switch">The toggle-switch Element</a></p>
+<p><strong>View</strong>: <a href="https://components.auroratide.com/toggle-switch">The toggle-switch Element</a></p>
 <p>A form control representing something is on or off.</p>
 <wc-demo>
 	<label for="toggle-switch">Fancy Switch</label>
@@ -330,7 +330,7 @@ import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as o,o 
 <span class="hljs-tag">&lt;<span class="hljs-name">toggle-switch</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;toggle-switch&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toggle-switch</span>&gt;</span>
 </code></pre>
 <h2 id="the-typewritten-text-element">The typewritten-text Element</h2>
-<p><strong>View</strong>: <a href="https://auroratide.github.io/web-components/typewritten-text">The typewritten-text Element</a></p>
+<p><strong>View</strong>: <a href="https://components.auroratide.com/typewritten-text">The typewritten-text Element</a></p>
 <p>An element that types one letter at a time to the screen.</p>
 <wc-demo id="typewritten-text-demo">
 	<div class="sentence">
@@ -370,4 +370,4 @@ import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as o,o 
 	<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
-`;function V(p){let t,n,e;return n=new A({props:{html:z,assets:[{replace:"./components/img-zoom/fruit.png",with:E}]}}),{c(){t=m("div"),d(n.$$.fragment),this.h()},l(s){t=b(s,"DIV",{class:!0});var l=u(t);j(n.$$.fragment,l),l.forEach(r),this.h()},h(){f(t,"class","img-contained svelte-w5efvt")},m(s,l){w(s,t,l),y(n,t,null),e=!0},p:o,i(s){e||(v(n.$$.fragment,s),e=!0)},o(s){k(n.$$.fragment,s),e=!1},d(s){s&&r(t),_(n)}}}function I(p){return a(()=>import("../chunks/define.DdJp3656.js"),[],import.meta.url),a(()=>import("../chunks/define.B8oekSMV.js"),[],import.meta.url),a(()=>import("../chunks/define.B7uxw3BH.js"),[],import.meta.url),a(()=>import("../chunks/define.B67tN34s.js"),[],import.meta.url),a(()=>import("../chunks/define.gp_6CtRi.js"),[],import.meta.url),a(()=>import("../chunks/define.Dnpg-HA6.js"),__vite__mapDeps([0,1]),import.meta.url),a(()=>Promise.resolve({}),__vite__mapDeps([2]),import.meta.url),a(()=>import("../chunks/define.EotpxmhP.js"),[],import.meta.url),c(()=>{q(),x(),T()}),[]}class F extends h{constructor(t){super(),g(this,t,I,V,i,{})}}export{F as component};
+`;function V(p){let t,n,e;return n=new A({props:{html:z,assets:[{replace:"./components/img-zoom/fruit.png",with:E}]}}),{c(){t=g("div"),d(n.$$.fragment),this.h()},l(s){t=j(s,"DIV",{class:!0});var l=u(t);b(n.$$.fragment,l),l.forEach(r),this.h()},h(){f(t,"class","img-contained svelte-w5efvt")},m(s,l){w(s,t,l),y(n,t,null),e=!0},p:i,i(s){e||(v(n.$$.fragment,s),e=!0)},o(s){k(n.$$.fragment,s),e=!1},d(s){s&&r(t),_(n)}}}function I(p){return a(()=>import("../chunks/define.DdJp3656.js"),[],import.meta.url),a(()=>import("../chunks/define.B8oekSMV.js"),[],import.meta.url),a(()=>import("../chunks/define.B7uxw3BH.js"),[],import.meta.url),a(()=>import("../chunks/define.B67tN34s.js"),[],import.meta.url),a(()=>import("../chunks/define.gp_6CtRi.js"),[],import.meta.url),a(()=>import("../chunks/define.Dnpg-HA6.js"),__vite__mapDeps([0,1]),import.meta.url),a(()=>Promise.resolve({}),__vite__mapDeps([2]),import.meta.url),a(()=>import("../chunks/define.EotpxmhP.js"),[],import.meta.url),c(()=>{q(),x(),T()}),[]}class F extends h{constructor(t){super(),m(this,t,I,V,o,{})}}export{F as component};
