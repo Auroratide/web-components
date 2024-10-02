@@ -1,4 +1,4 @@
-import{_ as l}from"../chunks/preload-helper.C1FmrZbK.js";import{s as o,n as p,o as c}from"../chunks/scheduler.uMbUtuGX.js";import{S as i,i as h,c as r,a as g,m as d,t as u,n as j,o as m}from"../chunks/index.Dz7ClLEz.js";import{R as f}from"../chunks/Readme.CkNnBTry.js";import{b}from"../chunks/build-tocs.2fh9akDk.js";const q=`<h1 id="the-table-of-contents-element">The table-of-contents Element</h1>
+import{_ as l}from"../chunks/preload-helper.C1FmrZbK.js";import{s as o,n as p,o as c}from"../chunks/scheduler.uMbUtuGX.js";import{S as i,i as h,c as r,a as g,m as d,t as u,n as j,o as m}from"../chunks/index.Dz7ClLEz.js";import{R as f}from"../chunks/Readme.Bno68zAz.js";import{b}from"../chunks/build-tocs.2fh9akDk.js";const q=`<h1 id="the-table-of-contents-element">The table-of-contents Element</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/table-of-contents">View this page with live demos!</a></strong></p>
 <p>The <code>table-of-contents</code> element represents a navigable list of headings for some content. This component is able to automatically generate links needed to navigate to all the different headings in an article.</p>
 <wc-demo>

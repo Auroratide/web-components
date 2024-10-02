@@ -1,4 +1,4 @@
-import{_ as o}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as r}from"../chunks/scheduler.uMbUtuGX.js";import{S as c,i as h,e as m,c as g,d as u,f as d,a as j,h as p,j as f,k as b,m as w,t as q,n as z,o as _}from"../chunks/index.Dz7ClLEz.js";import{R as y}from"../chunks/Readme.CkNnBTry.js";import{f as k}from"../chunks/fruit.BMJTztQG.js";const v=`<h1 id="the-img-zoom-element">The img-zoom Element</h1>
+import{_ as o}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as r}from"../chunks/scheduler.uMbUtuGX.js";import{S as c,i as h,e as m,c as g,d as u,f as d,a as j,h as p,j as f,k as b,m as w,t as q,n as z,o as _}from"../chunks/index.Dz7ClLEz.js";import{R as y}from"../chunks/Readme.Bno68zAz.js";import{f as k}from"../chunks/fruit.BMJTztQG.js";const v=`<h1 id="the-img-zoom-element">The img-zoom Element</h1>
 <p hidden><strong><a href="https://auroratide.github.io/web-components/img-zoom">View this page with live demos!</a></strong></p>
 <p>The <code>img-zoom</code> element represents an image that can be enlarged to fill the screen on demand.</p>
 <wc-demo id="main-demo">
