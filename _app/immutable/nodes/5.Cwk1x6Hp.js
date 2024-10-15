@@ -1,4 +1,4 @@
-import{_ as o}from"../chunks/preload-helper.C1FmrZbK.js";import{s as l,n as c,o as i}from"../chunks/scheduler.uMbUtuGX.js";import{S as r,i as p,c as d,a as h,m as u,t as f,n as m,o as g}from"../chunks/index.Dz7ClLEz.js";import{R as b}from"../chunks/Readme.BouwOqHp.js";import{s as j}from"../chunks/setup-flip-card-demos.e7UggXcj.js";const y=`<h1 id="the-flip-card-element">The flip-card Element</h1>
+import{_ as o}from"../chunks/preload-helper.C1FmrZbK.js";import{s as l,n as c,o as i}from"../chunks/scheduler.uMbUtuGX.js";import{S as r,i as p,c as d,a as h,m as u,t as f,n as m,o as g}from"../chunks/index.Dz7ClLEz.js";import{R as b}from"../chunks/Readme.DVy4TuAV.js";import{s as j}from"../chunks/setup-flip-card-demos.e7UggXcj.js";const y=`<h1 id="the-flip-card-element">The flip-card Element</h1>
 <p hidden><strong><a href="https://components.auroratide.com/flip-card">View this page with live demos!</a></strong></p>
 <p>The <code>flip-card</code> element represents content with a front side and a back side, with one side presented at a time.</p>
 <wc-demo class="flip-card-demo">

@@ -1,0 +1,1 @@
+const n=()=>{document.querySelectorAll(".arch-amount-demo").forEach(r=>{const e=r.querySelector("arched-text"),t=r.querySelector("input");t==null||t.addEventListener("input",o=>{const c=o.target.value;e==null||e.setAttribute("amount",c)})})};export{n as s};

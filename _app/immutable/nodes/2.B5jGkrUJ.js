@@ -1,5 +1,5 @@
 const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["../chunks/define.Dnpg-HA6.js","../chunks/events.C44j2o98.js","../assets/style.DZNs7oul.css"])))=>i.map(i=>d[i]);
-import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as o,n as i,o as c}from"../chunks/scheduler.uMbUtuGX.js";import{S as h,i as m,e as g,c as d,d as j,f as u,a as b,h as r,j as f,k as w,m as y,t as v,n as k,o as _}from"../chunks/index.Dz7ClLEz.js";import{s as x}from"../chunks/setup-cycle-demo.DlallKuY.js";import{s as q}from"../chunks/setup-flip-card-demos.e7UggXcj.js";import{b as T}from"../chunks/build-tocs.2fh9akDk.js";import{f as E}from"../chunks/fruit.BMJTztQG.js";import{R as A}from"../chunks/Readme.BouwOqHp.js";const z=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
+import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as o,n as i,o as c}from"../chunks/scheduler.uMbUtuGX.js";import{S as h,i as m,e as g,c as d,d as u,f as j,a as b,h as r,j as f,k as w,m as y,t as v,n as x,o as k}from"../chunks/index.Dz7ClLEz.js";import{s as _}from"../chunks/setup-cycle-demo.DlallKuY.js";import{s as q}from"../chunks/setup-flip-card-demos.e7UggXcj.js";import{b as T}from"../chunks/build-tocs.2fh9akDk.js";import{f as E}from"../chunks/fruit.BMJTztQG.js";import{R as A}from"../chunks/Readme.DVy4TuAV.js";import{s as z}from"../chunks/style.BNdgRZIy.js";const V=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
 <p hidden><strong><a href="https://components.auroratide.com">View this page with live demos!</a></strong></p>
 <p>This is just a bunch of highly reusable, fully accessible <strong><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a></strong> you can use on your websites! Why web components?</p>
 <ul>
@@ -8,6 +8,22 @@ import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as o,n as i,o 
 <li>They facilitate <a href="https://kryogenix.org/code/browser/everyonehasjs.html">progressive enhancement</a>: viewers get a basic view of content before the Javascript makes it functional.</li>
 </ul>
 <p><small>Made by <a href="https://auroratide.com">Auroratide</a>, a developer with a passion for the web, inclusive design, and storytelling ❤️</small></p>
+<h2 id="the-arched-text-element">The arched-text Element</h2>
+<p><strong>View</strong>: <a href="https://components.auroratide.com/arched-text">The arched-text Element</a></p>
+<p>An element that forms an arch out of text.</p>
+<wc-demo>
+	<div class="arch-amount-demo">
+		<p style="font-size: 2em;">
+			<arched-text amount="0.5">This text is arched!</arched-text>
+		</p>
+		<section class="range-input">
+			<input id="arch-demo-amount" type="range" min="0" max="1" value="0.5" step="0.05" />
+			<label for="arch-demo-amount">Arch Amount</label>
+		</section>
+	</div>
+</wc-demo>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">arched-text</span>&gt;</span>This text is arched!<span class="hljs-tag">&lt;/<span class="hljs-name">arched-text</span>&gt;</span>
+</code></pre>
 <h2 id="the-flip-card-element">The flip-card Element</h2>
 <p><strong>View</strong>: <a href="https://components.auroratide.com/flip-card">The flip-card Element</a></p>
 <p>An element that flips beautifully between a front and back side.</p>
@@ -370,4 +386,4 @@ import{_ as a}from"../chunks/preload-helper.C1FmrZbK.js";import{s as o,n as i,o 
 	<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
-`;function V(p){let t,n,e;return n=new A({props:{html:z,assets:[{replace:"./components/img-zoom/fruit.png",with:E}]}}),{c(){t=g("div"),d(n.$$.fragment),this.h()},l(s){t=j(s,"DIV",{class:!0});var l=u(t);b(n.$$.fragment,l),l.forEach(r),this.h()},h(){f(t,"class","img-contained svelte-w5efvt")},m(s,l){w(s,t,l),y(n,t,null),e=!0},p:i,i(s){e||(v(n.$$.fragment,s),e=!0)},o(s){k(n.$$.fragment,s),e=!1},d(s){s&&r(t),_(n)}}}function I(p){return a(()=>import("../chunks/define.DdJp3656.js"),[],import.meta.url),a(()=>import("../chunks/define.B8oekSMV.js"),[],import.meta.url),a(()=>import("../chunks/define.B7uxw3BH.js"),[],import.meta.url),a(()=>import("../chunks/define.B67tN34s.js"),[],import.meta.url),a(()=>import("../chunks/define.gp_6CtRi.js"),[],import.meta.url),a(()=>import("../chunks/define.Dnpg-HA6.js"),__vite__mapDeps([0,1]),import.meta.url),a(()=>Promise.resolve({}),__vite__mapDeps([2]),import.meta.url),a(()=>import("../chunks/define.EotpxmhP.js"),[],import.meta.url),c(()=>{q(),x(),T()}),[]}class F extends h{constructor(t){super(),m(this,t,I,V,o,{})}}export{F as component};
+`;function I(p){let t,n,e;return n=new A({props:{html:V,assets:[{replace:"./components/img-zoom/fruit.png",with:E}]}}),{c(){t=g("div"),d(n.$$.fragment),this.h()},l(s){t=u(s,"DIV",{class:!0});var l=j(t);b(n.$$.fragment,l),l.forEach(r),this.h()},h(){f(t,"class","img-contained svelte-w5efvt")},m(s,l){w(s,t,l),y(n,t,null),e=!0},p:i,i(s){e||(v(n.$$.fragment,s),e=!0)},o(s){x(n.$$.fragment,s),e=!1},d(s){s&&r(t),k(n)}}}function P(p){return a(()=>import("../chunks/define.BTnfLqC7.js"),[],import.meta.url),a(()=>import("../chunks/define.DdJp3656.js"),[],import.meta.url),a(()=>import("../chunks/define.B8oekSMV.js"),[],import.meta.url),a(()=>import("../chunks/define.B7uxw3BH.js"),[],import.meta.url),a(()=>import("../chunks/define.B67tN34s.js"),[],import.meta.url),a(()=>import("../chunks/define.gp_6CtRi.js"),[],import.meta.url),a(()=>import("../chunks/define.Dnpg-HA6.js"),__vite__mapDeps([0,1]),import.meta.url),a(()=>Promise.resolve({}),__vite__mapDeps([2]),import.meta.url),a(()=>import("../chunks/define.EotpxmhP.js"),[],import.meta.url),c(()=>{z(),q(),_(),T()}),[]}class W extends h{constructor(t){super(),m(this,t,P,I,o,{})}}export{W as component};
