@@ -7,6 +7,10 @@ export const Routes = {
 		href: () => `${base}/`,
 	},
 	Components: {
+		ArchedText: {
+			name: () => "Arched Text",
+			href: () => `${base}/arched-text`,
+		},
 		FlipCard: {
 			name: () => "Flip Card",
 			href: () => `${base}/flip-card`,

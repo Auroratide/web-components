@@ -1,0 +1,31 @@
+{
+	"name": "@auroratide/arched-text",
+	"version": "0.0.1",
+	"private": true,
+	"description": "",
+	"type": "module",
+	"main": "lib/index.js",
+	"module": "lib/index.js",
+	"scripts": {
+		"clean": "rm -rf lib",
+		"build": "tsc",
+		"build:watch": "tsc -w",
+		"test": "wtr --node-resolve --port 10010 test",
+		"test:clean": "pnpm clean && pnpm build && pnpm test"
+	},
+	"keywords": [],
+	"author": {
+		"name": "Timothy Foster",
+		"url": "https://auroratide.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Auroratide/web-components"
+	},
+	"license": "ISC",
+	"devDependencies": {
+		"@open-wc/testing": "^4.0.0",
+		"@web/test-runner": "^0.18.0",
+		"typescript": "^5.3.3"
+	}
+}
