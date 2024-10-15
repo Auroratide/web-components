@@ -1,8 +1,7 @@
 {
 	"name": "@auroratide/arched-text",
-	"version": "0.0.1",
-	"private": true,
-	"description": "",
+	"version": "0.1.0",
+	"description": "Forms text into an arch.",
 	"type": "module",
 	"main": "lib/index.js",
 	"module": "lib/index.js",
@@ -13,11 +12,12 @@
 		"test": "wtr --node-resolve --port 10010 test",
 		"test:clean": "pnpm clean && pnpm build && pnpm test"
 	},
-	"keywords": [],
+	"keywords": ["arch", "text", "web component"],
 	"author": {
 		"name": "Timothy Foster",
 		"url": "https://auroratide.com"
 	},
+	"homepage": "https://components.auroratide.com/arched-text",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Auroratide/web-components"

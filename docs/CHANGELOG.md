@@ -1,5 +1,17 @@
 # @auroratide/wc-docs
 
+## 0.2.0
+
+### Minor Changes
+
+- 9528368: Make theme the same as my main website
+- e1871e6: Create the arched-text component
+
+### Patch Changes
+
+- Updated dependencies [e1871e6]
+  - @auroratide/arched-text@0.1.0
+
 ## 0.1.21
 
 ### Patch Changes
