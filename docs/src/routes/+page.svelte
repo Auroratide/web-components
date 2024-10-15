@@ -7,8 +7,11 @@
 	import { buildTocs } from "./table-of-contents/build-tocs"
 	import fruit from "@auroratide/img-zoom/fruit.png"
 	import { Readme } from "$lib/web-components/Readme"
+	import { setupArchedTextDemos } from "./arched-text/setup-arched-text-demos"
+	import "./arched-text/style.css"
 
 	if (browser) {
+		import("@auroratide/arched-text/lib/define.js")
 		import("@auroratide/flip-card/lib/define.js")
 		import("@auroratide/img-zoom/lib/define.js")
 		import("@auroratide/reorder-list/lib/define.js")
@@ -21,6 +24,7 @@
 
 	onMount(() => {
 		if (browser) {
+			setupArchedTextDemos()
 			setupFlipCardDemos()
 			setupCycleDemo()
 			buildTocs()

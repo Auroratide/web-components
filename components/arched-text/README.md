@@ -6,7 +6,15 @@ The `arched-text` element represents text shaped into an arch.
 
 <!--DEMO
 <wc-demo>
-	<p style="margin-block-start: 1em;"><arched-text amount="0.5" style="font-size: 2em;">This text is arched!</arched-text></p>
+	<div class="arch-amount-demo">
+		<p style="font-size: 2em;">
+			<arched-text amount="0.5">This text is arched!</arched-text>
+		</p>
+		<section class="range-input">
+			<input id="arch-demo-amount" type="range" min="0" max="1" value="0.5" step="0.05" />
+			<label for="arch-demo-amount">Arch Amount</label>
+		</section>
+	</div>
 </wc-demo>
 /DEMO-->
 
@@ -50,9 +58,11 @@ You can use the `amount` attribute to adjust the amount of arching. It is a deci
 
 <!--DEMO
 <wc-demo>
-	<p><arched-text>Default arch</arched-text></p>
-	<p><arched-text amount="0.6667">More arching</arched-text></p>
-	<p><arched-text amount="0.1">Less arching</arched-text></p>
+	<p style="display: flex; flex-wrap: wrap; gap: 2em; margin-block-start: 1em;">
+		<arched-text>Default arch</arched-text>
+		<arched-text amount="0.6667">More arching</arched-text>
+		<arched-text amount="0.1">Less arching</arched-text>
+	</p>
 </wc-demo>
 /DEMO-->
 

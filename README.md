@@ -10,6 +10,31 @@ This is just a bunch of highly reusable, fully accessible **[web components](htt
 
 <small>Made by <a href="https://auroratide.com">Auroratide</a>, a developer with a passion for the web, inclusive design, and storytelling ❤️</small>
 
+## The arched-text Element
+
+**View**: [The arched-text Element](https://components.auroratide.com/arched-text)
+
+An element that forms an arch out of text.
+
+
+<!--DEMO
+<wc-demo>
+	<div class="arch-amount-demo">
+		<p style="font-size: 2em;">
+			<arched-text amount="0.5">This text is arched!</arched-text>
+		</p>
+		<section class="range-input">
+			<input id="arch-demo-amount" type="range" min="0" max="1" value="0.5" step="0.05" />
+			<label for="arch-demo-amount">Arch Amount</label>
+		</section>
+	</div>
+</wc-demo>
+/DEMO-->
+
+```html
+<arched-text>This text is arched!</arched-text>
+```
+
 ## The flip-card Element
 
 **View**: [The flip-card Element](https://components.auroratide.com/flip-card)
