@@ -1,5 +1,12 @@
 # @auroratide/img-zoom
 
+## 0.1.5
+
+### Patch Changes
+
+- 129a6bf: Fix issue where programmatically changing the image source did not always change the source in the zoomed image
+- ead21a5: Use a better-feeling default animation for zooming
+
 ## 0.1.4
 
 ### Patch Changes
