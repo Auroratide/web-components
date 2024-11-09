@@ -178,7 +178,7 @@ export class ImgZoomElement extends HTMLElement {
 		this.#modal().addEventListener("close", this.#onClose)
 
 		this.#observer.observe(this, {
-			attributes: false,
+			attributes: true,
 			childList: true,
 			subtree: true,
 		})

@@ -79,6 +79,22 @@ describe("img-zoom", () => {
 			expect(dialog.querySelector("img").getAttribute("src")).to.eq("/changed.png")
 		})
 
+		it("attribute only changes", async () => {
+			const elem = await fixture(`
+				<img-zoom>
+					<img src="/original.png" alt="image" />
+				</img-zoom>
+			`)
+
+			const zoomIn = elem.shadowRoot.querySelector("#zoom-in")
+			const dialog = elem.shadowRoot.querySelector("dialog")
+
+			elem.querySelector("img").setAttribute("src", "/changed.png")
+
+			await zoomIn.click()
+			expect(dialog.querySelector("img").getAttribute("src")).to.eq("/changed.png")
+		})
+
 		it("source in picture is changed", async () => {
 			const elem = await fixture(`
 				<img-zoom>
