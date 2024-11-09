@@ -1,5 +1,5 @@
 const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["../chunks/define.Dnpg-HA6.js","../chunks/events.C44j2o98.js"])))=>i.map(i=>d[i]);
-import{_ as l}from"../chunks/preload-helper.C1FmrZbK.js";import{s as c,n as p,o}from"../chunks/scheduler.uMbUtuGX.js";import{S as h,i,c as r,a as d,m as g,t as m,n as u,o as j}from"../chunks/index.Dz7ClLEz.js";import{C as b}from"../chunks/events.C44j2o98.js";import{R as w}from"../chunks/Readme.TzFt1DVI.js";const f=`<h1 id="the-toggle-switch-element">The toggle-switch Element</h1>
+import{_ as l}from"../chunks/preload-helper.C1FmrZbK.js";import{s as c,n as p,o}from"../chunks/scheduler.uMbUtuGX.js";import{S as h,i,c as r,a as d,m as g,t as m,n as u,o as j}from"../chunks/index.Dz7ClLEz.js";import{C as b}from"../chunks/events.C44j2o98.js";import{R as w}from"../chunks/Readme.BAL9kLut.js";const f=`<h1 id="the-toggle-switch-element">The toggle-switch Element</h1>
 <p hidden><strong><a href="https://components.auroratide.com/toggle-switch">View this page with live demos!</a></strong></p>
 <p>The <code>toggle-switch</code> element represents a control that is either on or off. This component is built with accessibility in mind and implements the WAI-ARIA <a href="https://www.w3.org/TR/wai-aria-1.1/#switch">switch role</a>.</p>
 <wc-demo>
