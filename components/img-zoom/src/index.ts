@@ -143,6 +143,9 @@ export class ImgZoomElement extends HTMLElement {
 
 	#zoomAnimation = pop({ duration: 400 })
 	#reducedMotionAnimation = fade({ duration: 400 })
+	#observer = new MutationObserver(() => {
+		this.#cloneIntoContent()
+	})
 
 	constructor() {
 		super()
@@ -170,14 +173,22 @@ export class ImgZoomElement extends HTMLElement {
 
 	connectedCallback() {
 		this.#zoomInBtn().addEventListener("click", this.zoomIn)
-		this.#slot().addEventListener("slotchange", this.#cloneIntoContent)
 		this.#modal().addEventListener("close", this.#onClose)
+
+		this.#observer.observe(this, {
+			attributes: false,
+			childList: true,
+			subtree: true,
+		})
+
+		this.#cloneIntoContent()
 	}
 
 	disconnectedCallback() {
 		this.#zoomInBtn().removeEventListener("click", this.zoomIn)
-		this.#slot().removeEventListener("slotchange", this.#cloneIntoContent)
 		this.#modal().removeEventListener("close", this.#onClose)
+
+		this.#observer.disconnect()
 	}
 
 	attributeChangedCallback(attribute: string, oldValue: string, newValue: string) {
