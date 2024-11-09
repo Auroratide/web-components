@@ -3,6 +3,8 @@ import { pop, fade, type AnimationDescription } from "./animation.js"
 export class ImgZoomElement extends HTMLElement {
 	static defaultElementName = "img-zoom"
 
+	static defaultAnimation = "cubic-bezier(0.25, 1, 0.5, 1)"
+
 	static html = `
 		<button id="zoom-in">
 			<slot></slot>
@@ -227,7 +229,7 @@ export class ImgZoomElement extends HTMLElement {
 
 		const animate = (animation: AnimationDescription) =>
 			this.#content().animate(animation.keyframes, {
-				easing: "ease-out",
+				easing: ImgZoomElement.defaultAnimation,
 				...animation.options,
 				fill: "none",
 				composite: "add",
@@ -247,7 +249,7 @@ export class ImgZoomElement extends HTMLElement {
 		const animate = (animation: AnimationDescription) =>
 			this.#content().animate(animation.keyframes, {
 				...animation.options,
-				easing: invertEasing(animation.options?.easing ?? "ease-out"),
+				easing: invertEasing(animation.options?.easing ?? ImgZoomElement.defaultAnimation),
 				fill: "none",
 				direction: "reverse",
 				composite: "add",
