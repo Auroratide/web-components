@@ -1,5 +1,11 @@
 # @auroratide/img-zoom
 
+## 0.1.6
+
+### Patch Changes
+
+- 5486da4: Fix issue where changing only the attribute did not trigger a re-clone
+
 ## 0.1.5
 
 ### Patch Changes
