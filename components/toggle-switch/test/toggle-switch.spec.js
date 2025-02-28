@@ -180,11 +180,11 @@ describe("toggle-switch", () => {
 
 		it("explicit label", async () => {
 			const container = await fixture(`
-                <div>
-                    <label class="label" for="switch">Switch</label>
-                    <toggle-switch id="switch"></toggle-switch>
-                </div>
-            `)
+					<div>
+						<label class="label" for="switch">Switch</label>
+						<toggle-switch id="switch"></toggle-switch>
+					</div>
+			`)
 
 			label(container).click()
 
@@ -193,11 +193,11 @@ describe("toggle-switch", () => {
 
 		it("implicit label", async () => {
 			const container = await fixture(`
-                <label>
-                    <span class="label">Switch</span>
-                    <toggle-switch></toggle-switch>
-                </label>
-            `)
+					<label>
+						<span class="label">Switch</span>
+						<toggle-switch></toggle-switch>
+					</label>
+			`)
 
 			label(container).click()
 

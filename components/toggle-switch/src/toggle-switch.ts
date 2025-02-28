@@ -1,4 +1,4 @@
-import { changeEvent } from "./events.js"
+import { changeEvent, changeOldEvent } from "./events.js"
 
 const CHECKED_ATTR = "checked"
 const DISABLED_ATTR = "disabled"
@@ -116,8 +116,10 @@ export class ToggleSwitchElement extends HTMLElement {
 
 	#updateChecked = (dispatch = false) => {
 		this.setAttribute("aria-checked", this.checked.toString())
-		if (dispatch)
+		if (dispatch) {
 			this.dispatchEvent(changeEvent(this.checked))
+			this.dispatchEvent(changeOldEvent(this.checked))
+		}
 	}
 
 	#createRoot = () => {

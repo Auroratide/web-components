@@ -160,12 +160,12 @@ The `toggle-switch` element dispatches the following events:
 
 | Name | When Triggered |
 | ------------- | ------------- |
-| `toggle-switch:change` | Any time the state changes (on to off, or off to on) |
+| `change` | Any time the state changes (on to off, or off to on) |
 
-The `toggle-switch:change` event contains the checked state in its details:
+The `change` event contains the checked state in its details:
 
 ```js
-elem.addEventListener('toggle-switch:change', e => {
+elem.addEventListener('change', e => {
     console.log(e.detail.checked)
 })
 ```
