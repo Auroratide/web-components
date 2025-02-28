@@ -1,5 +1,5 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["../chunks/define.Dnpg-HA6.js","../chunks/events.C44j2o98.js"])))=>i.map(i=>d[i]);
-import{_ as l}from"../chunks/preload-helper.C1FmrZbK.js";import{s as c,n as p,o}from"../chunks/scheduler.uMbUtuGX.js";import{S as h,i,c as r,a as d,m as g,t as m,n as u,o as j}from"../chunks/index.Dz7ClLEz.js";import{C as b}from"../chunks/events.C44j2o98.js";import{R as w}from"../chunks/Readme.BAL9kLut.js";const f=`<h1 id="the-toggle-switch-element">The toggle-switch Element</h1>
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["../chunks/define.DoeXCUNx.js","../chunks/events.2-e-6mGZ.js"])))=>i.map(i=>d[i]);
+import{_ as l}from"../chunks/preload-helper.C1FmrZbK.js";import{s as c,n as p,o}from"../chunks/scheduler.uMbUtuGX.js";import{S as h,i,c as r,a as d,m as g,t as m,n as u,o as j}from"../chunks/index.Dz7ClLEz.js";import{C as b}from"../chunks/events.2-e-6mGZ.js";import{R as w}from"../chunks/Readme.mXz2fH10.js";const f=`<h1 id="the-toggle-switch-element">The toggle-switch Element</h1>
 <p hidden><strong><a href="https://components.auroratide.com/toggle-switch">View this page with live demos!</a></strong></p>
 <p>The <code>toggle-switch</code> element represents a control that is either on or off. This component is built with accessibility in mind and implements the WAI-ARIA <a href="https://www.w3.org/TR/wai-aria-1.1/#switch">switch role</a>.</p>
 <wc-demo>
@@ -152,13 +152,13 @@ toggle-<span class="hljs-selector-tag">switch</span><span class="hljs-selector-a
 </thead>
 <tbody>
 <tr>
-<td><code>toggle-switch:change</code></td>
+<td><code>change</code></td>
 <td>Any time the state changes (on to off, or off to on)</td>
 </tr>
 </tbody>
 </table>
-<p>The <code>toggle-switch:change</code> event contains the checked state in its details:</p>
-<pre><code class="language-js">elem.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;toggle-switch:change&#x27;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> {
+<p>The <code>change</code> event contains the checked state in its details:</p>
+<pre><code class="language-js">elem.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;change&#x27;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> {
     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e.<span class="hljs-property">detail</span>.<span class="hljs-property">checked</span>)
 })
 </code></pre>
@@ -168,4 +168,4 @@ toggle-<span class="hljs-selector-tag">switch</span><span class="hljs-selector-a
 <li>The element can be focused</li>
 <li>The element can be toggled with <kbd>Enter</kbd> or <kbd>Space</kbd></li>
 </ul>
-`;function k(t){let s,n;return s=new w({props:{html:f}}),{c(){r(s.$$.fragment)},l(a){d(s.$$.fragment,a)},m(a,e){g(s,a,e),n=!0},p,i(a){n||(m(s.$$.fragment,a),n=!0)},o(a){u(s.$$.fragment,a),n=!1},d(a){j(s,a)}}}function y(t){return l(()=>import("../chunks/define.Dnpg-HA6.js"),__vite__mapDeps([0,1]),import.meta.url),o(()=>{const s=document.querySelector("#example-01"),n=document.querySelector("#example-01-output");s&&n&&(s==null||s.addEventListener(b,a=>{a.detail.checked?(n.textContent="On",n.classList.add("example-active")):(n.textContent="Off",n.classList.remove("example-active"))}))}),[]}class T extends h{constructor(s){super(),i(this,s,y,k,c,{})}}export{T as component};
+`;function k(t){let s,n;return s=new w({props:{html:f}}),{c(){r(s.$$.fragment)},l(a){d(s.$$.fragment,a)},m(a,e){g(s,a,e),n=!0},p,i(a){n||(m(s.$$.fragment,a),n=!0)},o(a){u(s.$$.fragment,a),n=!1},d(a){j(s,a)}}}function y(t){return l(()=>import("../chunks/define.DoeXCUNx.js"),__vite__mapDeps([0,1]),import.meta.url),o(()=>{const s=document.querySelector("#example-01"),n=document.querySelector("#example-01-output");s&&n&&(s==null||s.addEventListener(b,a=>{a.detail.checked?(n.textContent="On",n.classList.add("example-active")):(n.textContent="Off",n.classList.remove("example-active"))}))}),[]}class T extends h{constructor(s){super(),i(this,s,y,k,c,{})}}export{T as component};

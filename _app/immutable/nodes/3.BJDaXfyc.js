@@ -1,4 +1,4 @@
-import{_ as r}from"../chunks/preload-helper.C1FmrZbK.js";import{s as l,n as c,o}from"../chunks/scheduler.uMbUtuGX.js";import{S as p,i as h,c as i,a as m,m as d,t as u,n as g,o as x}from"../chunks/index.Dz7ClLEz.js";import{R as j}from"../chunks/Readme.BAL9kLut.js";import{s as f}from"../chunks/style.BNdgRZIy.js";const y=`<h1 id="the-arched-text-element">The arched-text Element</h1>
+import{_ as r}from"../chunks/preload-helper.C1FmrZbK.js";import{s as l,n as c,o}from"../chunks/scheduler.uMbUtuGX.js";import{S as p,i as h,c as i,a as m,m as d,t as u,n as g,o as x}from"../chunks/index.Dz7ClLEz.js";import{R as j}from"../chunks/Readme.mXz2fH10.js";import{s as f}from"../chunks/style.BNdgRZIy.js";const y=`<h1 id="the-arched-text-element">The arched-text Element</h1>
 <p hidden><strong><a href="https://components.auroratide.com/arched-text">View this page with live demos!</a></strong></p>
 <p>The <code>arched-text</code> element represents text shaped into an arch.</p>
 <wc-demo>
