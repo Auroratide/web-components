@@ -1,5 +1,11 @@
 # @auroratide/toggle-switch
 
+## 0.3.1
+
+### Patch Changes
+
+- dbffc51: Somehow forgot to actually change the event name
+
 ## 0.3.0
 
 ### Minor Changes

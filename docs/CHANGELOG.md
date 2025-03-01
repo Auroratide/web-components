@@ -1,5 +1,12 @@
 # @auroratide/wc-docs
 
+## 0.2.4
+
+### Patch Changes
+
+- Updated dependencies [dbffc51]
+  - @auroratide/toggle-switch@0.3.1
+
 ## 0.2.3
 
 ### Patch Changes
