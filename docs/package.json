@@ -10,21 +10,22 @@
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
     },
     "devDependencies": {
-        "@sveltejs/adapter-auto": "^3.2.5",
-        "@sveltejs/adapter-static": "^3.0.5",
-        "@sveltejs/kit": "^2.6.1",
+        "@sveltejs/adapter-auto": "^3.3.1",
+        "@sveltejs/adapter-static": "^3.0.8",
+        "@sveltejs/kit": "^2.20.8",
         "@sveltejs/vite-plugin-svelte": "^3.1.2",
         "@types/markdown-it": "^13.0.9",
-        "highlight.js": "^11.10.0",
+        "highlight.js": "^11.11.1",
         "markdown-it": "^13.0.2",
         "svelte": "^4.2.19",
         "svelte-check": "^3.8.6",
-        "typescript": "^5.6.2",
-        "vite": "^5.4.8",
+        "typescript": "^5.8.3",
+        "vite": "^5.4.19",
         "vite-plugin-markdown": "^2.2.0"
     },
     "type": "module",
     "dependencies": {
+        "@auroratide/arched-text": "workspace:^",
         "@auroratide/example-component": "workspace:^",
         "@auroratide/flip-card": "workspace:^",
         "@auroratide/img-zoom": "workspace:^",
@@ -34,7 +35,6 @@
         "@auroratide/toggle-switch": "workspace:^",
         "@auroratide/typewritten-text": "workspace:^",
         "@fortawesome/free-brands-svg-icons": "5.15.4",
-        "@fortawesome/free-solid-svg-icons": "5.15.4",
-        "@auroratide/arched-text": "workspace:^"
+        "@fortawesome/free-solid-svg-icons": "5.15.4"
     }
 }

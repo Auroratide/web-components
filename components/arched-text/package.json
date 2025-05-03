@@ -12,7 +12,11 @@
 		"test": "wtr --node-resolve --port 10010 test",
 		"test:clean": "pnpm clean && pnpm build && pnpm test"
 	},
-	"keywords": ["arch", "text", "web component"],
+	"keywords": [
+		"arch",
+		"text",
+		"web component"
+	],
 	"author": {
 		"name": "Timothy Foster",
 		"url": "https://auroratide.com"
@@ -25,7 +29,7 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@open-wc/testing": "^4.0.0",
-		"@web/test-runner": "^0.18.0",
-		"typescript": "^5.3.3"
+		"@web/test-runner": "^0.18.3",
+		"typescript": "^5.8.3"
 	}
 }
