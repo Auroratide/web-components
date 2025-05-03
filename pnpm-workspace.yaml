@@ -1,3 +1,9 @@
 packages:
-  - 'components/*'
-  - 'docs'
+  - components/*
+  - docs
+onlyBuiltDependencies:
+  - '@fortawesome/fontawesome-common-types'
+  - '@fortawesome/free-brands-svg-icons'
+  - '@fortawesome/free-solid-svg-icons'
+  - esbuild
+  - svelte-preprocess
