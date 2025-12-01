@@ -191,6 +191,7 @@ export class ImgZoomElement extends HTMLElement {
 		this.#modal().removeEventListener("close", this.#onClose)
 
 		this.#observer.disconnect()
+		this.#resumeScroll()
 	}
 
 	attributeChangedCallback(attribute: string, oldValue: string, newValue: string) {
