@@ -1,5 +1,5 @@
 const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["../assets/style.B89jwdWn.css"])))=>i.map(i=>d[i]);
-import{_ as p}from"../chunks/C1FmrZbK.js";import{s as c,n as r,o}from"../chunks/p4Z6_urL.js";import{S as i,i as d,a as h,t as u,b as g,m,g as j,n as y}from"../chunks/BJ0JgjBn.js";import{R as w}from"../chunks/s_ZfC1PQ.js";import{s as f}from"../chunks/DlallKuY.js";const b=`<h1 id="the-typewritten-text-element">The typewritten-text Element</h1>
+import{_ as p}from"../chunks/C1FmrZbK.js";import{s as c,n as r,o}from"../chunks/p4Z6_urL.js";import{S as i,i as d,a as h,t as u,b as g,m,g as j,n as y}from"../chunks/BJ0JgjBn.js";import{R as w}from"../chunks/CtTzQs9K.js";import{s as f}from"../chunks/DlallKuY.js";const b=`<h1 id="the-typewritten-text-element">The typewritten-text Element</h1>
 <p hidden><strong><a href="https://components.auroratide.com/typewritten-text">View this page with live demos!</a></strong></p>
 <p>The <code>typewritten-text</code> element represents text that should be typed out one letter at a time when displayed.</p>
 <p><img src="./demo.gif" alt="Text is automatically typed out one letter at a time"></p>

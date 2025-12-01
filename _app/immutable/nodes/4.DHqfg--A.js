@@ -1,4 +1,4 @@
-import{_ as o}from"../chunks/C1FmrZbK.js";import{s as p,n as l}from"../chunks/p4Z6_urL.js";import{S as m,i as r,a as c,t as i,b as u,m as h,g,n as d}from"../chunks/BJ0JgjBn.js";import{R as _}from"../chunks/s_ZfC1PQ.js";const f=`<h1 id="the-example-component-element">The example-component Element</h1>
+import{_ as o}from"../chunks/C1FmrZbK.js";import{s as p,n as l}from"../chunks/p4Z6_urL.js";import{S as m,i as r,a as c,t as i,b as u,m as h,g,n as d}from"../chunks/BJ0JgjBn.js";import{R as _}from"../chunks/CtTzQs9K.js";const f=`<h1 id="the-example-component-element">The example-component Element</h1>
 <p hidden><strong><a href="https://components.auroratide.com/example-component">View this page with live demos!</a></strong></p>
 <p>This example component just lets you decrease and increase a number.</p>
 <p><example-component></example-component></p>
