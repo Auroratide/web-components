@@ -1,5 +1,11 @@
 # @auroratide/img-zoom
 
+## 0.1.8
+
+### Patch Changes
+
+- 6ceb049: Fix scenario where there is no inner node to clone"
+
 ## 0.1.7
 
 ### Patch Changes
