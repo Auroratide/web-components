@@ -1,5 +1,11 @@
 # @auroratide/img-zoom
 
+## 0.1.7
+
+### Patch Changes
+
+- f088405: Restore scrolling when component is disconnected
+
 ## 0.1.6
 
 ### Patch Changes

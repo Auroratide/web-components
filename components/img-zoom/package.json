@@ -1,6 +1,6 @@
 {
 	"name": "@auroratide/img-zoom",
-	"version": "0.1.6",
+	"version": "0.1.7",
 	"description": "Component for viewing images in more detail.",
 	"type": "module",
 	"main": "lib/index.js",
