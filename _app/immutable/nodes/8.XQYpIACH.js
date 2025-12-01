@@ -1,4 +1,4 @@
-import{_ as l}from"../chunks/preload-helper.C1FmrZbK.js";import{s as p,n as o}from"../chunks/scheduler.uMbUtuGX.js";import{S as i,i as c,c as r,a as b,m as h,t as d,n as m,o as u}from"../chunks/index.Dz7ClLEz.js";import{R as g}from"../chunks/Readme.CF4HCArv.js";const j=`<h1 id="the-tab-list-elements">The tab-list Elements</h1>
+import{_ as l}from"../chunks/C1FmrZbK.js";import{s as p,n as o}from"../chunks/p4Z6_urL.js";import{S as i,i as c,a as r,t as b,b as h,m as d,g as m,n as u}from"../chunks/BJ0JgjBn.js";import{R as g}from"../chunks/s_ZfC1PQ.js";const j=`<h1 id="the-tab-list-elements">The tab-list Elements</h1>
 <p hidden><strong><a href="https://components.auroratide.com/tab-list">View this page with live demos!</a></strong></p>
 <p>The <code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code> elements together represent content that is presented one panel at a time. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://w3c.github.io/aria-practices/#tabpanel">tabs</a>.</p>
 <ul>
@@ -359,4 +359,4 @@ tab-panel<span class="hljs-selector-attr">[hidden]</span> {
 <li>Native support for removable tabs.</li>
 <li>Tabs that open popup menus.</li>
 </ul>
-`;function f(t){let a,n;return a=new g({props:{html:j}}),{c(){r(a.$$.fragment)},l(s){b(a.$$.fragment,s)},m(s,e){h(a,s,e),n=!0},p:o,i(s){n||(d(a.$$.fragment,s),n=!0)},o(s){m(a.$$.fragment,s),n=!1},d(s){u(a,s)}}}function y(t){return l(()=>import("../chunks/define.B67tN34s.js"),[],import.meta.url),[]}class x extends i{constructor(a){super(),c(this,a,y,f,p,{})}}export{x as component};
+`;function f(t){let a,n;return a=new g({props:{html:j}}),{c(){u(a.$$.fragment)},l(s){m(a.$$.fragment,s)},m(s,e){d(a,s,e),n=!0},p:o,i(s){n||(h(a.$$.fragment,s),n=!0)},o(s){b(a.$$.fragment,s),n=!1},d(s){r(a,s)}}}function y(t){return l(()=>import("../chunks/B67tN34s.js"),[],import.meta.url),[]}class x extends i{constructor(a){super(),c(this,a,y,f,p,{})}}export{x as component};

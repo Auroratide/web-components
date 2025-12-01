@@ -1,4 +1,4 @@
-import{_ as o}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as c}from"../chunks/scheduler.uMbUtuGX.js";import{S as r,i as h,e as m,c as g,d as u,f as d,a as j,h as p,j as f,k as b,m as w,t as q,n as z,o as _}from"../chunks/index.Dz7ClLEz.js";import{R as y}from"../chunks/Readme.CF4HCArv.js";import{f as k}from"../chunks/fruit.BMJTztQG.js";const v=`<h1 id="the-img-zoom-element">The img-zoom Element</h1>
+import{_ as o}from"../chunks/C1FmrZbK.js";import{s as i,n as c}from"../chunks/p4Z6_urL.js";import{S as r,i as h,d as p,a as m,t as g,b as u,c as d,m as j,f,j as b,k as w,g as q,o as z,n as _}from"../chunks/BJ0JgjBn.js";import{R as y}from"../chunks/s_ZfC1PQ.js";import{f as k}from"../chunks/BMJTztQG.js";const v=`<h1 id="the-img-zoom-element">The img-zoom Element</h1>
 <p hidden><strong><a href="https://components.auroratide.com/img-zoom">View this page with live demos!</a></strong></p>
 <p>The <code>img-zoom</code> element represents an image that can be enlarged to fill the screen on demand.</p>
 <wc-demo id="main-demo">
@@ -56,7 +56,7 @@ import{_ as o}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as c}fr
 </code></pre>
 <h2 id="customization">Customization</h2>
 <p>Since it's Just HTML<sup>TM</sup>, you can use good ol' CSS.</p>
-<pre><code class="language-css"><span class="hljs-selector-tag">img</span>-zoom {
+<pre><code class="language-css"><span class="hljs-selector-tag">img</span>-<span class="hljs-attribute">zoom</span> {
 	<span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0.5em</span> <span class="hljs-number">0.5em</span> <span class="hljs-built_in">oklch</span>(<span class="hljs-number">0%</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> / <span class="hljs-number">0.33</span>);
 }
 </code></pre>
@@ -73,4 +73,4 @@ import{_ as o}from"../chunks/preload-helper.C1FmrZbK.js";import{s as i,n as c}fr
 <li>Tab trapping: While zoomed, the tabbing order will remain within the image until dismissed.</li>
 <li>Reduced Motion: The animation is simplified for people who prefer reduced motion.</li>
 </ul>
-`,T=""+new URL("../assets/fruit.Ipb7VTQf.webp",import.meta.url).href;function $(l){let s,n,t;return n=new y({props:{html:v,assets:[{replace:"./fruit.png",with:k},{replace:"./fruit.webp",with:T}]}}),{c(){s=m("div"),g(n.$$.fragment),this.h()},l(a){s=u(a,"DIV",{class:!0});var e=d(s);j(n.$$.fragment,e),e.forEach(p),this.h()},h(){f(s,"class","img-contained svelte-w5efvt")},m(a,e){b(a,s,e),w(n,s,null),t=!0},p:c,i(a){t||(q(n.$$.fragment,a),t=!0)},o(a){z(n.$$.fragment,a),t=!1},d(a){a&&p(s),_(n)}}}function A(l){return o(()=>import("../chunks/define.lqPXTXtE.js"),[],import.meta.url),[]}class M extends r{constructor(s){super(),h(this,s,A,$,i,{})}}export{M as component};
+`,T=""+new URL("../assets/fruit.Ipb7VTQf.webp",import.meta.url).href;function $(l){let s,n,t;return n=new y({props:{html:v,assets:[{replace:"./fruit.png",with:k},{replace:"./fruit.webp",with:T}]}}),{c(){s=z("div"),_(n.$$.fragment),this.h()},l(a){s=b(a,"DIV",{class:!0});var e=w(s);q(n.$$.fragment,e),e.forEach(p),this.h()},h(){f(s,"class","img-contained svelte-w5efvt")},m(a,e){d(a,s,e),j(n,s,null),t=!0},p:c,i(a){t||(u(n.$$.fragment,a),t=!0)},o(a){g(n.$$.fragment,a),t=!1},d(a){a&&p(s),m(n)}}}function A(l){return o(()=>import("../chunks/BnObGrAy.js"),[],import.meta.url),[]}class M extends r{constructor(s){super(),h(this,s,A,$,i,{})}}export{M as component};

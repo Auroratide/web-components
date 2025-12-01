@@ -1,4 +1,4 @@
-import{_ as o}from"../chunks/preload-helper.C1FmrZbK.js";import{s as l,n as c,o as i}from"../chunks/scheduler.uMbUtuGX.js";import{S as r,i as p,c as d,a as h,m as u,t as f,n as m,o as g}from"../chunks/index.Dz7ClLEz.js";import{R as b}from"../chunks/Readme.CF4HCArv.js";import{s as j}from"../chunks/setup-flip-card-demos.e7UggXcj.js";const y=`<h1 id="the-flip-card-element">The flip-card Element</h1>
+import{_ as o}from"../chunks/C1FmrZbK.js";import{s as l,n as i,o as c}from"../chunks/p4Z6_urL.js";import{S as r,i as p,a as d,t as h,b as u,m as f,g as m,n as g}from"../chunks/BJ0JgjBn.js";import{R as b}from"../chunks/s_ZfC1PQ.js";import{s as j}from"../chunks/e7UggXcj.js";const y=`<h1 id="the-flip-card-element">The flip-card Element</h1>
 <p hidden><strong><a href="https://components.auroratide.com/flip-card">View this page with live demos!</a></strong></p>
 <p>The <code>flip-card</code> element represents content with a front side and a back side, with one side presented at a time.</p>
 <wc-demo class="flip-card-demo">
@@ -372,4 +372,4 @@ card.<span class="hljs-title function_">setFlipToBackAnimation</span>(
 </ul>
 <h3 id="announcing-when-the-card-flips">Announcing when the card flips</h3>
 <p>If you attach <code>aria-live=&quot;polite&quot;</code> to the <code>flip-card</code>, then flipping the card will announce the new side's contents to screen readers. As this may not always be desired behaviour, it is up to you to discern whether adding <code>aria-live</code> will make your content more accessible.</p>
-`;function w(e){let t,s;return t=new b({props:{html:y}}),{c(){d(t.$$.fragment)},l(n){h(t.$$.fragment,n)},m(n,a){u(t,n,a),s=!0},p:c,i(n){s||(f(t.$$.fragment,n),s=!0)},o(n){m(t.$$.fragment,n),s=!1},d(n){g(t,n)}}}function v(e){return o(()=>import("../chunks/define.DdJp3656.js"),[],import.meta.url),i(()=>{j()}),[]}class F extends r{constructor(t){super(),p(this,t,v,w,l,{})}}export{F as component};
+`;function w(e){let t,s;return t=new b({props:{html:y}}),{c(){g(t.$$.fragment)},l(n){m(t.$$.fragment,n)},m(n,a){f(t,n,a),s=!0},p:i,i(n){s||(u(t.$$.fragment,n),s=!0)},o(n){h(t.$$.fragment,n),s=!1},d(n){d(t,n)}}}function v(e){return o(()=>import("../chunks/DdJp3656.js"),[],import.meta.url),c(()=>{j()}),[]}class F extends r{constructor(t){super(),p(this,t,v,w,l,{})}}export{F as component};

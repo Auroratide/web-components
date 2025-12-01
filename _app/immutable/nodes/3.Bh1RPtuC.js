@@ -1,4 +1,4 @@
-import{_ as r}from"../chunks/preload-helper.C1FmrZbK.js";import{s as l,n as c,o}from"../chunks/scheduler.uMbUtuGX.js";import{S as p,i as h,c as i,a as m,m as d,t as u,n as g,o as x}from"../chunks/index.Dz7ClLEz.js";import{R as j}from"../chunks/Readme.CF4HCArv.js";import{s as f}from"../chunks/style.BNdgRZIy.js";const y=`<h1 id="the-arched-text-element">The arched-text Element</h1>
+import{_ as r}from"../chunks/C1FmrZbK.js";import{s as l,n as c,o}from"../chunks/p4Z6_urL.js";import{S as p,i as h,a as i,t as m,b as d,m as u,g,n as x}from"../chunks/BJ0JgjBn.js";import{R as j}from"../chunks/s_ZfC1PQ.js";import{s as f}from"../chunks/AuAQ2cgS.js";const y=`<h1 id="the-arched-text-element">The arched-text Element</h1>
 <p hidden><strong><a href="https://components.auroratide.com/arched-text">View this page with live demos!</a></strong></p>
 <p>The <code>arched-text</code> element represents text shaped into an arch.</p>
 <wc-demo>
@@ -44,4 +44,4 @@ import{_ as r}from"../chunks/preload-helper.C1FmrZbK.js";import{s as l,n as c,o}
 </wc-demo>
 <h2 id="accessibility">Accessibility</h2>
 <p>The element represents its textual content. That's it, I don't have anything else to say 🙂</p>
-`;function _(e){let t,s;return t=new j({props:{html:y}}),{c(){i(t.$$.fragment)},l(a){m(t.$$.fragment,a)},m(a,n){d(t,a,n),s=!0},p:c,i(a){s||(u(t.$$.fragment,a),s=!0)},o(a){g(t.$$.fragment,a),s=!1},d(a){x(t,a)}}}function b(e){return r(()=>import("../chunks/define.BTnfLqC7.js"),[],import.meta.url),o(()=>{f()}),[]}class k extends p{constructor(t){super(),h(this,t,b,_,l,{})}}export{k as component};
+`;function _(e){let t,s;return t=new j({props:{html:y}}),{c(){x(t.$$.fragment)},l(a){g(t.$$.fragment,a)},m(a,n){u(t,a,n),s=!0},p:c,i(a){s||(d(t.$$.fragment,a),s=!0)},o(a){m(t.$$.fragment,a),s=!1},d(a){i(t,a)}}}function b(e){return r(()=>import("../chunks/BTnfLqC7.js"),[],import.meta.url),o(()=>{f()}),[]}class k extends p{constructor(t){super(),h(this,t,b,_,l,{})}}export{k as component};
