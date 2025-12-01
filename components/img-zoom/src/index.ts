@@ -205,7 +205,8 @@ export class ImgZoomElement extends HTMLElement {
 	}
 
 	#cloneIntoContent = () => {
-		const cloned = this.#slotted().cloneNode(true) as HTMLElement
+		const cloned = this.#slotted()?.cloneNode(true) as HTMLElement
+		if (!cloned) return
 
 		if ("alt" in cloned) cloned.alt += " (zoomed)"
 		cloned.setAttribute("part", "content")
