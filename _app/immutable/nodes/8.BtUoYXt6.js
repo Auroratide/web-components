@@ -1,4 +1,4 @@
-import{_ as l}from"../chunks/C1FmrZbK.js";import{s as p,n as o}from"../chunks/p4Z6_urL.js";import{S as i,i as c,a as r,t as b,b as h,m as d,g as m,n as u}from"../chunks/BJ0JgjBn.js";import{R as g}from"../chunks/CtTzQs9K.js";const j=`<h1 id="the-tab-list-elements">The tab-list Elements</h1>
+import{_ as l}from"../chunks/C1FmrZbK.js";import{s as p,n as o}from"../chunks/p4Z6_urL.js";import{S as i,i as c,a as r,t as b,b as h,m as d,g as m,n as u}from"../chunks/BJ0JgjBn.js";import{R as g}from"../chunks/BRgKZOaZ.js";const j=`<h1 id="the-tab-list-elements">The tab-list Elements</h1>
 <p hidden><strong><a href="https://components.auroratide.com/tab-list">View this page with live demos!</a></strong></p>
 <p>The <code>tab-list</code>, <code>tab-item</code>, and <code>tab-panel</code> elements together represent content that is presented one panel at a time. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://w3c.github.io/aria-practices/#tabpanel">tabs</a>.</p>
 <ul>
