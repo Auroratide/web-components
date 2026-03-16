@@ -1,3 +1,5 @@
+import { Icon } from "./icons.js"
+
 export class TextareaMarkdownElement extends HTMLElement {
 	static readonly formAssociated = true
 	static defaultElementName = "textarea-markdown"
@@ -5,9 +7,9 @@ export class TextareaMarkdownElement extends HTMLElement {
 	static html = `
 		<div>
 			<menu id="menu" part="menu">
-				<li><button type="button" id="header" aria-label="Header">H</button></li>
-				<li><button type="button" id="bold" aria-label="Bold">B</button></li>
-				<li><button type="button" id="italic" aria-label="Italic">I</button></li>
+				<li><button type="button" id="header" aria-label="Header">${Icon.header}</button></li>
+				<li><button type="button" id="bold" aria-label="Bold">${Icon.bold}</button></li>
+				<li><button type="button" id="italic" aria-label="Italic">${Icon.italic}</button></li>
 			</menu>
 			<textarea id="textarea"></textarea>
 		</div>
@@ -34,6 +36,10 @@ export class TextareaMarkdownElement extends HTMLElement {
 			inline-size: 1.5em;
 			block-size: 1.5em;
 			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 0;
 		}
 
 		textarea {
@@ -42,10 +48,6 @@ export class TextareaMarkdownElement extends HTMLElement {
 			display: block;
 			inline-size: 100%;
 		}
-
-		#bold { font-weight: bold; }
-		#header { font-weight: 900; }
-		#italic { font-style: italic; }
 	`
 
 	static get observedAttributes() {
