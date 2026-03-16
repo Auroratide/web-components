@@ -7,13 +7,13 @@ export class TextareaMarkdownElement extends HTMLElement {
 	static html = `
 		<div>
 			<menu id="menu" part="menu">
-				<li><button type="button" id="header" aria-label="Header">${Icon.header}</button></li>
-				<li><button type="button" id="bold" aria-label="Bold">${Icon.bold}</button></li>
-				<li><button type="button" id="italic" aria-label="Italic">${Icon.italic}</button></li>
-				<li><button type="button" id="unordered-list" aria-label="Unordered List">${Icon.unorderedList}</button></li>
-				<li><button type="button" id="ordered-list" aria-label="Ordered List">${Icon.orderedList}</button></li>
+				<li><button part="button" type="button" id="header" aria-label="Header">${Icon.header}</button></li>
+				<li><button part="button" type="button" id="bold" aria-label="Bold">${Icon.bold}</button></li>
+				<li><button part="button" type="button" id="italic" aria-label="Italic">${Icon.italic}</button></li>
+				<li><button part="button" type="button" id="unordered-list" aria-label="Unordered List">${Icon.unorderedList}</button></li>
+				<li><button part="button" type="button" id="ordered-list" aria-label="Ordered List">${Icon.orderedList}</button></li>
 			</menu>
-			<textarea id="textarea"></textarea>
+			<textarea part="textarea" id="textarea"></textarea>
 		</div>
 	`
 

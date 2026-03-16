@@ -2,6 +2,7 @@ import { sveltekit } from "@sveltejs/kit/vite"
 import { defineConfig } from "vite"
 import { plugin as mdPlugin, Mode } from "vite-plugin-markdown"
 import MarkdownIt from "markdown-it"
+import MarkdownItGitHubAlerts from "./vite-plugins/md-alerts"
 import hljs from "highlight.js"
 
 const unleashTheDemos = (str: string) => str
@@ -34,6 +35,8 @@ const parseMarkdown = new MarkdownIt({
 		return ""
 	},
 })
+
+parseMarkdown.use(MarkdownItGitHubAlerts)
 
 export default defineConfig({
 	server: {
