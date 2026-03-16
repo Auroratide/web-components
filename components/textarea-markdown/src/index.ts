@@ -10,6 +10,8 @@ export class TextareaMarkdownElement extends HTMLElement {
 				<li><button type="button" id="header" aria-label="Header">${Icon.header}</button></li>
 				<li><button type="button" id="bold" aria-label="Bold">${Icon.bold}</button></li>
 				<li><button type="button" id="italic" aria-label="Italic">${Icon.italic}</button></li>
+				<li><button type="button" id="unordered-list" aria-label="Unordered List">${Icon.unorderedList}</button></li>
+				<li><button type="button" id="ordered-list" aria-label="Ordered List">${Icon.orderedList}</button></li>
 			</menu>
 			<textarea id="textarea"></textarea>
 		</div>
@@ -67,6 +69,8 @@ export class TextareaMarkdownElement extends HTMLElement {
 		header: HTMLButtonElement,
 		bold: HTMLButtonElement,
 		italic: HTMLButtonElement,
+		unorderedList: HTMLButtonElement,
+		orderedList: HTMLButtonElement,
 	}
 	#textarea: HTMLTextAreaElement
 
@@ -122,6 +126,8 @@ export class TextareaMarkdownElement extends HTMLElement {
 			header: this.shadowRoot?.querySelector("#header"),
 			bold: this.shadowRoot?.querySelector("#bold"),
 			italic: this.shadowRoot?.querySelector("#italic"),
+			unorderedList: this.shadowRoot?.querySelector("#unordered-list"),
+			orderedList: this.shadowRoot?.querySelector("#ordered-list"),
 		}
 		this.#textarea = this.shadowRoot?.querySelector("#textarea")
 
@@ -144,6 +150,8 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#menu.header.addEventListener("click", this.#toggleHeader)
 		this.#menu.bold.addEventListener("click", this.#toggleBold)
 		this.#menu.italic.addEventListener("click", this.#toggleItalic)
+		this.#menu.unorderedList.addEventListener("click", this.#toggleUnorderedList)
+		this.#menu.orderedList.addEventListener("click", this.#toggleOrderedList)
 
 		this.#textContentObserver.observe(this, {
 			attributes: false,
@@ -158,6 +166,8 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#menu.header.removeEventListener("click", this.#toggleHeader)
 		this.#menu.bold.removeEventListener("click", this.#toggleBold)
 		this.#menu.italic.removeEventListener("click", this.#toggleItalic)
+		this.#menu.unorderedList.removeEventListener("click", this.#toggleUnorderedList)
+		this.#menu.orderedList.removeEventListener("click", this.#toggleOrderedList)
 		this.removeEventListener("focus", this.#onFocus)
 
 		this.#textContentObserver.disconnect()
@@ -187,9 +197,13 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#setValue(target.value)
 	}
 
-	#onInput = (e: Event) => {
+	#onInput = (e: InputEvent) => {
 		const target = e.target as HTMLTextAreaElement
 		this.#setValue(target.value)
+
+		if (e.inputType === "insertLineBreak") {
+			this.#continueList()
+		}
 	}
 
 	#onFocus = () => {
@@ -235,12 +249,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 		const end = this.#textarea.selectionEnd
 		const value = this.#textarea.value
 
-		let startOfLine = start - 1
-		while (value[startOfLine] !== "\n" && startOfLine > 0) {
-			startOfLine -= 1
-		}
-
-		startOfLine = startOfLine <= 0 ? 0 : startOfLine + 1
+		const startOfLine = this.#getStartOfLine()
 
 		const currentHeadingLevel = value.slice(startOfLine).match(/^#+/)?.[0]?.length ?? 0
 		if (currentHeadingLevel === 0) {
@@ -258,6 +267,69 @@ export class TextareaMarkdownElement extends HTMLElement {
 		}
 
 		this.#textarea.focus()
+	}
+
+	#toggleList = (ordered: boolean) => (e: Event) => {
+		e.preventDefault()
+		const start = this.#textarea.selectionStart
+		const end = this.#textarea.selectionEnd
+		const value = this.#textarea.value
+
+		const startOfLine = this.#getStartOfLine()
+		const listType = this.#getListType(startOfLine)
+
+		if (listType == null) {
+			const newListStart = ordered ? "1. " : "- "
+
+			this.#setValue(value.slice(0, startOfLine) + newListStart + value.slice(startOfLine))
+			this.#textarea.selectionStart = start + newListStart.length
+			this.#textarea.selectionEnd = end + newListStart.length
+		} else {
+			this.#setValue(value.slice(0, startOfLine) + value.slice(startOfLine + listType.length))
+			this.#textarea.selectionStart = start - listType.length
+			this.#textarea.selectionEnd = end - listType.length
+		}
+
+		this.#textarea.focus()
+	}
+
+	#toggleUnorderedList = this.#toggleList(false)
+	#toggleOrderedList = this.#toggleList(true)
+
+	#continueList = () => {
+		const start = this.#textarea.selectionStart
+		const startOfLine = this.#getStartOfLine(start - 1)
+		const listType = this.#getListType(startOfLine)
+
+		const value = this.value
+
+		if (listType) {
+			let nextListType = listType
+			if (!isNaN(parseInt(listType))) {
+				nextListType = `${parseInt(listType) + 1}. `
+			}
+
+			this.#setValue(value.slice(0, start) + nextListType + value.slice(start))
+			this.#textarea.selectionStart = start + nextListType.length
+			this.#textarea.selectionEnd = start + nextListType.length
+		}
+	}
+
+	#getListType = (startOfLine: number) => {
+		const value = this.value
+		return value.slice(startOfLine).match(/^(- |\* |\d+\. )/)?.[0]
+	}
+
+	#getStartOfLine = (cursorLocation?: number): number => {
+		const start = cursorLocation ?? this.#textarea.selectionStart
+		const value = this.#textarea.value
+
+		let startOfLine = start - 1
+		while (value[startOfLine] !== "\n" && startOfLine > 0) {
+			startOfLine -= 1
+		}
+
+		return startOfLine <= 0 ? 0 : startOfLine + 1
 	}
 
 	#setValue = (value: string) => {

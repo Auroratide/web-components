@@ -235,6 +235,128 @@ describe("textarea-markdown", () => {
 				expect(submittedValue).to.equal("hello\n\n## world")
 			})
 		})
+
+		describe("unordered lists", () => {
+			it("at cursor location", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md"></textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				const unorderedListButton = getMenuButton(form, "Unordered List")
+				innerTextarea.focus()
+				await sendKeys({ type: "hello" })
+				unorderedListButton.click()
+
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("- hello")
+			})
+
+			it("creating a new line while in a list", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md">- first</textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				innerTextarea.focus()
+				innerTextarea.selectionStart = 7
+				innerTextarea.selectionEnd = 7
+				await sendKeys({ press: "Enter" })
+				await sendKeys({ type: "next" })
+
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("- first\n- next")
+			})
+
+			it("undoing", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md">- hello</textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				const unorderedListButton = getMenuButton(form, "Unordered List")
+				innerTextarea.focus()
+				innerTextarea.selectionStart = 4
+				innerTextarea.selectionEnd = 4
+				unorderedListButton.click()
+
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("hello")
+			})
+		})
+
+		describe("ordered lists", () => {
+			it("at cursor location", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md"></textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				const orderedListButton = getMenuButton(form, "Ordered List")
+				innerTextarea.focus()
+				await sendKeys({ type: "hello" })
+				orderedListButton.click()
+
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("1. hello")
+			})
+
+			it("creating a new line while in a list", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md">1. first</textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				innerTextarea.focus()
+				innerTextarea.selectionStart = 8
+				innerTextarea.selectionEnd = 8
+				await sendKeys({ press: "Enter" })
+				await sendKeys({ type: "next" })
+
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("1. first\n2. next")
+			})
+
+			it("undoing", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md">1. hello</textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				const orderedListButton = getMenuButton(form, "Ordered List")
+				innerTextarea.focus()
+				innerTextarea.selectionStart = 4
+				innerTextarea.selectionEnd = 4
+				orderedListButton.click()
+
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("hello")
+			})
+		})
 	})
 
 	describe("accessibility", () => {
