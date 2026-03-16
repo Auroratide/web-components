@@ -4,6 +4,7 @@ import "../lib/define.js"
 
 describe("textarea-markdown", () => {
 	const milliseconds = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+	const getLabel = (container) => container.querySelector("label")
 	const getTextarea = (container) => container.querySelector("textarea-markdown")
 	const getInnerTextarea = (container) => getTextarea(container).shadowRoot?.querySelector("textarea")
 	const getMenuButton = (container, name) => getTextarea(container).shadowRoot?.querySelector(`[aria-label="${name}"]`)
@@ -160,6 +161,26 @@ describe("textarea-markdown", () => {
 
 			const submittedValue = await submitForm(form)
 			expect(submittedValue).to.equal("hello world")
+		})
+	})
+
+	describe("accessibility", () => {
+		it("focuses the right thing when the associated label is selected", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md"></textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
+
+			const label = getLabel(form)
+			const textarea = getTextarea(form)
+			const innerTextarea = getInnerTextarea(form)
+
+			label.click()
+
+			expect(textarea.shadowRoot?.activeElement).to.equal(innerTextarea)
 		})
 	})
 })

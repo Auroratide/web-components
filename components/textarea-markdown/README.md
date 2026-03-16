@@ -7,7 +7,7 @@ This example component just lets you decrease and increase a number.
 <!--DEMO
 <wc-demo>
 	<label for="example-01">Textarea Yay</label>
-	<textarea-markdown id="example-01" name="huh" placeholder="sadasD" rows="10">sup yo</textarea-markdown>
+	<textarea-markdown id="example-01" name="huh" rows="10">sup yo</textarea-markdown>
 </wc-demo>
 <style>
 	label, toggle-switch {

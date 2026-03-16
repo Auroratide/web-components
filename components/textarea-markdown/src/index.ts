@@ -90,6 +90,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 	set cols(value: number | null) { this.setAttribute("cols", value?.toString()) }
 
 	get form(): HTMLFormElement | null { return this.#internals.form }
+	get labels(): NodeList { return this.#internals.labels }
 	get validity(): ValidityState | null { return this.#internals.validity }
 	get validationMessage(): string | null { return this.#internals.validationMessage }
 	get willValidate(): boolean { return this.#internals.willValidate }
@@ -107,6 +108,10 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#setValue(value ?? "")
 	}
 
+	focus(options: FocusOptions) {
+		this.#textarea?.focus(options)
+	}
+
 	connectedCallback() {
 		this.#menu = {
 			bold: this.shadowRoot?.querySelector("#bold"),
@@ -117,9 +122,15 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#textarea.value = this.textContent
 		this.#internals.setFormValue(this.#textarea.value)
 
-		this.#textarea?.setAttribute("placeholder", this.placeholder)
-		this.#textarea?.setAttribute("rows", this.rows?.toString())
-		this.#textarea?.setAttribute("cols", this.cols?.toString())
+		if (!this.hasAttribute("tabindex")) {
+			this.setAttribute("tabindex", "0")
+		}
+
+		this.addEventListener("focus", this.#onFocus)
+
+		this.#syncAttribute("placeholder")
+		this.#syncAttribute("rows")
+		this.#syncAttribute("cols")
 
 		this.#textarea.addEventListener("change", this.#onChange)
 		this.#textarea.addEventListener("input", this.#onInput)
@@ -143,6 +154,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#menu.bold.removeEventListener("click", this.#toggleBold)
 		this.#menu.italic.removeEventListener("pointerdown", this.#toggleItalic)
 		this.#menu.italic.removeEventListener("click", this.#toggleItalic)
+		this.removeEventListener("focus", this.#onFocus)
 
 		this.#textContentObserver.disconnect()
 	}
@@ -156,13 +168,13 @@ export class TextareaMarkdownElement extends HTMLElement {
 			this.#setValue(newValue)
 		},
 		"placeholder": (newValue: string | undefined | null) => {
-			this.#textarea?.setAttribute("placeholder", newValue)
+			this.#syncAttribute("placeholder", newValue)
 		},
 		"rows": (newValue: string | undefined | null) => {
-			this.#textarea?.setAttribute("rows", newValue)
+			this.#syncAttribute("rows", newValue)
 		},
 		"cols": (newValue: string | undefined | null) => {
-			this.#textarea?.setAttribute("cols", newValue)
+			this.#syncAttribute("cols", newValue)
 		},
 	}
 
@@ -174,6 +186,18 @@ export class TextareaMarkdownElement extends HTMLElement {
 	#onInput = (e: Event) => {
 		const target = e.target as HTMLTextAreaElement
 		this.#setValue(target.value)
+	}
+
+	#onFocus = () => {
+		this.#textarea?.focus()
+	}
+
+	#syncAttribute = (attribute: string, value?: string | null | undefined) => {
+		if (this.hasAttribute(attribute) || value != null) {
+			this.#textarea?.setAttribute(attribute, value ?? this.getAttribute(attribute))
+		} else {
+			this.#textarea?.removeAttribute(attribute)
+		}
 	}
 
 	#toggleInlineStyle = (style: string) => (e: Event) => {
