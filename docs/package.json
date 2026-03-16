@@ -35,6 +35,7 @@
         "@auroratide/toggle-switch": "workspace:^",
         "@auroratide/typewritten-text": "workspace:^",
         "@fortawesome/free-brands-svg-icons": "5.15.4",
-        "@fortawesome/free-solid-svg-icons": "5.15.4"
+        "@fortawesome/free-solid-svg-icons": "5.15.4",
+        "@auroratide/textarea-markdown": "workspace:^"
     }
 }
