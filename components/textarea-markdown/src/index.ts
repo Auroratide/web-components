@@ -5,6 +5,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 	static html = `
 		<div>
 			<menu id="menu" part="menu">
+				<li><button type="button" id="header" aria-label="Header">H</button></li>
 				<li><button type="button" id="bold" aria-label="Bold">B</button></li>
 				<li><button type="button" id="italic" aria-label="Italic">I</button></li>
 			</menu>
@@ -43,6 +44,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 		}
 
 		#bold { font-weight: bold; }
+		#header { font-weight: 900; }
 		#italic { font-style: italic; }
 	`
 
@@ -60,6 +62,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 	})
 
 	#menu: {
+		header: HTMLButtonElement,
 		bold: HTMLButtonElement,
 		italic: HTMLButtonElement,
 	}
@@ -114,6 +117,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 	connectedCallback() {
 		this.#menu = {
+			header: this.shadowRoot?.querySelector("#header"),
 			bold: this.shadowRoot?.querySelector("#bold"),
 			italic: this.shadowRoot?.querySelector("#italic"),
 		}
@@ -135,9 +139,8 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#textarea.addEventListener("change", this.#onChange)
 		this.#textarea.addEventListener("input", this.#onInput)
 
-		this.#menu.bold.addEventListener("pointerdown", this.#toggleBold)
+		this.#menu.header.addEventListener("click", this.#toggleHeader)
 		this.#menu.bold.addEventListener("click", this.#toggleBold)
-		this.#menu.italic.addEventListener("pointerdown", this.#toggleItalic)
 		this.#menu.italic.addEventListener("click", this.#toggleItalic)
 
 		this.#textContentObserver.observe(this, {
@@ -150,9 +153,8 @@ export class TextareaMarkdownElement extends HTMLElement {
 	disconnectedCallback() {
 		this.#textarea.removeEventListener("change", this.#onChange)
 		this.#textarea.removeEventListener("input", this.#onInput)
-		this.#menu.bold.removeEventListener("pointerdown", this.#toggleBold)
+		this.#menu.header.removeEventListener("click", this.#toggleHeader)
 		this.#menu.bold.removeEventListener("click", this.#toggleBold)
-		this.#menu.italic.removeEventListener("pointerdown", this.#toggleItalic)
 		this.#menu.italic.removeEventListener("click", this.#toggleItalic)
 		this.removeEventListener("focus", this.#onFocus)
 
@@ -224,6 +226,37 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 	#toggleBold = this.#toggleInlineStyle("**")
 	#toggleItalic = this.#toggleInlineStyle("_")
+
+	#toggleHeader = (e: Event) => {
+		e.preventDefault()
+		const start = this.#textarea.selectionStart
+		const end = this.#textarea.selectionEnd
+		const value = this.#textarea.value
+
+		let startOfLine = start - 1
+		while (value[startOfLine] !== "\n" && startOfLine > 0) {
+			startOfLine -= 1
+		}
+
+		startOfLine = startOfLine <= 0 ? 0 : startOfLine + 1
+
+		const currentHeadingLevel = value.slice(startOfLine).match(/^#+/)?.[0]?.length ?? 0
+		if (currentHeadingLevel === 0) {
+			this.#setValue(value.slice(0, startOfLine) + "## " + value.slice(startOfLine))
+			this.#textarea.selectionStart = start + 3
+			this.#textarea.selectionEnd = end + 3
+		} else if (currentHeadingLevel >= 4) {
+			this.#setValue(value.slice(0, startOfLine) + value.slice(startOfLine + currentHeadingLevel + 1))
+			this.#textarea.selectionStart = start - currentHeadingLevel - 1
+			this.#textarea.selectionEnd = end - currentHeadingLevel - 1
+		} else {
+			this.#setValue(value.slice(0, startOfLine) + "#" + value.slice(startOfLine))
+			this.#textarea.selectionStart = start + 1
+			this.#textarea.selectionEnd = end + 1
+		}
+
+		this.#textarea.focus()
+	}
 
 	#setValue = (value: string) => {
 		this.#internals.setFormValue(value)
