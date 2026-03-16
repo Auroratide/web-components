@@ -8,7 +8,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 				<li><button type="button" id="bold" aria-label="Bold">B</button></li>
 				<li><button type="button" id="italic" aria-label="Italic">I</button></li>
 			</menu>
-			<textarea id="textarea" part="textarea"></textarea>
+			<textarea id="textarea"></textarea>
 		</div>
 	`
 
@@ -18,13 +18,36 @@ export class TextareaMarkdownElement extends HTMLElement {
 		}
 
 		menu {
+			box-sizing: border-box;
 			list-style: none;
 			display: flex;
+			padding: 0;
+			justify-content: flex-end;
+			gap: 0.25em;
+			margin: 0 0 0.25em 0;
 		}
+
+		button {
+			font-size: 1em;
+			line-height: 1;
+			inline-size: 1.5em;
+			block-size: 1.5em;
+			cursor: pointer;
+		}
+
+		textarea {
+			box-sizing: border-box;
+			font-size: 1em;
+			display: block;
+			inline-size: 100%;
+		}
+
+		#bold { font-weight: bold; }
+		#italic { font-style: italic; }
 	`
 
 	static get observedAttributes() {
-		return ["value"]
+		return []
 	}
 
 	#internals = this.attachInternals()
