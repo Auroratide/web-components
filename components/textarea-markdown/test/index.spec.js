@@ -6,6 +6,7 @@ describe("textarea-markdown", () => {
 	const milliseconds = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 	const getTextarea = (container) => container.querySelector("textarea-markdown")
 	const getInnerTextarea = (container) => getTextarea(container).shadowRoot?.querySelector("textarea")
+	const getMenuButton = (container, name) => getTextarea(container).shadowRoot?.querySelector(`[aria-label="${name}"]`)
 	const submitForm = async (form) => {
 		let mdValue = ""
 		form.addEventListener("submit", (e) => {
@@ -97,6 +98,68 @@ describe("textarea-markdown", () => {
 			expect(submittedValue).to.equal("Original ValueNew Value")
 			expect(textarea.value).to.equal("Original ValueNew Value")
 			expect(textarea.textContent).to.equal("Original ValueNew Value")
+		})
+	})
+
+	describe("using them menu", () => {
+		it("at cursor location", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md"></textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
+
+			const innerTextarea = getInnerTextarea(form)
+			const boldButton = getMenuButton(form, "Bold")
+			innerTextarea.focus()
+			await sendKeys({ type: "hello " })
+			boldButton.click()
+			await sendKeys({ type: "world" })
+
+			const submittedValue = await submitForm(form)
+			expect(submittedValue).to.equal("hello **world**")
+		})
+
+		it("highlighted selection", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md">hello world</textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
+
+			const innerTextarea = getInnerTextarea(form)
+			const boldButton = getMenuButton(form, "Bold")
+			innerTextarea.focus()
+			innerTextarea.selectionStart = 6
+			innerTextarea.selectionEnd = 11
+			boldButton.click()
+
+			const submittedValue = await submitForm(form)
+			expect(submittedValue).to.equal("hello **world**")
+		})
+
+		it("undoing inline styles", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md">hello **world**</textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
+
+			const innerTextarea = getInnerTextarea(form)
+			const boldButton = getMenuButton(form, "Bold")
+			innerTextarea.focus()
+			innerTextarea.selectionStart = 8
+			innerTextarea.selectionEnd = 13
+			boldButton.click()
+
+			const submittedValue = await submitForm(form)
+			expect(submittedValue).to.equal("hello world")
 		})
 	})
 })

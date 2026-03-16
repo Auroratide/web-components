@@ -5,8 +5,8 @@ export class TextareaMarkdownElement extends HTMLElement {
 	static html = `
 		<div>
 			<menu id="menu" part="menu">
-				<li><button>B</button></li>
-				<li><button>I</button></li>
+				<li><button type="button" id="bold" aria-label="Bold">B</button></li>
+				<li><button type="button" id="italic" aria-label="Italic">I</button></li>
 			</menu>
 			<textarea id="textarea" part="textarea"></textarea>
 		</div>
@@ -36,7 +36,10 @@ export class TextareaMarkdownElement extends HTMLElement {
 		}
 	})
 
-	#menu: HTMLMenuElement
+	#menu: {
+		bold: HTMLButtonElement,
+		italic: HTMLButtonElement,
+	}
 	#textarea: HTMLTextAreaElement
 
 	constructor() {
@@ -58,7 +61,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 	formDisabledCallback(disabled: boolean) { this.toggleAttribute("disabled", disabled) }
 	formResetCallback() {
-		
+		this.#setValue("")
 	}
 
 	get value(): string | null { return this.#textarea.value }
@@ -67,7 +70,10 @@ export class TextareaMarkdownElement extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this.#menu = this.shadowRoot?.querySelector("#menu")
+		this.#menu = {
+			bold: this.shadowRoot?.querySelector("#bold"),
+			italic: this.shadowRoot?.querySelector("#italic"),
+		}
 		this.#textarea = this.shadowRoot?.querySelector("#textarea")
 
 		this.#textarea.value = this.textContent
@@ -75,6 +81,11 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 		this.#textarea.addEventListener("change", this.#onChange)
 		this.#textarea.addEventListener("input", this.#onInput)
+
+		this.#menu.bold.addEventListener("pointerdown", this.#toggleBold)
+		this.#menu.bold.addEventListener("click", this.#toggleBold)
+		this.#menu.italic.addEventListener("pointerdown", this.#toggleItalic)
+		this.#menu.italic.addEventListener("click", this.#toggleItalic)
 
 		this.#textContentObserver.observe(this, {
 			attributes: false,
@@ -86,6 +97,11 @@ export class TextareaMarkdownElement extends HTMLElement {
 	disconnectedCallback() {
 		this.#textarea.removeEventListener("change", this.#onChange)
 		this.#textarea.removeEventListener("input", this.#onInput)
+		this.#menu.bold.removeEventListener("pointerdown", this.#toggleBold)
+		this.#menu.bold.removeEventListener("click", this.#toggleBold)
+		this.#menu.italic.removeEventListener("pointerdown", this.#toggleItalic)
+		this.#menu.italic.removeEventListener("click", this.#toggleItalic)
+
 		this.#textContentObserver.disconnect()
 	}
 
@@ -108,6 +124,31 @@ export class TextareaMarkdownElement extends HTMLElement {
 		const target = e.target as HTMLTextAreaElement
 		this.#setValue(target.value)
 	}
+
+	#toggleInlineStyle = (style: string) => (e: Event) => {
+		e.preventDefault()
+		const start = this.#textarea.selectionStart
+		const end = this.#textarea.selectionEnd
+		const value = this.#textarea.value
+
+		const alreadyStyled = value.slice(start - style.length, start) === style && value.slice(end, end + style.length) === style
+
+		// TODO: figure out how to make this undoable
+		if (alreadyStyled) {
+			this.#setValue(value.slice(0, start - style.length) + value.slice(start, end) + value.slice(end + style.length))
+			this.#textarea.selectionStart = start - style.length
+			this.#textarea.selectionEnd = end - style.length
+		} else {
+			this.#setValue(value.slice(0, start) + style + value.slice(start, end) + style + value.slice(end))
+			this.#textarea.selectionStart = start + style.length
+			this.#textarea.selectionEnd = end + style.length
+		}
+
+		this.#textarea.focus()
+	}
+
+	#toggleBold = this.#toggleInlineStyle("**")
+	#toggleItalic = this.#toggleInlineStyle("_")
 
 	#setValue = (value: string) => {
 		this.#internals.setFormValue(value)
