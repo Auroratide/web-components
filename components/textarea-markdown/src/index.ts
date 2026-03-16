@@ -47,7 +47,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 	`
 
 	static get observedAttributes() {
-		return []
+		return ["placeholder", "rows", "cols"]
 	}
 
 	#internals = this.attachInternals()
@@ -73,6 +73,21 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 	get name(): string | null { return this.getAttribute("name") }
 	set name(value: string | null) { this.setAttribute("name", value) }
+
+	get placeholder(): string | null { return this.getAttribute("placeholder") }
+	set placeholder(value: string | null) { this.setAttribute("placeholder", value) }
+
+	get rows(): number | null {
+		const value = this.getAttribute("rows")
+		return value ? parseInt(value) : null
+	}
+	set rows(value: number | null) { this.setAttribute("rows", value?.toString()) }
+
+	get cols(): number | null {
+		const value = this.getAttribute("cols")
+		return value ? parseInt(value) : null
+	}
+	set cols(value: number | null) { this.setAttribute("cols", value?.toString()) }
 
 	get form(): HTMLFormElement | null { return this.#internals.form }
 	get validity(): ValidityState | null { return this.#internals.validity }
@@ -101,6 +116,10 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 		this.#textarea.value = this.textContent
 		this.#internals.setFormValue(this.#textarea.value)
+
+		this.#textarea?.setAttribute("placeholder", this.placeholder)
+		this.#textarea?.setAttribute("rows", this.rows?.toString())
+		this.#textarea?.setAttribute("cols", this.cols?.toString())
 
 		this.#textarea.addEventListener("change", this.#onChange)
 		this.#textarea.addEventListener("input", this.#onInput)
@@ -135,6 +154,15 @@ export class TextareaMarkdownElement extends HTMLElement {
 	#attributeCallbacks = {
 		"value": (newValue: string | undefined | null) => {
 			this.#setValue(newValue)
+		},
+		"placeholder": (newValue: string | undefined | null) => {
+			this.#textarea?.setAttribute("placeholder", newValue)
+		},
+		"rows": (newValue: string | undefined | null) => {
+			this.#textarea?.setAttribute("rows", newValue)
+		},
+		"cols": (newValue: string | undefined | null) => {
+			this.#textarea?.setAttribute("cols", newValue)
 		},
 	}
 
