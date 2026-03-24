@@ -1,10 +1,12 @@
-import { changeEvent } from "./events.js"
+import { changeEvent, commitEvent } from "./events.js"
 import { ReorderItemElement } from "./reorder-item.js"
 
 export type Orientation = "vertical" | "horizontal"
 
 export class ReorderListElement extends HTMLElement {
 	static defaultElementName = "reorder-list"
+
+	static COMMIT_DEBOUNCE_MS = 1000
 
 	static html = `
 		<slot></slot>
@@ -81,6 +83,8 @@ export class ReorderListElement extends HTMLElement {
 		newItem.focus()
 	}
 
+	#debouncedCommit: number
+
 	#handleNav = (e: KeyboardEvent) => {
 		const keys = this.#keysForOrientation()
 		if (keys.includes(e.key)) {
@@ -101,7 +105,10 @@ export class ReorderListElement extends HTMLElement {
 				e.preventDefault()
 				e.stopPropagation()
 
+				window.clearTimeout(this.#debouncedCommit ?? -1)
+				this.#startCommitTracking()
 				this.reorder(currentFocusable, nextFocusable, items)
+				this.#debouncedCommit = window.setTimeout(this.#endCommitTracking, ReorderListElement.COMMIT_DEBOUNCE_MS)
 			} else if (currentFocusable !== nextFocusable) {
 				e.preventDefault()
 				e.stopPropagation()
@@ -109,6 +116,21 @@ export class ReorderListElement extends HTMLElement {
 				this.changeFocus(items[nextFocusable], items)
 			}
 		}
+	}
+
+	#originalPosition: number | undefined = undefined
+
+	#startCommitTracking = () => {
+		if (this.#originalPosition == null) {
+			this.#originalPosition = this.items().indexOf(this.current())
+		}
+	}
+
+	#endCommitTracking = () => {
+		const current = this.current()
+		const newPosition = this.items().indexOf(this.current())
+		this.dispatchEvent(commitEvent(current, this.#originalPosition, newPosition))
+		this.#originalPosition = undefined
 	}
 
 	#keysForOrientation = () => {

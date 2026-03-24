@@ -487,7 +487,7 @@ describe("reorder-list", () => {
 			expect(emitted.newIndex).to.equal(1)
 		})
 
-		it("committing", async () => {
+		it("dragging", async () => {
 			const container = await fixture(`
 				<reorder-list>
 					<reorder-item>Apple</reorder-item>
