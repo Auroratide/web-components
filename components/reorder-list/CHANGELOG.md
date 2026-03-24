@@ -1,5 +1,11 @@
 # @auroratide/reorder-list
 
+## 0.5.0
+
+### Minor Changes
+
+- ae5ecd2: Added reorder-handle, to allow the handle to be a specific part of the item and not the entire thing.
+
 ## 0.4.0
 
 ### Minor Changes
