@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="./favicon.svg" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+		<meta name="author" content="Timothy Foster, Auroratide" />
+
+		<link rel="stylesheet" href="./normalize.css" />
+		<link rel="stylesheet" href="./global.css" />
+
+		
+		<link href="./_app/immutable/assets/stores.Datw8_T3.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/0.CSNOKOki.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/ErrorPage.CEKG1Zd1.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/10.CRgfeYGX.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.Cx1lQ6JD.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/C8isWgLx.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/p4Z6_urL.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.I4EZ5Y2g.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/C1FmrZbK.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/BJ0JgjBn.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.BA5rf7jI.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/Cmdb-H3O.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/CWtzGeUc.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/10.BpLpTR2S.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/DEeyB_2P.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/Cn7PjDJB.js"><title>The textarea-markdown Element | Web Components</title><!-- HEAD_svelte-wt2744_START --><meta name="description" content="The textarea-markdown element represents a textarea which supports Markdown Syntax. This component is built with accessibility in mind."><!-- HEAD_svelte-wt2744_END --><!-- HEAD_svelte-fi4ewo_START --><meta property="og:title" content="The textarea-markdown Element"><meta property="og:image" content="https://auroratide.com/favicon.svg"><meta property="og:image:alt" content="Auroratide's Web Components Logo"><meta property="og:url" content="https://components.auroratide.com/textarea-markdown"><meta property="og:type" content="website"><meta property="og:site_name" content="Web Components"><meta property="og:description" content="The textarea-markdown element represents a textarea which supports Markdown Syntax. This component is built with accessibility in mind."><!-- HEAD_svelte-fi4ewo_END -->
+	</head>
+	<body class="theme-dark">
+		<div id="root" data-sveltekit-prefetch>  <div ><div class="skip-link svelte-s3ptch"><a href="#main" class="button text-fg-b bg-primary-a  svelte-1k3hv3h"> <span>Skip to Content</span></a> </div></div> <div class="container svelte-26xy8n"><div class="lg:two-columns svelte-ttfylw"><header aria-label="Site" class="overlap-root row lg:column large-spaces-between print:hide svelte-ttfylw"  aria-hidden="false"><section class="grid svelte-1t27qgt"><div class="svg-full-height svelte-1t27qgt" aria-hidden="true" style="grid-area: logo;"><a href="./" tabindex="-1" class="svelte-1t27qgt"><svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 317.5 317.5" class="svelte-1itcf0r"><title>Auroratide Web Components</title><path fill="var(--c-logo-dark)" d="M238.125 296.232H79.375L0 158.75 79.375 21.268h158.75L317.5 158.75z" style="fill-opacity:1;stroke:none;stroke-width:3.29073;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"></path><path fill="var(--c-logo-main)" d="M323.672 121.385 47.342 600l276.33 478.615h552.656L1152.658 600l-276.33-478.615ZM443.873 329.58h312.254L912.254 600 756.127 870.42H443.873L287.746 600Z" style="fill-opacity:1;stroke:none;stroke-width:11.4561;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers" transform="scale(.26458)"></path><path fill="var(--c-logo-light)" d="M85.638 32.116 12.526 158.75l73.112 126.634h63.607l-31.804-55.085-41.308-71.549 41.308-71.549 31.803-55.085Z" style="fill-opacity:1;stroke:none;stroke-width:3.03107;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke fill markers"></path><path fill="var(--c-logo-dark)" d="m117.441 230.299 31.804 55.085h14.664l-31.803-55.085zM163.91 32.116l-31.804 55.085H117.44l31.803-55.085z" style="fill-opacity:1;stroke:none;stroke-width:.499999;stroke-linecap:round;paint-order:stroke fill markers"></path></svg></a></div> <p class="larger svelte-1t27qgt" style="grid-area: title;"><a href="./" class="text-fg-b svelte-1t27qgt">Web Components</a></p> <p class="smaller text-fg-a svelte-1t27qgt" style="grid-area: subtitle;">By Auroratide</p> </section> <div class="lg:hide svelte-1t2gyqg"><details class="full-height svelte-1t2gyqg" style="--details-transition-dur: 0.2s;"><summary class="full-height no-marker dots-overlap-container text-fg-b bold-and-large svelte-1t2gyqg"><span class="overlapping-words svelte-176oh95"><span class="open:hide svelte-176oh95">Menu</span> <span class="open:show svelte-176oh95">Close</span> </span> <div class="dots svelte-1k6be58"><div class="svelte-1k6be58" style="--bg: var(--t-blue-a);"></div> <div class="svelte-1k6be58" style="--bg: var(--t-purple-a);"></div> <div class="svelte-1k6be58" style="--bg: var(--t-yellow-a);"></div> <div class="svelte-1k6be58" style="--bg: var(--t-green-a);"></div> <div class="svelte-1k6be58" style="--bg: var(--t-red-a);"></div> </div></summary> <div class="overlap-bottom animate-wipe svelte-1t2gyqg"><nav aria-label="Site" class="svelte-1t2gyqg"><ul class="no-list column space-start svelte-1t2gyqg"><li><a href="/arched-text" data-first-letter="A" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Arched Text" style="--bg-circle-color: var(--t-blue-a);">Arched Text</a> </li><li><a href="/flip-card" data-first-letter="F" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Flip Card" style="--bg-circle-color: var(--t-purple-a);">Flip Card</a> </li><li><a href="/img-zoom" data-first-letter="I" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Img Zoom" style="--bg-circle-color: var(--t-yellow-a);">Img Zoom</a> </li><li><a href="/reorder-list" data-first-letter="R" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Reorder List" style="--bg-circle-color: var(--t-green-a);">Reorder List</a> </li><li><a href="/tab-list" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Tab List" style="--bg-circle-color: var(--t-red-a);">Tab List</a> </li><li><a href="/table-of-contents" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Table of Contents" style="--bg-circle-color: var(--t-blue-a);">Table of Contents</a> </li><li><a href="/toggle-switch" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Toggle Switch" style="--bg-circle-color: var(--t-purple-a);">Toggle Switch</a> </li><li><a href="/typewritten-text" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Typewritten Text" style="--bg-circle-color: var(--t-yellow-a);">Typewritten Text</a> </li></ul></nav> <section class="extra-content svelte-1t2gyqg"><div slot="header"><div class="table-of-contents svelte-1exerps"><p class="svelte-1exerps" data-svelte-h="svelte-vf08hv"><strong id="toc-id">Contents</strong></p> <table-of-contents for="page-content" aria-labelledby="toc-id" class="svelte-1exerps"></table-of-contents> </div></div></section></div></details></div> <div class="lg:show svelte-1t2gyqg"><nav aria-label="Site" class="svelte-1t2gyqg"><ul class="no-list column space-start svelte-1t2gyqg"><li><a href="/arched-text" data-first-letter="A" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Arched Text" style="--bg-circle-color: var(--t-blue-a);">Arched Text</a> </li><li><a href="/flip-card" data-first-letter="F" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Flip Card" style="--bg-circle-color: var(--t-purple-a);">Flip Card</a> </li><li><a href="/img-zoom" data-first-letter="I" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Img Zoom" style="--bg-circle-color: var(--t-yellow-a);">Img Zoom</a> </li><li><a href="/reorder-list" data-first-letter="R" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Reorder List" style="--bg-circle-color: var(--t-green-a);">Reorder List</a> </li><li><a href="/tab-list" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Tab List" style="--bg-circle-color: var(--t-red-a);">Tab List</a> </li><li><a href="/table-of-contents" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Table of Contents" style="--bg-circle-color: var(--t-blue-a);">Table of Contents</a> </li><li><a href="/toggle-switch" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Toggle Switch" style="--bg-circle-color: var(--t-purple-a);">Toggle Switch</a> </li><li><a href="/typewritten-text" data-first-letter="T" class="bg-circle wider-text text-fg-b svelte-1t2gyqg" aria-label="Typewritten Text" style="--bg-circle-color: var(--t-yellow-a);">Typewritten Text</a> </li></ul></nav> <section class="extra-content slide-view-transition svelte-1t2gyqg"><div slot="header"><div class="table-of-contents svelte-1exerps"><p class="svelte-1exerps" data-svelte-h="svelte-vf08hv"><strong id="toc-id">Contents</strong></p> <table-of-contents for="page-content" aria-labelledby="toc-id" class="svelte-1exerps"></table-of-contents> </div></div></section> </div></header> <main id="main" class="circle-view-transition svelte-ttfylw"><div class="textarea-markdown-page svelte-1nez1p8">  <header class="medium-space-after svelte-zfgh82"><h1 class="text-fg-b very-large topmost-item-spacing balance svelte-1iio6qq">The textarea-markdown Element </h1></header> <div id="page-content" slot="content"><div class="page-content"><!-- HTML_TAG_START -->
+<p hidden><strong><a href="https://components.auroratide.com/textarea-markdown">View this page with live demos!</a></strong></p>
+<p>The <code>textarea-markdown</code> element represents a textarea which supports <a href="https://www.markdownguide.org/">Markdown Syntax</a>. This component is built with accessibility in mind.</p>
+<aside class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg><span>Warning</span></p><p>This component is still in active development and may not implement all the things necessary for an element to be fully form-associated and accessible. If you decide to use this, be sure to update often!</p>
+</aside>
+<wc-demo>
+	<label for="example-01">Some Label</label>
+	<textarea-markdown id="example-01" placeholder="Type some text" rows="6"></textarea-markdown>
+</wc-demo>
+<style>
+	label, toggle-switch {
+		vertical-align: middle;
+	}
+</style>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-01&quot;</span>&gt;</span>Some Label<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">textarea-markdown</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;example-01&quot;</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Type some text&quot;</span> <span class="hljs-attr">rows</span>=<span class="hljs-string">&quot;6&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">textarea-markdown</span>&gt;</span>
+</code></pre>
+<h2 id="installation">Installation</h2>
+<p>You can import through CDN:</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/@auroratide/textarea-markdown/lib/define.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p>Or, you may install through <a href="https://www.npmjs.com/package/@auroratide/textarea-markdown">NPM</a> and include it as part of your build process:</p>
+<pre><code>$ npm i @auroratide/textarea-markdown
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;@auroratide/textarea-markdown/lib/define.js&#x27;</span>
+</code></pre>
+<h2 id="usage">Usage</h2>
+<p><code>textarea-markdown</code> is an <strong>inline markup element</strong> that you can use in your HTML document. It is a form control, meaning it is appropriate to properly <a href="https://html.spec.whatwg.org/#the-label-element">label</a> it like so:</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-02&quot;</span>&gt;</span>Character Description<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">textarea-markdown</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;example-02&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">textarea-markdown</span>&gt;</span>
+</code></pre>
+<p>You can start initialize the input with some text as well:</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;example-03&quot;</span>&gt;</span>Character Description<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">textarea-markdown</span> <span class="hljs-attr">checked</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;example-03&quot;</span>&gt;</span>
+She has **orange** hair and _green_ eyes.
+<span class="hljs-tag">&lt;/<span class="hljs-name">textarea-markdown</span>&gt;</span>
+</code></pre>
+<wc-demo>
+<label for="example-03">Character Description</label>
+<textarea-markdown checked id="example-03" rows="6">
+She has **orange** hair and _green_ eyes.
+</textarea-markdown>
+</wc-demo>
+<h3 id="attributes">Attributes</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>placeholder</code></td>
+<td>-</td>
+<td>Hint text to show when there is no value.</td>
+</tr>
+<tr>
+<td><code>rows</code></td>
+<td>-</td>
+<td>Number of rows to include in the textarea.</td>
+</tr>
+<tr>
+<td><code>cols</code></td>
+<td>-</td>
+<td>Numer of columns to include in the textarea.</td>
+</tr>
+<tr>
+<td><code>disabled</code></td>
+<td>-</td>
+<td>Whether the textarea can be edited.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="css-customization">CSS Customization</h3>
+<p>The <code>textarea-markdown</code> is composed of a <strong>menu</strong> with <strong>buttons</strong> and a <strong>textarea</strong> which can be individually customized:</p>
+<ul>
+<li><code>menu</code>: List of markdown controls.</li>
+<li><code>button</code>: A single button that controls markdown formatting.</li>
+<li><code>textarea</code>: The editable input field.</li>
+</ul>
+<p>Here's an example showing how to use CSS to customize the appearance:</p>
+<wc-demo>
+	<label id="fancy-textarea-label" for="fancy-textarea">Fancy Textarea</label>
+	<textarea-markdown id="fancy-textarea" rows="6"></textarea-markdown>
+	<style>
+		#fancy-textarea-label {
+			display: block;
+			margin-block-end: 0.333em;
+		}
+		#fancy-textarea {
+			border: 0.0625em solid oklch(1 0 0 / 0.5);
+			border-radius: 0.25em;
+		}
+		#fancy-textarea:focus {
+			border: 0.0625em solid var(--t-primary-b);
+		}
+		#fancy-textarea::part(menu) {
+			background-color: oklch(1 0 0 / 0.125);
+			padding: 0.25em 0.5em;
+		}
+		#fancy-textarea::part(button) {
+			border-radius: 0.25em;
+			background: none;
+			font-size: 87.5%;
+		}
+		#fancy-textarea::part(button):hover {
+			background: oklch(0 0 0 / 0.25);
+		}
+		#fancy-textarea::part(textarea) {
+			border: none;
+		}
+	</style>
+</wc-demo>
+<pre><code class="language-css"><span class="hljs-selector-tag">textarea</span>-markdown {
+	<span class="hljs-attribute">border</span>: <span class="hljs-number">0.0625em</span> solid <span class="hljs-built_in">oklch</span>(<span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> / <span class="hljs-number">0.5</span>);
+	<span class="hljs-attribute">border-radius</span>: <span class="hljs-number">0.25em</span>;
+}
+
+<span class="hljs-selector-tag">textarea</span>-markdown<span class="hljs-selector-pseudo">:focus</span> {
+	<span class="hljs-attribute">border</span>: <span class="hljs-number">0.0625em</span> solid <span class="hljs-built_in">var</span>(--t-primary-b);
+}
+
+<span class="hljs-selector-tag">textarea</span>-markdown<span class="hljs-selector-pseudo">::part</span>(<span class="hljs-selector-tag">menu</span>) {
+	<span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">oklch</span>(<span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> / <span class="hljs-number">0.125</span>);
+	<span class="hljs-attribute">padding</span>: <span class="hljs-number">0.25em</span> <span class="hljs-number">0.5em</span>;
+}
+
+<span class="hljs-selector-tag">textarea</span>-markdown<span class="hljs-selector-pseudo">::part</span>(<span class="hljs-selector-tag">button</span>) {
+	<span class="hljs-attribute">border-radius</span>: <span class="hljs-number">0.25em</span>;
+	<span class="hljs-attribute">background</span>: none;
+	<span class="hljs-attribute">font-size</span>: <span class="hljs-number">87.5%</span>;
+}
+
+<span class="hljs-selector-tag">textarea</span>-markdown<span class="hljs-selector-pseudo">::part</span>(<span class="hljs-selector-tag">button</span>)<span class="hljs-selector-pseudo">:hover</span> {
+	<span class="hljs-attribute">background</span>: <span class="hljs-built_in">oklch</span>(<span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> / <span class="hljs-number">0.25</span>);
+}
+
+<span class="hljs-selector-tag">textarea</span>-markdown<span class="hljs-selector-pseudo">::part</span>(<span class="hljs-selector-tag">textarea</span>) {
+	<span class="hljs-attribute">border</span>: none;
+}
+</code></pre>
+<!-- HTML_TAG_END --></div></div> </div></main> <footer aria-label="Site" class="print:hide svelte-15hem8y"  aria-hidden="false"><section class="top-aligned-row svelte-ow9tni"><strong class="lg:show svelte-ow9tni">Find me on</strong> <span class="lg:show svelte-ow9tni"><span class="bullet-divider svelte-170zqmj" aria-hidden="true" data-svelte-h="svelte-1vne0dc">•</span></span> <ul class="transparent-list center-aligned-row no-space svelte-ow9tni" style="flex: 1;"><li class="theme-linked-in center-aligned-row svelte-ow9tni"><a href="https://www.linkedin.com/in/timothy-foster-224946120" class="icon-link svelte-ow9tni"><vector-icon icon="linked-in" class="circle-bg svelte-ow9tni"></vector-icon> <span class="svelte-ow9tni">Linked In</span> </a></li><li class="theme-github center-aligned-row svelte-ow9tni"><a href="https://github.com/Auroratide" class="icon-link svelte-ow9tni"><vector-icon icon="github-alt" class="circle-bg svelte-ow9tni"></vector-icon> <span class="svelte-ow9tni">Github</span> </a></li><li class="theme-stack-overflow center-aligned-row svelte-ow9tni"><a href="https://stackoverflow.com/users/6163066/auroratide" class="icon-link svelte-ow9tni"><vector-icon icon="stack-overflow" class="circle-bg svelte-ow9tni"></vector-icon> <span class="svelte-ow9tni">Stack Overflow</span> </a></li></ul> </section> <div class="column lg:row-reverse svelte-15hem8y"><ul class="row transparent-list small-text no-space svelte-15hem8y"><li><a href="/" class="text-fg-a svelte-15hem8y">All Components</a></li><li><a href="https://github.com/Auroratide/web-components" class="text-fg-a svelte-15hem8y">Source Code</a></li><li><a href="https://auroratide.com" class="text-fg-a svelte-15hem8y">My Website</a></li></ul> <small>© 2026 Auroratide, Timothy Foster</small></div> </footer></div> </div> 
+			
+			<script>
+				{
+					__sveltekit_tl6aot = {
+						base: new URL(".", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("./_app/immutable/entry/start.Cx1lQ6JD.js"),
+						import("./_app/immutable/entry/app.I4EZ5Y2g.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 10],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+		<script>
+			// Ensure we do not get a flash of light mode
+			if (localStorage.getItem('darkmode') === 'true') {
+					document.body.classList.add('theme-dark')
+			}
+		</script>
+	</body>
+</html>

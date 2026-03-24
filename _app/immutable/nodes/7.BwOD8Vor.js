@@ -1,15 +1,15 @@
-import{_ as r}from"../chunks/C1FmrZbK.js";import{s as l,n as p}from"../chunks/p4Z6_urL.js";import{S as o,i,a as d,t as c,b as m,m as h,g,n as j}from"../chunks/BJ0JgjBn.js";import{R as u}from"../chunks/BRgKZOaZ.js";const b=`<h1 id="the-reorder-list-elements">The reorder-list Elements</h1>
+import{_ as l}from"../chunks/C1FmrZbK.js";import{s as r,n as p}from"../chunks/p4Z6_urL.js";import{S as o,i,a as d,t as c,b as h,m,g,n as j}from"../chunks/BJ0JgjBn.js";import{R as u}from"../chunks/DEeyB_2P.js";const b=`<h1 id="the-reorder-list-elements">The reorder-list Elements</h1>
 <p hidden><strong><a href="https://components.auroratide.com/reorder-list">View this page with live demos!</a></strong></p>
-<p>The <code>reorder-list</code> and <code>reorder-item</code> elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html">rearrangable listboxes</a>.</p>
+<p>The <code>reorder-list</code>, <code>reorder-item</code>, and <code>reorder-handle</code> elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html">rearrangable listboxes</a>.</p>
 <wc-demo>
 	<p>Press and hold to drag items. Or, tab into the list and use <kbd>Alt</kbd> + <kbd>Up/Down</kbd>.</p>
 	<reorder-list>
-		<reorder-item>Apple</reorder-item>
-		<reorder-item>Orange</reorder-item>
-		<reorder-item>Banana</reorder-item>
-		<reorder-item>Lime</reorder-item>
-		<reorder-item>Blueberry</reorder-item>
-		<reorder-item>Plum</reorder-item>
+		<reorder-item><span>Apple</span></reorder-item>
+		<reorder-item><span>Orange</span></reorder-item>
+		<reorder-item><span>Banana</span></reorder-item>
+		<reorder-item><span>Lime</span></reorder-item>
+		<reorder-item><span>Blueberry</span></reorder-item>
+		<reorder-item><span>Plum</span></reorder-item>
 	</reorder-list>
 </wc-demo>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">reorder-list</span>&gt;</span>
@@ -31,10 +31,69 @@ import{_ as r}from"../chunks/C1FmrZbK.js";import{s as l,n as p}from"../chunks/p4
 <pre><code class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;@auroratide/reorder-list/lib/define.js&#x27;</span>
 </code></pre>
 <h2 id="usage">Usage</h2>
-<p><code>reorder-list</code> and <code>reorder-item</code> are <strong>markup elements</strong> that you can use in your HTML document. To use them together, it is best to follow these guidelines:</p>
+<p><code>reorder-list</code>, <code>reorder-item</code>, and <code>reorder-handle</code> are <strong>markup elements</strong> that you can use in your HTML document. To use them together, it is best to follow these guidelines:</p>
 <ul>
 <li><code>reorder-item</code> elements <strong>must</strong> be <em>direct</em> descendents of a <code>reorder-list</code> element. This is similar to how <code>li</code> must directly descend <code>ol</code>.</li>
+<li><code>reorder-handle</code> elements are optional, but if included <strong>must</strong> be a descendent of a <code>reorder-item</code> element.</li>
 </ul>
+<h2 id="reorder-handles">Reorder Handles</h2>
+<p>By default, when there is no explicit handle provided, the entire reorder item is a draggable handle. If you only want a part of the item to be draggable, then you can use <code>reorder-handle</code>, like so:</p>
+<wc-demo>
+	<p>Press and hold "[Drag]" to drag items. You cannot drag via the fruit names (allowing it to scroll on mobile and such).</p>
+	<reorder-list>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Apple</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Orange</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Banana</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Lime</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Blueberry</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Plum</span>
+		</reorder-item>
+	</reorder-list>
+</wc-demo>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">reorder-list</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">reorder-handle</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>[Drag]<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">reorder-handle</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Apple<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">reorder-handle</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>[Drag]<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">reorder-handle</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Orange<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">reorder-handle</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>[Drag]<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">reorder-handle</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Banana<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">reorder-handle</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>[Drag]<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">reorder-handle</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Lime<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">reorder-handle</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>[Drag]<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">reorder-handle</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Blueberry<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">reorder-handle</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>[Drag]<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">reorder-handle</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Plum<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-list</span>&gt;</span>
+</code></pre>
 <h2 id="orientation">Orientation</h2>
 <p>By default, <code>orientation</code> is &quot;vertical&quot;, meaning you drag items up and down. Setting <code>orientation</code> to &quot;horizontal&quot; will allow you to reorder items left and right instead.</p>
 <wc-demo id="horizontal-demo">
@@ -322,4 +381,4 @@ reorder-item <span class="hljs-selector-tag">ul</span> {
 <li><kbd>Alt</kbd> + <kbd>Up</kbd>/<kbd>Down</kbd> moves the currently selected list item up or down in the order.</li>
 <li>If orientation is horizontal, then <kbd>Left</kbd> and <kbd>Right</kbd> are used instead.</li>
 </ul>
-`;function f(n){let s,a;return s=new u({props:{html:b}}),{c(){j(s.$$.fragment)},l(t){g(s.$$.fragment,t)},m(t,e){h(s,t,e),a=!0},p,i(t){a||(m(s.$$.fragment,t),a=!0)},o(t){c(s.$$.fragment,t),a=!1},d(t){d(s,t)}}}function y(n){return r(()=>import("../chunks/B7uxw3BH.js"),[],import.meta.url),[]}class q extends o{constructor(s){super(),i(this,s,y,f,l,{})}}export{q as component};
+`;function f(n){let s,t;return s=new u({props:{html:b}}),{c(){j(s.$$.fragment)},l(a){g(s.$$.fragment,a)},m(a,e){m(s,a,e),t=!0},p,i(a){t||(h(s.$$.fragment,a),t=!0)},o(a){c(s.$$.fragment,a),t=!1},d(a){d(s,a)}}}function y(n){return l(()=>import("../chunks/ClOpXOaI.js"),[],import.meta.url),[]}class q extends o{constructor(s){super(),i(this,s,y,f,r,{})}}export{q as component};
