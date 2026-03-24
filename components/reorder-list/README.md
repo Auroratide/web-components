@@ -2,18 +2,18 @@
 
 <p hidden><strong><a href="https://components.auroratide.com/reorder-list">View this page with live demos!</a></strong></p>
 
-The `reorder-list` and `reorder-item` elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement the WAI-ARIA guidelines for [rearrangable listboxes](https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html).
+The `reorder-list`, `reorder-item`, and `reorder-handle` elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement the WAI-ARIA guidelines for [rearrangable listboxes](https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html).
 
 <!--DEMO
 <wc-demo>
 	<p>Press and hold to drag items. Or, tab into the list and use <kbd>Alt</kbd> + <kbd>Up/Down</kbd>.</p>
 	<reorder-list>
-		<reorder-item>Apple</reorder-item>
-		<reorder-item>Orange</reorder-item>
-		<reorder-item>Banana</reorder-item>
-		<reorder-item>Lime</reorder-item>
-		<reorder-item>Blueberry</reorder-item>
-		<reorder-item>Plum</reorder-item>
+		<reorder-item><span>Apple</span></reorder-item>
+		<reorder-item><span>Orange</span></reorder-item>
+		<reorder-item><span>Banana</span></reorder-item>
+		<reorder-item><span>Lime</span></reorder-item>
+		<reorder-item><span>Blueberry</span></reorder-item>
+		<reorder-item><span>Plum</span></reorder-item>
 	</reorder-list>
 </wc-demo>
 /DEMO-->
@@ -49,9 +49,75 @@ import '@auroratide/reorder-list/lib/define.js'
 
 ## Usage
 
-`reorder-list` and `reorder-item` are **markup elements** that you can use in your HTML document. To use them together, it is best to follow these guidelines:
+`reorder-list`, `reorder-item`, and `reorder-handle` are **markup elements** that you can use in your HTML document. To use them together, it is best to follow these guidelines:
 
 * `reorder-item` elements **must** be _direct_ descendents of a `reorder-list` element. This is similar to how `li` must directly descend `ol`.
+* `reorder-handle` elements are optional, but if included **must** be a descendent of a `reorder-item` element.
+
+## Reorder Handles
+
+By default, when there is no explicit handle provided, the entire reorder item is a draggable handle. If you only want a part of the item to be draggable, then you can use `reorder-handle`, like so:
+
+<!--DEMO
+<wc-demo>
+	<p>Press and hold "[Drag]" to drag items. You cannot drag via the fruit names (allowing it to scroll on mobile and such).</p>
+	<reorder-list>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Apple</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Orange</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Banana</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Lime</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Blueberry</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Plum</span>
+		</reorder-item>
+	</reorder-list>
+</wc-demo>
+/DEMO-->
+
+```html
+<reorder-list>
+	<reorder-item>
+		<reorder-handle><span>[Drag]</span></reorder-handle>
+		<span>Apple</span>
+	</reorder-item>
+	<reorder-item>
+		<reorder-handle><span>[Drag]</span></reorder-handle>
+		<span>Orange</span>
+	</reorder-item>
+	<reorder-item>
+		<reorder-handle><span>[Drag]</span></reorder-handle>
+		<span>Banana</span>
+	</reorder-item>
+	<reorder-item>
+		<reorder-handle><span>[Drag]</span></reorder-handle>
+		<span>Lime</span>
+	</reorder-item>
+	<reorder-item>
+		<reorder-handle><span>[Drag]</span></reorder-handle>
+		<span>Blueberry</span>
+	</reorder-item>
+	<reorder-item>
+		<reorder-handle><span>[Drag]</span></reorder-handle>
+		<span>Plum</span>
+	</reorder-item>
+</reorder-list>
+```
 
 ## Orientation
 

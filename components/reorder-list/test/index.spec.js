@@ -425,6 +425,43 @@ describe("reorder-list", () => {
 
 			expect(document.activeElement).not.to.eq(firstItem)
 		})
+
+		it("using a reorder-handle", async () => {
+			const container = await fixture(`
+				<reorder-list>
+					<reorder-item>
+						<span>Apple</span>
+						<reorder-handle>Drag</reorder-handle>
+					</reorder-item>
+					<reorder-item>
+						<span>Orange</span>
+						<reorder-handle>Drag</reorder-handle>
+					</reorder-item>
+					<reorder-item>
+						<span>Banana</span>
+						<reorder-handle>Drag</reorder-handle>
+					</reorder-item>
+				</reorder-list>
+			`)
+
+			const boundingBox = container.getBoundingClientRect()
+			const itemHeight = boundingBox.height / 3
+			const epsilon = 2
+			let items = container.querySelectorAll("reorder-item span")
+			let handles = container.querySelectorAll("reorder-handle")
+
+			await drag(handles[1], { y: boundingBox.top + itemHeight - epsilon })
+			items = container.querySelectorAll("reorder-item span")
+			expect(items[0].textContent).to.equal("Orange")
+			expect(items[1].textContent).to.equal("Apple")
+			expect(items[2].textContent).to.equal("Banana")
+
+			await drag(handles[2], { y: boundingBox.top + itemHeight * 2 - epsilon })
+			items = container.querySelectorAll("reorder-item span")
+			expect(items[0].textContent).to.equal("Orange")
+			expect(items[1].textContent).to.equal("Banana")
+			expect(items[2].textContent).to.equal("Apple")
+		})
 	})
 
 	describe("events", () => {

@@ -1,4 +1,5 @@
 import { commitEvent } from "./events.js"
+import { ReorderHandleElement } from "./reorder-handle.js"
 import { ReorderListElement } from "./reorder-list.js"
 
 export class ReorderItemElement extends HTMLElement {
@@ -14,6 +15,11 @@ export class ReorderItemElement extends HTMLElement {
 			touch-action: none;
 			cursor: grab;
 		}
+
+		:host([data-has-handle]) {
+			cursor: auto;
+			touch-action: auto;
+		}
 		
 		:host([data-dragging]) {
 			opacity: 0.5;
@@ -27,6 +33,11 @@ export class ReorderItemElement extends HTMLElement {
 
 	static START_DRAG_DELAY_MS = 150
 
+	#initialized = false
+	#observer = new MutationObserver(() => {
+		this.#attachTouchListeners()
+	})
+
 	constructor() {
 		super()
 
@@ -35,24 +46,36 @@ export class ReorderItemElement extends HTMLElement {
 
 	list = (): ReorderListElement =>
 		this.closest(ReorderListElement.defaultElementName)
+	handles = (): NodeListOf<ReorderHandleElement> =>
+		this.querySelectorAll(ReorderHandleElement.defaultElementName)
 
 	connectedCallback() {
 		this.setAttribute("role", "option")
-		this.addEventListener("pointerdown", this.#onTouchStart)
 
 		if (!this.hasAttribute("aria-selected")) {
 			this.#setDefaultFocusability()
 		}
+
+		this.#observer.observe(this, {
+			attributes: false,
+			childList: true,
+			subtree: true,
+		})
+
+		this.#attachTouchListeners()
 	}
 
-	#onTouchStart = (e: PointerEvent) => {
-		if (e.target instanceof HTMLElement && e.target.dataset.ignoreReorder != null) {
-			return
-		}
+	disconnectedCallback() {
+		this.#observer.disconnect()
+		this.#initialized = false
+	}
 
-		e.preventDefault()
-		e.stopPropagation()
+	startDragging = () => {
 		this.list().changeFocus(this)
+
+		for (const handle of this.handles()) {
+			handle.dataset.dragging = ""
+		}
 
 		const timeout = setTimeout(() => this.#onDragStart(), ReorderItemElement.START_DRAG_DELAY_MS)
 		const cancelDrag = () => {
@@ -65,6 +88,31 @@ export class ReorderItemElement extends HTMLElement {
 		document.addEventListener("pointerup", cancelDrag)
 		document.addEventListener("pointercancel", cancelDrag)
 		document.addEventListener("contextmenu", cancelDrag)
+	}
+
+	#attachTouchListeners = () => {
+		const hasHandlesNow = this.handles().length > 0
+		if ((this.dataset.hasHandle || !this.#initialized) && !hasHandlesNow) {
+			delete this.dataset.hasHandle
+			this.addEventListener("pointerdown", this.#onTouchStart)
+		}
+
+		if ((!this.dataset.hasHandle || !this.#initialized) && hasHandlesNow) {
+			this.dataset.hasHandle = ""
+			this.removeEventListener("pointerdown", this.#onTouchStart)
+		}
+
+		this.#initialized = true
+	}
+
+	#onTouchStart = (e: PointerEvent) => {
+		if (e.target instanceof HTMLElement && e.target.dataset.ignoreReorder != null) {
+			return
+		}
+
+		e.preventDefault()
+		e.stopPropagation()
+		this.startDragging()
 	}
 
 	#onDragStart = (e?: PointerEvent) => {
@@ -119,6 +167,10 @@ export class ReorderItemElement extends HTMLElement {
 
 	#onDragEnd = () => {
 		delete this.dataset.dragging
+		for (const handle of this.handles()) {
+			delete handle.dataset.dragging
+		}
+
 		document.removeEventListener("pointermove", this.#onDragMove)
 		document.removeEventListener("pointerup", this.#onDragEnd)
 		document.removeEventListener("pointercancel", this.#onDragEnd)
