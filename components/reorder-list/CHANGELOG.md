@@ -1,5 +1,11 @@
 # @auroratide/reorder-list
 
+## 0.5.1
+
+### Patch Changes
+
+- c406df6: Emit commit event when reordering via the keyboard
+
 ## 0.5.0
 
 ### Minor Changes
