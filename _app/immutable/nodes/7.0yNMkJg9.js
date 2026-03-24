@@ -1,4 +1,4 @@
-import{_ as l}from"../chunks/C1FmrZbK.js";import{s as r,n as p}from"../chunks/p4Z6_urL.js";import{S as o,i,a as d,t as c,b as h,m,g,n as j}from"../chunks/BJ0JgjBn.js";import{R as u}from"../chunks/DEeyB_2P.js";const b=`<h1 id="the-reorder-list-elements">The reorder-list Elements</h1>
+import{_ as l}from"../chunks/C1FmrZbK.js";import{s as r,n as p}from"../chunks/p4Z6_urL.js";import{S as o,i,a as d,t as c,b as h,m,g,n as j}from"../chunks/BJ0JgjBn.js";import{R as u}from"../chunks/BeP07JF_.js";const b=`<h1 id="the-reorder-list-elements">The reorder-list Elements</h1>
 <p hidden><strong><a href="https://components.auroratide.com/reorder-list">View this page with live demos!</a></strong></p>
 <p>The <code>reorder-list</code>, <code>reorder-item</code>, and <code>reorder-handle</code> elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html">rearrangable listboxes</a>.</p>
 <wc-demo>
@@ -381,4 +381,4 @@ reorder-item <span class="hljs-selector-tag">ul</span> {
 <li><kbd>Alt</kbd> + <kbd>Up</kbd>/<kbd>Down</kbd> moves the currently selected list item up or down in the order.</li>
 <li>If orientation is horizontal, then <kbd>Left</kbd> and <kbd>Right</kbd> are used instead.</li>
 </ul>
-`;function f(n){let s,t;return s=new u({props:{html:b}}),{c(){j(s.$$.fragment)},l(a){g(s.$$.fragment,a)},m(a,e){m(s,a,e),t=!0},p,i(a){t||(h(s.$$.fragment,a),t=!0)},o(a){c(s.$$.fragment,a),t=!1},d(a){d(s,a)}}}function y(n){return l(()=>import("../chunks/ClOpXOaI.js"),[],import.meta.url),[]}class q extends o{constructor(s){super(),i(this,s,y,f,r,{})}}export{q as component};
+`;function f(n){let s,t;return s=new u({props:{html:b}}),{c(){j(s.$$.fragment)},l(a){g(s.$$.fragment,a)},m(a,e){m(s,a,e),t=!0},p,i(a){t||(h(s.$$.fragment,a),t=!0)},o(a){c(s.$$.fragment,a),t=!1},d(a){d(s,a)}}}function y(n){return l(()=>import("../chunks/xfHmz_n9.js"),[],import.meta.url),[]}class q extends o{constructor(s){super(),i(this,s,y,f,r,{})}}export{q as component};
