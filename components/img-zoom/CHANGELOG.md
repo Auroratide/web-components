@@ -1,5 +1,11 @@
 # @auroratide/img-zoom
 
+## 0.1.9
+
+### Patch Changes
+
+- f066205: Grow button to fit container
+
 ## 0.1.8
 
 ### Patch Changes
