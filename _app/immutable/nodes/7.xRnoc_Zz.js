@@ -1,4 +1,4 @@
-import{_ as l}from"../chunks/C1FmrZbK.js";import{s as r,n as p}from"../chunks/p4Z6_urL.js";import{S as o,i,a as d,t as c,b as h,m,g,n as j}from"../chunks/BJ0JgjBn.js";import{R as u}from"../chunks/BeP07JF_.js";const b=`<h1 id="the-reorder-list-elements">The reorder-list Elements</h1>
+import{_ as l}from"../chunks/C1FmrZbK.js";import{s as r,n as p}from"../chunks/p4Z6_urL.js";import{S as o,i,a as d,t as c,b as h,m,g,n as j}from"../chunks/BJ0JgjBn.js";import{R as u}from"../chunks/I1IEJtVw.js";const b=`<h1 id="the-reorder-list-elements">The reorder-list Elements</h1>
 <p hidden><strong><a href="https://components.auroratide.com/reorder-list">View this page with live demos!</a></strong></p>
 <p>The <code>reorder-list</code>, <code>reorder-item</code>, and <code>reorder-handle</code> elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement the WAI-ARIA guidelines for <a href="https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html">rearrangable listboxes</a>.</p>
 <wc-demo>

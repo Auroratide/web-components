@@ -28,6 +28,8 @@ var B=Object.defineProperty;var H=e=>{throw TypeError(e)};var D=(e,o,t)=>o in e?
 		button {
 			all: unset;
 			display: block;
+			inline-size: 100%;
+			block-size: 100%;
 		}
 		#zoom-in { cursor: zoom-in; }
 		#zoom-out { cursor: zoom-out; }
