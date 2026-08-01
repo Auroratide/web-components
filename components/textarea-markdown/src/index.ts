@@ -234,6 +234,8 @@ export class TextareaMarkdownElement extends HTMLElement {
 	#onChange = (e: Event) => {
 		const target = e.target as HTMLTextAreaElement
 		this.#setValue(target.value)
+
+		this.#events.dispatchChange()
 	}
 
 	#onInput = (e: InputEvent) => {
@@ -255,17 +257,6 @@ export class TextareaMarkdownElement extends HTMLElement {
 		} else {
 			this.#textarea()?.removeAttribute(attribute)
 		}
-	}
-
-	#syncDisabled = (value: boolean) => {
-		const textarea = this.#textarea()
-		const menu = this.#menu()
-
-		this.toggleAttribute("disabled", value)
-		textarea.disabled = value
-		Object.values(menu).forEach((button) => {
-			button.disabled = value
-		})
 	}
 
 	#toggleInlineStyle = (style: string) => (e: Event) => {
@@ -290,6 +281,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 		}
 
 		textarea.focus()
+		this.#events.dispatchChange()
 	}
 
 	#toggleBold = this.#toggleInlineStyle("**")
@@ -323,6 +315,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 		}
 
 		textarea.focus()
+		this.#events.dispatchChange()
 	}
 
 	#toggleList = (ordered: boolean) => (e: Event) => {
@@ -349,6 +342,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 		}
 
 		textarea.focus()
+		this.#events.dispatchChange()
 	}
 
 	#toggleUnorderedList = this.#toggleList(false)
@@ -372,6 +366,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 			this.#setValue(value.slice(0, start) + nextListType + value.slice(start))
 			textarea.selectionStart = start + nextListType.length
 			textarea.selectionEnd = start + nextListType.length
+			this.#events.dispatchChange()
 		}
 	}
 
@@ -413,6 +408,11 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 		this.#internals.setFormValue(value)
 		this.#textarea().value = value
+	}
+
+	#events = {
+		dispatchChange: () => this.dispatchEvent(new Event("change", { bubbles: true })),
+		dispatchInput: () => this.dispatchEvent(new Event("input", { bubbles: true })),
 	}
 
 	#createRoot = () => {

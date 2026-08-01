@@ -6,6 +6,7 @@ describe("textarea-markdown", () => {
 	const milliseconds = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 	const getLabel = (container) => container.querySelector("label")
 	const getTextarea = (container) => container.querySelector("textarea-markdown")
+	const getButton = (container) => container.querySelector("button")
 	const getInnerTextarea = (container) => getTextarea(container).shadowRoot?.querySelector("textarea")
 	const getMenuButton = (container, name) => getTextarea(container).shadowRoot?.querySelector(`[aria-label="${name}"]`)
 	const submitForm = async (form) => {
@@ -473,6 +474,88 @@ describe("textarea-markdown", () => {
 			const mdValue = await submitForm(form)
 
 			expect(mdValue).to.equal(null)
+		})
+	})
+
+	describe("events", () => {
+		it("change", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md"></textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
+
+			const textarea = getTextarea(form)
+
+			const emittedPromise = new Promise((resolve) => {
+				textarea.addEventListener("change", (e) => {
+					resolve(e)	
+				})
+			})
+
+			const innerTextarea = getInnerTextarea(form)
+			innerTextarea.focus()
+			await sendKeys({ type: "New Value" })
+			getButton(form).focus()
+			
+			const emitted = await emittedPromise
+			
+			expect(emitted.target.value).to.equal("New Value")
+		})
+
+		it("input", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md"></textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
+
+			const textarea = getTextarea(form)
+
+			let emitted = []
+			textarea.addEventListener("input", (e) => {
+				emitted.push(e)
+			})
+
+			const innerTextarea = getInnerTextarea(form)
+			innerTextarea.focus()
+			await sendKeys({ type: "New Value" })
+
+			expect(emitted.length).to.equal(9)
+		})
+
+		it("menu button causes change", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md">hello</textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
+
+			const textarea = getTextarea(form)
+
+			const emittedPromise = new Promise((resolve) => {
+				textarea.addEventListener("change", (e) => {
+					resolve(e)	
+				})
+			})
+
+			const innerTextarea = getInnerTextarea(form)
+			const headerButton = getMenuButton(form, "Header")
+			innerTextarea.focus()
+			headerButton.click()
+
+			const submittedValue = await submitForm(form)
+			expect(submittedValue).to.equal("## hello")
+			getButton(form).focus()
+			
+			const emitted = await emittedPromise
+			expect(emitted.target.value).to.equal("## hello")
 		})
 	})
 })
