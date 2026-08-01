@@ -4,6 +4,10 @@ export class TextareaMarkdownElement extends HTMLElement {
 	static readonly formAssociated = true
 	static defaultElementName = "textarea-markdown"
 
+	static validationMessages = {
+		valueMissing: "Please fill out this field.",
+	}
+
 	static html = `
 		<div>
 			<menu id="menu" part="menu">
@@ -62,7 +66,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 	`
 
 	static get observedAttributes() {
-		return ["placeholder", "rows", "cols", "disabled"]
+		return ["placeholder", "rows", "cols", "disabled", "required"]
 	}
 
 	#internals = this.attachInternals()
@@ -129,14 +133,45 @@ export class TextareaMarkdownElement extends HTMLElement {
 	get disabled(): boolean { return this.hasAttribute("disabled") }
 	set disabled(value: boolean) { this.toggleAttribute("disabled", value) }
 
+	get required(): boolean { return this.hasAttribute("required") }
+	set required(value: boolean) { this.toggleAttribute("required", value) }
+
 	get form(): HTMLFormElement | null { return this.#internals.form }
 	get labels(): NodeList { return this.#internals.labels }
-	get validity(): ValidityState | null { return this.#internals.validity }
+	get validity(): ValidityState { return this.#internals.validity }
 	get validationMessage(): string | null { return this.#internals.validationMessage }
 	get willValidate(): boolean { return this.#internals.willValidate }
 
 	checkValidity(): boolean { return this.#internals.checkValidity() }
 	reportValidity(): boolean { return this.#internals.reportValidity() }
+
+	#customError = ""
+
+	#validate = () => {
+		const flags: ValidityStateFlags = {}
+		let message = ""
+
+		if (this.required && (this.value ?? "") === "") {
+			flags.valueMissing = true
+			message = TextareaMarkdownElement.validationMessages.valueMissing
+		}
+
+		if (this.#customError) {
+			flags.customError = true
+			message = this.#customError
+		}
+
+		if (Object.keys(flags).length > 0) {
+			this.#internals.setValidity(flags, message, this.#textarea())
+		} else {
+			this.#internals.setValidity({})
+		}
+	}
+
+	setCustomValidity(message: string) {
+		this.#customError = message
+		this.#validate()
+	}
 
 	formDisabledCallback(disabled: boolean) {
 		const textarea = this.#textarea()
@@ -228,6 +263,10 @@ export class TextareaMarkdownElement extends HTMLElement {
 		},
 		"disabled": (newValue: string | undefined | null) => {
 			this.#syncAttribute("disabled", newValue)
+		},
+		"required": (newValue: string | undefined | null) => {
+			this.#syncAttribute("required", newValue)
+			this.#validate()
 		},
 	}
 
@@ -408,6 +447,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 		this.#internals.setFormValue(value)
 		this.#textarea().value = value
+		this.#validate()
 	}
 
 	#events = {

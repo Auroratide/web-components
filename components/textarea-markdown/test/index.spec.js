@@ -9,19 +9,26 @@ describe("textarea-markdown", () => {
 	const getButton = (container) => container.querySelector("button")
 	const getInnerTextarea = (container) => getTextarea(container).shadowRoot?.querySelector("textarea")
 	const getMenuButton = (container, name) => getTextarea(container).shadowRoot?.querySelector(`[aria-label="${name}"]`)
-	const submitForm = async (form) => {
-		let mdValue = ""
-		form.addEventListener("submit", (e) => {
-			e.preventDefault()
-			// console.log(Object.fromEntries(new FormData(e.target).entries()))
-			mdValue = new FormData(e.target).get("md")
-		}, { once: true })
 
-		const submitEvent = oneEvent(form, "submit")
-		form.querySelector("#submit").click()
-		await submitEvent
+	const submitForm = (form) => {
+		return new Promise((resolve, reject) => {
+			form.addEventListener("submit", (e) => {
+				e.preventDefault()
+				// console.log(Object.fromEntries(new FormData(e.target).entries()))
+				const mdValue = new FormData(e.target).get("md")
 
-		return mdValue
+				resolve(mdValue)
+			}, { once: true })
+
+			getTextarea(form).addEventListener("invalid", (e) => {
+				e.preventDefault()
+				const message = e.target.validationMessage
+
+				reject(message)
+			}, { once: true })
+
+			form.querySelector("#submit").click()
+		})
 	}
 
 	const resetForm = async (form) => {
@@ -29,43 +36,78 @@ describe("textarea-markdown", () => {
 		form.querySelector("#reset").click()
 		await submitEvent
 	}
+	
+	describe("forms", () => {
+		it("participates in the form", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md">Some Value</textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
 
-	it("participates in the form", async () => {
-		const form = await fixture(`
-			<form>
-				<label for="md">Markdown</label>
-				<textarea-markdown id="md" name="md">Some Value</textarea-markdown>
-				<button id="submit" type="submit">Submit</button>
-			</form>
-		`)
+			const textarea = getTextarea(form)
+			const mdValue = await submitForm(form)
 
-		const textarea = getTextarea(form)
-		const mdValue = await submitForm(form)
+			expect(textarea.form).to.equal(form)
+			expect(mdValue).to.equal("Some Value")
+		})
 
-		expect(textarea.form).to.equal(form)
-		expect(mdValue).to.equal("Some Value")
-	})
+		it("resets in a form correctly", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md">Some Value</textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+					<button id="reset" type="reset">Reset</button>
+				</form>
+			`)
 
-	it("resets in a form correctly", async () => {
-		const form = await fixture(`
-			<form>
-				<label for="md">Markdown</label>
-				<textarea-markdown id="md" name="md">Some Value</textarea-markdown>
-				<button id="submit" type="submit">Submit</button>
-				<button id="reset" type="reset">Reset</button>
-			</form>
-		`)
+			const textarea = getTextarea(form)
+			const innerTextarea = getInnerTextarea(form)
+			innerTextarea.focus()
+			await sendKeys({ type: "New Value" })
+			const mdValue = await submitForm(form)
+			expect(mdValue).to.equal("Some ValueNew Value")
 
-		const textarea = getTextarea(form)
-		const innerTextarea = getInnerTextarea(form)
-		innerTextarea.focus()
-		await sendKeys({ type: "New Value" })
-		const mdValue = await submitForm(form)
-		expect(mdValue).to.equal("Some ValueNew Value")
+			await resetForm(form)
+			const mdValueAfterReset = await submitForm(form)
+			expect(mdValueAfterReset).to.equal("Some Value")
+		})
 
-		await resetForm(form)
-		const mdValueAfterReset = await submitForm(form)
-		expect(mdValueAfterReset).to.equal("Some Value")
+		it("respects validity", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md" required></textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
+
+			const error = await submitForm(form).catch((e) => e)
+			expect(error).to.equal("Please fill out this field.")
+
+			getTextarea(form).value = "Hello!"
+			const value = await submitForm(form).catch((e) => e)
+			expect(value).to.equal("Hello!")
+		})
+
+		it("custom validity", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md">has text</textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
+
+			const textarea = getTextarea(form)
+			textarea.setCustomValidity("it bork")
+
+			const error = await submitForm(form).catch((e) => e)
+			expect(error).to.equal("it bork")
+		})
 	})
 
 	describe("different ways to set the value", () => {
