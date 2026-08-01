@@ -194,9 +194,6 @@ export class TextareaMarkdownElement extends HTMLElement {
 	}
 
 	#attributeCallbacks: Record<string, (newValue: string | undefined | null, oldValue: string | undefined | null) => void> = {
-		"value": (newValue: string | undefined | null) => {
-			this.#setValue(newValue ?? "")
-		},
 		"placeholder": (newValue: string | undefined | null) => {
 			this.#syncAttribute("placeholder", newValue)
 		},
