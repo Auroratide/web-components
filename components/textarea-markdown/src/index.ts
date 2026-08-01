@@ -136,7 +136,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#setValue(value ?? "")
 	}
 
-	get defaultValue(): string { return this.textContent ?? "" }
+	get defaultValue(): string { return this.textContent?.trimStart() ?? "" }
 	set defaultValue(value: string) { this.textContent = value }
 
 	focus(options: FocusOptions) {
@@ -147,7 +147,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 		const menu = this.#menu()
 		const textarea = this.#textarea()
 
-		textarea.value = this.textContent
+		textarea.value = this.textContent.trimStart()
 		this.#internals.setFormValue(textarea.value)
 
 		if (!this.hasAttribute("tabindex")) {
