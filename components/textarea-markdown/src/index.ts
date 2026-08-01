@@ -65,14 +65,25 @@ export class TextareaMarkdownElement extends HTMLElement {
 		}
 	})
 
-	#menu: {
+	#menu = (): {
 		header: HTMLButtonElement,
 		bold: HTMLButtonElement,
 		italic: HTMLButtonElement,
 		unorderedList: HTMLButtonElement,
 		orderedList: HTMLButtonElement,
+	} => {
+		return {
+			header: this.shadowRoot?.querySelector("#header") as HTMLButtonElement,
+			bold: this.shadowRoot?.querySelector("#bold") as HTMLButtonElement,
+			italic: this.shadowRoot?.querySelector("#italic") as HTMLButtonElement,
+			unorderedList: this.shadowRoot?.querySelector("#unordered-list") as HTMLButtonElement,
+			orderedList: this.shadowRoot?.querySelector("#ordered-list") as HTMLButtonElement,
+		}
 	}
-	#textarea: HTMLTextAreaElement
+
+	#textarea = (): HTMLTextAreaElement => {
+		return this.shadowRoot?.querySelector("#textarea") as HTMLTextAreaElement
+	}
 
 	constructor() {
 		super()
@@ -80,23 +91,31 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#createRoot()
 	}
 
+	#setOrUnsetAttribute = (name: string, value: string | null | undefined) => {
+		if (value == null) {
+			this.removeAttribute(name)
+		} else {
+			this.setAttribute(name, value)
+		}
+	}
+
 	get name(): string | null { return this.getAttribute("name") }
-	set name(value: string | null) { this.setAttribute("name", value) }
+	set name(value: string | null) { this.#setOrUnsetAttribute("name", value) }
 
 	get placeholder(): string | null { return this.getAttribute("placeholder") }
-	set placeholder(value: string | null) { this.setAttribute("placeholder", value) }
+	set placeholder(value: string | null) { this.#setOrUnsetAttribute("placeholder", value) }
 
 	get rows(): number | null {
 		const value = this.getAttribute("rows")
 		return value ? parseInt(value) : null
 	}
-	set rows(value: number | null) { this.setAttribute("rows", value?.toString()) }
+	set rows(value: number | null) { this.#setOrUnsetAttribute("rows", value?.toString()) }
 
 	get cols(): number | null {
 		const value = this.getAttribute("cols")
 		return value ? parseInt(value) : null
 	}
-	set cols(value: number | null) { this.setAttribute("cols", value?.toString()) }
+	set cols(value: number | null) { this.#setOrUnsetAttribute("cols", value?.toString()) }
 
 	get form(): HTMLFormElement | null { return this.#internals.form }
 	get labels(): NodeList { return this.#internals.labels }
@@ -112,27 +131,21 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#setValue("")
 	}
 
-	get value(): string | null { return this.#textarea.value }
+	get value(): string | null { return this.#textarea().value }
 	set value(value: string | null) {
 		this.#setValue(value ?? "")
 	}
 
 	focus(options: FocusOptions) {
-		this.#textarea?.focus(options)
+		this.#textarea()?.focus(options)
 	}
 
 	connectedCallback() {
-		this.#menu = {
-			header: this.shadowRoot?.querySelector("#header"),
-			bold: this.shadowRoot?.querySelector("#bold"),
-			italic: this.shadowRoot?.querySelector("#italic"),
-			unorderedList: this.shadowRoot?.querySelector("#unordered-list"),
-			orderedList: this.shadowRoot?.querySelector("#ordered-list"),
-		}
-		this.#textarea = this.shadowRoot?.querySelector("#textarea")
+		const menu = this.#menu()
+		const textarea = this.#textarea()
 
-		this.#textarea.value = this.textContent
-		this.#internals.setFormValue(this.#textarea.value)
+		textarea.value = this.textContent
+		this.#internals.setFormValue(textarea.value)
 
 		if (!this.hasAttribute("tabindex")) {
 			this.setAttribute("tabindex", "0")
@@ -144,14 +157,14 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#syncAttribute("rows")
 		this.#syncAttribute("cols")
 
-		this.#textarea.addEventListener("change", this.#onChange)
-		this.#textarea.addEventListener("input", this.#onInput)
+		textarea.addEventListener("change", this.#onChange)
+		textarea.addEventListener("input", this.#onInput)
 
-		this.#menu.header.addEventListener("click", this.#toggleHeader)
-		this.#menu.bold.addEventListener("click", this.#toggleBold)
-		this.#menu.italic.addEventListener("click", this.#toggleItalic)
-		this.#menu.unorderedList.addEventListener("click", this.#toggleUnorderedList)
-		this.#menu.orderedList.addEventListener("click", this.#toggleOrderedList)
+		menu.header.addEventListener("click", this.#toggleHeader)
+		menu.bold.addEventListener("click", this.#toggleBold)
+		menu.italic.addEventListener("click", this.#toggleItalic)
+		menu.unorderedList.addEventListener("click", this.#toggleUnorderedList)
+		menu.orderedList.addEventListener("click", this.#toggleOrderedList)
 
 		this.#textContentObserver.observe(this, {
 			attributes: false,
@@ -161,13 +174,16 @@ export class TextareaMarkdownElement extends HTMLElement {
 	}
 
 	disconnectedCallback() {
-		this.#textarea.removeEventListener("change", this.#onChange)
-		this.#textarea.removeEventListener("input", this.#onInput)
-		this.#menu.header.removeEventListener("click", this.#toggleHeader)
-		this.#menu.bold.removeEventListener("click", this.#toggleBold)
-		this.#menu.italic.removeEventListener("click", this.#toggleItalic)
-		this.#menu.unorderedList.removeEventListener("click", this.#toggleUnorderedList)
-		this.#menu.orderedList.removeEventListener("click", this.#toggleOrderedList)
+		const menu = this.#menu()
+		const textarea = this.#textarea()
+
+		textarea.removeEventListener("change", this.#onChange)
+		textarea.removeEventListener("input", this.#onInput)
+		menu.header.removeEventListener("click", this.#toggleHeader)
+		menu.bold.removeEventListener("click", this.#toggleBold)
+		menu.italic.removeEventListener("click", this.#toggleItalic)
+		menu.unorderedList.removeEventListener("click", this.#toggleUnorderedList)
+		menu.orderedList.removeEventListener("click", this.#toggleOrderedList)
 		this.removeEventListener("focus", this.#onFocus)
 
 		this.#textContentObserver.disconnect()
@@ -177,9 +193,9 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#attributeCallbacks[attribute]?.(newValue, oldValue)
 	}
 
-	#attributeCallbacks = {
+	#attributeCallbacks: Record<string, (newValue: string | undefined | null, oldValue: string | undefined | null) => void> = {
 		"value": (newValue: string | undefined | null) => {
-			this.#setValue(newValue)
+			this.#setValue(newValue ?? "")
 		},
 		"placeholder": (newValue: string | undefined | null) => {
 			this.#syncAttribute("placeholder", newValue)
@@ -207,37 +223,39 @@ export class TextareaMarkdownElement extends HTMLElement {
 	}
 
 	#onFocus = () => {
-		this.#textarea?.focus()
+		this.#textarea()?.focus()
 	}
 
 	#syncAttribute = (attribute: string, value?: string | null | undefined) => {
 		if (this.hasAttribute(attribute) || value != null) {
-			this.#textarea?.setAttribute(attribute, value ?? this.getAttribute(attribute))
+			this.#textarea()?.setAttribute(attribute, value ?? this.getAttribute(attribute) ?? "")
 		} else {
-			this.#textarea?.removeAttribute(attribute)
+			this.#textarea()?.removeAttribute(attribute)
 		}
 	}
 
 	#toggleInlineStyle = (style: string) => (e: Event) => {
 		e.preventDefault()
-		const start = this.#textarea.selectionStart
-		const end = this.#textarea.selectionEnd
-		const value = this.#textarea.value
+		const textarea = this.#textarea()
+
+		const start = textarea.selectionStart
+		const end = textarea.selectionEnd
+		const value = textarea.value
 
 		const alreadyStyled = value.slice(start - style.length, start) === style && value.slice(end, end + style.length) === style
 
 		// TODO: figure out how to make this undoable
 		if (alreadyStyled) {
 			this.#setValue(value.slice(0, start - style.length) + value.slice(start, end) + value.slice(end + style.length))
-			this.#textarea.selectionStart = start - style.length
-			this.#textarea.selectionEnd = end - style.length
+			textarea.selectionStart = start - style.length
+			textarea.selectionEnd = end - style.length
 		} else {
 			this.#setValue(value.slice(0, start) + style + value.slice(start, end) + style + value.slice(end))
-			this.#textarea.selectionStart = start + style.length
-			this.#textarea.selectionEnd = end + style.length
+			textarea.selectionStart = start + style.length
+			textarea.selectionEnd = end + style.length
 		}
 
-		this.#textarea.focus()
+		textarea.focus()
 	}
 
 	#toggleBold = this.#toggleInlineStyle("**")
@@ -245,35 +263,39 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 	#toggleHeader = (e: Event) => {
 		e.preventDefault()
-		const start = this.#textarea.selectionStart
-		const end = this.#textarea.selectionEnd
-		const value = this.#textarea.value
+		const textarea = this.#textarea()
+
+		const start = textarea.selectionStart
+		const end = textarea.selectionEnd
+		const value = textarea.value
 
 		const startOfLine = this.#getStartOfLine()
 
 		const currentHeadingLevel = value.slice(startOfLine).match(/^#+/)?.[0]?.length ?? 0
 		if (currentHeadingLevel === 0) {
 			this.#setValue(value.slice(0, startOfLine) + "## " + value.slice(startOfLine))
-			this.#textarea.selectionStart = start + 3
-			this.#textarea.selectionEnd = end + 3
+			textarea.selectionStart = start + 3
+			textarea.selectionEnd = end + 3
 		} else if (currentHeadingLevel >= 4) {
 			this.#setValue(value.slice(0, startOfLine) + value.slice(startOfLine + currentHeadingLevel + 1))
-			this.#textarea.selectionStart = start - currentHeadingLevel - 1
-			this.#textarea.selectionEnd = end - currentHeadingLevel - 1
+			textarea.selectionStart = start - currentHeadingLevel - 1
+			textarea.selectionEnd = end - currentHeadingLevel - 1
 		} else {
 			this.#setValue(value.slice(0, startOfLine) + "#" + value.slice(startOfLine))
-			this.#textarea.selectionStart = start + 1
-			this.#textarea.selectionEnd = end + 1
+			textarea.selectionStart = start + 1
+			textarea.selectionEnd = end + 1
 		}
 
-		this.#textarea.focus()
+		textarea.focus()
 	}
 
 	#toggleList = (ordered: boolean) => (e: Event) => {
 		e.preventDefault()
-		const start = this.#textarea.selectionStart
-		const end = this.#textarea.selectionEnd
-		const value = this.#textarea.value
+		const textarea = this.#textarea()
+
+		const start = textarea.selectionStart
+		const end = textarea.selectionEnd
+		const value = textarea.value
 
 		const startOfLine = this.#getStartOfLine()
 		const listType = this.#getListType(startOfLine)
@@ -282,26 +304,28 @@ export class TextareaMarkdownElement extends HTMLElement {
 			const newListStart = ordered ? "1. " : "- "
 
 			this.#setValue(value.slice(0, startOfLine) + newListStart + value.slice(startOfLine))
-			this.#textarea.selectionStart = start + newListStart.length
-			this.#textarea.selectionEnd = end + newListStart.length
+			textarea.selectionStart = start + newListStart.length
+			textarea.selectionEnd = end + newListStart.length
 		} else {
 			this.#setValue(value.slice(0, startOfLine) + value.slice(startOfLine + listType.length))
-			this.#textarea.selectionStart = start - listType.length
-			this.#textarea.selectionEnd = end - listType.length
+			textarea.selectionStart = start - listType.length
+			textarea.selectionEnd = end - listType.length
 		}
 
-		this.#textarea.focus()
+		textarea.focus()
 	}
 
 	#toggleUnorderedList = this.#toggleList(false)
 	#toggleOrderedList = this.#toggleList(true)
 
 	#continueList = () => {
-		const start = this.#textarea.selectionStart
+		const textarea = this.#textarea()
+
+		const start = textarea.selectionStart
 		const startOfLine = this.#getStartOfLine(start - 1)
 		const listType = this.#getListType(startOfLine)
 
-		const value = this.value
+		const value = this.value ?? ""
 
 		if (listType) {
 			let nextListType = listType
@@ -310,19 +334,20 @@ export class TextareaMarkdownElement extends HTMLElement {
 			}
 
 			this.#setValue(value.slice(0, start) + nextListType + value.slice(start))
-			this.#textarea.selectionStart = start + nextListType.length
-			this.#textarea.selectionEnd = start + nextListType.length
+			textarea.selectionStart = start + nextListType.length
+			textarea.selectionEnd = start + nextListType.length
 		}
 	}
 
 	#getListType = (startOfLine: number) => {
 		const value = this.value
-		return value.slice(startOfLine).match(/^(- |\* |\d+\. )/)?.[0]
+		return value?.slice(startOfLine).match(/^(- |\* |\d+\. )/)?.[0]
 	}
 
 	#getStartOfLine = (cursorLocation?: number): number => {
-		const start = cursorLocation ?? this.#textarea.selectionStart
-		const value = this.#textarea.value
+		const textarea = this.#textarea()
+		const start = cursorLocation ?? textarea.selectionStart
+		const value = textarea.value
 
 		let startOfLine = start - 1
 		while (value[startOfLine] !== "\n" && startOfLine > 0) {
@@ -334,7 +359,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 	#setValue = (value: string) => {
 		this.#internals.setFormValue(value)
-		this.#textarea.value = value
+		this.#textarea().value = value
 		this.textContent = value
 	}
 
