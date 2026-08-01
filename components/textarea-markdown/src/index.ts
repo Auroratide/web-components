@@ -51,12 +51,12 @@ export class TextareaMarkdownElement extends HTMLElement {
 			inline-size: 100%;
 		}
 
-		:host([disabled]) button {
+		:host(:disabled) button {
 			opacity: 0.75;
 			cursor: not-allowed;
 		}
 
-		:host([disabled]) textarea {
+		:host(:disabled) textarea {
 			cursor: not-allowed;
 		}
 	`
@@ -127,7 +127,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 	set cols(value: number | null) { this.#setOrUnsetAttribute("cols", value?.toString()) }
 
 	get disabled(): boolean { return this.hasAttribute("disabled") }
-	set disabled(value: boolean) { this.#syncDisabled(value) }
+	set disabled(value: boolean) { this.toggleAttribute("disabled", value) }
 
 	get form(): HTMLFormElement | null { return this.#internals.form }
 	get labels(): NodeList { return this.#internals.labels }
@@ -138,7 +138,15 @@ export class TextareaMarkdownElement extends HTMLElement {
 	checkValidity(): boolean { return this.#internals.checkValidity() }
 	reportValidity(): boolean { return this.#internals.reportValidity() }
 
-	formDisabledCallback(disabled: boolean) { this.toggleAttribute("disabled", disabled) }
+	formDisabledCallback(disabled: boolean) {
+		const textarea = this.#textarea()
+		const menu = this.#menu()
+
+		textarea.disabled = disabled
+		Object.values(menu).forEach((button) => {
+			button.disabled = disabled
+		})
+	}
 	formResetCallback() {
 		this.#setValue(this.defaultValue)
 	}
@@ -219,7 +227,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 			this.#syncAttribute("cols", newValue)
 		},
 		"disabled": (newValue: string | undefined | null) => {
-			this.#syncDisabled(newValue != null)
+			this.#syncAttribute("disabled", newValue)
 		},
 	}
 
