@@ -270,16 +270,18 @@ export class TextareaMarkdownElement extends HTMLElement {
 		const value = textarea.value
 
 		const startOfLine = this.#getStartOfLine()
+		const endOfLine = this.#getEndOfLine()
 
 		const currentHeadingLevel = value.slice(startOfLine).match(/^#+/)?.[0]?.length ?? 0
+		const currentHeadingText = value.slice(startOfLine + currentHeadingLevel, endOfLine)?.trimStart()
 		if (currentHeadingLevel === 0) {
 			this.#setValue(value.slice(0, startOfLine) + "## " + value.slice(startOfLine))
 			textarea.selectionStart = start + 3
 			textarea.selectionEnd = end + 3
 		} else if (currentHeadingLevel >= 4) {
-			this.#setValue(value.slice(0, startOfLine) + value.slice(startOfLine + currentHeadingLevel + 1))
-			textarea.selectionStart = start - currentHeadingLevel - 1
-			textarea.selectionEnd = end - currentHeadingLevel - 1
+			this.#setValue(value.slice(0, startOfLine) + currentHeadingText + value.slice(endOfLine))
+			textarea.selectionStart = start - endOfLine + startOfLine + currentHeadingText.length
+			textarea.selectionEnd = end - endOfLine + startOfLine + currentHeadingText.length
 		} else {
 			this.#setValue(value.slice(0, startOfLine) + "#" + value.slice(startOfLine))
 			textarea.selectionStart = start + 1
@@ -355,6 +357,19 @@ export class TextareaMarkdownElement extends HTMLElement {
 		}
 
 		return startOfLine <= 0 ? 0 : startOfLine + 1
+	}
+
+	#getEndOfLine = (cursorLocation?: number): number => {
+		const textarea = this.#textarea()
+		const end = cursorLocation ?? textarea.selectionEnd
+		const value = textarea.value
+
+		let endOfLine = end
+		while (value[endOfLine] !== "\n" && endOfLine < value.length) {
+			endOfLine += 1
+		}
+
+		return endOfLine >= value.length ? value.length : endOfLine
 	}
 
 	#setValue = (value: string) => {

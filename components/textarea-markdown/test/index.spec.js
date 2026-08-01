@@ -218,6 +218,32 @@ describe("textarea-markdown", () => {
 				expect(submittedValue).to.equal("")
 			})
 
+			it("no space in the header", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md">###header</textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				const headerButton = getMenuButton(form, "Header")
+				innerTextarea.focus()
+
+				headerButton.click()
+				let submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("####header")
+
+				headerButton.click()
+				submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("header")
+
+				headerButton.click()
+				submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("## header")
+			})
+
 			it("highlighted selection", async () => {
 				const form = await fixture(`
 					<form>
