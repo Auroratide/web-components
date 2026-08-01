@@ -136,6 +136,9 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#setValue(value ?? "")
 	}
 
+	get defaultValue(): string { return this.textContent ?? "" }
+	set defaultValue(value: string) { this.textContent = value }
+
 	focus(options: FocusOptions) {
 		this.#textarea()?.focus(options)
 	}
@@ -355,9 +358,12 @@ export class TextareaMarkdownElement extends HTMLElement {
 	}
 
 	#setValue = (value: string) => {
+		// Note: do NOT set textContent in here, two reasons:
+		// 1. textContent represents the defaultValue
+		// 2. It causes a click bug with the menu buttons, preventing 'click' from being dispatched
+
 		this.#internals.setFormValue(value)
 		this.#textarea().value = value
-		this.textContent = value
 	}
 
 	#createRoot = () => {

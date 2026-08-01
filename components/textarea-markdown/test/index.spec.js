@@ -56,7 +56,8 @@ describe("textarea-markdown", () => {
 
 			expect(submittedValue).to.equal("New Value")
 			expect(textarea.value).to.equal("New Value")
-			expect(textarea.textContent).to.equal("New Value")
+			expect(textarea.defaultValue).to.equal("Original Value")
+			expect(textarea.textContent).to.equal("Original Value")
 		})
 
 		it("textContent", async () => {
@@ -77,6 +78,7 @@ describe("textarea-markdown", () => {
 
 			expect(submittedValue).to.equal("New Value")
 			expect(textarea.value).to.equal("New Value")
+			expect(textarea.defaultValue).to.equal("New Value")
 			expect(textarea.textContent).to.equal("New Value")
 		})
 
@@ -98,7 +100,8 @@ describe("textarea-markdown", () => {
 
 			expect(submittedValue).to.equal("Original ValueNew Value")
 			expect(textarea.value).to.equal("Original ValueNew Value")
-			expect(textarea.textContent).to.equal("Original ValueNew Value")
+			expect(textarea.defaultValue).to.equal("Original Value")
+			expect(textarea.textContent).to.equal("Original Value")
 		})
 	})
 
