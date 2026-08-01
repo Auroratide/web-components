@@ -435,4 +435,24 @@ describe("textarea-markdown", () => {
 			expect(textarea.shadowRoot?.activeElement).to.equal(innerTextarea)
 		})
 	})
+
+	describe("disabled", () => {
+		it("with the attribute", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md" disabled></textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
+
+			const textarea = getTextarea(form)
+			const innerTextarea = getInnerTextarea(form)
+			innerTextarea.focus()
+			await sendKeys({ type: "New Value" })
+			const mdValue = await submitForm(form)
+
+			expect(mdValue).to.equal(null) // disabled, see https://www.w3.org/TR/REC-html40-971218/interact/forms.html#h-17.12.1
+		})
+	})
 })

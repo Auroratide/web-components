@@ -50,10 +50,19 @@ export class TextareaMarkdownElement extends HTMLElement {
 			display: block;
 			inline-size: 100%;
 		}
+
+		:host([disabled]) button {
+			opacity: 0.75;
+			cursor: not-allowed;
+		}
+
+		:host([disabled]) textarea {
+			cursor: not-allowed;
+		}
 	`
 
 	static get observedAttributes() {
-		return ["placeholder", "rows", "cols"]
+		return ["placeholder", "rows", "cols", "disabled"]
 	}
 
 	#internals = this.attachInternals()
@@ -116,6 +125,9 @@ export class TextareaMarkdownElement extends HTMLElement {
 		return value ? parseInt(value) : null
 	}
 	set cols(value: number | null) { this.#setOrUnsetAttribute("cols", value?.toString()) }
+
+	get disabled(): boolean { return this.hasAttribute("disabled") }
+	set disabled(value: boolean) { this.#syncDisabled(value) }
 
 	get form(): HTMLFormElement | null { return this.#internals.form }
 	get labels(): NodeList { return this.#internals.labels }
@@ -206,6 +218,9 @@ export class TextareaMarkdownElement extends HTMLElement {
 		"cols": (newValue: string | undefined | null) => {
 			this.#syncAttribute("cols", newValue)
 		},
+		"disabled": (newValue: string | undefined | null) => {
+			this.#syncDisabled(newValue != null)
+		},
 	}
 
 	#onChange = (e: Event) => {
@@ -232,6 +247,17 @@ export class TextareaMarkdownElement extends HTMLElement {
 		} else {
 			this.#textarea()?.removeAttribute(attribute)
 		}
+	}
+
+	#syncDisabled = (value: boolean) => {
+		const textarea = this.#textarea()
+		const menu = this.#menu()
+
+		this.toggleAttribute("disabled", value)
+		textarea.disabled = value
+		Object.values(menu).forEach((button) => {
+			button.disabled = value
+		})
 	}
 
 	#toggleInlineStyle = (style: string) => (e: Event) => {
