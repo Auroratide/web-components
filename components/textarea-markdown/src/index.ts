@@ -128,7 +128,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 	formDisabledCallback(disabled: boolean) { this.toggleAttribute("disabled", disabled) }
 	formResetCallback() {
-		this.#setValue("")
+		this.#setValue(this.defaultValue)
 	}
 
 	get value(): string | null { return this.#textarea().value }

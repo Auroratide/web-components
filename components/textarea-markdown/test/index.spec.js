@@ -23,6 +23,12 @@ describe("textarea-markdown", () => {
 		return mdValue
 	}
 
+	const resetForm = async (form) => {
+		const submitEvent = oneEvent(form, "reset")
+		form.querySelector("#reset").click()
+		await submitEvent
+	}
+
 	it("participates in the form", async () => {
 		const form = await fixture(`
 			<form>
@@ -37,6 +43,28 @@ describe("textarea-markdown", () => {
 
 		expect(textarea.form).to.equal(form)
 		expect(mdValue).to.equal("Some Value")
+	})
+
+	it("resets in a form correctly", async () => {
+		const form = await fixture(`
+			<form>
+				<label for="md">Markdown</label>
+				<textarea-markdown id="md" name="md">Some Value</textarea-markdown>
+				<button id="submit" type="submit">Submit</button>
+				<button id="reset" type="reset">Reset</button>
+			</form>
+		`)
+
+		const textarea = getTextarea(form)
+		const innerTextarea = getInnerTextarea(form)
+		innerTextarea.focus()
+		await sendKeys({ type: "New Value" })
+		const mdValue = await submitForm(form)
+		expect(mdValue).to.equal("Some ValueNew Value")
+
+		await resetForm(form)
+		const mdValueAfterReset = await submitForm(form)
+		expect(mdValueAfterReset).to.equal("Some Value")
 	})
 
 	describe("different ways to set the value", () => {
