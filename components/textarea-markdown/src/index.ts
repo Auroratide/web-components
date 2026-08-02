@@ -1,5 +1,7 @@
 import { Icon } from "./icons.js"
 
+const mod = (n: number, m: number) => ((n % m) + m) % m
+
 export class TextareaMarkdownElement extends HTMLElement {
 	static readonly formAssociated = true
 	static defaultElementName = "textarea-markdown"
@@ -10,7 +12,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 	static html = `
 		<div>
-			<menu id="menu" part="menu">
+			<menu role="toolbar" aria-label="Formatting" aria-controls="textarea" id="menu" part="menu">
 				<li><button part="button" type="button" id="header" aria-label="Header">${Icon.header}</button></li>
 				<li><button part="button" type="button" id="bold" aria-label="Bold">${Icon.bold}</button></li>
 				<li><button part="button" type="button" id="italic" aria-label="Italic">${Icon.italic}</button></li>
@@ -92,6 +94,10 @@ export class TextareaMarkdownElement extends HTMLElement {
 			unorderedList: this.shadowRoot?.querySelector("#unordered-list") as HTMLButtonElement,
 			orderedList: this.shadowRoot?.querySelector("#ordered-list") as HTMLButtonElement,
 		}
+	}
+
+	#menuList = (): HTMLButtonElement[] => {
+		return Array.from(this.shadowRoot?.querySelectorAll("#menu button") ?? [])
 	}
 
 	#textarea = (): HTMLTextAreaElement => {
@@ -195,7 +201,6 @@ export class TextareaMarkdownElement extends HTMLElement {
 	set defaultValue(value: string) { this.textContent = value }
 
 	connectedCallback() {
-		const menu = this.#menu()
 		const textarea = this.#textarea()
 
 		textarea.value = this.textContent.trimStart()
@@ -208,11 +213,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 		textarea.addEventListener("change", this.#onChange)
 		textarea.addEventListener("input", this.#onInput)
 
-		menu.header.addEventListener("click", this.#toggleHeader)
-		menu.bold.addEventListener("click", this.#toggleBold)
-		menu.italic.addEventListener("click", this.#toggleItalic)
-		menu.unorderedList.addEventListener("click", this.#toggleUnorderedList)
-		menu.orderedList.addEventListener("click", this.#toggleOrderedList)
+		this.#setupToolbar()
 
 		this.addEventListener("click", this.#onSelfClick)
 
@@ -229,11 +230,8 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 		textarea.removeEventListener("change", this.#onChange)
 		textarea.removeEventListener("input", this.#onInput)
-		menu.header.removeEventListener("click", this.#toggleHeader)
-		menu.bold.removeEventListener("click", this.#toggleBold)
-		menu.italic.removeEventListener("click", this.#toggleItalic)
-		menu.unorderedList.removeEventListener("click", this.#toggleUnorderedList)
-		menu.orderedList.removeEventListener("click", this.#toggleOrderedList)
+
+		this.#teardownToolbar()
 
 		this.removeEventListener("click", this.#onSelfClick)
 
@@ -450,6 +448,58 @@ export class TextareaMarkdownElement extends HTMLElement {
 	#events = {
 		dispatchChange: () => this.dispatchEvent(new Event("change", { bubbles: true })),
 		dispatchInput: () => this.dispatchEvent(new Event("input", { bubbles: true })),
+	}
+
+	#setupToolbar = () => {
+		const menu = this.#menu()
+		const menuList = this.#menuList()
+
+		menu.header.addEventListener("click", this.#toggleHeader)
+		menu.bold.addEventListener("click", this.#toggleBold)
+		menu.italic.addEventListener("click", this.#toggleItalic)
+		menu.unorderedList.addEventListener("click", this.#toggleUnorderedList)
+		menu.orderedList.addEventListener("click", this.#toggleOrderedList)
+
+		menuList.forEach((button, i) => {
+			button.tabIndex = i === 0 ? 0 : -1
+
+			button.addEventListener("keydown", this.#onMenuButtonKeyDown)
+		})
+	}
+
+	#teardownToolbar = () => {
+		const menu = this.#menu()
+		const menuList = this.#menuList()
+
+		menu.header.removeEventListener("click", this.#toggleHeader)
+		menu.bold.removeEventListener("click", this.#toggleBold)
+		menu.italic.removeEventListener("click", this.#toggleItalic)
+		menu.unorderedList.removeEventListener("click", this.#toggleUnorderedList)
+		menu.orderedList.removeEventListener("click", this.#toggleOrderedList)
+
+		menuList.forEach((button, i) => {
+			button.removeEventListener("keydown", this.#onMenuButtonKeyDown)
+		})
+	}
+
+	#onMenuButtonKeyDown = (e: KeyboardEvent) => {
+		if (e.key !== "ArrowLeft" && e.key !== "ArrowRight")
+			return
+
+		const menu = this.#menuList()
+		const current = e.target as HTMLElement
+		const index = menu.findIndex((button) => button === current)
+
+		if (index < 0)
+			return
+
+		e.preventDefault()
+
+		current.tabIndex = -1
+		const direction = e.key === "ArrowLeft" ? -1 : 1
+		const nextButton = menu[mod(index + direction, menu.length)]
+		nextButton.tabIndex = 0
+		nextButton.focus()
 	}
 
 	#createRoot = () => {

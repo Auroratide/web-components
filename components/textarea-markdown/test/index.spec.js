@@ -2,8 +2,21 @@ import { fixture, expect, oneEvent } from "@open-wc/testing"
 import { sendKeys } from "@web/test-runner-commands"
 import "../lib/define.js"
 
+const deepActiveElement = () => {
+	let el = document.activeElement
+	while (el?.shadowRoot?.activeElement) el = el.shadowRoot.activeElement
+	return el
+}
+
+const shiftTab = async () => {
+	await sendKeys({ down: "Shift" })
+	await sendKeys({ press: "Tab" })
+	await sendKeys({ up: "Shift" })
+}
+
 describe("textarea-markdown", () => {
 	const milliseconds = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+	const focusStart = (container) => container.querySelector("#start").focus()
 	const getLabel = (container) => container.querySelector("label")
 	const getTextarea = (container) => container.querySelector("textarea-markdown")
 	const getButton = (container) => container.querySelector("button")
@@ -476,7 +489,43 @@ describe("textarea-markdown", () => {
 			label.click()
 
 			// note: do not use to.equal, the comparison hangs indefinitely if it fails
-			expect(textarea.shadowRoot?.activeElement === innerTextarea).to.be.true
+			expect(deepActiveElement() === innerTextarea).to.be.true
+		})
+
+		it("toolbar uses arrows for navigation", async () => {
+			const form = await fixture(`
+				<form>
+					<button id="start">start</button>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md"></textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
+
+			const textarea = getTextarea(form)
+			const headerButton = getMenuButton(form, "Header")
+			const boldButton = getMenuButton(form, "Bold")
+			const italicButton = getMenuButton(form, "Italic")
+			const innerTextarea = getInnerTextarea(form)
+
+			focusStart(form)
+			await sendKeys({ press: "Tab" })
+			expect(deepActiveElement() === headerButton).to.be.true
+
+			await sendKeys({ press: "ArrowRight" })
+			expect(deepActiveElement() === boldButton).to.be.true
+
+			await sendKeys({ press: "ArrowRight" })
+			expect(deepActiveElement() === italicButton).to.be.true
+
+			await sendKeys({ press: "ArrowLeft" })
+			expect(deepActiveElement() === boldButton).to.be.true
+
+			await sendKeys({ press: "Tab" })
+			expect(deepActiveElement() === innerTextarea).to.be.true
+
+			await shiftTab()
+			expect(deepActiveElement() === boldButton).to.be.true
 		})
 	})
 

@@ -5,7 +5,7 @@
 	"description": "Monorepo for Web Components by Auroratide",
 	"type": "module",
 	"scripts": {
-		"components:watch": "pnpm -F \"./components/**\" build:watch",
+		"components:watch": "pnpm -r --workspace-concurrency=Infinity build:watch",
 		"docs:watch": "pnpm -F wc-docs dev",
 		"dev": "npm-run-all --parallel components:watch docs:watch",
 		"test": "pnpm -F \"./components/**\" run test:clean",
