@@ -194,22 +194,12 @@ export class TextareaMarkdownElement extends HTMLElement {
 	get defaultValue(): string { return this.textContent?.trimStart() ?? "" }
 	set defaultValue(value: string) { this.textContent = value }
 
-	focus(options: FocusOptions) {
-		this.#textarea()?.focus(options)
-	}
-
 	connectedCallback() {
 		const menu = this.#menu()
 		const textarea = this.#textarea()
 
 		textarea.value = this.textContent.trimStart()
 		this.#internals.setFormValue(textarea.value)
-
-		if (!this.hasAttribute("tabindex")) {
-			this.setAttribute("tabindex", "0")
-		}
-
-		this.addEventListener("focus", this.#onFocus)
 
 		this.#syncAttribute("placeholder")
 		this.#syncAttribute("rows")
@@ -223,6 +213,8 @@ export class TextareaMarkdownElement extends HTMLElement {
 		menu.italic.addEventListener("click", this.#toggleItalic)
 		menu.unorderedList.addEventListener("click", this.#toggleUnorderedList)
 		menu.orderedList.addEventListener("click", this.#toggleOrderedList)
+
+		this.addEventListener("click", this.#onSelfClick)
 
 		this.#textContentObserver.observe(this, {
 			attributes: false,
@@ -242,7 +234,8 @@ export class TextareaMarkdownElement extends HTMLElement {
 		menu.italic.removeEventListener("click", this.#toggleItalic)
 		menu.unorderedList.removeEventListener("click", this.#toggleUnorderedList)
 		menu.orderedList.removeEventListener("click", this.#toggleOrderedList)
-		this.removeEventListener("focus", this.#onFocus)
+
+		this.removeEventListener("click", this.#onSelfClick)
 
 		this.#textContentObserver.disconnect()
 	}
@@ -270,6 +263,14 @@ export class TextareaMarkdownElement extends HTMLElement {
 		},
 	}
 
+	#onSelfClick = (e: Event) => {
+		// Allows focusing the label to focus the textarea, while
+		// keeping the toolbar first in the tab order
+		if (e.composedPath()[0] === this) {
+			this.#textarea().focus()
+		}
+	}
+
 	#onChange = (e: Event) => {
 		const target = e.target as HTMLTextAreaElement
 		this.#setValue(target.value)
@@ -284,10 +285,6 @@ export class TextareaMarkdownElement extends HTMLElement {
 		if (e.inputType === "insertLineBreak") {
 			this.#continueList()
 		}
-	}
-
-	#onFocus = () => {
-		this.#textarea()?.focus()
 	}
 
 	#syncAttribute = (attribute: string, value?: string | null | undefined) => {
@@ -456,7 +453,10 @@ export class TextareaMarkdownElement extends HTMLElement {
 	}
 
 	#createRoot = () => {
-		const root = this.shadowRoot ?? this.attachShadow({ mode: "open" })
+		const root = this.shadowRoot ?? this.attachShadow({
+			mode: "open",
+			delegatesFocus: true,
+		})
 
 		const style = document.createElement("style")
 		style.innerHTML = TextareaMarkdownElement.css

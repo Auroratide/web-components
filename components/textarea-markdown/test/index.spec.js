@@ -475,7 +475,8 @@ describe("textarea-markdown", () => {
 
 			label.click()
 
-			expect(textarea.shadowRoot?.activeElement).to.equal(innerTextarea)
+			// note: do not use to.equal, the comparison hangs indefinitely if it fails
+			expect(textarea.shadowRoot?.activeElement === innerTextarea).to.be.true
 		})
 	})
 
