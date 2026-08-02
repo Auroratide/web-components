@@ -81,6 +81,8 @@ export class TextareaMarkdownElement extends HTMLElement {
 		}
 	})
 
+	#labelObserver = new MutationObserver(() => this.#syncAccessibleName())
+
 	#menu = (): {
 		header: HTMLButtonElement,
 		bold: HTMLButtonElement,
@@ -210,6 +212,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#syncAttribute("placeholder")
 		this.#syncAttribute("rows")
 		this.#syncAttribute("cols")
+		this.#syncAccessibleName()
 
 		textarea.addEventListener("change", this.#onChange)
 		textarea.addEventListener("input", this.#onInput)
@@ -223,10 +226,10 @@ export class TextareaMarkdownElement extends HTMLElement {
 			childList: true,
 			subtree: false,
 		})
+		this.#observeLabels()
 	}
 
 	disconnectedCallback() {
-		const menu = this.#menu()
 		const textarea = this.#textarea()
 
 		textarea.removeEventListener("change", this.#onChange)
@@ -237,6 +240,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.removeEventListener("click", this.#onSelfClick)
 
 		this.#textContentObserver.disconnect()
+		this.#labelObserver.disconnect()
 	}
 
 	attributeChangedCallback(attribute: string, oldValue: string, newValue: string) {
@@ -292,6 +296,30 @@ export class TextareaMarkdownElement extends HTMLElement {
 		} else {
 			this.#textarea()?.removeAttribute(attribute)
 		}
+	}
+
+	#observeLabels = () => {
+		this.#labelObserver.disconnect()
+		this.#internals.labels.forEach((label) => {
+			this.#labelObserver.observe(label, {
+				characterData: true,
+				childList: true,
+				subtree: true,
+			})
+		})
+	}
+
+	#syncAccessibleName = () => {
+		const textarea = this.#textarea()
+
+		const fromLabels = Array.from(this.#internals.labels)
+			.map((it) => it.textContent?.trim())
+			.join(" ")
+
+		if (fromLabels)
+			textarea.setAttribute("aria-label", fromLabels)
+		else
+			textarea.removeAttribute("aria-label")
 	}
 
 	#toggleInlineStyle = (style: string) => (e: Event) => {

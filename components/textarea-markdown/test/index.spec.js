@@ -1,4 +1,4 @@
-import { fixture, expect, oneEvent } from "@open-wc/testing"
+import { fixture, expect, oneEvent, waitUntil } from "@open-wc/testing"
 import { sendKeys } from "@web/test-runner-commands"
 import "../lib/define.js"
 
@@ -536,6 +536,25 @@ describe("textarea-markdown", () => {
 
 			await shiftTab()
 			expect(deepActiveElement() === boldButton).to.be.true
+		})
+
+		it("textbox matches label", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md"></textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
+
+			const innerTextarea = getInnerTextarea(form)
+			expect(innerTextarea.getAttribute("aria-label")).to.equal("Markdown")
+
+			const label = getLabel(form)
+			label.textContent = "Updated Label"
+			await waitUntil(() => {
+				return innerTextarea.getAttribute("aria-label") === "Updated Label"
+			}, "Accessible name did not update")
 		})
 	})
 
