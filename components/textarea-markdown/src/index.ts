@@ -1,6 +1,7 @@
 import { Icon } from "./icons.js"
 
 const mod = (n: number, m: number) => ((n % m) + m) % m
+const isLowSurrogate = (code: number) => code >= 0xDC00 && code <= 0xDFFF
 
 export class TextareaMarkdownElement extends HTMLElement {
 	static readonly formAssociated = true
@@ -303,15 +304,12 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 		const alreadyStyled = value.slice(start - style.length, start) === style && value.slice(end, end + style.length) === style
 
-		// TODO: figure out how to make this undoable
 		if (alreadyStyled) {
 			this.#setValue(value.slice(0, start - style.length) + value.slice(start, end) + value.slice(end + style.length))
-			textarea.selectionStart = start - style.length
-			textarea.selectionEnd = end - style.length
+			textarea.setSelectionRange(start - style.length, end - style.length)
 		} else {
 			this.#setValue(value.slice(0, start) + style + value.slice(start, end) + style + value.slice(end))
-			textarea.selectionStart = start + style.length
-			textarea.selectionEnd = end + style.length
+			textarea.setSelectionRange(start + style.length, end + style.length)
 		}
 
 		textarea.focus()
@@ -336,16 +334,16 @@ export class TextareaMarkdownElement extends HTMLElement {
 		const currentHeadingText = value.slice(startOfLine + currentHeadingLevel, endOfLine)?.trimStart()
 		if (currentHeadingLevel === 0) {
 			this.#setValue(value.slice(0, startOfLine) + "## " + value.slice(startOfLine))
-			textarea.selectionStart = start + 3
-			textarea.selectionEnd = end + 3
+			textarea.setSelectionRange(start + 3, end + 3)
 		} else if (currentHeadingLevel >= 4) {
 			this.#setValue(value.slice(0, startOfLine) + currentHeadingText + value.slice(endOfLine))
-			textarea.selectionStart = start - endOfLine + startOfLine + currentHeadingText.length
-			textarea.selectionEnd = end - endOfLine + startOfLine + currentHeadingText.length
+			textarea.setSelectionRange(
+				 start - endOfLine + startOfLine + currentHeadingText.length,
+				 end - endOfLine + startOfLine + currentHeadingText.length,
+			)
 		} else {
 			this.#setValue(value.slice(0, startOfLine) + "#" + value.slice(startOfLine))
-			textarea.selectionStart = start + 1
-			textarea.selectionEnd = end + 1
+			textarea.setSelectionRange(start + 1, end + 1)
 		}
 
 		textarea.focus()
@@ -367,12 +365,10 @@ export class TextareaMarkdownElement extends HTMLElement {
 			const newListStart = ordered ? "1. " : "- "
 
 			this.#setValue(value.slice(0, startOfLine) + newListStart + value.slice(startOfLine))
-			textarea.selectionStart = start + newListStart.length
-			textarea.selectionEnd = end + newListStart.length
+			textarea.setSelectionRange(start + newListStart.length, end + newListStart.length)
 		} else {
 			this.#setValue(value.slice(0, startOfLine) + value.slice(startOfLine + listType.length))
-			textarea.selectionStart = start - listType.length
-			textarea.selectionEnd = end - listType.length
+			textarea.setSelectionRange(start - listType.length, end - listType.length)
 		}
 
 		textarea.focus()
@@ -398,8 +394,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 			}
 
 			this.#setValue(value.slice(0, start) + nextListType + value.slice(start))
-			textarea.selectionStart = start + nextListType.length
-			textarea.selectionEnd = start + nextListType.length
+			textarea.setSelectionRange(start + nextListType.length, start + nextListType.length)
 			this.#events.dispatchChange()
 		}
 	}
@@ -441,8 +436,50 @@ export class TextareaMarkdownElement extends HTMLElement {
 		// 2. It causes a click bug with the menu buttons, preventing 'click' from being dispatched
 
 		this.#internals.setFormValue(value)
-		this.#textarea().value = value
+		this.#undoableReplaceText(value)
 		this.#validate()
+	}
+
+	#changedText = (currentValue: string, newValue: string) => {
+		const max = Math.min(currentValue.length, newValue.length)
+
+		let start = 0
+		while (start < max && currentValue[start] === newValue[start])
+			start += 1
+
+		let end = 0
+		while (end < max - start && currentValue[currentValue.length - 1 - end] === newValue[newValue.length - 1 - end])
+			end += 1
+
+		if (isLowSurrogate(currentValue.charCodeAt(start)))
+			start = Math.max(0, start - 1)
+		if (isLowSurrogate(currentValue.charCodeAt(currentValue.length - end)))
+			end += 1
+
+		return {
+			from: start,
+			to: currentValue.length - end,
+			text: newValue.slice(start, newValue.length - end),
+		}
+	}
+
+	#undoableReplaceText = (newValue: string) => {
+		const textarea = this.#textarea()
+
+		// forward compatibility
+		if (!("execCommand" in document)) {
+			textarea.value = newValue
+			return
+		}
+
+		const currentValue = textarea.value
+		if (currentValue === newValue) return
+
+		const { from, to, text } = this.#changedText(currentValue, newValue)
+
+		textarea.focus()
+		textarea.setSelectionRange(from, to)
+		document.execCommand("insertText", false, text)
 	}
 
 	#events = {

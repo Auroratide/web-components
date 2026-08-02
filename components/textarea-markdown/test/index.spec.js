@@ -14,6 +14,16 @@ const shiftTab = async () => {
 	await sendKeys({ up: "Shift" })
 }
 
+const undo = (el) => {
+	el.focus()
+	document.execCommand("undo")
+}
+
+const redo = (el) => {
+	el.focus()
+	document.execCommand("redo")
+}
+
 describe("textarea-markdown", () => {
 	const milliseconds = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 	const focusStart = (container) => container.querySelector("#start").focus()
@@ -648,6 +658,35 @@ describe("textarea-markdown", () => {
 			
 			const emitted = await emittedPromise
 			expect(emitted.target.value).to.equal("## hello")
+		})
+	})
+
+	describe("undoing", () => {
+		it("buttons are undoable", async () => {
+			const form = await fixture(`
+				<form>
+					<label for="md">Markdown</label>
+					<textarea-markdown id="md" name="md">hello world</textarea-markdown>
+					<button id="submit" type="submit">Submit</button>
+				</form>
+			`)
+
+			const innerTextarea = getInnerTextarea(form)
+			const boldButton = getMenuButton(form, "Bold")
+			innerTextarea.focus()
+			innerTextarea.selectionStart = 6
+			innerTextarea.selectionEnd = 11
+			boldButton.click()
+
+			undo(innerTextarea)
+
+			let submittedValue = await submitForm(form)
+			expect(submittedValue).to.equal("hello world")
+
+			redo(innerTextarea)
+
+			submittedValue = await submitForm(form)
+			expect(submittedValue).to.equal("hello **world**")
 		})
 	})
 })
