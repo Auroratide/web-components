@@ -17,6 +17,7 @@
 		import("@auroratide/reorder-list/lib/define.js")
 		import("@auroratide/tab-list/lib/define.js")
 		import("@auroratide/table-of-contents/lib/define.js")
+		import("@auroratide/textarea-markdown/lib/define.js")
 		import("@auroratide/toggle-switch/lib/define.js")
 		import("@auroratide/typewritten-text/lib/style.css")
 		import("@auroratide/typewritten-text/lib/define.js")
@@ -32,7 +33,7 @@
 	})
 </script>
 
-<div class="img-contained">
+<div class="img-contained page">
 	<Readme {html} assets={[ {
 		replace: "./components/img-zoom/fruit.png",
 		with: fruit,
@@ -43,5 +44,17 @@
 	.img-contained :global(img) {
 		width: 100%;
 		height: auto;
+	}
+
+	.page :global(textarea-markdown::part(button)) {
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.page :global(textarea-markdown::part(textarea)) {
+		border: 0.0625em solid var(--t-fg-a);
+		border-block-end: 0.25em solid var(--t-fg-a);
 	}
 </style>

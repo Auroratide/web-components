@@ -31,6 +31,10 @@ export const Routes = {
 			name: () => "Table of Contents",
 			href: () => `${base}/table-of-contents`,
 		},
+		TextareaMarkdown: {
+			name: () => "Textarea Markdown",
+			href: () => `${base}/textarea-markdown`,
+		},
 		ToggleSwitch: {
 			name: () => "Toggle Switch",
 			href: () => `${base}/toggle-switch`,

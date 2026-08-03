@@ -362,6 +362,54 @@ A component that automatically generates a table of contents.
 ></table-of-contents>
 ```
 
+## The textarea-markdown Element
+
+**View**: [The textarea-markdown Element](https://components.auroratide.com/textarea-markdown)
+
+A textarea with controls for markdown formatting.
+
+<!--DEMO
+<wc-demo>
+	<label id="textarea-markdown-label" for="textarea-markdown">Markdown Formatted</label>
+	<textarea-markdown id="textarea-markdown" placeholder="Type some text!" rows="6">This text can be **bolded.**</textarea-markdown>
+	<style>
+		#textarea-markdown-label {
+			display: block;
+			margin-block-end: 0.333em;
+		}
+		#textarea-markdown {
+			border: 0.0625em solid oklch(1 0 0 / 0.5);
+			border-radius: 0.25em;
+		}
+		#textarea-markdown:focus {
+			border: 0.0625em solid var(--t-primary-b);
+		}
+		#textarea-markdown::part(menu) {
+			background-color: oklch(1 0 0 / 0.125);
+			padding: 0.25em 0.5em;
+		}
+		#textarea-markdown::part(button) {
+			border-radius: 0.25em;
+			background: none;
+			font-size: 87.5%;
+		}
+		#textarea-markdown::part(button):hover {
+			background: oklch(0 0 0 / 0.25);
+		}
+		#textarea-markdown::part(textarea) {
+			border: none;
+		}
+	</style>
+</wc-demo>
+/DEMO-->
+
+```html
+<label for="textarea-markdown">Markdown Formatted</label>
+<textarea-markdown id="textarea-markdown" placeholder="Type some text!" rows="6">
+	This text can be **bolded.**
+</textarea-markdown>
+```
+
 ## The toggle-switch Element
 
 **View**: [The toggle-switch Element](https://components.auroratide.com/toggle-switch)
