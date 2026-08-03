@@ -1,5 +1,5 @@
 const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["../chunks/BxcPM8AB.js","../chunks/BkzQfvds.js","../assets/style.B89jwdWn.css"])))=>i.map(i=>d[i]);
-import{_ as a}from"../chunks/C1FmrZbK.js";import{s as o,n as i,o as c}from"../chunks/p4Z6_urL.js";import{S as h,i as m,d as r,a as g,t as d,b as u,c as j,m as b,f,j as w,k as y,g as v,o as x,n as k}from"../chunks/BJ0JgjBn.js";import{s as _}from"../chunks/DlallKuY.js";import{s as q}from"../chunks/e7UggXcj.js";import{b as T}from"../chunks/2fh9akDk.js";import{f as E}from"../chunks/BMJTztQG.js";import{R as A}from"../chunks/eS6eXqz-.js";import{s as z}from"../chunks/AuAQ2cgS.js";const V=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
+import{_ as t}from"../chunks/C1FmrZbK.js";import{s as o,n as i,o as c}from"../chunks/p4Z6_urL.js";import{S as m,i as h,d as r,a as g,t as d,b as u,c as j,m as b,f,j as w,k as y,g as k,o as x,n as v}from"../chunks/BJ0JgjBn.js";import{s as _}from"../chunks/DlallKuY.js";import{s as q}from"../chunks/e7UggXcj.js";import{b as T}from"../chunks/2fh9akDk.js";import{f as E}from"../chunks/BMJTztQG.js";import{R as A}from"../chunks/DJKbV-HT.js";import{s as z}from"../chunks/AuAQ2cgS.js";const V=`<h1 id="web-components-by-auroratide">Web Components by Auroratide</h1>
 <p hidden><strong><a href="https://components.auroratide.com">View this page with live demos!</a></strong></p>
 <p>This is just a bunch of highly reusable, fully accessible <strong><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a></strong> you can use on your websites! Why web components?</p>
 <ul>
@@ -311,6 +311,46 @@ import{_ as a}from"../chunks/C1FmrZbK.js";import{s as o,n as i,o as c}from"../ch
 	<span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Table of Contents&quot;</span>
 &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">table-of-contents</span>&gt;</span>
 </code></pre>
+<h2 id="the-textarea-markdown-element">The textarea-markdown Element</h2>
+<p><strong>View</strong>: <a href="https://components.auroratide.com/textarea-markdown">The textarea-markdown Element</a></p>
+<p>A textarea with controls for markdown formatting.</p>
+<wc-demo>
+	<label id="textarea-markdown-label" for="textarea-markdown">Markdown Formatted</label>
+	<textarea-markdown id="textarea-markdown" placeholder="Type some text!" rows="6">This text can be **bolded.**</textarea-markdown>
+	<style>
+		#textarea-markdown-label {
+			display: block;
+			margin-block-end: 0.333em;
+		}
+		#textarea-markdown {
+			border: 0.0625em solid oklch(1 0 0 / 0.5);
+			border-radius: 0.25em;
+		}
+		#textarea-markdown:focus {
+			border: 0.0625em solid var(--t-primary-b);
+		}
+		#textarea-markdown::part(menu) {
+			background-color: oklch(1 0 0 / 0.125);
+			padding: 0.25em 0.5em;
+		}
+		#textarea-markdown::part(button) {
+			border-radius: 0.25em;
+			background: none;
+			font-size: 87.5%;
+		}
+		#textarea-markdown::part(button):hover {
+			background: oklch(0 0 0 / 0.25);
+		}
+		#textarea-markdown::part(textarea) {
+			border: none;
+		}
+	</style>
+</wc-demo>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;textarea-markdown&quot;</span>&gt;</span>Markdown Formatted<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">textarea-markdown</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;textarea-markdown&quot;</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Type some text!&quot;</span> <span class="hljs-attr">rows</span>=<span class="hljs-string">&quot;6&quot;</span>&gt;</span>
+	This text can be **bolded.**
+<span class="hljs-tag">&lt;/<span class="hljs-name">textarea-markdown</span>&gt;</span>
+</code></pre>
 <h2 id="the-toggle-switch-element">The toggle-switch Element</h2>
 <p><strong>View</strong>: <a href="https://components.auroratide.com/toggle-switch">The toggle-switch Element</a></p>
 <p>A form control representing something is on or off.</p>
@@ -386,4 +426,4 @@ import{_ as a}from"../chunks/C1FmrZbK.js";import{s as o,n as i,o as c}from"../ch
 	<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
-`;function I(p){let t,n,e;return n=new A({props:{html:V,assets:[{replace:"./components/img-zoom/fruit.png",with:E}]}}),{c(){t=x("div"),k(n.$$.fragment),this.h()},l(s){t=w(s,"DIV",{class:!0});var l=y(t);v(n.$$.fragment,l),l.forEach(r),this.h()},h(){f(t,"class","img-contained svelte-w5efvt")},m(s,l){j(s,t,l),b(n,t,null),e=!0},p:i,i(s){e||(u(n.$$.fragment,s),e=!0)},o(s){d(n.$$.fragment,s),e=!1},d(s){s&&r(t),g(n)}}}function P(p){return a(()=>import("../chunks/BTnfLqC7.js"),[],import.meta.url),a(()=>import("../chunks/DdJp3656.js"),[],import.meta.url),a(()=>import("../chunks/B3G3M7v2.js"),[],import.meta.url),a(()=>import("../chunks/xfHmz_n9.js"),[],import.meta.url),a(()=>import("../chunks/B67tN34s.js"),[],import.meta.url),a(()=>import("../chunks/gp_6CtRi.js"),[],import.meta.url),a(()=>import("../chunks/BxcPM8AB.js"),__vite__mapDeps([0,1]),import.meta.url),a(()=>Promise.resolve({}),__vite__mapDeps([2]),import.meta.url),a(()=>import("../chunks/EotpxmhP.js"),[],import.meta.url),c(()=>{z(),q(),_(),T()}),[]}class W extends h{constructor(t){super(),m(this,t,P,I,o,{})}}export{W as component};
+`;function I(p){let s,n,e;return n=new A({props:{html:V,assets:[{replace:"./components/img-zoom/fruit.png",with:E}]}}),{c(){s=x("div"),v(n.$$.fragment),this.h()},l(a){s=w(a,"DIV",{class:!0});var l=y(s);k(n.$$.fragment,l),l.forEach(r),this.h()},h(){f(s,"class","img-contained page svelte-2q2nf7")},m(a,l){j(a,s,l),b(n,s,null),e=!0},p:i,i(a){e||(u(n.$$.fragment,a),e=!0)},o(a){d(n.$$.fragment,a),e=!1},d(a){a&&r(s),g(n)}}}function P(p){return t(()=>import("../chunks/BTnfLqC7.js"),[],import.meta.url),t(()=>import("../chunks/DdJp3656.js"),[],import.meta.url),t(()=>import("../chunks/B3G3M7v2.js"),[],import.meta.url),t(()=>import("../chunks/xfHmz_n9.js"),[],import.meta.url),t(()=>import("../chunks/B67tN34s.js"),[],import.meta.url),t(()=>import("../chunks/gp_6CtRi.js"),[],import.meta.url),t(()=>import("../chunks/CFjo8Z_0.js"),[],import.meta.url),t(()=>import("../chunks/BxcPM8AB.js"),__vite__mapDeps([0,1]),import.meta.url),t(()=>Promise.resolve({}),__vite__mapDeps([2]),import.meta.url),t(()=>import("../chunks/EotpxmhP.js"),[],import.meta.url),c(()=>{z(),q(),_(),T()}),[]}class B extends m{constructor(s){super(),h(this,s,P,I,o,{})}}export{B as component};
