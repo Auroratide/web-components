@@ -4,6 +4,10 @@ const mod = (n: number, m: number) => ((n % m) + m) % m
 const isLowSurrogate = (code: number) => code >= 0xDC00 && code <= 0xDFFF
 const LIST_MARKER = /^(- |\* |\d+\. )/
 
+const isApple = () => "userAgentData" in navigator
+	? (navigator.userAgentData as any).platform.toLowerCase().includes('mac')
+	: /Mac|iPod|iPhone|iPad/.test(navigator.userAgent)
+
 export class TextareaMarkdownElement extends HTMLElement {
 	static readonly formAssociated = true
 	static defaultElementName = "textarea-markdown"
@@ -16,10 +20,10 @@ export class TextareaMarkdownElement extends HTMLElement {
 		<div>
 			<menu role="toolbar" aria-label="Formatting" aria-controls="textarea" id="menu" part="menu">
 				<li><button part="button" type="button" id="header" aria-label="Header">${Icon.header}</button></li>
-				<li><button part="button" type="button" id="bold" aria-label="Bold">${Icon.bold}</button></li>
-				<li><button part="button" type="button" id="italic" aria-label="Italic">${Icon.italic}</button></li>
-				<li><button part="button" type="button" id="unordered-list" aria-label="Unordered List">${Icon.unorderedList}</button></li>
-				<li><button part="button" type="button" id="ordered-list" aria-label="Ordered List">${Icon.orderedList}</button></li>
+				<li><button part="button" type="button" id="bold" aria-label="Bold" aria-keyshortcuts="Meta+B">${Icon.bold}</button></li>
+				<li><button part="button" type="button" id="italic" aria-label="Italic" aria-keyshortcuts="Meta+I">${Icon.italic}</button></li>
+				<li><button part="button" type="button" id="unordered-list" aria-label="Unordered List" aria-keyshortcuts="Meta+Shift+8">${Icon.unorderedList}</button></li>
+				<li><button part="button" type="button" id="ordered-list" aria-label="Ordered List" aria-keyshortcuts="Meta+Shift+7">${Icon.orderedList}</button></li>
 			</menu>
 			<textarea part="textarea" id="textarea"></textarea>
 		</div>
@@ -221,6 +225,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#setupToolbar()
 
 		this.addEventListener("click", this.#onSelfClick)
+		this.addEventListener("keydown", this.#onKeyboardShortcut)
 
 		this.#textContentObserver.observe(this, {
 			attributes: false,
@@ -239,6 +244,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 		this.#teardownToolbar()
 
 		this.removeEventListener("click", this.#onSelfClick)
+		this.removeEventListener("keydown", this.#onKeyboardShortcut)
 
 		this.#textContentObserver.disconnect()
 		this.#labelObserver.disconnect()
@@ -289,6 +295,20 @@ export class TextareaMarkdownElement extends HTMLElement {
 		if (e.inputType === "insertLineBreak") {
 			this.#continueList()
 		}
+	}
+
+	#onKeyboardShortcut = (e: KeyboardEvent) => {
+		const metaKey = isApple() ? e.metaKey : e.ctrlKey
+		if (!metaKey) return
+
+		if (!e.shiftKey && !e.altKey && e.key.toLowerCase() === "b")
+			this.#toggleBold(e)
+		else if (!e.shiftKey && !e.altKey && e.key.toLowerCase() === "i")
+			this.#toggleItalic(e)
+		else if (e.shiftKey && !e.altKey && e.key === "8")
+			this.#toggleUnorderedList(e)
+		else if (e.shiftKey && !e.altKey && e.key === "7")
+			this.#toggleOrderedList(e)
 	}
 
 	#syncAttribute = (attribute: string, value?: string | null | undefined) => {

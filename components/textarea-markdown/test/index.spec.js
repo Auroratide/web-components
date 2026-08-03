@@ -2,6 +2,10 @@ import { fixture, expect, oneEvent, waitUntil } from "@open-wc/testing"
 import { sendKeys } from "@web/test-runner-commands"
 import "../lib/define.js"
 
+const isApple = () => "userAgentData" in navigator
+	? navigator.userAgentData.platform.toLowerCase().includes('mac')
+	: /Mac|iPod|iPhone|iPad/.test(navigator.userAgent)
+
 const deepActiveElement = () => {
 	let el = document.activeElement
 	while (el?.shadowRoot?.activeElement) el = el.shadowRoot.activeElement
@@ -22,6 +26,16 @@ const undo = (el) => {
 const redo = (el) => {
 	el.focus()
 	document.execCommand("redo")
+}
+
+const shortcut = async (key, ...extraModifiers) => {
+	const modifiers = [isApple() ? "Meta" : "Control", ...extraModifiers]
+	try {
+		for (const m of modifiers) await sendKeys({ down: m })
+		await sendKeys({ press: key })
+	} finally {
+		for (const m of [...modifiers].reverse()) await sendKeys({ up: m })
+	}
 }
 
 describe("textarea-markdown", () => {
@@ -260,6 +274,44 @@ describe("textarea-markdown", () => {
 				const submittedValue = await submitForm(form)
 				expect(submittedValue).to.equal("hello world")
 			})
+
+			it("keyboard shortcut - bold", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md">hello world</textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				innerTextarea.focus()
+				innerTextarea.selectionStart = 6
+				innerTextarea.selectionEnd = 11
+				await shortcut("b")
+
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("hello **world**")
+			})
+
+			it("keyboard shortcut - italic", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md">hello world</textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				innerTextarea.focus()
+				innerTextarea.selectionStart = 6
+				innerTextarea.selectionEnd = 11
+				await shortcut("i")
+
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("hello _world_")
+			})
 		})
 
 		describe("header", () => {
@@ -459,6 +511,25 @@ describe("textarea-markdown", () => {
 				const submittedValue = await submitForm(form)
 				expect(submittedValue).to.equal("hello")
 			})
+
+			it("keyboard shortcut", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md">first\nsecond\nthird\nfourth</textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				innerTextarea.focus()
+				innerTextarea.selectionStart = 2
+				innerTextarea.selectionEnd = 18
+				await shortcut("8", "Shift")
+				
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("- first\n- second\n- third\nfourth")
+			})
 		})
 
 		describe("ordered lists", () => {
@@ -560,6 +631,25 @@ describe("textarea-markdown", () => {
 
 				const submittedValue = await submitForm(form)
 				expect(submittedValue).to.equal("hello")
+			})
+
+			it("keyboard shortcut", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md">first\nsecond\nthird\nfourth</textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				innerTextarea.focus()
+				innerTextarea.selectionStart = 2
+				innerTextarea.selectionEnd = 18
+				await shortcut("7", "Shift")
+				
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("1. first\n2. second\n3. third\nfourth")
 			})
 		})
 	})
