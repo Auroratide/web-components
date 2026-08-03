@@ -2,7 +2,7 @@
 
 <p hidden><strong><a href="https://components.auroratide.com/textarea-markdown">View this page with live demos!</a></strong></p>
 
-The `textarea-markdown` element represents a textarea which supports [Markdown Syntax](https://www.markdownguide.org/). This component is built with accessibility in mind.
+The `textarea-markdown` element represents a textarea which supports [Markdown Syntax](https://www.markdownguide.org/). This component is built with accessibility in mind: it is form-associated, works with customary labels, and uses the WAI-ARIA guidelines for the [toolbar pattern](https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/).
 
 > [!WARNING]
 > This component is still in active development and may not implement all the things necessary for an element to be fully form-associated and accessible. If you decide to use this, be sure to update often!
@@ -78,6 +78,7 @@ She has **orange** hair and _green_ eyes.
 | `rows` | - | Number of rows to include in the textarea. |
 | `cols` | - | Numer of columns to include in the textarea. |
 | `disabled` | - | Whether the textarea can be edited. |
+| `required` | - | Whether the textarea is required for form submission. |
 
 ### CSS Customization
 
@@ -153,3 +154,33 @@ textarea-markdown::part(textarea) {
 	border: none;
 }
 ```
+
+### Events
+
+The `textarea-markdown` element dispatches the following events:
+
+| Name | When Triggered |
+| ---- | -------------- |
+| `change` | Whenever the value of the textarea changes, or when one of the tools is invoked. |
+| `input` | Whenever a change occurs in the textarea through the user interface. |
+
+The value of the text field can be accessed with `event.target.value`.
+
+### Toolbar
+
+As of this version, the toolbar is static and provides the following options:
+
+| Tool | Shortcut | Purpose |
+| ---- | -------- | ------- |
+| Header | - | Switches between a level 2, level 3, and level 4 header. |
+| Bold | Ctrl+B | Makes the selected text bold. |
+| Italic | Ctrl+I | Makes the selected text italic. |
+| Bullets | Ctrl+Shift+8 | Starts a bulleted list. |
+| Numbers | Ctrl+Shift+7 | Starts a numbered list. |
+
+## Accessibility
+
+This custom element is build with accessibility in mind! It follows the WAI-ARIA guidelines for the [toolbar pattern](https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/).
+
+- When focus is on the toolbar, <kbd>Left</kbd> and <kbd>Right</kbd> navigate between the options.
+- The textarea is form-associated, so it participates in form submission and can be labeled the same way as inputs.
