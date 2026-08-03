@@ -420,6 +420,26 @@ describe("textarea-markdown", () => {
 				expect(submittedValue).to.equal("- first\nnext")
 			})
 
+			it("toggling many lines at once", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md">first\nsecond\nthird\nfourth</textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				const unorderedListButton = getMenuButton(form, "Unordered List")
+				innerTextarea.focus()
+				innerTextarea.selectionStart = 2
+				innerTextarea.selectionEnd = 18
+				unorderedListButton.click()
+				
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("- first\n- second\n- third\nfourth")
+			})
+
 			it("undoing", async () => {
 				const form = await fixture(`
 					<form>
@@ -500,6 +520,26 @@ describe("textarea-markdown", () => {
 
 				const submittedValue = await submitForm(form)
 				expect(submittedValue).to.equal("1. first\nnext")
+			})
+
+			it("toggling many lines at once", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md">first\nsecond\nthird\nfourth</textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				const orderedListButton = getMenuButton(form, "Ordered List")
+				innerTextarea.focus()
+				innerTextarea.selectionStart = 2
+				innerTextarea.selectionEnd = 18
+				orderedListButton.click()
+				
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("1. first\n2. second\n3. third\nfourth")
 			})
 
 			it("undoing", async () => {

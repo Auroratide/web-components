@@ -2,6 +2,7 @@ import { Icon } from "./icons.js"
 
 const mod = (n: number, m: number) => ((n % m) + m) % m
 const isLowSurrogate = (code: number) => code >= 0xDC00 && code <= 0xDFFF
+const LIST_MARKER = /^(- |\* |\d+\. )/
 
 export class TextareaMarkdownElement extends HTMLElement {
 	static readonly formAssociated = true
@@ -386,20 +387,33 @@ export class TextareaMarkdownElement extends HTMLElement {
 		const end = textarea.selectionEnd
 		const value = textarea.value
 
-		const startOfLine = this.#getStartOfLine()
-		const listType = this.#getListType(startOfLine)
+		const blockStart = this.#getStartOfLine(start)
+		const blockEnd = this.#getEndOfLine(
+			end > start && this.#getStartOfLine(end) === end ? end - 1 : end
+		)
+		const lines = value.slice(blockStart, blockEnd).split("\n")
 
-		if (listType == null) {
-			const newListStart = ordered ? "1. " : "- "
+		// Only strip markers if every line matches
+		const allMatch = lines.every((line) => {
+			const marker = line.match(LIST_MARKER)?.[0]
+			return marker != null && /^\d/.test(marker) === ordered
+		})
 
-			this.#setValue(value.slice(0, startOfLine) + newListStart + value.slice(startOfLine))
-			textarea.setSelectionRange(start + newListStart.length, end + newListStart.length)
-		} else {
-			this.#setValue(value.slice(0, startOfLine) + value.slice(startOfLine + listType.length))
-			textarea.setSelectionRange(start - listType.length, end - listType.length)
-		}
+		const next = lines.map((line, index) => {
+			const stripped = line.replace(LIST_MARKER, "")
+			return allMatch ? stripped : (ordered ? `${index + 1}. ` : "- ") + stripped
+		})
 
-		textarea.focus()
+		const block = next.join("\n")
+		this.#setValue(value.slice(0, blockStart) + block + value.slice(blockEnd))
+
+		const firstDelta = next[0].length - lines[0].length
+		const totalDelta = block.length - (blockEnd - blockStart)
+		textarea.setSelectionRange(
+			Math.max(blockStart, start + firstDelta),
+			Math.max(blockStart, end + totalDelta),
+		)
+
 		this.#events.dispatchChange()
 	}
 
@@ -437,7 +451,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 
 	#getListType = (startOfLine: number) => {
 		const value = this.value
-		return value?.slice(startOfLine).match(/^(- |\* |\d+\. )/)?.[0]
+		return value?.slice(startOfLine).match(LIST_MARKER)?.[0]
 	}
 
 	#getStartOfLine = (cursorLocation?: number): number => {
