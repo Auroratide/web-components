@@ -1,8 +1,7 @@
 {
 	"name": "@auroratide/textarea-markdown",
 	"version": "0.0.1",
-	"private": true,
-	"description": "",
+	"description": "Web component for a textarea with markdown capabilities.",
 	"type": "module",
 	"main": "lib/index.js",
 	"module": "lib/index.js",
@@ -13,7 +12,12 @@
 		"test": "wtr --node-resolve --port 10011 test",
 		"test:clean": "pnpm clean && pnpm build && pnpm test"
 	},
-	"keywords": [],
+	"keywords": [
+		"textarea",
+		"mardkown",
+		"web component",
+		"element"
+	],
 	"author": {
 		"name": "Timothy Foster",
 		"url": "https://auroratide.com"
