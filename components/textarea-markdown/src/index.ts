@@ -410,21 +410,29 @@ export class TextareaMarkdownElement extends HTMLElement {
 		const textarea = this.#textarea()
 
 		const start = textarea.selectionStart
+		const end = textarea.selectionEnd
 		const startOfLine = this.#getStartOfLine(start - 1)
+		const endOfLine = this.#getEndOfLine(start)
 		const listType = this.#getListType(startOfLine)
 
-		const value = this.value ?? ""
+		if (!listType) return
 
-		if (listType) {
-			let nextListType = listType
-			if (!isNaN(parseInt(listType))) {
-				nextListType = `${parseInt(listType) + 1}. `
-			}
+		const value = textarea.value
+		const lineContent = value.slice(startOfLine + listType.length, endOfLine).trim()
 
-			this.#setValue(value.slice(0, start) + nextListType + value.slice(start))
-			textarea.setSelectionRange(start + nextListType.length, start + nextListType.length)
+		if (!lineContent) {
+			this.#setValue(value.slice(0, startOfLine) + value.slice(start))
+			textarea.setSelectionRange(startOfLine, startOfLine)
 			this.#events.dispatchChange()
+			return
 		}
+
+		const isOrdered = !isNaN(parseInt(listType))
+		const nextListType = isOrdered ? `${parseInt(listType) + 1}. ` : listType
+
+		this.#setValue(value.slice(0, start) + nextListType + value.slice(start))
+		textarea.setSelectionRange(start + nextListType.length, start + nextListType.length)
+		this.#events.dispatchChange()
 	}
 
 	#getListType = (startOfLine: number) => {

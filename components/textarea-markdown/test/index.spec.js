@@ -399,6 +399,27 @@ describe("textarea-markdown", () => {
 				expect(submittedValue).to.equal("- first\n- next")
 			})
 
+			it("cancelling a current list", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md">- first</textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				innerTextarea.focus()
+				innerTextarea.selectionStart = 7
+				innerTextarea.selectionEnd = 7
+				await sendKeys({ press: "Enter" })
+				await sendKeys({ press: "Enter" })
+				await sendKeys({ type: "next" })
+
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("- first\nnext")
+			})
+
 			it("undoing", async () => {
 				const form = await fixture(`
 					<form>
@@ -458,6 +479,27 @@ describe("textarea-markdown", () => {
 
 				const submittedValue = await submitForm(form)
 				expect(submittedValue).to.equal("1. first\n2. next")
+			})
+
+			it("cancelling a current list", async () => {
+				const form = await fixture(`
+					<form>
+						<label for="md">Markdown</label>
+						<textarea-markdown id="md" name="md">1. first</textarea-markdown>
+						<button id="submit" type="submit">Submit</button>
+					</form>
+				`)
+
+				const innerTextarea = getInnerTextarea(form)
+				innerTextarea.focus()
+				innerTextarea.selectionStart = 8
+				innerTextarea.selectionEnd = 8
+				await sendKeys({ press: "Enter" })
+				await sendKeys({ press: "Enter" })
+				await sendKeys({ type: "next" })
+
+				const submittedValue = await submitForm(form)
+				expect(submittedValue).to.equal("1. first\nnext")
 			})
 
 			it("undoing", async () => {
