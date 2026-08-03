@@ -1,5 +1,12 @@
 # @auroratide/wc-docs
 
+## 0.2.6
+
+### Patch Changes
+
+- Updated dependencies [14c0aba]
+  - @auroratide/textarea-markdown@0.1.0
+
 ## 0.2.5
 
 ### Patch Changes
