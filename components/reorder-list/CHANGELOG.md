@@ -1,5 +1,11 @@
 # @auroratide/reorder-list
 
+## 0.6.0
+
+### Minor Changes
+
+- 408199a: Change the overall semantics from listbox to a list in order for list items to contain interactive elements.
+
 ## 0.5.1
 
 ### Patch Changes
