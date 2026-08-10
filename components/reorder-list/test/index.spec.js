@@ -107,9 +107,18 @@ const handlesOf = (container) => container.querySelectorAll("reorder-handle")
 
 const defaultHandleOf = (item) => item.shadowRoot?.querySelector("[part~=handle]")
 
+const ANNOUNCER_SELECTOR = "[data-reorder-list-announcer]"
+
+const region = () => document.querySelector(ANNOUNCER_SELECTOR)
+
 describe("reorder-list", () => {
 	beforeEach(() => {
 		ReorderItemElement.START_DRAG_DELAY_MS = 10
+
+		// the region is a shared, document-level node that outlives each fixture
+		if (region() != null) {
+			region().textContent = ""
+		}
 	})
 
 	describe("aria-requirements", () => {
@@ -574,22 +583,40 @@ describe("reorder-list", () => {
 		// Under the old listbox pattern a move took focus with it, so the item and
 		// its position were re-announced for free. Focus now stays on the handle,
 		// and a DOM reorder says nothing on its own.
-		const regionOf = (list) => list.shadowRoot?.querySelector("[aria-live]")
-		const saidBy = (list) => regionOf(list).textContent.trim()
+		const said = () => region().textContent.trim()
 
 		it("has a polite live region", async () => {
-			const container = await fixture(listMarkup(["Apple", "Orange"]))
-			const region = regionOf(container)
+			// It exists from the moment a list connects, not from the first
+			// announcement: a live region populated in the same breath as it is
+			// inserted is unreliably announced.
+			await fixture(listMarkup(["Apple", "Orange"]))
 
-			expect(region, "the list needs somewhere to speak").to.exist
-			expect(region.getAttribute("aria-live")).to.equal("polite")
-			expect(saidBy(container), "silent until something moves").to.equal("")
+			expect(region(), "the list needs somewhere to speak").to.exist
+			expect(region().getAttribute("aria-live")).to.equal("polite")
+			expect(said(), "silent until something moves").to.equal("")
 		})
 
 		it("does not disturb the layout", async () => {
+			await fixture(listMarkup(["Apple", "Orange"]))
+
+			expect(region().getBoundingClientRect().height).to.be.at.most(1)
+		})
+
+		it("sits outside the list, so browsing it never meets the region", async () => {
 			const container = await fixture(listMarkup(["Apple", "Orange"]))
 
-			expect(regionOf(container).getBoundingClientRect().height).to.be.at.most(1)
+			expect(container.contains(region())).to.be.false
+			expect(container.shadowRoot.contains(region())).to.be.false
+			expect(region().parentElement).to.equal(document.body)
+		})
+
+		it("is one region shared by every list", async () => {
+			await fixture(`<div>
+				${listMarkup(["Apple", "Orange"])}
+				${listMarkup(["Cherry", "Plum"])}
+			</div>`)
+
+			expect(document.querySelectorAll(ANNOUNCER_SELECTOR).length).to.equal(1)
 		})
 
 		it("announces the new position after a keyboard reorder", async () => {
@@ -598,10 +625,10 @@ describe("reorder-list", () => {
 			handlesOf(container)[0].focus()
 
 			await altPress("ArrowDown")
-			expect(saidBy(container)).to.equal("Apple, position 2 of 3")
+			expect(said()).to.equal("Apple, position 2 of 3")
 
 			await altPress("ArrowDown")
-			expect(saidBy(container)).to.equal("Apple, position 3 of 3")
+			expect(said()).to.equal("Apple, position 3 of 3")
 		})
 
 		it("announces from a default handle too", async () => {
@@ -610,7 +637,7 @@ describe("reorder-list", () => {
 			defaultHandleOf(container.querySelectorAll("reorder-item")[2]).focus()
 
 			await altPress("ArrowUp")
-			expect(saidBy(container)).to.equal("Banana, position 2 of 3")
+			expect(said()).to.equal("Banana, position 2 of 3")
 		})
 
 		it("can be translated", async () => {
@@ -624,7 +651,7 @@ describe("reorder-list", () => {
 				handlesOf(container)[0].focus()
 				await altPress("ArrowDown")
 
-				expect(saidBy(container)).to.equal("Apple : 2/2")
+				expect(said()).to.equal("Apple : 2/2")
 			} finally {
 				ReorderListElement.announcementFor = original
 			}
@@ -635,13 +662,13 @@ describe("reorder-list", () => {
 		 * rewriting identical text is still a mutation, and a screen reader may
 		 * well speak it twice.
 		 */
-		const listenTo = (list) => {
+		const listenToRegion = () => {
 			const heard = []
 			const observer = new MutationObserver((records) => {
-				records.forEach(() => heard.push(saidBy(list)))
+				records.forEach(() => heard.push(said()))
 			})
 
-			observer.observe(regionOf(list), {
+			observer.observe(region(), {
 				childList: true,
 				characterData: true,
 				subtree: true,
@@ -662,7 +689,7 @@ describe("reorder-list", () => {
 			// worth speaking. But a drag reorders on every boundary it crosses, and
 			// announcing each one would flood the region and lag behind the pointer.
 			const container = await fixture(plainListMarkup(["Apple", "Orange", "Banana"]))
-			const region = listenTo(container)
+			const heard = listenToRegion()
 
 			const boundingBox = container.getBoundingClientRect()
 			const itemHeight = boundingBox.height / 3
@@ -673,7 +700,7 @@ describe("reorder-list", () => {
 			expect(itemNames(container), "the drag did reorder").to.deep.equal(
 				["Orange", "Banana", "Apple"],
 			)
-			expect(await region.stop(), "one announcement, not one per boundary").to.deep.equal(
+			expect(await heard.stop(), "one announcement, not one per boundary").to.deep.equal(
 				["Apple, position 3 of 3"],
 			)
 		})
@@ -684,13 +711,13 @@ describe("reorder-list", () => {
 
 			try {
 				const container = await fixture(listMarkup(["Apple", "Orange", "Banana"]))
-				const region = listenTo(container)
+				const heard = listenToRegion()
 
 				handlesOf(container)[0].focus()
 				await altPress("ArrowDown")
 				await wait(50)
 
-				expect(await region.stop()).to.deep.equal(["Apple, position 2 of 3"])
+				expect(await heard.stop()).to.deep.equal(["Apple, position 2 of 3"])
 			} finally {
 				ReorderListElement.COMMIT_DEBOUNCE_MS = previous
 			}
@@ -703,7 +730,7 @@ describe("reorder-list", () => {
 			handlesOf(container)[0].focus()
 			await press("ArrowDown")
 
-			expect(saidBy(container)).to.equal("")
+			expect(said()).to.equal("")
 		})
 
 		it("stays quiet when reordered programmatically", async () => {
@@ -714,7 +741,7 @@ describe("reorder-list", () => {
 			expect(itemNames(container), "the call did reorder").to.deep.equal(
 				["Banana", "Apple", "Orange"],
 			)
-			expect(saidBy(container)).to.equal("")
+			expect(said()).to.equal("")
 		})
 	})
 

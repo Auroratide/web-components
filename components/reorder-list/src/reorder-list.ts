@@ -11,6 +11,48 @@ declare global {
 	}
 }
 
+const ANNOUNCER_ATTRIBUTE = "data-reorder-list-announcer"
+
+/**
+ * Every list shares one live region, and it lives at the end of the document
+ * rather than in a shadow root. Two reasons: live regions inside shadow DOM are
+ * not reliably observed by assistive technology, and an inline region is read
+ * as ordinary content when browsing the page, interrupting the list it belongs
+ * to. At the end of the document it is out of the way of everything.
+ */
+const announcer = (): HTMLElement | null => {
+	if (typeof document === "undefined") {
+		return null
+	}
+
+	const existing = document.querySelector<HTMLElement>(`[${ANNOUNCER_ATTRIBUTE}]`)
+	if (existing != null) {
+		return existing
+	}
+
+	const created = document.createElement("div")
+	created.setAttribute(ANNOUNCER_ATTRIBUTE, "")
+	created.setAttribute("aria-live", "polite")
+	created.setAttribute("aria-atomic", "true")
+
+	// inline, since no shadow stylesheet reaches it and author CSS might
+	created.style.cssText = [
+		"position: absolute",
+		"width: 1px",
+		"height: 1px",
+		"margin: -1px",
+		"padding: 0",
+		"border: 0",
+		"overflow: hidden",
+		"white-space: nowrap",
+		"clip-path: inset(50%)",
+	].join(";")
+
+	document.body.appendChild(created)
+
+	return created
+}
+
 const deepActiveElement = (): Element | null => {
 	let el = document.activeElement
 	while (el?.shadowRoot?.activeElement != null) {
@@ -34,7 +76,6 @@ export class ReorderListElement extends HTMLElement {
 
 	static html = `
 		<slot></slot>
-		<div part="announcer" aria-live="polite" aria-atomic="true"></div>
 	`
 
 	static css = `
@@ -48,22 +89,6 @@ export class ReorderListElement extends HTMLElement {
 			display: flex;
 			flex-direction: row;
 			list-style-position: inside;
-		}
-
-		/*
-		 * Out of flow so it neither disturbs the layout nor becomes a flex item
-		 * when the list is horizontal.
-		 */
-		[part~="announcer"] {
-			position: absolute;
-			width: 1px;
-			height: 1px;
-			margin: -1px;
-			padding: 0;
-			border: 0;
-			overflow: hidden;
-			white-space: nowrap;
-			clip-path: inset(50%);
 		}
 	`
 
@@ -90,6 +115,10 @@ export class ReorderListElement extends HTMLElement {
 
 	connectedCallback() {
 		this.setAttribute("role", "list")
+
+		// established now rather than at the first announcement: a live region
+		// populated as it is inserted is unreliably announced
+		announcer()
 
 		this.addEventListener("keydown", this.#handleNav)
 		this.addEventListener(COMMIT, this.#announceCommit)
@@ -175,8 +204,6 @@ export class ReorderListElement extends HTMLElement {
 		this.#announce(item, newIndex, items.length)
 	}
 
-	#announcer: HTMLElement | undefined = undefined
-
 	/**
 	 * Every settled reorder is worth speaking, however it was made: dragging with
 	 * a screen reader running is ordinary. Announcing at the commit rather than
@@ -190,11 +217,12 @@ export class ReorderListElement extends HTMLElement {
 	}
 
 	#announce = (item: ReorderItemElement, index: number, total: number) => {
+		const region = announcer()
 		const message = ReorderListElement.announcementFor(nameOf(item), index + 1, total)
 
 		// a keyboard move announces as it goes, so its commit has nothing to add
-		if (this.#announcer != null && this.#announcer.textContent !== message) {
-			this.#announcer.textContent = message
+		if (region != null && region.textContent !== message) {
+			region.textContent = message
 		}
 	}
 
@@ -262,8 +290,6 @@ export class ReorderListElement extends HTMLElement {
 
 		root.appendChild(style)
 		root.appendChild(template.content)
-
-		this.#announcer = root.querySelector("[part~=announcer]")!
 
 		return root
 	}
