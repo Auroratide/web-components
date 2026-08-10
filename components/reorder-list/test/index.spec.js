@@ -1,7 +1,7 @@
 import { fixture, expect, waitUntil } from "@open-wc/testing"
 import { sendKeys } from "@web/test-runner-commands"
 import { CHANGED, COMMIT } from "../lib/events"
-import { ReorderItemElement } from "../lib"
+import { ReorderItemElement, ReorderListElement } from "../lib"
 import "../lib/define.js"
 
 const deepActiveElement = () => {
@@ -503,6 +503,94 @@ describe("reorder-list", () => {
 			await waitUntil(() => defaultHandleOf(item) != null,
 				"the item should be keyboard reorderable again",
 			)
+		})
+	})
+
+	describe("announcements", () => {
+		// Under the old listbox pattern a move took focus with it, so the item and
+		// its position were re-announced for free. Focus now stays on the handle,
+		// and a DOM reorder says nothing on its own.
+		const regionOf = (list) => list.shadowRoot?.querySelector("[aria-live]")
+		const saidBy = (list) => regionOf(list).textContent.trim()
+
+		it("has a polite live region", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange"]))
+			const region = regionOf(container)
+
+			expect(region, "the list needs somewhere to speak").to.exist
+			expect(region.getAttribute("aria-live")).to.equal("polite")
+			expect(saidBy(container), "silent until something moves").to.equal("")
+		})
+
+		it("does not disturb the layout", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange"]))
+
+			expect(regionOf(container).getBoundingClientRect().height).to.be.at.most(1)
+		})
+
+		it("announces the new position after a keyboard reorder", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange", "Banana"]))
+
+			handlesOf(container)[0].focus()
+
+			await altPress("ArrowDown")
+			expect(saidBy(container)).to.equal("Apple, position 2 of 3")
+
+			await altPress("ArrowDown")
+			expect(saidBy(container)).to.equal("Apple, position 3 of 3")
+		})
+
+		it("announces from a default handle too", async () => {
+			const container = await fixture(plainListMarkup(["Apple", "Orange", "Banana"]))
+
+			defaultHandleOf(container.querySelectorAll("reorder-item")[2]).focus()
+
+			await altPress("ArrowUp")
+			expect(saidBy(container)).to.equal("Banana, position 2 of 3")
+		})
+
+		it("can be translated", async () => {
+			const original = ReorderListElement.announcementFor
+			ReorderListElement.announcementFor = (name, position, total) =>
+				`${name} : ${position}/${total}`
+
+			try {
+				const container = await fixture(listMarkup(["Apple", "Orange"]))
+
+				handlesOf(container)[0].focus()
+				await altPress("ArrowDown")
+
+				expect(saidBy(container)).to.equal("Apple : 2/2")
+			} finally {
+				ReorderListElement.announcementFor = original
+			}
+		})
+
+		it("stays quiet during a pointer drag", async () => {
+			// a drag reorders on every boundary it crosses, which would flood the region
+			const container = await fixture(plainListMarkup(["Apple", "Orange", "Banana"]))
+
+			const boundingBox = container.getBoundingClientRect()
+			const itemHeight = boundingBox.height / 3
+			const items = container.querySelectorAll("reorder-item")
+
+			await drag(items[0], { y: boundingBox.top + itemHeight * 2 + 2 }, 2)
+
+			expect(itemNames(container), "the drag did reorder").to.deep.equal(
+				["Orange", "Banana", "Apple"],
+			)
+			expect(saidBy(container)).to.equal("")
+		})
+
+		it("stays quiet when reordered programmatically", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange", "Banana"]))
+
+			container.reorder(2, 0)
+
+			expect(itemNames(container), "the call did reorder").to.deep.equal(
+				["Banana", "Apple", "Orange"],
+			)
+			expect(saidBy(container)).to.equal("")
 		})
 	})
 

@@ -1,5 +1,5 @@
 import { changeEvent, commitEvent } from "./events.js"
-import { ReorderHandleElement } from "./reorder-handle.js"
+import { ReorderHandleElement, nameOf } from "./reorder-handle.js"
 import { ReorderItemElement } from "./reorder-item.js"
 
 export type Orientation = "vertical" | "horizontal"
@@ -25,8 +25,16 @@ export class ReorderListElement extends HTMLElement {
 
 	static COMMIT_DEBOUNCE_MS = 1000
 
+	/**
+	 * What a keyboard reorder announces. Replace to translate:
+	 * `ReorderListElement.announcementFor = (name, position, total) => ...`
+	 */
+	static announcementFor = (name: string, position: number, total: number) =>
+		`${name}, position ${position} of ${total}`
+
 	static html = `
 		<slot></slot>
+		<div part="announcer" aria-live="polite" aria-atomic="true"></div>
 	`
 
 	static css = `
@@ -40,6 +48,22 @@ export class ReorderListElement extends HTMLElement {
 			display: flex;
 			flex-direction: row;
 			list-style-position: inside;
+		}
+
+		/*
+		 * Out of flow so it neither disturbs the layout nor becomes a flex item
+		 * when the list is horizontal.
+		 */
+		[part~="announcer"] {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			margin: -1px;
+			padding: 0;
+			border: 0;
+			overflow: hidden;
+			white-space: nowrap;
+			clip-path: inset(50%);
 		}
 	`
 
@@ -136,6 +160,20 @@ export class ReorderListElement extends HTMLElement {
 		this.#startCommitTracking(item)
 		this.reorder(curIndex, newIndex, items)
 		this.#debouncedCommit = window.setTimeout(this.#endCommitTracking, ReorderListElement.COMMIT_DEBOUNCE_MS)
+
+		// Only the keyboard announces: a drag reorders on every boundary it
+		// crosses, and reorder() is shared by all three callers.
+		this.#announce(item, newIndex, items.length)
+	}
+
+	#announcer: HTMLElement | undefined = undefined
+
+	#announce = (item: ReorderItemElement, index: number, total: number) => {
+		if (this.#announcer != null) {
+			this.#announcer.textContent = ReorderListElement.announcementFor(
+				nameOf(item), index + 1, total,
+			)
+		}
 	}
 
 	/**
@@ -202,6 +240,8 @@ export class ReorderListElement extends HTMLElement {
 
 		root.appendChild(style)
 		root.appendChild(template.content)
+
+		this.#announcer = root.querySelector("[part~=announcer]")!
 
 		return root
 	}
