@@ -14,6 +14,10 @@ const nameableText = (node: Node): string => {
 		: Array.from(node.childNodes).map(nameableText).join(" ")
 }
 
+/** The text a handle names itself after, shared with the default handle. */
+export const nameOf = (node: Node | null): string =>
+	node == null ? "" : nameableText(node).replace(/\s+/g, " ").trim()
+
 export class ReorderHandleElement extends HTMLElement {
 	static defaultElementName = "reorder-handle"
 
@@ -74,7 +78,7 @@ export class ReorderHandleElement extends HTMLElement {
 			return
 		}
 
-		const text = nameableText(this.item() ?? this).replace(/\s+/g, " ").trim()
+		const text = nameOf(this.item() ?? this)
 		if (text.length > 0) {
 			this.setAttribute("aria-label", ReorderHandleElement.labelFor(text))
 		}

@@ -1,4 +1,4 @@
-import { fixture, expect } from "@open-wc/testing"
+import { fixture, expect, waitUntil } from "@open-wc/testing"
 import { sendKeys } from "@web/test-runner-commands"
 import { CHANGED, COMMIT } from "../lib/events"
 import { ReorderItemElement } from "../lib"
@@ -78,10 +78,7 @@ const tap = async (element) => {
 	}))
 }
 
-/**
- * A list whose items each carry an explicit handle. Until the default handle
- * exists, this is the only shape with a keyboard affordance.
- */
+/** A list whose items each carry an explicit handle. */
 const listMarkup = (names, attributes = "") => `
 	<reorder-list ${attributes}>
 		${names.map((name) => `
@@ -93,11 +90,22 @@ const listMarkup = (names, attributes = "") => `
 	</reorder-list>
 `
 
+/** A list left to supply its own handles. */
+const plainListMarkup = (names, attributes = "") => `
+	<reorder-list ${attributes}>
+		${names.map((name) => `
+			<reorder-item><span>${name}</span></reorder-item>
+		`).join("")}
+	</reorder-list>
+`
+
 const itemNames = (container) => Array.from(
 	container.querySelectorAll("reorder-item"),
 ).map((item) => item.querySelector("span, a").textContent.trim())
 
 const handlesOf = (container) => container.querySelectorAll("reorder-handle")
+
+const defaultHandleOf = (item) => item.shadowRoot?.querySelector("[part~=handle]")
 
 describe("reorder-list", () => {
 	beforeEach(() => {
@@ -355,6 +363,146 @@ describe("reorder-list", () => {
 
 			expect(itemNames(container)).to.deep.equal(["Apple", "Orange"])
 			expect(changes, "reordering only responds to keys from a handle").to.equal(0)
+		})
+	})
+
+	describe("default handle", () => {
+		it("an item without a handle provides one", async () => {
+			const container = await fixture(plainListMarkup(["Apple", "Orange"]))
+
+			container.querySelectorAll("reorder-item").forEach((item) => {
+				const handle = defaultHandleOf(item)
+				expect(handle, "a handle-less item supplies its own").to.exist
+				expect(handle.localName).to.equal("button")
+			})
+		})
+
+		it("is named after its item", async () => {
+			const container = await fixture(plainListMarkup(["Apple", "Orange"]))
+			const items = container.querySelectorAll("reorder-item")
+
+			expect(defaultHandleOf(items[0]).getAttribute("aria-label")).to.contain("Apple")
+			expect(defaultHandleOf(items[1]).getAttribute("aria-label")).to.contain("Orange")
+		})
+
+		it("is a tab stop", async () => {
+			const container = await fixture(`<div>
+				<button id="focus-start">Focusable</button>
+				${plainListMarkup(["Apple", "Orange"])}
+				<button id="focus-end">Focusable</button>
+			</div>`)
+
+			const items = container.querySelectorAll("reorder-item")
+			container.querySelector("#focus-start").focus()
+
+			await press("Tab")
+			expectFocus(defaultHandleOf(items[0]))
+
+			await press("Tab")
+			expectFocus(defaultHandleOf(items[1]))
+
+			await press("Tab")
+			expectFocus(container.querySelector("#focus-end"))
+		})
+
+		it("reorders with the arrow keys", async () => {
+			const container = await fixture(plainListMarkup(["Apple", "Orange", "Banana"]))
+			const appleHandle = defaultHandleOf(container.querySelectorAll("reorder-item")[0])
+
+			appleHandle.focus()
+
+			await altPress("ArrowDown")
+			expect(itemNames(container)).to.deep.equal(["Orange", "Apple", "Banana"])
+
+			await press("ArrowDown")
+			expect(itemNames(container)).to.deep.equal(["Orange", "Banana", "Apple"])
+
+			expectFocus(appleHandle)
+		})
+
+		it("space does not scroll the page", async () => {
+			const container = await fixture(plainListMarkup(["Apple", "Orange"]))
+
+			let event = undefined
+			document.addEventListener("keydown", (e) => {
+				event = e
+			}, { once: true })
+
+			defaultHandleOf(container.querySelector("reorder-item")).focus()
+			await press("Space")
+
+			expect(event?.defaultPrevented, "Space should be consumed by the handle").to.be.true
+		})
+
+		it("does not intercept pointer events", async () => {
+			// The whole item is already draggable by pointer, so the default handle
+			// is a keyboard affordance only. An overlay that swallowed clicks would
+			// break any link or button inside the item.
+			const container = await fixture(plainListMarkup(["Apple"]))
+			const handle = defaultHandleOf(container.querySelector("reorder-item"))
+
+			expect(getComputedStyle(handle).pointerEvents).to.equal("none")
+		})
+
+		it("leaves the item pointer-draggable", async () => {
+			const container = await fixture(plainListMarkup(["Apple"]))
+			const item = container.querySelector("reorder-item")
+
+			expect(item.hasAttribute("data-has-handle"),
+				"a default handle is not an author handle",
+			).to.be.false
+		})
+
+		it("is invisible until focused", async () => {
+			const container = await fixture(`<div>
+				<button id="focus-start">Focusable</button>
+				${plainListMarkup(["Apple"])}
+			</div>`)
+
+			const handle = defaultHandleOf(container.querySelector("reorder-item"))
+			expect(getComputedStyle(handle).opacity, "does not disturb existing layouts").to.equal("0")
+
+			container.querySelector("#focus-start").focus()
+			await press("Tab")
+
+			expectFocus(handle)
+			expect(getComputedStyle(handle).opacity, "visible once keyboard focus lands").to.equal("1")
+		})
+
+		it("an author handle replaces it", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange"]))
+
+			container.querySelectorAll("reorder-item").forEach((item) => {
+				expect(defaultHandleOf(item), "an item has one handle, not two").to.not.exist
+			})
+		})
+
+		it("goes away when an author handle appears", async () => {
+			const container = await fixture(plainListMarkup(["Apple", "Orange"]))
+			const item = container.querySelectorAll("reorder-item")[0]
+
+			expect(defaultHandleOf(item)).to.exist
+
+			const handle = document.createElement("reorder-handle")
+			handle.textContent = "Drag"
+			item.prepend(handle)
+
+			await waitUntil(() => defaultHandleOf(item) == null,
+				"the default handle should give way to the author's",
+			)
+		})
+
+		it("comes back when the author handle is removed", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange"]))
+			const item = container.querySelectorAll("reorder-item")[0]
+
+			expect(defaultHandleOf(item)).to.not.exist
+
+			item.querySelector("reorder-handle").remove()
+
+			await waitUntil(() => defaultHandleOf(item) != null,
+				"the item should be keyboard reorderable again",
+			)
 		})
 	})
 

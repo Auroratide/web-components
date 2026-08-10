@@ -112,11 +112,8 @@ export class ReorderListElement extends HTMLElement {
 			return
 		}
 
-		// Only a handle drives reordering, so interactive content within an item
-		// keeps its own arrow key behaviour.
-		const handle = e.composedPath().find((node) => node instanceof ReorderHandleElement)
-		const item = handle?.item()
-		if (item == null || item.list() !== this) {
+		const item = this.#originatingItem(e)
+		if (item == null) {
 			return
 		}
 
@@ -139,6 +136,26 @@ export class ReorderListElement extends HTMLElement {
 		this.#startCommitTracking(item)
 		this.reorder(curIndex, newIndex, items)
 		this.#debouncedCommit = window.setTimeout(this.#endCommitTracking, ReorderListElement.COMMIT_DEBOUNCE_MS)
+	}
+
+	/**
+	 * The item a key belongs to, but only when the key came from that item's
+	 * handle. Interactive content within an item keeps its own arrow behaviour,
+	 * and a nested list handles its own items.
+	 */
+	#originatingItem = (e: Event): ReorderItemElement | null => {
+		const path = e.composedPath()
+		const index = path.findIndex((node) => node instanceof ReorderItemElement)
+		if (index < 0) {
+			return null
+		}
+
+		const item = path[index] as ReorderItemElement
+		const fromHandle = path.slice(0, index).some((node) =>
+			node instanceof ReorderHandleElement || node === item.defaultHandle(),
+		)
+
+		return fromHandle && item.list() === this ? item : null
 	}
 
 	#trackedItem: ReorderItemElement | undefined = undefined

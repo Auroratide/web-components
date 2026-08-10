@@ -1,5 +1,5 @@
 import { commitEvent } from "./events.js"
-import { ReorderHandleElement } from "./reorder-handle.js"
+import { ReorderHandleElement, nameOf } from "./reorder-handle.js"
 import { ReorderListElement } from "./reorder-list.js"
 
 export class ReorderItemElement extends HTMLElement {
@@ -16,14 +16,44 @@ export class ReorderItemElement extends HTMLElement {
 			cursor: grab;
 		}
 
+		:host(:not([data-has-handle])) {
+			position: relative;
+		}
+
 		:host([data-has-handle]) {
 			cursor: auto;
 			touch-action: auto;
 		}
-		
+
 		:host([data-dragging]) {
 			opacity: 0.5;
 			cursor: grabbing;
+		}
+
+		/*
+		 * The default handle is a keyboard affordance only: the whole item is
+		 * already draggable by pointer, and an overlay that caught clicks would
+		 * block any link or button inside the item. It stays invisible so that
+		 * existing layouts are undisturbed, appearing only once focused.
+		 */
+		button[part~="handle"] {
+			position: absolute;
+			inset: 0;
+			margin: 0;
+			padding: 0;
+			border: none;
+			background: none;
+			font: inherit;
+			color: inherit;
+			opacity: 0;
+			pointer-events: none;
+			border-radius: 0.125em;
+			outline: 0.125em solid currentColor;
+			outline-offset: 0.125em;
+		}
+
+		button[part~="handle"]:focus-visible {
+			opacity: 1;
 		}
 	`
 
@@ -45,6 +75,9 @@ export class ReorderItemElement extends HTMLElement {
 	handles = (): NodeListOf<ReorderHandleElement> =>
 		this.querySelectorAll(ReorderHandleElement.defaultElementName)
 
+	/** The handle this item supplies for itself when the author provides none. */
+	defaultHandle = (): HTMLButtonElement | null => this.#defaultHandle ?? null
+
 	connectedCallback() {
 		this.setAttribute("role", "listitem")
 
@@ -63,7 +96,7 @@ export class ReorderItemElement extends HTMLElement {
 		this.#initialized = false
 	}
 
-	startDragging = (handle: HTMLElement = this.handles()[0]) => {
+	startDragging = (handle: HTMLElement | null = this.handles()[0] ?? this.#defaultHandle) => {
 		handle?.focus()
 
 		for (const handle of this.handles()) {
@@ -91,21 +124,63 @@ export class ReorderItemElement extends HTMLElement {
 		for (const handle of this.handles()) {
 			handle.refreshLabel?.()
 		}
+
+		this.#refreshDefaultHandleLabel()
 	}
 
 	#attachTouchListeners = () => {
-		const hasHandlesNow = this.handles().length > 0
-		if ((this.dataset.hasHandle || !this.#initialized) && !hasHandlesNow) {
-			delete this.dataset.hasHandle
-			this.addEventListener("pointerdown", this.#onTouchStart)
+		const hasHandle = this.handles().length > 0
+		if (this.#initialized && hasHandle === this.hasAttribute("data-has-handle")) {
+			return
 		}
 
-		if ((!this.dataset.hasHandle || !this.#initialized) && hasHandlesNow) {
+		if (hasHandle) {
 			this.dataset.hasHandle = ""
 			this.removeEventListener("pointerdown", this.#onTouchStart)
+			this.#removeDefaultHandle()
+		} else {
+			delete this.dataset.hasHandle
+			this.addEventListener("pointerdown", this.#onTouchStart)
+			this.#createDefaultHandle()
 		}
 
 		this.#initialized = true
+	}
+
+	#defaultHandle: HTMLButtonElement | undefined = undefined
+
+	#createDefaultHandle = () => {
+		if (this.#defaultHandle != null) {
+			return
+		}
+
+		const handle = document.createElement("button")
+		handle.type = "button"
+		handle.setAttribute("part", "handle")
+		handle.addEventListener("keydown", this.#onDefaultHandleKeyDown)
+
+		this.shadowRoot?.insertBefore(handle, this.shadowRoot.querySelector("slot"))
+		this.#defaultHandle = handle
+
+		this.#refreshDefaultHandleLabel()
+	}
+
+	#removeDefaultHandle = () => {
+		this.#defaultHandle?.remove()
+		this.#defaultHandle = undefined
+	}
+
+	#refreshDefaultHandleLabel = () => {
+		const text = nameOf(this)
+		if (this.#defaultHandle != null && text.length > 0) {
+			this.#defaultHandle.setAttribute("aria-label", ReorderHandleElement.labelFor(text))
+		}
+	}
+
+	#onDefaultHandleKeyDown = (e: KeyboardEvent) => {
+		if (e.key === " ") {
+			e.preventDefault()
+		}
 	}
 
 	#onTouchStart = (e: PointerEvent) => {
