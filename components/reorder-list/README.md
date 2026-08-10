@@ -437,3 +437,7 @@ This custom element is build with accessibility in mind! It implements list/list
 * <kbd>Alt</kbd> + <kbd>Up</kbd>/<kbd>Down</kbd> moves the currently selected list item up or down in the order.
 * If orientation is horizontal, then <kbd>Left</kbd> and <kbd>Right</kbd> are used instead.
 * A live region is used to announce the last change of order.
+
+### Reorder Announcer
+
+List reordering is announced to assistive technology using a live region. This region is located at the end of the body document, with the `data-reorder-list-announcer` attribute. All `reorder-list` elements share the same announcement region.
