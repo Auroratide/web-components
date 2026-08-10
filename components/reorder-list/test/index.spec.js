@@ -78,6 +78,27 @@ const tap = async (element) => {
 	}))
 }
 
+/**
+ * A list whose items each carry an explicit handle. Until the default handle
+ * exists, this is the only shape with a keyboard affordance.
+ */
+const listMarkup = (names, attributes = "") => `
+	<reorder-list ${attributes}>
+		${names.map((name) => `
+			<reorder-item>
+				<reorder-handle>Drag</reorder-handle>
+				<span>${name}</span>
+			</reorder-item>
+		`).join("")}
+	</reorder-list>
+`
+
+const itemNames = (container) => Array.from(
+	container.querySelectorAll("reorder-item"),
+).map((item) => item.querySelector("span, a").textContent.trim())
+
+const handlesOf = (container) => container.querySelectorAll("reorder-handle")
+
 describe("reorder-list", () => {
 	beforeEach(() => {
 		ReorderItemElement.START_DRAG_DELAY_MS = 10
@@ -85,198 +106,255 @@ describe("reorder-list", () => {
 
 	describe("aria-requirements", () => {
 		it("roles", async () => {
-			const container = await fixture(`
-				<reorder-list>
-					<reorder-item>Apple</reorder-item>
-					<reorder-item>Orange</reorder-item>
-				</reorder-list>
-			`)
+			const container = await fixture(listMarkup(["Apple", "Orange"]))
 
-			expect(container.getAttribute("role")).to.equal("listbox")
+			expect(container.getAttribute("role")).to.equal("list")
 			container.querySelectorAll("reorder-item").forEach((item) => {
-				expect(item.getAttribute("role")).to.equal("option")
+				expect(item.getAttribute("role")).to.equal("listitem")
+			})
+			handlesOf(container).forEach((handle) => {
+				expect(handle.getAttribute("role")).to.equal("button")
+				expect(handle.getAttribute("tabindex")).to.equal("0")
 			})
 		})
 
-		it("aria-selected and tabindex", async () => {
-			const container = await fixture(`
-				<reorder-list>
-					<reorder-item>Apple</reorder-item>
-					<reorder-item>Orange</reorder-item>
-				</reorder-list>
-			`)
+		it("items are not focusable", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange"]))
 
-			const items = container.querySelectorAll("reorder-item")
-
-			expect(items[0].getAttribute("aria-selected")).to.equal("true")
-			expect(items[0].getAttribute("tabindex")).to.equal("0")
-
-			expect(items[1].getAttribute("aria-selected")).to.equal("false")
-			expect(items[1].getAttribute("tabindex")).to.equal("-1")
+			container.querySelectorAll("reorder-item").forEach((item) => {
+				expect(item.hasAttribute("tabindex"), "items carry no roving tabindex").to.be.false
+				expect(item.hasAttribute("aria-selected"), "listitems are not selectable").to.be.false
+			})
 		})
 
-		it("aria-orientation", async () => {
-			const list = await fixture(`
-				<reorder-list orientation="horizontal">
-					<reorder-item>Apple</reorder-item>
-					<reorder-item>Orange</reorder-item>
+		it("orientation is behaviour, not semantics", async () => {
+			// aria-orientation is not valid on role=list, but the attribute still
+			// drives which arrow keys reorder.
+			const list = await fixture(listMarkup(["Apple", "Orange"], "orientation='horizontal'"))
+
+			expect(list.hasAttribute("aria-orientation")).to.be.false
+			expect(list.orientation).to.equal("horizontal")
+
+			list.orientation = "vertical"
+			expect(list.hasAttribute("aria-orientation")).to.be.false
+			expect(list.orientation).to.equal("vertical")
+		})
+
+		it("a handle is named after its item", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange"]))
+			const handles = handlesOf(container)
+
+			expect(handles[0].getAttribute("aria-label")).to.contain("Apple")
+			expect(handles[1].getAttribute("aria-label")).to.contain("Orange")
+
+			// the handle's own content is an affordance, not part of the name
+			expect(handles[0].getAttribute("aria-label")).to.not.contain("Drag")
+		})
+
+		it("an author-provided name wins", async () => {
+			const container = await fixture(`
+				<reorder-list>
+					<reorder-item>
+						<reorder-handle aria-label="Move fruit">Drag</reorder-handle>
+						<span>Apple</span>
+					</reorder-item>
 				</reorder-list>
 			`)
 
-			expect(list.getAttribute("aria-orientation")).to.equal("horizontal")
+			expect(handlesOf(container)[0].getAttribute("aria-label")).to.equal("Move fruit")
+		})
 
-			list.orientation = "vertical"
-			expect(list.getAttribute("aria-orientation")).to.equal("vertical")
+		it("author-provided role and tabindex win", async () => {
+			const container = await fixture(`
+				<reorder-list>
+					<reorder-item>
+						<reorder-handle role="link" tabindex="3">Drag</reorder-handle>
+						<span>Apple</span>
+					</reorder-item>
+				</reorder-list>
+			`)
+
+			const handle = handlesOf(container)[0]
+			expect(handle.getAttribute("role")).to.equal("link")
+			expect(handle.getAttribute("tabindex")).to.equal("3")
 		})
 	})
 
 	describe("keyboard navigation", () => {
-		it("tabbing through", async () => {
+		it("every handle is a tab stop", async () => {
 			const container = await fixture(`<div>
 				<button id="focus-start">Focusable</button>
-				<reorder-list>
-					<reorder-item>Apple</reorder-item>
-					<reorder-item>Orange</reorder-item>
-				</reorder-list>
+				${listMarkup(["Apple", "Orange"])}
 				<button id="focus-end">Focusable</button>
 			</div>`)
 
+			const handles = handlesOf(container)
 			container.querySelector("#focus-start").focus()
 
 			await press("Tab")
-			expectFocus(container.querySelectorAll("reorder-item")[0])
+			expectFocus(handles[0])
 
-			// The second item does NOT receive focus
+			await press("Tab")
+			expectFocus(handles[1])
+
 			await press("Tab")
 			expectFocus(container.querySelector("#focus-end"))
 		})
 
-		it("up/down navigation (vertical)", async () => {
-			const container = await fixture(`
-				<reorder-list>
-					<reorder-item>Apple</reorder-item>
-					<reorder-item>Orange</reorder-item>
-					<reorder-item>Banana</reorder-item>
-				</reorder-list>
-			`)
-
-			const items = container.querySelectorAll("reorder-item")
-			items[0].focus()
-
-			await press("ArrowDown")
-			expectFocus(items[1])
-
-			await press("ArrowDown")
-			expectFocus(items[2])
-
-			await press("ArrowDown")
-			expectFocus(items[2])
-
-			await press("ArrowUp")
-			expectFocus(items[1])
-
-			await press("ArrowUp")
-			expectFocus(items[0])
-		})
-
 		it("reordering an item (vertical)", async () => {
-			const container = await fixture(`
-				<reorder-list>
-					<reorder-item>Apple</reorder-item>
-					<reorder-item>Orange</reorder-item>
-					<reorder-item>Banana</reorder-item>
-				</reorder-list>
-			`)
+			const container = await fixture(listMarkup(["Apple", "Orange", "Banana"]))
+			const appleHandle = handlesOf(container)[0]
 
-			let items = container.querySelectorAll("reorder-item")
-			items[0].focus()
+			appleHandle.focus()
 
 			await altPress("ArrowDown")
-			items = container.querySelectorAll("reorder-item")
-			expectFocus(items[1])
-			expect(items[0].textContent).to.equal("Orange")
-			expect(items[1].textContent).to.equal("Apple")
+			expect(itemNames(container)).to.deep.equal(["Orange", "Apple", "Banana"])
 
-			await press("ArrowDown")
+			await altPress("ArrowDown")
+			expect(itemNames(container)).to.deep.equal(["Orange", "Banana", "Apple"])
+
 			await altPress("ArrowUp")
-			items = container.querySelectorAll("reorder-item")
-			expectFocus(items[1])
-			expect(items[0].textContent).to.equal("Orange")
-			expect(items[1].textContent).to.equal("Banana")
-			expect(items[2].textContent).to.equal("Apple")
+			expect(itemNames(container)).to.deep.equal(["Orange", "Apple", "Banana"])
 		})
 
-		it("left/right navigation (horizontal)", async () => {
-			const container = await fixture(`
-				<reorder-list orientation="horizontal">
-					<reorder-item>Apple</reorder-item>
-					<reorder-item>Orange</reorder-item>
-					<reorder-item>Banana</reorder-item>
-				</reorder-list>
-			`)
+		it("reordering stops at the ends of the list", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange", "Banana"]))
 
-			const items = container.querySelectorAll("reorder-item")
-			items[0].focus()
+			handlesOf(container)[0].focus()
 
-			await press("ArrowRight")
-			expectFocus(items[1])
+			await altPress("ArrowUp")
+			expect(itemNames(container)).to.deep.equal(["Apple", "Orange", "Banana"])
 
-			await press("ArrowRight")
-			expectFocus(items[2])
+			handlesOf(container)[2].focus()
 
-			await press("ArrowRight")
-			expectFocus(items[2])
+			await altPress("ArrowDown")
+			expect(itemNames(container)).to.deep.equal(["Apple", "Orange", "Banana"])
+		})
 
-			await press("ArrowLeft")
-			expectFocus(items[1])
+		it("moving an item keeps focus on its handle", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange", "Banana"]))
+			const appleHandle = handlesOf(container)[0]
 
-			await press("ArrowLeft")
-			expectFocus(items[0])
+			appleHandle.focus()
+			expectFocus(appleHandle)
+
+			// the item is re-inserted in the DOM, which would otherwise drop focus
+			await altPress("ArrowDown")
+			expectFocus(appleHandle)
+
+			await altPress("ArrowDown")
+			expectFocus(appleHandle)
 		})
 
 		it("reordering an item (horizontal)", async () => {
-			const container = await fixture(`
-				<reorder-list orientation="horizontal">
-					<reorder-item>Apple</reorder-item>
-					<reorder-item>Orange</reorder-item>
-					<reorder-item>Banana</reorder-item>
-				</reorder-list>
-			`)
+			const container = await fixture(
+				listMarkup(["Apple", "Orange", "Banana"], "orientation='horizontal'"),
+			)
 
-			let items = container.querySelectorAll("reorder-item")
-			items[0].focus()
+			handlesOf(container)[0].focus()
 
 			await altPress("ArrowRight")
-			items = container.querySelectorAll("reorder-item")
-			expectFocus(items[1])
-			expect(items[0].textContent).to.equal("Orange")
-			expect(items[1].textContent).to.equal("Apple")
+			expect(itemNames(container)).to.deep.equal(["Orange", "Apple", "Banana"])
 
-			await press("ArrowRight")
+			await altPress("ArrowRight")
+			expect(itemNames(container)).to.deep.equal(["Orange", "Banana", "Apple"])
+
 			await altPress("ArrowLeft")
-			items = container.querySelectorAll("reorder-item")
-			expectFocus(items[1])
-			expect(items[0].textContent).to.equal("Orange")
-			expect(items[1].textContent).to.equal("Banana")
-			expect(items[2].textContent).to.equal("Apple")
+			expect(itemNames(container)).to.deep.equal(["Orange", "Apple", "Banana"])
 		})
 
-		it("clicking on an item", async () => {
-			const container = await fixture(`<div>
-				<button id="focus-start">Focusable</button>
-				<reorder-list>
-					<reorder-item>Apple</reorder-item>
-					<reorder-item>Orange</reorder-item>
-					<reorder-item>Banana</reorder-item>
-				</reorder-list>
-				<button id="focus-end">Focusable</button>
-			</div>`)
+		it("the cross-axis arrows do nothing", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange", "Banana"]))
 
+			handlesOf(container)[0].focus()
+
+			await altPress("ArrowRight")
+			await altPress("ArrowLeft")
+			expect(itemNames(container)).to.deep.equal(["Apple", "Orange", "Banana"])
+		})
+
+		it("plain arrows also reorder", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange", "Banana"]))
+
+			handlesOf(container)[0].focus()
+
+			await press("ArrowDown")
+			expect(itemNames(container)).to.deep.equal(["Orange", "Apple", "Banana"])
+
+			await press("ArrowUp")
+			expect(itemNames(container)).to.deep.equal(["Apple", "Orange", "Banana"])
+		})
+
+		it("space on a handle does not scroll the page", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange"]))
+
+			let event = undefined
+			document.addEventListener("keydown", (e) => {
+				event = e
+			}, { once: true })
+
+			handlesOf(container)[0].focus()
+			await press("Space")
+
+			expect(event?.defaultPrevented, "Space should be consumed by the handle").to.be.true
+		})
+	})
+
+	describe("interactive content", () => {
+		const withLinks = `<div>
+			<button id="focus-start">Focusable</button>
+			<reorder-list>
+				<reorder-item>
+					<reorder-handle>Drag</reorder-handle>
+					<a href="#apple">Apple</a>
+				</reorder-item>
+				<reorder-item>
+					<reorder-handle>Drag</reorder-handle>
+					<a href="#orange">Orange</a>
+				</reorder-item>
+			</reorder-list>
+			<button id="focus-end">Focusable</button>
+		</div>`
+
+		it("a link inside an item is reachable", async () => {
+			const container = await fixture(withLinks)
+
+			const handles = handlesOf(container)
+			const links = container.querySelectorAll("a")
 			container.querySelector("#focus-start").focus()
 
-			await tap(container.querySelectorAll("reorder-item")[1])
+			await press("Tab")
+			expectFocus(handles[0])
 
-			expectFocus(container.querySelectorAll("reorder-item")[1])
+			await press("Tab")
+			expectFocus(links[0])
+
+			await press("Tab")
+			expectFocus(handles[1])
+
+			await press("Tab")
+			expectFocus(links[1])
+
+			await press("Tab")
+			expectFocus(container.querySelector("#focus-end"))
+		})
+
+		it("arrows on a link do not reorder", async () => {
+			const container = await fixture(withLinks)
+			const list = container.querySelector("reorder-list")
+
+			let changes = 0
+			list.addEventListener(CHANGED, () => {
+				changes += 1
+			})
+
+			container.querySelectorAll("a")[0].focus()
+
+			await altPress("ArrowDown")
+			await press("ArrowDown")
+
+			expect(itemNames(container)).to.deep.equal(["Apple", "Orange"])
+			expect(changes, "reordering only responds to keys from a handle").to.equal(0)
 		})
 	})
 
@@ -416,6 +494,15 @@ describe("reorder-list", () => {
 			await tap(input)
 
 			expectNoFocus(firstItem)
+		})
+
+		it("tapping a handle focuses it", async () => {
+			const container = await fixture(listMarkup(["Apple", "Orange", "Banana"]))
+			const handles = handlesOf(container)
+
+			await tap(handles[1])
+
+			expectFocus(handles[1])
 		})
 
 		it("using a reorder-handle", async () => {

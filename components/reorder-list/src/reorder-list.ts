@@ -1,7 +1,24 @@
 import { changeEvent, commitEvent } from "./events.js"
+import { ReorderHandleElement } from "./reorder-handle.js"
 import { ReorderItemElement } from "./reorder-item.js"
 
 export type Orientation = "vertical" | "horizontal"
+
+declare global {
+	interface Node {
+		/** Not yet in lib.dom; an atomic move that preserves focus and state. */
+		moveBefore?: (node: Node, before: Node | null) => void,
+	}
+}
+
+const deepActiveElement = (): Element | null => {
+	let el = document.activeElement
+	while (el?.shadowRoot?.activeElement != null) {
+		el = el.shadowRoot.activeElement
+	}
+
+	return el
+}
 
 export class ReorderListElement extends HTMLElement {
 	static defaultElementName = "reorder-list"
@@ -32,104 +49,122 @@ export class ReorderListElement extends HTMLElement {
 		this.#createRoot()
 	}
 
-	static get observedAttributes() {
-		return ["orientation"]
-	}
-
 	get orientation(): Orientation { return this.getAttribute("orientation") as Orientation ?? "vertical" }
 	set orientation(value: Orientation) { this.setAttribute("orientation", value) }
-
-	attributeChangedCallback(attribute: string, oldValue: string, newValue: string) {
-		this.#attributeCallbacks[attribute]?.(newValue, oldValue)
-	}
-
-	#attributeCallbacks = {
-		"orientation": () => {
-			this.#setAriaOrientation()
-		},
-	}
 
 	items = (): ReorderItemElement[] =>
 		Array.from(this.querySelectorAll(`:scope > ${ReorderItemElement.defaultElementName}`))
 
-	current = (): ReorderItemElement =>
-		this.querySelector(`:scope > ${ReorderItemElement.defaultElementName}[tabindex="0"]`)
+	/** The item currently containing focus, if any. */
+	current = (): ReorderItemElement | null => {
+		const item = deepActiveElement()?.closest(
+			ReorderItemElement.defaultElementName,
+		) as ReorderItemElement | null
+
+		return item?.parentElement === this ? item : null
+	}
 
 	connectedCallback() {
-		this.setAttribute("role", "listbox")
+		this.setAttribute("role", "list")
 
 		this.addEventListener("keydown", this.#handleNav)
 	}
 
 	reorder = (curIndex: number, newIndex: number, list: ReorderItemElement[] = this.items()) => {
 		const item = list[curIndex]
-		if (curIndex < newIndex) {
-			list[newIndex].after(item)
-		} else {
-			this.insertBefore(item, list[newIndex])
-		}
+		const previouslyFocused = deepActiveElement()
+
+		this.#move(item, curIndex < newIndex
+			? list[newIndex].nextSibling
+			: list[newIndex],
+		)
 
 		this.dispatchEvent(changeEvent(item, curIndex, newIndex))
 
-		list[curIndex].focus()
-	}
-
-	changeFocus = (newItem: ReorderItemElement, list: ReorderItemElement[] = this.items()) => {
-		list.forEach((item) => {
-			item.setAttribute("aria-selected", "false")
-		})
-
-		newItem.setAttribute("aria-selected", "true")
-		newItem.focus()
-	}
-
-	#debouncedCommit: number
-
-	#handleNav = (e: KeyboardEvent) => {
-		const keys = this.#keysForOrientation()
-		if (keys.includes(e.key)) {
-			const items = this.items()
-			items.indexOf(this.current())
-			let currentFocusable = items.indexOf(this.current())
-			if (currentFocusable < 0) {
-				currentFocusable = 0
-			}
-
-			const nextFocusable = Math.max(0,
-				Math.min(items.length - 1,
-					currentFocusable + (e.key === keys[0] ? -1 : 1),
-				),
-			)
-
-			if (e.altKey && currentFocusable !== nextFocusable) {
-				e.preventDefault()
-				e.stopPropagation()
-
-				window.clearTimeout(this.#debouncedCommit ?? -1)
-				this.#startCommitTracking()
-				this.reorder(currentFocusable, nextFocusable, items)
-				this.#debouncedCommit = window.setTimeout(this.#endCommitTracking, ReorderListElement.COMMIT_DEBOUNCE_MS)
-			} else if (currentFocusable !== nextFocusable) {
-				e.preventDefault()
-				e.stopPropagation()
-
-				this.changeFocus(items[nextFocusable], items)
-			}
+		// Re-inserting a subtree drops focus, unless the move was atomic.
+		if (previouslyFocused instanceof HTMLElement && deepActiveElement() !== previouslyFocused) {
+			previouslyFocused.focus()
 		}
 	}
 
+	/**
+	 * moveBefore preserves focus and state; insertBefore is the fallback where it
+	 * is unavailable, or where the node cannot be moved atomically.
+	 */
+	#move = (item: ReorderItemElement, before: Node | null) => {
+		if (typeof this.moveBefore === "function") {
+			try {
+				this.moveBefore(item, before)
+				return
+			} catch {
+				// fall through to a plain insertion
+			}
+		}
+
+		this.insertBefore(item, before)
+	}
+
+	#debouncedCommit: number | undefined = undefined
+
+	#handleNav = (e: KeyboardEvent) => {
+		const keys = this.#keysForOrientation()
+		if (!keys.includes(e.key)) {
+			return
+		}
+
+		// Only a handle drives reordering, so interactive content within an item
+		// keeps its own arrow key behaviour.
+		const handle = e.composedPath().find((node) => node instanceof ReorderHandleElement)
+		const item = handle?.item()
+		if (item == null || item.list() !== this) {
+			return
+		}
+
+		const items = this.items()
+		const curIndex = items.indexOf(item)
+		const newIndex = Math.max(0,
+			Math.min(items.length - 1,
+				curIndex + (e.key === keys[0] ? -1 : 1),
+			),
+		)
+
+		if (curIndex < 0 || curIndex === newIndex) {
+			return
+		}
+
+		e.preventDefault()
+		e.stopPropagation()
+
+		window.clearTimeout(this.#debouncedCommit ?? -1)
+		this.#startCommitTracking(item)
+		this.reorder(curIndex, newIndex, items)
+		this.#debouncedCommit = window.setTimeout(this.#endCommitTracking, ReorderListElement.COMMIT_DEBOUNCE_MS)
+	}
+
+	#trackedItem: ReorderItemElement | undefined = undefined
 	#originalPosition: number | undefined = undefined
 
-	#startCommitTracking = () => {
-		if (this.#originalPosition == null) {
-			this.#originalPosition = this.items().indexOf(this.current())
+	#startCommitTracking = (item: ReorderItemElement) => {
+		if (this.#trackedItem != null && this.#trackedItem !== item) {
+			this.#endCommitTracking()
+		}
+
+		if (this.#trackedItem == null) {
+			this.#trackedItem = item
+			this.#originalPosition = this.items().indexOf(item)
 		}
 	}
 
 	#endCommitTracking = () => {
-		const current = this.current()
-		const newPosition = this.items().indexOf(this.current())
-		this.dispatchEvent(commitEvent(current, this.#originalPosition, newPosition))
+		const item = this.#trackedItem
+		if (item == null) {
+			return
+		}
+
+		const newPosition = this.items().indexOf(item)
+		this.dispatchEvent(commitEvent(item, this.#originalPosition ?? -1, newPosition))
+
+		this.#trackedItem = undefined
 		this.#originalPosition = undefined
 	}
 
@@ -137,10 +172,6 @@ export class ReorderListElement extends HTMLElement {
 		return this.orientation === "horizontal"
 			? ["ArrowLeft", "ArrowRight"]
 			: ["ArrowUp", "ArrowDown"]
-	}
-
-	#setAriaOrientation = () => {
-		this.setAttribute("aria-orientation", this.orientation)
 	}
 
 	#createRoot = () => {

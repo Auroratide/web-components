@@ -27,15 +27,11 @@ export class ReorderItemElement extends HTMLElement {
 		}
 	`
 
-	static get observedAttributes() {
-		return ["aria-selected"]
-	}
-
 	static START_DRAG_DELAY_MS = 150
 
 	#initialized = false
 	#observer = new MutationObserver(() => {
-		this.#attachTouchListeners()
+		this.#onContentChanged()
 	})
 
 	constructor() {
@@ -44,25 +40,22 @@ export class ReorderItemElement extends HTMLElement {
 		this.#createRoot()
 	}
 
-	list = (): ReorderListElement =>
-		this.closest(ReorderListElement.defaultElementName)
+	list = (): ReorderListElement | null =>
+		this.closest<ReorderListElement>(ReorderListElement.defaultElementName)
 	handles = (): NodeListOf<ReorderHandleElement> =>
 		this.querySelectorAll(ReorderHandleElement.defaultElementName)
 
 	connectedCallback() {
-		this.setAttribute("role", "option")
-
-		if (!this.hasAttribute("aria-selected")) {
-			this.#setDefaultFocusability()
-		}
+		this.setAttribute("role", "listitem")
 
 		this.#observer.observe(this, {
 			attributes: false,
 			childList: true,
+			characterData: true,
 			subtree: true,
 		})
 
-		this.#attachTouchListeners()
+		this.#onContentChanged()
 	}
 
 	disconnectedCallback() {
@@ -70,8 +63,8 @@ export class ReorderItemElement extends HTMLElement {
 		this.#initialized = false
 	}
 
-	startDragging = () => {
-		this.list().changeFocus(this)
+	startDragging = (handle: HTMLElement = this.handles()[0]) => {
+		handle?.focus()
 
 		for (const handle of this.handles()) {
 			handle.dataset.dragging = ""
@@ -88,6 +81,16 @@ export class ReorderItemElement extends HTMLElement {
 		document.addEventListener("pointerup", cancelDrag)
 		document.addEventListener("pointercancel", cancelDrag)
 		document.addEventListener("contextmenu", cancelDrag)
+	}
+
+	#onContentChanged = () => {
+		this.#attachTouchListeners()
+
+		// A handle may connect before the text it names itself after is parsed.
+		// Handles not yet upgraded will name themselves when they are.
+		for (const handle of this.handles()) {
+			handle.refreshLabel?.()
+		}
 	}
 
 	#attachTouchListeners = () => {
@@ -130,7 +133,7 @@ export class ReorderItemElement extends HTMLElement {
 	#onDragMove = (e: PointerEvent) => {
 		e.preventDefault()
 		const list = this.list()
-		const items = list.items()
+		const items = list?.items() ?? []
 		const cur = {
 			index: items.indexOf(this),
 			rect: this.getBoundingClientRect(),
@@ -145,21 +148,21 @@ export class ReorderItemElement extends HTMLElement {
 		}
 
 		if (prev.rect && this.#isOverPrevious(e, prev.rect, cur.rect)) {
-			list.reorder(cur.index, prev.index, items)
+			list?.reorder(cur.index, prev.index, items)
 		} else if (next.rect && this.#isOverNext(e, next.rect, cur.rect)) {
-			list.reorder(cur.index, next.index, items)
+			list?.reorder(cur.index, next.index, items)
 		}
 	}
 
 	#isOverPrevious = (mouse: MouseEvent, prev: DOMRect, cur: DOMRect): boolean => {
-		const orientation = this.list().orientation
+		const orientation = this.list()?.orientation
 		return orientation === "horizontal"
 			? mouse.clientX < Math.min(prev.left + cur.width, prev.right)
 			: mouse.clientY < Math.min(prev.top + cur.height, prev.bottom)
 	}
 
 	#isOverNext = (mouse: MouseEvent, next: DOMRect, cur: DOMRect): boolean => {
-		const orientation = this.list().orientation
+		const orientation = this.list()?.orientation
 		return orientation === "horizontal"
 			? mouse.clientX > Math.max(next.right - cur.width, next.left)
 			: mouse.clientY > Math.max(next.bottom - cur.height, next.top)
@@ -183,33 +186,17 @@ export class ReorderItemElement extends HTMLElement {
 		e.preventDefault()
 	}
 
-	#originalPosition: number
+	#originalPosition: number | undefined = undefined
 
 	#startCommitTracking = () => {
-		this.#originalPosition = this.list().items().indexOf(this)
+		this.#originalPosition = this.list()?.items().indexOf(this)
 	}
 
 	#endCommitTracking = () => {
 		const list = this.list()
-		const newPosition = list.items().indexOf(this)
-		list.dispatchEvent(commitEvent(this, this.#originalPosition, newPosition))
+		const newPosition = list?.items().indexOf(this) ?? -1
+		list?.dispatchEvent(commitEvent(this, this.#originalPosition ?? -1, newPosition))
 		this.#originalPosition = undefined
-	}
-
-	attributeChangedCallback() {
-		this.setAttribute("tabindex",
-			this.getAttribute("aria-selected") === "true" ? "0" : "-1",
-		)
-	}
-
-	#setDefaultFocusability = () => {
-		const items = this.list().items()
-		const noOtherItemIsFocusable = null == items.find((it) => it.getAttribute("aria-selected") === "true")
-		if (this === items[0] && noOtherItemIsFocusable) {
-			this.setAttribute("aria-selected", "true")
-		} else {
-			this.setAttribute("aria-selected", "false")
-		}
 	}
 
 	#createRoot = () => {
