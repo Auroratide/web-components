@@ -2,7 +2,7 @@
 
 <p hidden><strong><a href="https://components.auroratide.com/reorder-list">View this page with live demos!</a></strong></p>
 
-The `reorder-list`, `reorder-item`, and `reorder-handle` elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement the WAI-ARIA guidelines for [rearrangable listboxes](https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html).
+The `reorder-list`, `reorder-item`, and `reorder-handle` elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement list/listitem semantics with a button handle.
 
 <!--DEMO
 <wc-demo>
@@ -56,7 +56,7 @@ import '@auroratide/reorder-list/lib/define.js'
 
 ## Reorder Handles
 
-By default, when there is no explicit handle provided, the entire reorder item is a draggable handle. If you only want a part of the item to be draggable, then you can use `reorder-handle`, like so:
+By default, when there is no explicit handle provided, the entire reorder item provides a default draggable handle that covers the item. If you only want a part of the item to be draggable, then you can use `reorder-handle`, like so:
 
 <!--DEMO
 <wc-demo>
@@ -118,6 +118,12 @@ By default, when there is no explicit handle provided, the entire reorder item i
 	</reorder-item>
 </reorder-list>
 ```
+
+Handles have the following accessibility affordances:
+
+- Handles participate in the tab order of the document.
+- Handles are labeled as "Reorder {item name}", to instruct screen readers what the handle is for.
+- The default handle becomes visible on focus, indicating which item is focused.
 
 ## Orientation
 
@@ -424,9 +430,10 @@ Nothing stops you from putting lists inside of lists.
 
 ## Accessibility
 
-This custom element is build with accessibility in mind! It follows the WAI-ARIA guidelines for [rearrangable listboxes](https://www.w3.org/WAI/ARIA/apg/example-index/listbox/listbox-rearrangeable.html) (the `listbox` and `option` roles).
+This custom element is build with accessibility in mind! It implements list/listitem semantics and uses handles to reorder the items.
 
-* When focus enters the list, focus goes to the currently active list item.
+* Each handle is a focusable item that participates in the tab order.
 * <kbd>Up</kbd> and <kbd>Down</kbd> can be used to navigate the list, focusing on an element that will be reordered.
 * <kbd>Alt</kbd> + <kbd>Up</kbd>/<kbd>Down</kbd> moves the currently selected list item up or down in the order.
 * If orientation is horizontal, then <kbd>Left</kbd> and <kbd>Right</kbd> are used instead.
+* A live region is used to announce the last change of order.
