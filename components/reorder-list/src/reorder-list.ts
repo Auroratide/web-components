@@ -1,4 +1,4 @@
-import { changeEvent, commitEvent } from "./events.js"
+import { COMMIT, changeEvent, commitEvent, type ReorderListChangeEventDetail } from "./events.js"
 import { ReorderHandleElement, nameOf } from "./reorder-handle.js"
 import { ReorderItemElement } from "./reorder-item.js"
 
@@ -92,6 +92,7 @@ export class ReorderListElement extends HTMLElement {
 		this.setAttribute("role", "list")
 
 		this.addEventListener("keydown", this.#handleNav)
+		this.addEventListener(COMMIT, this.#announceCommit)
 	}
 
 	reorder = (curIndex: number, newIndex: number, list: ReorderItemElement[] = this.items()) => {
@@ -156,23 +157,44 @@ export class ReorderListElement extends HTMLElement {
 		e.preventDefault()
 		e.stopPropagation()
 
+		// A plain arrow only moves between handles, so a list of items with their
+		// own interactive content can be skimmed without tabbing through it all.
+		if (!e.altKey) {
+			items[newIndex].handle()?.focus()
+			return
+		}
+
 		window.clearTimeout(this.#debouncedCommit ?? -1)
 		this.#startCommitTracking(item)
 		this.reorder(curIndex, newIndex, items)
 		this.#debouncedCommit = window.setTimeout(this.#endCommitTracking, ReorderListElement.COMMIT_DEBOUNCE_MS)
 
 		// Only the keyboard announces: a drag reorders on every boundary it
-		// crosses, and reorder() is shared by all three callers.
+		// crosses, and reorder() is shared by all three callers. Navigating needs
+		// no announcement, since focusing a handle reads out its name already.
 		this.#announce(item, newIndex, items.length)
 	}
 
 	#announcer: HTMLElement | undefined = undefined
 
+	/**
+	 * Every settled reorder is worth speaking, however it was made: dragging with
+	 * a screen reader running is ordinary. Announcing at the commit rather than
+	 * on each change is what keeps a drag from flooding the region.
+	 */
+	#announceCommit = (e: Event) => {
+		const { item, oldIndex, newIndex } = (e as CustomEvent<ReorderListChangeEventDetail>).detail
+		if (oldIndex !== newIndex) {
+			this.#announce(item, newIndex, this.items().length)
+		}
+	}
+
 	#announce = (item: ReorderItemElement, index: number, total: number) => {
-		if (this.#announcer != null) {
-			this.#announcer.textContent = ReorderListElement.announcementFor(
-				nameOf(item), index + 1, total,
-			)
+		const message = ReorderListElement.announcementFor(nameOf(item), index + 1, total)
+
+		// a keyboard move announces as it goes, so its commit has nothing to add
+		if (this.#announcer != null && this.#announcer.textContent !== message) {
+			this.#announcer.textContent = message
 		}
 	}
 

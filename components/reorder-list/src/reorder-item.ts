@@ -78,6 +78,9 @@ export class ReorderItemElement extends HTMLElement {
 	/** The handle this item supplies for itself when the author provides none. */
 	defaultHandle = (): HTMLButtonElement | null => this.#defaultHandle ?? null
 
+	/** The handle that represents this item to the keyboard. */
+	handle = (): HTMLElement | null => this.handles()[0] ?? this.#defaultHandle ?? null
+
 	connectedCallback() {
 		this.setAttribute("role", "listitem")
 
@@ -96,7 +99,7 @@ export class ReorderItemElement extends HTMLElement {
 		this.#initialized = false
 	}
 
-	startDragging = (handle: HTMLElement | null = this.handles()[0] ?? this.#defaultHandle) => {
+	startDragging = (handle: HTMLElement | null = this.handle()) => {
 		handle?.focus()
 
 		for (const handle of this.handles()) {

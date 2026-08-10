@@ -281,16 +281,65 @@ describe("reorder-list", () => {
 			expect(itemNames(container)).to.deep.equal(["Apple", "Orange", "Banana"])
 		})
 
-		it("plain arrows also reorder", async () => {
+		// Alt+Arrow reorders; a plain arrow only moves between handles, so a list
+		// of link-bearing items can be skimmed without tabbing through each one.
+		it("plain arrows move between handles", async () => {
 			const container = await fixture(listMarkup(["Apple", "Orange", "Banana"]))
+			const handles = handlesOf(container)
 
-			handlesOf(container)[0].focus()
+			handles[0].focus()
 
 			await press("ArrowDown")
-			expect(itemNames(container)).to.deep.equal(["Orange", "Apple", "Banana"])
+			expectFocus(handles[1])
+
+			await press("ArrowDown")
+			expectFocus(handles[2])
+
+			await press("ArrowDown")
+			expectFocus(handles[2])
 
 			await press("ArrowUp")
-			expect(itemNames(container)).to.deep.equal(["Apple", "Orange", "Banana"])
+			expectFocus(handles[1])
+
+			expect(itemNames(container), "navigating never reorders").to.deep.equal(
+				["Apple", "Orange", "Banana"],
+			)
+		})
+
+		it("plain arrows step over content within an item", async () => {
+			const container = await fixture(`
+				<reorder-list>
+					<reorder-item>
+						<reorder-handle>Drag</reorder-handle>
+						<a href="#apple">Apple</a>
+					</reorder-item>
+					<reorder-item>
+						<reorder-handle>Drag</reorder-handle>
+						<a href="#orange">Orange</a>
+					</reorder-item>
+				</reorder-list>
+			`)
+
+			const handles = handlesOf(container)
+			handles[0].focus()
+
+			await press("ArrowDown")
+			expectFocus(handles[1])
+		})
+
+		it("plain arrows follow the orientation", async () => {
+			const container = await fixture(
+				listMarkup(["Apple", "Orange"], "orientation='horizontal'"),
+			)
+			const handles = handlesOf(container)
+
+			handles[0].focus()
+
+			await press("ArrowDown")
+			expectFocus(handles[0])
+
+			await press("ArrowRight")
+			expectFocus(handles[1])
 		})
 
 		it("space on a handle does not scroll the page", async () => {
@@ -405,7 +454,7 @@ describe("reorder-list", () => {
 			expectFocus(container.querySelector("#focus-end"))
 		})
 
-		it("reorders with the arrow keys", async () => {
+		it("reorders with alt and the arrow keys", async () => {
 			const container = await fixture(plainListMarkup(["Apple", "Orange", "Banana"]))
 			const appleHandle = defaultHandleOf(container.querySelectorAll("reorder-item")[0])
 
@@ -414,10 +463,25 @@ describe("reorder-list", () => {
 			await altPress("ArrowDown")
 			expect(itemNames(container)).to.deep.equal(["Orange", "Apple", "Banana"])
 
-			await press("ArrowDown")
+			await altPress("ArrowDown")
 			expect(itemNames(container)).to.deep.equal(["Orange", "Banana", "Apple"])
 
 			expectFocus(appleHandle)
+		})
+
+		it("navigates between default handles", async () => {
+			const container = await fixture(plainListMarkup(["Apple", "Orange", "Banana"]))
+			const items = container.querySelectorAll("reorder-item")
+
+			defaultHandleOf(items[0]).focus()
+
+			await press("ArrowDown")
+			expectFocus(defaultHandleOf(items[1]))
+
+			await press("ArrowUp")
+			expectFocus(defaultHandleOf(items[0]))
+
+			expect(itemNames(container)).to.deep.equal(["Apple", "Orange", "Banana"])
 		})
 
 		it("space does not scroll the page", async () => {
@@ -566,9 +630,39 @@ describe("reorder-list", () => {
 			}
 		})
 
-		it("stays quiet during a pointer drag", async () => {
-			// a drag reorders on every boundary it crosses, which would flood the region
+		/**
+		 * Every time the region is written, in order. Deliberately not de-duped:
+		 * rewriting identical text is still a mutation, and a screen reader may
+		 * well speak it twice.
+		 */
+		const listenTo = (list) => {
+			const heard = []
+			const observer = new MutationObserver((records) => {
+				records.forEach(() => heard.push(saidBy(list)))
+			})
+
+			observer.observe(regionOf(list), {
+				childList: true,
+				characterData: true,
+				subtree: true,
+			})
+
+			return {
+				heard,
+				stop: async () => {
+					await wait(1)
+					observer.disconnect()
+					return heard
+				},
+			}
+		}
+
+		it("announces once at the end of a pointer drag", async () => {
+			// Dragging with a screen reader running is ordinary, so the outcome is
+			// worth speaking. But a drag reorders on every boundary it crosses, and
+			// announcing each one would flood the region and lag behind the pointer.
 			const container = await fixture(plainListMarkup(["Apple", "Orange", "Banana"]))
+			const region = listenTo(container)
 
 			const boundingBox = container.getBoundingClientRect()
 			const itemHeight = boundingBox.height / 3
@@ -579,6 +673,36 @@ describe("reorder-list", () => {
 			expect(itemNames(container), "the drag did reorder").to.deep.equal(
 				["Orange", "Banana", "Apple"],
 			)
+			expect(await region.stop(), "one announcement, not one per boundary").to.deep.equal(
+				["Apple, position 3 of 3"],
+			)
+		})
+
+		it("does not repeat itself when a keyboard move commits", async () => {
+			const previous = ReorderListElement.COMMIT_DEBOUNCE_MS
+			ReorderListElement.COMMIT_DEBOUNCE_MS = 10
+
+			try {
+				const container = await fixture(listMarkup(["Apple", "Orange", "Banana"]))
+				const region = listenTo(container)
+
+				handlesOf(container)[0].focus()
+				await altPress("ArrowDown")
+				await wait(50)
+
+				expect(await region.stop()).to.deep.equal(["Apple, position 2 of 3"])
+			} finally {
+				ReorderListElement.COMMIT_DEBOUNCE_MS = previous
+			}
+		})
+
+		it("stays quiet when navigating", async () => {
+			// moving focus to a handle announces that handle's own name already
+			const container = await fixture(listMarkup(["Apple", "Orange"]))
+
+			handlesOf(container)[0].focus()
+			await press("ArrowDown")
+
 			expect(saidBy(container)).to.equal("")
 		})
 
