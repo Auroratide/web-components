@@ -1,50 +1,48 @@
 import { fixture, expect } from "@open-wc/testing"
+import { sendKeys } from "@web/test-runner-commands"
 import { CHANGED, COMMIT } from "../lib/events"
 import { ReorderItemElement } from "../lib"
 import "../lib/define.js"
 
+const deepActiveElement = () => {
+	let el = document.activeElement
+	while (el?.shadowRoot?.activeElement) el = el.shadowRoot.activeElement
+	return el
+}
+
+const describeElement = (el) => el == null
+	? "nothing"
+	: `<${el.localName}>${el.textContent?.trim().slice(0, 20) ?? ""}`
+
 /**
- * https://stackoverflow.com/questions/7208161/focus-next-element-in-tab-index
- * Removed the form constraint.
+ * Note: do not use to.equal to compare elements; the deep comparison hangs
+ * indefinitely when it fails. Identity plus a readable message instead.
  */
-const pressTab = () => {
-	//add all elements we want to include in our selection
-	var focussableElements = "a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex=\"-1\"])"
-	if (document.activeElement) {
-		var focussable = Array.prototype.filter.call(document.querySelectorAll(focussableElements),
-			function (element) {
-				//check for visibility while always include the current activeElement
-				return element.offsetWidth > 0 || element.offsetHeight > 0 || element === document.activeElement
-			})
-		var index = focussable.indexOf(document.activeElement)
-		if(index > -1) {
-			var nextElement = focussable[index + 1] || focussable[0]
-			nextElement.focus()
-		}
+const expectFocus = (expected) => {
+	const actual = deepActiveElement()
+	expect(actual === expected,
+		`expected focus on ${describeElement(expected)}, but it was on ${describeElement(actual)}`,
+	).to.be.true
+}
+
+const expectNoFocus = (unexpected) => {
+	expect(deepActiveElement() === unexpected,
+		`expected focus to be anywhere but ${describeElement(unexpected)}`,
+	).to.be.false
+}
+
+const press = (key) => sendKeys({ press: key })
+
+const pressWith = async (modifier, key) => {
+	await sendKeys({ down: modifier })
+	try {
+		await sendKeys({ press: key })
+	} finally {
+		await sendKeys({ up: modifier })
 	}
 }
 
-const arrow = (direction) => ({
-	key: `Arrow${direction}`,
-	code: `Arrow${direction}`,
-})
-
-const alt = () => ({
-	altKey: true,
-})
-
-const press = (key, ...modifiers) => {
-	document.activeElement.dispatchEvent(new KeyboardEvent("keydown", {
-		key: key.key,
-		code: key.code,
-		bubbles: true,
-		cancelable: true,
-		...modifiers.reduce((all, cur) => ({
-			...all,
-			...cur,
-		}), {}),
-	}))
-}
+const altPress = (key) => pressWith("Alt", key)
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -61,7 +59,7 @@ const drag = async (item, destination, numberOfSlots = 1) => {
 			clientY: destination.y,
 			bubbles: true,
 		}))
-	
+
 		await wait(1)
 	}
 
@@ -142,19 +140,15 @@ describe("reorder-list", () => {
 				</reorder-list>
 				<button id="focus-end">Focusable</button>
 			</div>`)
-            
+
 			container.querySelector("#focus-start").focus()
 
-			pressTab()
-			expect(document.activeElement).to.equal(
-				container.querySelectorAll("reorder-item")[0],
-			)
+			await press("Tab")
+			expectFocus(container.querySelectorAll("reorder-item")[0])
 
 			// The second item does NOT receive focus
-			pressTab()
-			expect(document.activeElement).to.equal(
-				container.querySelector("#focus-end"),
-			)
+			await press("Tab")
+			expectFocus(container.querySelector("#focus-end"))
 		})
 
 		it("up/down navigation (vertical)", async () => {
@@ -169,20 +163,20 @@ describe("reorder-list", () => {
 			const items = container.querySelectorAll("reorder-item")
 			items[0].focus()
 
-			press(arrow("Down"))
-			expect(document.activeElement).to.equal(items[1])
+			await press("ArrowDown")
+			expectFocus(items[1])
 
-			press(arrow("Down"))
-			expect(document.activeElement).to.equal(items[2])
+			await press("ArrowDown")
+			expectFocus(items[2])
 
-			press(arrow("Down"))
-			expect(document.activeElement).to.equal(items[2])
+			await press("ArrowDown")
+			expectFocus(items[2])
 
-			press(arrow("Up"))
-			expect(document.activeElement).to.equal(items[1])
+			await press("ArrowUp")
+			expectFocus(items[1])
 
-			press(arrow("Up"))
-			expect(document.activeElement).to.equal(items[0])
+			await press("ArrowUp")
+			expectFocus(items[0])
 		})
 
 		it("reordering an item (vertical)", async () => {
@@ -197,16 +191,16 @@ describe("reorder-list", () => {
 			let items = container.querySelectorAll("reorder-item")
 			items[0].focus()
 
-			press(arrow("Down"), alt())
+			await altPress("ArrowDown")
 			items = container.querySelectorAll("reorder-item")
-			expect(document.activeElement).to.equal(items[1])
+			expectFocus(items[1])
 			expect(items[0].textContent).to.equal("Orange")
 			expect(items[1].textContent).to.equal("Apple")
 
-			press(arrow("Down"))
-			press(arrow("Up"), alt())
+			await press("ArrowDown")
+			await altPress("ArrowUp")
 			items = container.querySelectorAll("reorder-item")
-			expect(document.activeElement).to.equal(items[1])
+			expectFocus(items[1])
 			expect(items[0].textContent).to.equal("Orange")
 			expect(items[1].textContent).to.equal("Banana")
 			expect(items[2].textContent).to.equal("Apple")
@@ -224,20 +218,20 @@ describe("reorder-list", () => {
 			const items = container.querySelectorAll("reorder-item")
 			items[0].focus()
 
-			press(arrow("Right"))
-			expect(document.activeElement).to.equal(items[1])
+			await press("ArrowRight")
+			expectFocus(items[1])
 
-			press(arrow("Right"))
-			expect(document.activeElement).to.equal(items[2])
+			await press("ArrowRight")
+			expectFocus(items[2])
 
-			press(arrow("Right"))
-			expect(document.activeElement).to.equal(items[2])
+			await press("ArrowRight")
+			expectFocus(items[2])
 
-			press(arrow("Left"))
-			expect(document.activeElement).to.equal(items[1])
+			await press("ArrowLeft")
+			expectFocus(items[1])
 
-			press(arrow("Left"))
-			expect(document.activeElement).to.equal(items[0])
+			await press("ArrowLeft")
+			expectFocus(items[0])
 		})
 
 		it("reordering an item (horizontal)", async () => {
@@ -252,16 +246,16 @@ describe("reorder-list", () => {
 			let items = container.querySelectorAll("reorder-item")
 			items[0].focus()
 
-			press(arrow("Right"), alt())
+			await altPress("ArrowRight")
 			items = container.querySelectorAll("reorder-item")
-			expect(document.activeElement).to.equal(items[1])
+			expectFocus(items[1])
 			expect(items[0].textContent).to.equal("Orange")
 			expect(items[1].textContent).to.equal("Apple")
 
-			press(arrow("Right"))
-			press(arrow("Left"), alt())
+			await press("ArrowRight")
+			await altPress("ArrowLeft")
 			items = container.querySelectorAll("reorder-item")
-			expect(document.activeElement).to.equal(items[1])
+			expectFocus(items[1])
 			expect(items[0].textContent).to.equal("Orange")
 			expect(items[1].textContent).to.equal("Banana")
 			expect(items[2].textContent).to.equal("Apple")
@@ -282,9 +276,7 @@ describe("reorder-list", () => {
 
 			await tap(container.querySelectorAll("reorder-item")[1])
 
-			expect(document.activeElement).to.equal(
-				container.querySelectorAll("reorder-item")[1],
-			)
+			expectFocus(container.querySelectorAll("reorder-item")[1])
 		})
 	})
 
@@ -423,7 +415,7 @@ describe("reorder-list", () => {
 			const input = container.querySelector("#input")
 			await tap(input)
 
-			expect(document.activeElement).not.to.eq(firstItem)
+			expectNoFocus(firstItem)
 		})
 
 		it("using a reorder-handle", async () => {
