@@ -19,11 +19,11 @@ export class TextareaMarkdownElement extends HTMLElement {
 	static html = `
 		<div>
 			<menu role="toolbar" aria-label="Formatting" aria-controls="textarea" id="menu" part="menu">
-				<li><button part="button" type="button" id="header" aria-label="Header">${Icon.header}</button></li>
-				<li><button part="button" type="button" id="bold" aria-label="Bold" aria-keyshortcuts="Meta+B">${Icon.bold}</button></li>
-				<li><button part="button" type="button" id="italic" aria-label="Italic" aria-keyshortcuts="Meta+I">${Icon.italic}</button></li>
-				<li><button part="button" type="button" id="unordered-list" aria-label="Unordered List" aria-keyshortcuts="Meta+Shift+8">${Icon.unorderedList}</button></li>
-				<li><button part="button" type="button" id="ordered-list" aria-label="Ordered List" aria-keyshortcuts="Meta+Shift+7">${Icon.orderedList}</button></li>
+				<li><button part="button" type="button" id="header" aria-label="Header" title="Header">${Icon.header}</button></li>
+				<li><button part="button" type="button" id="bold" aria-label="Bold" title="Bold" aria-keyshortcuts="Meta+B">${Icon.bold}</button></li>
+				<li><button part="button" type="button" id="italic" aria-label="Italic" title="Italic" aria-keyshortcuts="Meta+I">${Icon.italic}</button></li>
+				<li><button part="button" type="button" id="unordered-list" title="Bullet List" aria-label="Unordered List" aria-keyshortcuts="Meta+Shift+8">${Icon.unorderedList}</button></li>
+				<li><button part="button" type="button" id="ordered-list" title="Number List" aria-label="Ordered List" aria-keyshortcuts="Meta+Shift+7">${Icon.orderedList}</button></li>
 			</menu>
 			<textarea part="textarea" id="textarea"></textarea>
 		</div>
