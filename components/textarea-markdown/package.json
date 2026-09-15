@@ -1,6 +1,6 @@
 {
 	"name": "@auroratide/textarea-markdown",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Web component for a textarea with markdown capabilities.",
 	"type": "module",
 	"main": "lib/index.js",
