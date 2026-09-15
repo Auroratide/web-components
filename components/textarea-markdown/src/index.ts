@@ -74,7 +74,7 @@ export class TextareaMarkdownElement extends HTMLElement {
 	`
 
 	static get observedAttributes() {
-		return ["placeholder", "rows", "cols", "disabled", "required"]
+		return ["id", "placeholder", "rows", "cols", "disabled", "required"]
 	}
 
 	#internals = this.attachInternals()
@@ -255,6 +255,9 @@ export class TextareaMarkdownElement extends HTMLElement {
 	}
 
 	#attributeCallbacks: Record<string, (newValue: string | undefined | null, oldValue: string | undefined | null) => void> = {
+		"id": () => {
+			this.#observeLabels(); this.#syncAccessibleName()
+		},
 		"placeholder": (newValue: string | undefined | null) => {
 			this.#syncAttribute("placeholder", newValue)
 		},
