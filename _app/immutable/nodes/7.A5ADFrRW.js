@@ -1,4 +1,4 @@
-import{_ as l}from"../chunks/C1FmrZbK.js";import{s as r,n as p}from"../chunks/p4Z6_urL.js";import{S as o,i,a as d,t as c,b as h,m,g,n as j}from"../chunks/BJ0JgjBn.js";import{R as u}from"../chunks/DNMEPfIK.js";const b=`<h1 id="the-reorder-list-elements">The reorder-list Elements</h1>
+import{_ as l}from"../chunks/C1FmrZbK.js";import{s as r,n as p}from"../chunks/p4Z6_urL.js";import{S as o,i,a as d,t as c,b as h,m,g,n as j}from"../chunks/BJ0JgjBn.js";import{R as u}from"../chunks/Dmw1xjA7.js";const b=`<h1 id="the-reorder-list-elements">The reorder-list Elements</h1>
 <p hidden><strong><a href="https://components.auroratide.com/reorder-list">View this page with live demos!</a></strong></p>
 <p>The <code>reorder-list</code>, <code>reorder-item</code>, and <code>reorder-handle</code> elements represent an ordered list of items that can be reordered. They are built with accessibility in mind and implement list/listitem semantics with a button handle.</p>
 <wc-demo>
@@ -379,6 +379,59 @@ reorder-item <span class="hljs-selector-tag">ul</span> {
 	<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">reorder-list</span>&gt;</span>
 </code></pre>
+<h2 id="filtering">Filtering</h2>
+<p>You may have a list with some of the items hidden as a result of filtering. The reorder-list will still allow you to reorder the sublist!</p>
+<p>Some important notes:</p>
+<ul>
+<li>The <code>change</code> and <code>commit</code> events continue to report the changes in the indexes of the overall list, not just the visible list.</li>
+<li>The end result of the reorder will be as if the invisible items were visible, for the sake of predictability.</li>
+<li>This works with arrow keys too for accessibility.</li>
+</ul>
+<wc-demo>
+	<p>Orange and Lime are hidden. Dragging and arrowing both move straight past them.</p>
+	<reorder-list>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Apple</span>
+		</reorder-item>
+		<reorder-item hidden>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Orange</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Banana</span>
+		</reorder-item>
+		<reorder-item hidden>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Lime</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Blueberry</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Plum</span>
+		</reorder-item>
+	</reorder-list>
+</wc-demo>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">reorder-list</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">reorder-handle</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>[Drag]<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">reorder-handle</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Apple<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span> <span class="hljs-attr">hidden</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">reorder-handle</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>[Drag]<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">reorder-handle</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Orange<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">reorder-item</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">reorder-handle</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>[Drag]<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">reorder-handle</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Banana<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-item</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">reorder-list</span>&gt;</span>
+</code></pre>
+<p>If you need the distinction yourself, <code>list.items()</code> gives every item and <code>list.visibleItems()</code> only the ones on screen.</p>
 <h2 id="accessibility">Accessibility</h2>
 <p>This custom element is build with accessibility in mind! It implements list/listitem semantics and uses handles to reorder the items.</p>
 <ul>
@@ -390,4 +443,4 @@ reorder-item <span class="hljs-selector-tag">ul</span> {
 </ul>
 <h3 id="reorder-announcer">Reorder Announcer</h3>
 <p>List reordering is announced to assistive technology using a live region. This region is located at the end of the body document, with the <code>data-reorder-list-announcer</code> attribute. All <code>reorder-list</code> elements share the same announcement region.</p>
-`;function f(n){let s,t;return s=new u({props:{html:b}}),{c(){j(s.$$.fragment)},l(a){g(s.$$.fragment,a)},m(a,e){m(s,a,e),t=!0},p,i(a){t||(h(s.$$.fragment,a),t=!0)},o(a){c(s.$$.fragment,a),t=!1},d(a){d(s,a)}}}function y(n){return l(()=>import("../chunks/Dsa0QTiD.js"),[],import.meta.url),[]}class q extends o{constructor(s){super(),i(this,s,y,f,r,{})}}export{q as component};
+`;function f(t){let s,n;return s=new u({props:{html:b}}),{c(){j(s.$$.fragment)},l(a){g(s.$$.fragment,a)},m(a,e){m(s,a,e),n=!0},p,i(a){n||(h(s.$$.fragment,a),n=!0)},o(a){c(s.$$.fragment,a),n=!1},d(a){d(s,a)}}}function y(t){return l(()=>import("../chunks/CxDb7Aj1.js"),[],import.meta.url),[]}class D extends o{constructor(s){super(),i(this,s,y,f,r,{})}}export{D as component};
