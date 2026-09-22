@@ -1,5 +1,11 @@
 # @auroratide/reorder-list
 
+## 0.6.1
+
+### Patch Changes
+
+- 4ee9efa: Allow reordering over lists with hidden items
+
 ## 0.6.0
 
 ### Minor Changes
