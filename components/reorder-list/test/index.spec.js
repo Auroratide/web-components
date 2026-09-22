@@ -10,9 +10,10 @@ const deepActiveElement = () => {
 	return el
 }
 
+// the accessible name first: every handle in a list reads "Drag" otherwise
 const describeElement = (el) => el == null
 	? "nothing"
-	: `<${el.localName}>${el.textContent?.trim().slice(0, 20) ?? ""}`
+	: `<${el.localName}>${el.getAttribute?.("aria-label") ?? el.textContent?.trim().slice(0, 20) ?? ""}`
 
 /**
  * Note: do not use to.equal to compare elements; the deep comparison hangs
@@ -979,6 +980,336 @@ describe("reorder-list", () => {
 			expect(emitted.item).to.equal(expectedTarget)
 			expect(emitted.oldIndex).to.equal(0)
 			expect(emitted.newIndex).to.equal(2)
+		})
+	})
+
+	describe("hidden items", () => {
+		const listWithHidden = (names, hiddenIndexes, hiding = "display: none") => `
+			<reorder-list>
+				${names.map((name, i) => `
+					<reorder-item ${hiddenIndexes.includes(i) ? `style="${hiding}"` : ""}>
+						<reorder-handle>Drag</reorder-handle>
+						<span>${name}</span>
+					</reorder-item>
+				`).join("")}
+			</reorder-list>
+		`
+
+		// No explicit handle
+		const plainListWithHidden = (names, hiddenIndexes, hiding = "display: none") => `
+			<reorder-list>
+				${names.map((name, i) => `
+					<reorder-item ${hiddenIndexes.includes(i) ? `style="${hiding}"` : ""}>
+						<span>${name}</span>
+					</reorder-item>
+				`).join("")}
+			</reorder-list>
+		`
+
+		const isVisible = (el) => el.checkVisibility({
+			visibilityProperty: true,
+			contentVisibilityAuto: true,
+		})
+
+		const visibleNames = (container) => Array.from(
+			container.querySelectorAll("reorder-item"),
+		).filter(isVisible).map((item) => item.querySelector("span, a").textContent.trim())
+
+		describe("hiding", () => {
+			it("the hidden attribute hides an item", async () => {
+				const container = await fixture(`
+					<reorder-list>
+						<reorder-item><span>Apple</span></reorder-item>
+						<reorder-item hidden><span>Orange</span></reorder-item>
+						<reorder-item><span>Banana</span></reorder-item>
+					</reorder-list>
+				`)
+
+				const items = container.querySelectorAll("reorder-item")
+
+				expect(isVisible(items[0]), "Apple is visible").to.be.true
+				expect(isVisible(items[1]), "Orange is hidden").to.be.false
+				expect(isVisible(items[2]), "Banana is visible").to.be.true
+			})
+		})
+
+		describe("keyboard navigation", () => {
+			it("plain arrows skip over a hidden item", async () => {
+				const container = await fixture(listWithHidden(["Apple", "Orange", "Banana"], [1]))
+				const handles = handlesOf(container)
+
+				handles[0].focus()
+
+				await press("ArrowDown")
+				expectFocus(handles[2])
+
+				await press("ArrowUp")
+				expectFocus(handles[0])
+			})
+
+			it("plain arrows skip over a run of hidden items", async () => {
+				const container = await fixture(
+					listWithHidden(["Apple", "Orange", "Plum", "Banana"], [1, 2]),
+				)
+				const handles = handlesOf(container)
+
+				handles[0].focus()
+
+				await press("ArrowDown")
+				expectFocus(handles[3])
+			})
+
+			it("plain arrows stop at the last visible item", async () => {
+				const container = await fixture(listWithHidden(["Apple", "Orange", "Banana"], [2]))
+				const handles = handlesOf(container)
+
+				handles[1].focus()
+
+				await press("ArrowDown")
+				expectFocus(handles[1])
+			})
+
+			it("plain arrows stop at the first visible item", async () => {
+				const container = await fixture(listWithHidden(["Apple", "Orange", "Banana"], [0]))
+				const handles = handlesOf(container)
+
+				handles[1].focus()
+
+				await press("ArrowUp")
+				expectFocus(handles[1])
+			})
+
+			it("an item hidden by the hidden attribute is skipped", async () => {
+				const container = await fixture(`
+					<reorder-list>
+						<reorder-item>
+							<reorder-handle>Drag</reorder-handle>
+							<span>Apple</span>
+						</reorder-item>
+						<reorder-item hidden>
+							<reorder-handle>Drag</reorder-handle>
+							<span>Orange</span>
+						</reorder-item>
+						<reorder-item>
+							<reorder-handle>Drag</reorder-handle>
+							<span>Banana</span>
+						</reorder-item>
+					</reorder-list>
+				`)
+				const handles = handlesOf(container)
+
+				handles[0].focus()
+
+				await press("ArrowDown")
+				expectFocus(handles[2])
+			})
+
+			// It still takes up space, but it is out of the accessibility tree all
+			// the same, so arrowing onto it would land focus on nothing.
+			it("an item hidden by visibility is skipped", async () => {
+				const container = await fixture(
+					listWithHidden(["Apple", "Orange", "Banana"], [1], "visibility: hidden"),
+				)
+				const handles = handlesOf(container)
+
+				handles[0].focus()
+
+				await press("ArrowDown")
+				expectFocus(handles[2])
+			})
+		})
+
+		describe("keyboard reordering", () => {
+			it("alt and an arrow move past a hidden item in one press", async () => {
+				const container = await fixture(listWithHidden(["Apple", "Orange", "Banana"], [1]))
+
+				handlesOf(container)[0].focus()
+
+				await altPress("ArrowDown")
+				expect(visibleNames(container)).to.deep.equal(["Banana", "Apple"])
+				expect(itemNames(container)).to.deep.equal(["Orange", "Banana", "Apple"])
+
+				await altPress("ArrowUp")
+				expect(visibleNames(container)).to.deep.equal(["Apple", "Banana"])
+				expect(itemNames(container)).to.deep.equal(["Orange", "Apple", "Banana"])
+			})
+
+			it("alt and an arrow move past a run of hidden items", async () => {
+				const container = await fixture(
+					listWithHidden(["Apple", "Orange", "Plum", "Banana"], [1, 2]),
+				)
+
+				handlesOf(container)[0].focus()
+
+				await altPress("ArrowDown")
+				expect(visibleNames(container)).to.deep.equal(["Banana", "Apple"])
+				expect(itemNames(container)).to.deep.equal(["Orange", "Plum", "Banana", "Apple"])
+			})
+
+			it("reordering stops at the last visible item", async () => {
+				const container = await fixture(listWithHidden(["Apple", "Orange", "Banana"], [2]))
+
+				handlesOf(container)[1].focus()
+
+				// there is nowhere visible to go, so Orange stays put rather than
+				// swapping with a hidden Banana and appearing not to move at all
+				await altPress("ArrowDown")
+				expect(itemNames(container)).to.deep.equal(["Apple", "Orange", "Banana"])
+			})
+
+			it("reordering stops at the first visible item", async () => {
+				const container = await fixture(listWithHidden(["Apple", "Orange", "Banana"], [0]))
+
+				handlesOf(container)[1].focus()
+
+				await altPress("ArrowUp")
+				expect(itemNames(container)).to.deep.equal(["Apple", "Orange", "Banana"])
+			})
+
+			it("moving past a hidden item keeps focus on the handle", async () => {
+				const container = await fixture(listWithHidden(["Apple", "Orange", "Banana"], [1]))
+				const appleHandle = handlesOf(container)[0]
+
+				appleHandle.focus()
+
+				await altPress("ArrowDown")
+				expectFocus(appleHandle)
+			})
+		})
+
+		describe("dragging", () => {
+			it("dragging down over a hidden item", async () => {
+				const container = await fixture(plainListWithHidden(["Apple", "Orange", "Banana"], [1]))
+				const items = container.querySelectorAll("reorder-item")
+				const banana = items[2].getBoundingClientRect()
+
+				// A hidden item has a zero-sized rect, so the only boundary worth
+				// testing against is the next item that is actually on screen.
+				await drag(items[0], { y: banana.bottom - 2 })
+
+				expect(visibleNames(container)).to.deep.equal(["Banana", "Apple"])
+				expect(itemNames(container)).to.deep.equal(["Orange", "Banana", "Apple"])
+			})
+
+			it("dragging up over a hidden item", async () => {
+				const container = await fixture(plainListWithHidden(["Apple", "Orange", "Banana"], [1]))
+				const items = container.querySelectorAll("reorder-item")
+				const apple = items[0].getBoundingClientRect()
+
+				await drag(items[2], { y: apple.top + 2 })
+
+				expect(visibleNames(container)).to.deep.equal(["Banana", "Apple"])
+				expect(itemNames(container)).to.deep.equal(["Banana", "Apple", "Orange"])
+			})
+
+			it("dragging over a run of hidden items", async () => {
+				const container = await fixture(
+					plainListWithHidden(["Apple", "Orange", "Plum", "Banana"], [1, 2]),
+				)
+				const items = container.querySelectorAll("reorder-item")
+				const apple = items[0].getBoundingClientRect()
+
+				await drag(items[3], { y: apple.top + 2 })
+
+				expect(visibleNames(container)).to.deep.equal(["Banana", "Apple"])
+				expect(itemNames(container)).to.deep.equal(["Banana", "Apple", "Orange", "Plum"])
+			})
+
+			it("a hidden item is not a place to drop", async () => {
+				// Only hidden items sit above Orange, so dragging it upwards has
+				// nowhere to go; it must not swap into a slot with nothing in it.
+				const container = await fixture(plainListWithHidden(["Apple", "Orange", "Banana"], [0]))
+				const items = container.querySelectorAll("reorder-item")
+				const orange = items[1].getBoundingClientRect()
+
+				await drag(items[1], { y: orange.top - 50 })
+
+				expect(itemNames(container)).to.deep.equal(["Apple", "Orange", "Banana"])
+			})
+
+			it("dragging is unaffected by a hidden item elsewhere in the list", async () => {
+				const container = await fixture(
+					plainListWithHidden(["Apple", "Orange", "Banana", "Plum"], [3]),
+				)
+				const items = container.querySelectorAll("reorder-item")
+				const apple = items[0].getBoundingClientRect()
+
+				await drag(items[1], { y: apple.top + 2 })
+
+				expect(itemNames(container)).to.deep.equal(["Orange", "Apple", "Banana", "Plum"])
+			})
+		})
+
+		// Indexes reported are relative to the ENTIRE list, not
+		// just the visible list
+		describe("events", () => {
+			it("a keyboard reorder reports indexes into the whole list", async () => {
+				const container = await fixture(listWithHidden(["Apple", "Orange", "Banana"], [1]))
+
+				let emitted = undefined
+				container.addEventListener(CHANGED, (e) => {
+					emitted = e.detail
+				})
+
+				handlesOf(container)[0].focus()
+				await altPress("ArrowDown")
+
+				expect(emitted.item).to.equal(container.items()[2])
+				expect(emitted.oldIndex).to.equal(0)
+				expect(emitted.newIndex, "Banana's index in the whole list, not the visible one")
+					.to.equal(2)
+			})
+
+			it("a keyboard reorder commits indexes into the whole list", async () => {
+				const previous = ReorderListElement.COMMIT_DEBOUNCE_MS
+				ReorderListElement.COMMIT_DEBOUNCE_MS = 10
+
+				try {
+					const container = await fixture(listWithHidden(["Apple", "Orange", "Banana"], [1]))
+
+					let emitted = undefined
+					container.addEventListener(COMMIT, (e) => {
+						emitted = e.detail
+					})
+
+					handlesOf(container)[0].focus()
+					await altPress("ArrowDown")
+					await wait(50)
+
+					expect(emitted.oldIndex).to.equal(0)
+					expect(emitted.newIndex).to.equal(2)
+				} finally {
+					ReorderListElement.COMMIT_DEBOUNCE_MS = previous
+				}
+			})
+
+			it("a drag reports indexes into the whole list", async () => {
+				const container = await fixture(plainListWithHidden(["Apple", "Orange", "Banana"], [1]))
+
+				let emitted = undefined
+				container.addEventListener(COMMIT, (e) => {
+					emitted = e.detail
+				})
+
+				const items = container.querySelectorAll("reorder-item")
+				const banana = items[2].getBoundingClientRect()
+
+				await drag(items[0], { y: banana.bottom - 2 })
+
+				expect(emitted.item).to.equal(container.items()[2])
+				expect(emitted.oldIndex).to.equal(0)
+				expect(emitted.newIndex).to.equal(2)
+			})
+
+			it("reorder() still addresses the whole list", async () => {
+				// Filtering is a matter of presentation; the programmatic API keeps
+				// speaking about the list as it really is.
+				const container = await fixture(listWithHidden(["Apple", "Orange", "Banana"], [1]))
+
+				container.reorder(0, 2)
+
+				expect(itemNames(container)).to.deep.equal(["Orange", "Banana", "Apple"])
+			})
 		})
 	})
 })

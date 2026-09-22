@@ -428,6 +428,67 @@ Nothing stops you from putting lists inside of lists.
 </reorder-list>
 ```
 
+## Filtering
+
+You may have a list with some of the items hidden as a result of filtering. The reorder-list will still allow you to reorder the sublist!
+
+Some important notes:
+
+* The `change` and `commit` events continue to report the changes in the indexes of the overall list, not just the visible list.
+* The end result of the reorder will be as if the invisible items were visible, for the sake of predictability.
+* This works with arrow keys too for accessibility.
+
+<!--DEMO
+<wc-demo>
+	<p>Orange and Lime are hidden. Dragging and arrowing both move straight past them.</p>
+	<reorder-list>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Apple</span>
+		</reorder-item>
+		<reorder-item hidden>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Orange</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Banana</span>
+		</reorder-item>
+		<reorder-item hidden>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Lime</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Blueberry</span>
+		</reorder-item>
+		<reorder-item>
+			<reorder-handle><span>[Drag]</span></reorder-handle>
+			<span>Plum</span>
+		</reorder-item>
+	</reorder-list>
+</wc-demo>
+/DEMO-->
+
+```html
+<reorder-list>
+	<reorder-item>
+		<reorder-handle><span>[Drag]</span></reorder-handle>
+		<span>Apple</span>
+	</reorder-item>
+	<reorder-item hidden>
+		<reorder-handle><span>[Drag]</span></reorder-handle>
+		<span>Orange</span>
+	</reorder-item>
+	<reorder-item>
+		<reorder-handle><span>[Drag]</span></reorder-handle>
+		<span>Banana</span>
+	</reorder-item>
+</reorder-list>
+```
+
+If you need the distinction yourself, `list.items()` gives every item and `list.visibleItems()` only the ones on screen.
+
 ## Accessibility
 
 This custom element is build with accessibility in mind! It implements list/listitem semantics and uses handles to reorder the items.

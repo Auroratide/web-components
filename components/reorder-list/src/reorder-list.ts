@@ -53,6 +53,13 @@ const announcer = (): HTMLElement | null => {
 	return created
 }
 
+// Used to protect against hidden elements interferring with reordering
+const isVisible = (item: Element): boolean =>
+	item.checkVisibility({
+		visibilityProperty: true,
+		contentVisibilityAuto: true,
+	})
+
 const deepActiveElement = (): Element | null => {
 	let el = document.activeElement
 	while (el?.shadowRoot?.activeElement != null) {
@@ -103,6 +110,23 @@ export class ReorderListElement extends HTMLElement {
 
 	items = (): ReorderItemElement[] =>
 		Array.from(this.querySelectorAll(`:scope > ${ReorderItemElement.defaultElementName}`))
+
+	visibleItems = (): ReorderItemElement[] => this.items().filter(isVisible)
+
+	/**
+	 * The nearest visible item in `direction`, as an index into the whole list,
+	 * or -1 when there is none. Hidden items are stepped over rather than landed
+	 * on, so a move always looks like a move.
+	 */
+	nearestVisible = (from: number, direction: -1 | 1, list: ReorderItemElement[] = this.items()): number => {
+		for (let i = from + direction; i >= 0 && i < list.length; i += direction) {
+			if (isVisible(list[i])) {
+				return i
+			}
+		}
+
+		return -1
+	}
 
 	/** The item currently containing focus, if any. */
 	current = (): ReorderItemElement | null => {
@@ -173,13 +197,14 @@ export class ReorderListElement extends HTMLElement {
 
 		const items = this.items()
 		const curIndex = items.indexOf(item)
-		const newIndex = Math.max(0,
-			Math.min(items.length - 1,
-				curIndex + (e.key === keys[0] ? -1 : 1),
-			),
-		)
+		if (curIndex < 0) {
+			return
+		}
 
-		if (curIndex < 0 || curIndex === newIndex) {
+		// The end of the list, for a person using it, is the last item they can
+		// see; anything beyond that would move nothing they could notice.
+		const newIndex = this.nearestVisible(curIndex, e.key === keys[0] ? -1 : 1, items)
+		if (newIndex < 0) {
 			return
 		}
 

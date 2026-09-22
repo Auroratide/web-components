@@ -16,6 +16,10 @@ export class ReorderItemElement extends HTMLElement {
 			cursor: grab;
 		}
 
+		:host([hidden]) {
+			display: none;
+		}
+
 		:host(:not([data-has-handle])) {
 			position: relative;
 		}
@@ -216,13 +220,19 @@ export class ReorderItemElement extends HTMLElement {
 			index: items.indexOf(this),
 			rect: this.getBoundingClientRect(),
 		}
+
+		// A hidden item has no box to drag over, so the boundary worth testing
+		// against is the nearest neighbour that is actually on screen. Its index
+		// is still its index in the whole list, which is what reorder() moves by.
+		const prevIndex = list?.nearestVisible(cur.index, -1, items) ?? -1
+		const nextIndex = list?.nearestVisible(cur.index, 1, items) ?? -1
 		const prev = {
-			index: cur.index - 1,
-			rect: items[cur.index - 1]?.getBoundingClientRect(),
+			index: prevIndex,
+			rect: items[prevIndex]?.getBoundingClientRect(),
 		}
 		const next = {
-			index: cur.index + 1,
-			rect: items[cur.index + 1]?.getBoundingClientRect(),
+			index: nextIndex,
+			rect: items[nextIndex]?.getBoundingClientRect(),
 		}
 
 		if (prev.rect && this.#isOverPrevious(e, prev.rect, cur.rect)) {
